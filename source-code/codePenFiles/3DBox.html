@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>3DBox</title>
+    <style>
+        .base{
+            margin: 10px auto;
+            padding: 1px;
+            width: 300px;
+            height: 300px;
+            background-color: rgb(1, 51, 22);
+            perspective-origin: 0 0;
+            perspective: 1000px;
+        }
+        .container{
+            position: relative;
+            margin: 100px;
+            width: 100px;
+            height: 100px;
+            transform-style: preserve-3d;
+            backface-visibility: visible;
+            transition: transform 1s;
+            /* @des 一定要删除该元素的背景色 */
+            background-color: transparent;
+        }
+        .container div{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .d1{
+            transform: translateZ(50px);
+            background-color: rgba(247, 7, 7, .6);
+        }
+        .d2{
+            /* @des 每一个面都是以它自己当前所在二位坐标，进行下一次3d移动*/
+            transform: rotateX(90deg) translateZ(50px);
+            background-color: rgba(2, 126, 2, .6);
+        }
+        .d3{
+            transform: rotateY(90deg) rotateZ(180deg)  translateZ(-50px);
+            background-color: rgba(5, 5, 255, .6);
+        }
+        .d4{
+            transform: rotateX(-90deg)  translateZ(50px);
+            background-color: rgba(255, 182, 194, .6);
+        }
+        .d5{
+            transform: rotateY(90deg) translateZ(50px);
+            background-color: rgba(252, 252, 9, .6);
+        }
+        .d6{
+            transform: translateZ(-50px) rotateX(180deg) ;
+            background-color: rgba(253, 167, 7, .6);
+        }
+
+        .change{
+            text-align: center;
+        }
+        .change button{
+            display: inline-block;
+            padding: 10px 30px;
+            color: #fff;
+            background-color: rgb(1, 51, 22);
+            border: 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="base">
+        <div class="container">
+            <div class="d1">1</div>
+            <div class="d2">2</div>
+            <div class="d3">3</div>
+            <div class="d4">4</div>
+            <div class="d5">5</div>
+            <div class="d6">6</div>
+        </div>
+    </div>
+
+    <div class="change">
+        <button onclick="handleChange()">转换</button>
+    </div>
+
+    <script>
+        var n = 1, r = ['rotateY(0)', 'rotateX(-90deg)', 'rotateY(90deg)', 'rotateX(90deg)', 'rotateY(-90deg)', 'rotateX(180deg)'];
+        function handleChange() {
+            document.querySelector('.container').setAttribute('style', 'transform:' + r[n]);
+            n++
+            if(n>5) n = 0
+        }
+    </script>
+</body>
+</html>

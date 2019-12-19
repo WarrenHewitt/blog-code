@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>scroll bar</title>
+    <style lang="css">
+        .stage {
+            width: 800px;
+            height: 800px;
+            margin: 10px 30%;
+            perspective: 1800px;
+            background-color: #3ad7fa;
+        }
+
+        .diceWrap {
+            position: relative;
+            transform-style: preserve-3d;
+            width: 100px;
+            height: 100px;
+            transform: translate(0, 0)
+        }
+
+        .dice {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            left: 25px;
+            top: 25px;
+
+            border-radius: 10px;
+            box-shadow: inset 0 0 40px #e1e1e1;
+            background-color: #fff;
+        }
+
+        .dice1 {
+            transform: translateZ(50px);
+        }
+
+        .dice2 {
+            transform: rotateX(90deg) translateZ(50px);
+        }
+
+        .dice3 {
+            transform: rotateX(180deg) translateZ(50px);
+        }
+
+        .dice4 {
+            transform: rotateX(-90deg) translateZ(50px);
+        }
+
+        .dice5 {
+            transform: rotateY(90deg) translateZ(50px);
+        }
+
+        .dice6 {
+            transform: rotateY(-90deg) translateZ(50px);
+        }
+
+        .dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #444;
+        }
+
+        .dice1>.dot {
+            left: 50%;
+            top: 50%;
+            margin: -10px 0 0 -10px;
+        }
+
+        .dice2>.dot:nth-child(1) {
+            left: 5%;
+            top: 5%;
+        }
+
+        .dice2>.dot:nth-child(2) {
+            right: 5%;
+            bottom: 5%;
+        }
+
+        .dice3>.dot:nth-child(1) {
+            left: 5%;
+            top: 5%;
+        }
+
+        .dice3>.dot:nth-child(2) {
+            left: 50%;
+            top: 50%;
+            margin: -10px 0 0 -10px;
+        }
+
+        .dice3>.dot:nth-child(3) {
+            right: 5%;
+            bottom: 5%;
+        }
+
+        .dice4>.dot:nth-child(1) {
+            left: 5%;
+            top: 5%;
+        }
+
+        .dice4>.dot:nth-child(2) {
+            left: 5%;
+            bottom: 5%;
+        }
+
+        .dice4>.dot:nth-child(3) {
+            right: 5%;
+            top: 5%;
+        }
+
+        .dice4>.dot:nth-child(4) {
+            right: 5%;
+            bottom: 5%;
+        }
+
+        .dice5>.dot:nth-child(1) {
+            left: 5%;
+            top: 5%;
+        }
+
+        .dice5>.dot:nth-child(2) {
+            left: 5%;
+            bottom: 5%;
+        }
+
+        .dice5>.dot:nth-child(3) {
+            left: 50%;
+            top: 50%;
+            margin: -10px 0 0 -10px;
+        }
+
+        .dice5>.dot:nth-child(4) {
+            right: 5%;
+            top: 5%;
+        }
+
+        .dice5>.dot:nth-child(5) {
+            right: 5%;
+            bottom: 5%;
+        }
+
+        .dice6>.dot:nth-child(1) {
+            left: 5%;
+            top: 5%;
+        }
+
+        .dice6>.dot:nth-child(2) {
+            left: 5%;
+            bottom: 5%;
+        }
+
+        .dice6>.dot:nth-child(3) {
+            left: 5%;
+            top: 50%;
+            margin-top: -10px;
+        }
+
+        .dice6>.dot:nth-child(4) {
+            right: 5%;
+            top: 5%;
+        }
+
+        .dice6>.dot:nth-child(5) {
+            right: 5%;
+            top: 50%;
+            margin-top: -10px;
+        }
+
+        .dice6>.dot:nth-child(6) {
+            right: 5%;
+            bottom: 5%;
+        }
+
+        .cover {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            left: 25px;
+            top: 25px;
+            border-radius: 0;
+            background-color: #f0f0f0;
+        }
+
+        .cover.x {
+            transform: rotateY(90deg);
+        }
+
+        .cover.z {
+            transform: rotateX(90deg);
+        }
+
+        .operation {
+            text-align: center
+        }
+
+        .operation div {
+            padding: 8px 15px;
+            display: inline-block;
+            color: #fff;
+            background-color: #3ad7fa;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stage">
+        <div class="diceWrap">
+            <div class="dice dice1">
+                <div class="dot"></div>
+            </div>
+
+            <div class="dice dice2">
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <div class="dice dice3">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <div class="dice dice4">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <div class="dice dice5">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <div class="dice dice6">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <dov class="cover x"></dov>
+            <dov class="cover y"></dov>
+            <dov class="cover z"></dov>
+        </div>
+    </div>
+
+    <div class="operation">
+        <div onclick="roll(1)">1</div>
+        <div onclick="roll(2)">2</div>
+        <div onclick="roll(3)">3</div>
+        <div onclick="roll(4)">4</div>
+        <div onclick="roll(5)">5</div>
+        <div onclick="roll(6)">6</div>
+    </div>
+
+    <script>
+        //动画配置开始
+        let diceWrap = document.querySelector('.diceWrap');
+        //不同开奖号码的配置,不同数字代表不同开奖结果
+        let keyframes = {
+            '1': [
+                { transform: 'rotate3d(1, 1, 1, 0deg)  scale3d(0,0, 0)  translate(0,0)', transformOrigin: '150px 150px 0' },
+                { transform: 'rotate3d(1, 1, 1, 360deg)   scale3d(.2, .2, .2) translate(500px,0)', transformOrigin: '650px 150px 0' },
+                { transform: 'rotate3d(1, 1, 1, 720deg)  scale3d(.4, .4, .4) translate(500px,500px)', transformOrigin: '650px 650px 0' },
+                { transform: 'rotate3d(1, 1, 1, 1080deg)   scale3d(.8, .8, .8) translate(0,500px)', transformOrigin: '150px 650px 0' },
+                { transform: 'rotate3d(1, 1, 1, 1440deg)   scale3d(.9, .9, .9) translate(0,0)', transformOrigin: '150px 150px 0' },
+                { transform: 'rotate3d(1, 1, 1, 1780deg)  scale3d(1, 1, 1) translate(250px,250px)', transformOrigin: '400px 400px 0' },
+
+            ],
+            '2': [
+                { transform: 'rotate3d(1, 1, 1, 0deg) rotateX(-90deg) scale3d(1, 1, 1)' },
+                { transform: 'rotate3d(1, 1, 1, 360deg) rotateX(270deg) scale3d(1, 1, 1)' }
+            ],
+            '3': [
+                { transform: 'rotate3d(1, 1, 1, 0deg) rotateY(0deg) scale3d(1, 1, 1)' },
+                { transform: 'rotate3d(1, 1, 1, 360deg) rotateY(540deg) scale3d(1, 1, 1)' }
+            ],
+            '4': [
+                { transform: 'rotate3d(1, 1, 1, 0deg) rotateX(-180deg) rotateY(-180deg)scale3d(1, 1, 1)' },
+                { transform: 'rotate3d(1, 1, 1, 360deg) rotateX(90deg) rotateY(0deg) scale3d(1, 1, 1)' }
+            ],
+            '5': [
+                { transform: 'rotate3d(1, 1, 1, 0deg) rotateY(0deg) scale3d(1, 1, 1)' },
+                { transform: 'rotate3d(1, 1, 1, 360deg) rotateY(-90deg) scale3d(1, 1, 1)' }
+            ],
+            '6': [
+                { transform: 'rotate3d(1, 1, 1, 0deg) rotateX(0deg) scale3d(1, 1, 1)' },
+                { transform: 'rotate3d(1, 1, 1, 360deg) rotateY(-270deg) translate(500px,250px) scale3d(1, 1, 1)' }
+            ]
+        }
+        let animationConfig = {
+            duration: 2000,
+            /* @des 重复次数 */
+            iterations: 1,
+            /* @des 当动画完成后，在最后一帧保持，不用恢复到原位置 */
+            fill: 'both',
+        };
+
+        /*
+        * @des 主要是利用Element.animate 方法；（兼容性不好）
+        * 参考：https://developer.mozilla.org/zh-CN/docs/Web/API/Element/animate
+        */
+        function roll(number) {
+            diceWrap.animate(
+                keyframes[number.toString()],
+                animationConfig
+            );
+        }
+    </script>
+</body>
+
+</html>
