@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>scroll bar</title>
+    <style>
+        .box {
+            height: 100px;
+            overflow-y: scroll;
+            white-space: nowrap;
+            scroll-behavior: smooth;
+            background-color: rgb(236, 236, 236);
+        }
+
+        .single {
+            text-align: center;
+            display: inline-block;
+            height: 80px;
+            margin: 10px 0;
+            background-color: rgb(202, 202, 202);
+        }
+
+        .inner {
+            height: 100%;
+            margin: 0 5px;
+            color: #fff;
+            background-color: rgb(155, 155, 155);
+        }
+
+        .arrow-box {
+            position: relative;
+            height: 50px;
+            padding: 1px 0;
+            margin-top: 20px;
+        }
+
+        .arrow {
+            width: 30px;
+            height: 30px;
+            margin: -5px auto 0;
+            background-color: rgb(62, 234, 247);
+            transform: rotate(45deg)
+        }
+
+        .cover {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            background-color: rgb(62, 234, 247)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+    </div>
+    <div class="arrow-box">
+        <div class="arrow"></div>
+        <div class="cover"></div>
+    </div>
+
+    <script>
+        horizontalScroll()
+
+        function horizontalScroll() {
+            // length 要为奇数
+            var length = 5
+            var boxEle = document.querySelector('.box');
+            var clientWidth = boxEle.clientWidth;
+            var singleWidth = clientWidth / length
+            var padding = singleWidth * Math.floor(length / 2);
+            var boxHtml = ''
+            var clearT = '', halfS = singleWidth / 2, canMove = true;
+
+            boxEle.setAttribute('style', 'padding:0 ' + padding + 'px');
+            for (let i = 0; i < length; i++) {
+                boxHtml += '<div class="single" style="width:' + singleWidth + 'px"><div class="inner">' + i + '</div></div>'
+            }
+            boxEle.innerHTML = boxHtml
+
+            boxEle.addEventListener('scroll', function () {
+                clearTimeout(clearT)
+                clearT = setTimeout(function () {
+                    var le = boxEle.scrollLeft
+                    var n = Math.floor((le + halfS) / singleWidth)
+                    var center = n * singleWidth
+                    if (canMove) {
+                        boxEle.scrollLeft = center;
+                        console.log('当前指向', n);
+                        canMove = false
+                    } else {
+                        canMove = true
+                    }
+                }, 200);
+            })
+        }
+    </script>
+</body>
+
+</html>
