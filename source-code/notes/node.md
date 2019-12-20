@@ -9,6 +9,12 @@
 
 - process.env 为none的全局变量
 
+- npm 传递参数 
+```
+scripts 命令："npmRun": "node"
+执行：npm run npmRun -- a.js  -> node a.js
+```  
+
 
  ### npm-shrinkwrap.json和package-lock.json区别
 - shrinkwrap 向后兼容npm版本2,3和4
