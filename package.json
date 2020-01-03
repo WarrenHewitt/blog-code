@@ -1,7 +1,7 @@
 {
   "name": "blog-code",
   "version": "1.0.0",
-  "description": "- 博客、笔记等源记录信息",
+  "description": "博客、笔记等源记录信息",
   "main": "index.js",
   "scripts": {
     "dev": "vuepress dev docs",
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/WarrenHewitt/blog-code#readme",
   "devDependencies": {
+    "@vuepress/plugin-back-to-top": "^1.2.0",
     "vuepress": "^1.2.0"
   }
 }
