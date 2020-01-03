@@ -51,7 +51,5 @@ git config --global user.email 'email'
 7. 打开创建的 github page，查看效果即可
 
 
-## Hexo 一些常规操作
-
 
 

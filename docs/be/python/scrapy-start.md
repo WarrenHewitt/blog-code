@@ -29,7 +29,7 @@
 # 创建项目
 
 - 创建scrapy：scrapy startproject youName
-- 创建spider：scrapy genspider <name> <domain> // 在项目跟目录执行
+- 创建spider：`scrapy genspider <name> <domain>` // 在项目跟目录执行
 
 ## 配置settings.py文件
 1. 如果抓取的内容包含中文可配置：FEED_EXPORT_ENCODING = 'utf-8'
