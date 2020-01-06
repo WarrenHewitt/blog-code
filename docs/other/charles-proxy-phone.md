@@ -12,4 +12,4 @@
 
 **注意：手机连接的网络要和电脑的网络在一个网段**
 
-> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog-note)
+> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog)

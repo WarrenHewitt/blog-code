@@ -46,3 +46,15 @@ Shell 脚本（shell script），是一种为 shell 编写的脚本程序
 文档：https://www.runoob.com/linux/linux-shell.html
 
 - windows 下执行 .sh 文件 可以用 git bash 执行 ./xx.sh 来运行
+
+
+```
+#! /bin/sh   #!告诉系统该脚本需要什么解释器来执行  可以不跟内容，也可以引用其它解释器路径
+name=hew  赋值语句两边不能有空格  右边若有空格的话，需要加上引号（单引号或双引号都是可以的）
+echo $name  用$获取变量值
+
+
+一下两个,一般写在 shell 代码逻辑之前
+set -x 会在执行每一行 shell 脚本时，把执行的内容输出来
+set -e  会在执行出错时结束程序，就像其他语言中的“抛出异常”一样  
+```

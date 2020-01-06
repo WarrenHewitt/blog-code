@@ -40,7 +40,34 @@ module.exports = {
                         ['/fe/vue/iview-table-edit', 'iview可编辑表格'],
                         ['/fe/vue/iview-ud-table-header', 'iview自定义多级表头'],
                     ]
-                }
+                },
+                { 
+                    title: '相关', 
+                    collapsable: false,
+                    children: [
+                        ['/fe/other/designPattern', '设计模式'],
+                        ['/fe/other/generator', '生成器'],
+                        ['/fe/other/dragDropPreview', '拖拽与拖拽文件上传'],
+                        ['/fe/other/html5device', 'HTML5 设备访问'],
+                        ['/fe/other/indexedDB', 'indexedDB'],
+                        ['/fe/other/requestAnimationFrame', 'requestAnimationFrame 兼容'],
+                        ['/fe/other/singlePageRoute', 'hash或history实现单页面路由'],
+                        ['/fe/other/toastAndLoading', '页面弹窗toast和加载loading'],
+                        ['/fe/other/vertical-roll', '元素内容垂直循环滚动'],
+                        ['/fe/other/weChatGetUserInfo', '获取微信用户信息'],
+                        ['/fe/other/weChatShare', '微信分享'],
+                    ]
+                },
+                { 
+                    title: '工具方法', 
+                    collapsable: false,
+                    children: [
+                        ['/fe/tools/arrayFun', '数组相关'],
+                        ['/fe/tools/debounceThrottle', '防抖/节流'],
+                        ['/fe/tools/publicFn', '常用'],
+                        ['/fe/tools/regexpRules', '正则表达式'],
+                    ]
+                },
             ],
 
             /** @des 后端 */
@@ -75,21 +102,27 @@ module.exports = {
 
             /** @des 笔记 */
             '/note/': [
-                ['examination', '笔试'],
-                ['javascript', 'javascript'], 
-                ['html', 'html'], 
-                ['css', 'css'], 
-                ['react', 'react'], 
-                ['vue', 'vue'], 
-                ['web-app', 'web-app'], 
-                ['typescript', 'typescript'], 
-                ['mini-programe', 'mini-programe'], 
-                ['node', 'node'], 
-                ['java', 'java'], 
-                ['python', 'python'], 
-                ['mysql-mongo', 'mysql-mongo'], 
-                ['git', 'git'], 
-                ['D3', 'D3'],
+                { 
+                    title: '所有', 
+                    collapsable: false,
+                    children: [
+                        ['examination', '笔试'],
+                        ['javascript', 'javascript'], 
+                        ['html', 'html'], 
+                        ['css', 'css'], 
+                        ['react', 'react'], 
+                        ['vue', 'vue'], 
+                        ['web-app', 'web-app'], 
+                        ['typescript', 'typescript'], 
+                        ['mini-programe', 'mini-programe'], 
+                        ['node', 'node'], 
+                        ['java', 'java'], 
+                        ['python', 'python'], 
+                        ['mysql-mongo', 'mysql-mongo'], 
+                        ['git', 'git'], 
+                        ['D3', 'D3'],
+                    ]
+                },
             ],
 
             '/other/': [
@@ -106,6 +139,8 @@ module.exports = {
                     children: [
                         ['/other/win-cmd', 'windows系统相关操作'],
                         ['/other/softwareUsage', '常用软件操作'],
+                        ['/other/charles-proxy-phone', 'charles抓包手机数据'],
+                        ['/other/psISE', 'powershell ISE，集成git命令'],
                     ]
                 },
                 { 
@@ -115,6 +150,13 @@ module.exports = {
                         ['/other/githubHexo', '搭建步骤'],
                     ]
                 },
+                { 
+                    title: '算法', 
+                    collapsable: false,
+                    children: [
+                        ['/other/algorithm/algorithm', '算法实践'],
+                    ]
+                }
             ]
         }
     },
