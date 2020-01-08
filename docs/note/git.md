@@ -1,6 +1,5 @@
 
 [toc]
-[[toc]]
 
 ---
 
@@ -9,9 +8,19 @@
 
 ## git
 
+- .gitignore  以斜杠“/”开头表示目录
+
+### 基础命令
 - init 此命令初始化一个新本地仓库，它在工作目录下生成一个名为.git的隐藏文件夹
 
 - add 将文件添加进暂存区
+```
+git add . 提交新文件(new)和被修改(modified)文件，不包括被删除(deleted)文件
+
+git add -u 提交被修改(modified)和被删除(deleted)文件，不包括新文件(new)
+
+git add -A 提交所有变化
+```
 
 - commit 将暂存区文件提交到当前分支
 
@@ -37,20 +46,26 @@ ssh-keygen
 
 ### 钩子
 
-在 ./git/hooks/ 中，加了 .sample 的文件表示不执行的文件
+- 在初始化git时会在 `./git/hooks/` 中生成钩子脚本，默认加了 `.sample` 后缀，防止默认执行
 
----
+钩子如下：
+#### 本地钩子
+- `pre-commit` 运行git commit 时被触发,不需要任何参数，以非0状态退出时将放弃整个提交
+- `prepare-commit-msg` 在pre-commit钩子在文本编辑器中生成提交信息之后被调用;用来方便地修改自动生成的squash或merge提交
+- `commit-msg` 它会在用户输入提交信息之后被调用。这适合用来提醒开发者他们的提交信息不符合你团队的规范
+- `post-commit` commit-msg钩子之后立即被运行 。它无法更改git commit的结果，所以这主要用于通知用途
 
-可以在 ./git/hooks/ 的文件中修改  禁掉或启用检测
+- `post-checkout` 和post-commit钩子很像，但它在你用git checkout查看引用的时候被调用。这是用来清理你的工作目录中可能会令人困惑的生成文件
 
----
+- `pre-rebase` git rebase发生更改之前运行
 
-.gitignore  
-以斜杠“/”开头表示目录
+#### 服务器钩子
 
----
+- `pre-receive` 用git push向仓库推送代码时被执行
+- `update` 在pre-receive之后被调用
+- `post-receive` post-receive
 
-怎么恢复 `git add .`操作后，删除的工作区的文件；
+### 怎么恢复 `git add .`操作后，删除的工作区的文件；
 
 前提是在删除后没有 `git add` 操作
 
@@ -138,8 +153,7 @@ git clone 会默认将本地与远程分支进行追踪
 - git push origin [localbranch | HEAD(就是当前活跃分支的游标)] : remotebranch (当远程和本地分支相同时可以简写：git push origin branchname)  
 
 - git push origin  localbranch : remotebranch 创建远程分支 确保本地已有branchname分支
-- git push origin  :remotebranch  删除远程分支 ||   
-- git push origin --delete remotebranch
+- git push origin  :remotebranch  删除远程分支 || git push origin --delete remotebranch
 
 - git pull origin remotebranch:localbranch  表示获取远程分支的更新与本地分支合并.
 - git pull origin remotebranch  表示与当前本地分支合并;

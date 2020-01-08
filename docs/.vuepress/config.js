@@ -42,20 +42,27 @@ module.exports = {
                     ]
                 },
                 { 
-                    title: '相关', 
+                    title: '实践示例', 
+                    collapsable: false,
+                    children: [
+                        ['/fe/other/dragDropPreview', '拖拽与拖拽文件上传'],
+                        ['/fe/other/requestAnimationFrame', 'requestAnimationFrame 兼容'],
+                        ['/fe/other/toastAndLoading', '页面弹窗toast和加载loading'],
+                        ['/fe/other/vertical-roll', '元素内容垂直循环滚动'],
+                        ['/fe/other/cssHeart', '用css 实现心形'],
+                        ['/fe/other/weChatGetUserInfo', '获取微信用户信息'],
+                        ['/fe/other/weChatShare', '微信分享'],
+                    ]
+                },
+                { 
+                    title: '探索原理实践', 
                     collapsable: false,
                     children: [
                         ['/fe/other/designPattern', '设计模式'],
                         ['/fe/other/generator', '生成器'],
-                        ['/fe/other/dragDropPreview', '拖拽与拖拽文件上传'],
                         ['/fe/other/html5device', 'HTML5 设备访问'],
                         ['/fe/other/indexedDB', 'indexedDB'],
-                        ['/fe/other/requestAnimationFrame', 'requestAnimationFrame 兼容'],
-                        ['/fe/other/singlePageRoute', 'hash或history实现单页面路由'],
-                        ['/fe/other/toastAndLoading', '页面弹窗toast和加载loading'],
-                        ['/fe/other/vertical-roll', '元素内容垂直循环滚动'],
-                        ['/fe/other/weChatGetUserInfo', '获取微信用户信息'],
-                        ['/fe/other/weChatShare', '微信分享'],
+                        ['/fe/other/singlePageRoute', 'hash或history实现单页面路由']
                     ]
                 },
                 { 
