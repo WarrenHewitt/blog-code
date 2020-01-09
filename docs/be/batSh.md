@@ -47,12 +47,47 @@ Shell 脚本（shell script），是一种为 shell 编写的脚本程序
 
 - windows 下执行 .sh 文件 可以用 git bash 执行 ./xx.sh 来运行
 
+- 分号为代码块标识
+
+- && 左边返回真后右边代码才会执行 
+
+
+### 命令替换
+
+输出结果暂时保存,在适当的地方输出
+
+执行的命令用其包裹
+
+```
+$() 和 ``
+
+# `` 嵌套时需要转义
+
+# $() 不是所有的 shell 都能使用
+
+```
+
+- **赋值语句两边不能有空格**
 
 ```
 #! /bin/sh   #!告诉系统该脚本需要什么解释器来执行  可以不跟内容，也可以引用其它解释器路径
-name=hew  赋值语句两边不能有空格  右边若有空格的话，需要加上引号（单引号或双引号都是可以的）
+name=hew  右边若有空格的话，需要加上引号（单引号或双引号都是可以的）
 echo $name  用$获取变量值
 
+# 获取工作目录
+# pwd (print name of current/working directory)
+dir="$(pwd)"
+# 返回/e/practice
+
+dir="$0"
+# 返回 ./gitT/a.sh
+
+dir="$(dirname "$0")"
+# 返回 ./gitT
+
+# 获取绝对地址
+dir=$(cd "$(dirname "$0")";pwd)
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 一下两项操作,一般写在 shell 代码逻辑之前
 set -x 会在执行每一行 shell 脚本时，把执行的内容输出来
