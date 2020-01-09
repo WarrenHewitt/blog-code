@@ -19,7 +19,7 @@ git add . 提交新文件(new)和被修改(modified)文件，不包括被删除(
 
 git add -u 提交被修改(modified)和被删除(deleted)文件，不包括新文件(new)
 
-git add -A 提交所有变化
+git add -A(--all) 提交所有变化
 ```
 
 - commit 将暂存区文件提交到当前分支
@@ -48,16 +48,35 @@ ssh-keygen
 
 - 在初始化git时会在 `./git/hooks/` 中生成钩子脚本，默认加了 `.sample` 后缀，防止默认执行
 
-钩子如下：
+- 安装一个钩子只需要去掉.sample拓展名即可
+
+
 #### 本地钩子
 - `pre-commit` 运行git commit 时被触发,不需要任何参数，以非0状态退出时将放弃整个提交
+
 - `prepare-commit-msg` 在pre-commit钩子在文本编辑器中生成提交信息之后被调用;用来方便地修改自动生成的squash或merge提交
+
 - `commit-msg` 它会在用户输入提交信息之后被调用。这适合用来提醒开发者他们的提交信息不符合你团队的规范
+
 - `post-commit` commit-msg钩子之后立即被运行 。它无法更改git commit的结果，所以这主要用于通知用途
+
+- `applypatch-msg` 执行git am命令时触发，常用于检查命令提取出来的提交信息是否符合特定格式
+
+- `pre-applypatch` git am提取出补丁并应用于当前分支后，准备提交前触发，常用于执行测试用例或检查缓冲区代码
+
+- `post-applypatch` git am提交后触发，常用于通知、或补丁邮件回复（此钩子不能停止git am过程）
 
 - `post-checkout` 和post-commit钩子很像，但它在你用git checkout查看引用的时候被调用。这是用来清理你的工作目录中可能会令人困惑的生成文件
 
 - `pre-rebase` git rebase发生更改之前运行
+
+- `post-rewrite` 执行会替换commit的命令时触发，比如git rebase或git commit –amend
+
+- `post-merge` 成功完成一次 merge行为后触发
+
+- `pre-push` 执行git push命令时触发，可用于执行测试用例
+
+- `pre-auto-gc` 执行垃圾回收前触发
 
 #### 服务器钩子
 
@@ -148,11 +167,23 @@ git clone 会默认将本地与远程分支进行追踪
 
 #### 远程分支操作
 
-- git remote add anyname url  定义了一个本地的anyname远程端，这个anyname远程端指向url所代表的远程端。当用git clone时默认的anyname为origin。 
+- git remote add anyname url  anyname为别名。
+
+url: 远程仓库地址链接  如：https://github.com/WarrenHewitt/blog-code.git
+
+一般 anyname 默认为 origin，当设置完成后，在推送代码时可以直接 git push anyname branchName 托送代码到指定仓库的指定分支
+
+当用git clone时默认的anyname为origin。
+
+---
 
 - git push origin [localbranch | HEAD(就是当前活跃分支的游标)] : remotebranch (当远程和本地分支相同时可以简写：git push origin branchname)  
 
-- git push origin  localbranch : remotebranch 创建远程分支 确保本地已有branchname分支
+这里的 origin 可以替代为 url 仓库地址
+
+---
+
+- git push origin  localbranch : remotebranch 创建远程分支 确保本地已有 localbranch 分支
 - git push origin  :remotebranch  删除远程分支 || git push origin --delete remotebranch
 
 - git pull origin remotebranch:localbranch  表示获取远程分支的更新与本地分支合并.
