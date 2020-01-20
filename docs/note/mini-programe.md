@@ -13,12 +13,17 @@
 	"cloudfunctionRoot": "cloudfunctions/", 云开发的目录
 }
 ```
-
 ---
 
-- app.json 全局配置
+### 遇到的问题
 
-pages 数组的第一个值为小程序的首页
+- 自定义弹窗防止底层内容滑动添加事件 catchtouchmove="catchMove" catchMove 是空函数即可
+
+### app.json 全局配置
+
+- 创建页面：可以直接在app.json 中先配置好页面路径及名称，保存时，编辑器自动创建文件
+
+- pages 数组的第一个值为小程序的首页
 
 ---
 
@@ -49,17 +54,32 @@ sitemap.json
 }
 ```
 
+### 生命周期函数
+
+执行顺序： onLoad -> onShow -> onReady
+
 ### 组件内引用全局样式
 
-设置
+组件js文件，设置以下项
 ```
-options: {
-  styleIsolation: 'apply-shared'
-},
+Component({
+  options: {
+    styleIsolation: 'apply-shared'
+  }
+})
 ```
 
+### computed
+
+- 先安装 miniprogram-computed 安装后 computed 和 watch 都可用 
+
+### behaviors
+
+用于组件间代码共享的特性，类似于一些编程语言中的“mixins”
 
 
-### 遇到的问题
+### canvas 相关
 
-- 自定义弹窗防止底层内容滑动添加事件 catchtouchmove="catchMove" catchMove 是空函数即可
+- ctx.draw(true); 参数为true则保留当前画布上的内容，进行绘制
+
+- touches[0].x  在canvas中返回的是相对于canvas的x值

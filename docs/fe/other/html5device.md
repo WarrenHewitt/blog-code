@@ -29,6 +29,17 @@ reader.readAsDataURL(file);
 - touchcancel **电话的接入或者弹出信息等比较高级的事件触发，一般做保存操作**
 - touchmove
 
+回掉返回的 event 对象
+```
+{
+    touches: [{
+        screenX: 488 // 相对于屏幕左边沿的的X坐标
+        clientX: 67 // 相对于可见视区左边沿的的X坐标
+        pageX: 67 // 相对于HTML文档左边沿的的X坐标
+    }]
+}
+```
+
 ## geolocation 
 > [参考地址](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/Using_geolocation)
 

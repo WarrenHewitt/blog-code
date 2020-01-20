@@ -22,7 +22,7 @@ module.exports = {
             { text: '后端', link: '/be/' },
             { text: '笔记', link: '/note/' },
             { text: '其它', link: '/other/' },
-            { text: 'GitHub', link: 'https://github.com/WarrenHewitt/blog' },
+            { text: 'GitHub', link: 'https://github.com/WarrenHewitt' },
         ],
         sidebar: {
             /** @des 前端 */
@@ -58,7 +58,7 @@ module.exports = {
                     title: '探索原理实践', 
                     collapsable: false,
                     children: [
-                        ['/fe/other/designPattern', '设计模式'],
+                        ['/fe/other/designPattern', '设计模式的理解与实现'],
                         ['/fe/other/generator', '生成器'],
                         ['/fe/other/html5device', 'HTML5 设备访问'],
                         ['/fe/other/indexedDB', 'indexedDB'],
@@ -71,7 +71,7 @@ module.exports = {
                     children: [
                         ['/fe/tools/arrayFun', '数组相关'],
                         ['/fe/tools/debounceThrottle', '防抖/节流'],
-                        ['/fe/tools/publicFn', '常用'],
+                        ['/fe/tools/publicFn', '常用工具函数'],
                         ['/fe/tools/regexpRules', '正则表达式'],
                     ]
                 },
@@ -102,7 +102,7 @@ module.exports = {
                     title: '脚本', 
                     collapsable: false,
                     children: [
-                        ['/be/batSh', '批处理与shell']
+                        ['/be/batSh', '批处理与 shell 语法']
                     ]
                 }
             ],
@@ -162,6 +162,13 @@ module.exports = {
                     collapsable: false,
                     children: [
                         ['/other/algorithm/algorithm', '算法实践'],
+                    ]
+                },
+                { 
+                    title: 'codepen', 
+                    collapsable: false,
+                    children: [
+                        ['/other/codepen', 'codepen 实例'],
                     ]
                 }
             ]

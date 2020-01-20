@@ -1,11 +1,7 @@
 [toc]
 [[toc]]
 
----
-
----
-
-- axios 可以自动判断上传的数据是否是formdata，从而修改content-type
+- axios 可以自动判断上传的数据是否是formdata，从而修改 content-type
 
 ---
 
@@ -142,8 +138,29 @@ https://www.jianshu.com/p/a20f2023c78a
 ### keep-alive
 1. include 包含的是组件的name属性值
 2. 通过同一个 router-view 进入的路由间切换, keep-alive 都有效,都会缓存页面。
-3. 只要通过keep-alive下的路由(前提是要包含在include中) 都会触发activated, 只有第一次进入会触发mounted（切换过router-view入口 再进入也会触发mounted）
+3. 只要通过keep-alive下的路由(前提是要包含在include中) ，每次都会触发activated, 只有第一次进入会触发mounted（切换过router-view入口 再进入也会触发mounted）
 4. 注意include 如果用字符串值，后面名称与逗号之间不要有空格
+```js
+beforeRouteLeave (to, from, next) {
+    /** 这里主要是重置数据 */
+    if (!['routeName'].includes(to.name)) {
+        this.key = '数据重置了'
+    }
+    next()
+},
+
+activated () {
+    /**
+    * @des 这里更新表格数据等
+    */
+},
+
+created () {
+    /**
+        * 这里请求不需要频繁更新的数据
+        */
+},
+```
  
 #### 处理保存页面状态
 - 最好一个模块有一个单独的 router-view 
