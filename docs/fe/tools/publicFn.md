@@ -1,8 +1,8 @@
 [toc]
 
-# 公用方法
+## 公用方法
 
-## ajax
+### ajax
 
 ```javascript
 function ajaxFn() {
@@ -35,7 +35,7 @@ status 200表示成功，304表示 资源没有修改可以直接使用浏览器
 必须在调用open()方法之后且调用send()方法之前调用setRequestHeader()
 
 
-## fetch
+### fetch
 
 ```js
 fetch('http://localhost:1025/121', {
@@ -57,7 +57,7 @@ fetch('http://localhost:1025/121', {
 ```
 
 
-## 批量动态插入元素
+### 批量动态插入元素
 ```js
 const loopInsert = (element, attribute, parent) => {
     const s = document.createElement(element);
@@ -76,7 +76,7 @@ loopInsert('link', attribute, 'head');
 
 ```
 
-## time format 时间格式化
+### time format 时间格式化
 moment.js | Day.js(https://github.com/iamkun/dayjs)
 ```js
 function formatTime(data = {}) {
@@ -128,7 +128,7 @@ function formatTime() {
 }
 ```
 
-## 浏览器全屏
+### 浏览器全屏
 ```js
 function fullScreen() {
     // 方法必须放到用户触发的事件里面  
@@ -146,9 +146,9 @@ function fullScreen() {
 }
 ```
 
-## 复制内容
+### 复制内容
 
-### 简单实现
+#### 简单实现
 ```html
 <textarea cols="20" rows="10" id="content">用户定义的代码区域</textarea>
 <input type="button" onClick="copy()" value="点击复制代码" />
@@ -163,11 +163,11 @@ function copy() {
 }
 ```
 
-### 使用插件 clipboard.js
+#### 使用插件 clipboard.js
 
 https://github.com/zenorocha/clipboard.js
 
-## 递归遍历树
+### 递归遍历树
 ```js
 const tree = [
     {
@@ -221,4 +221,70 @@ const loopTree = (data) => {
 }
 
 console.log(loopTree(tree));
+```
+
+### 返回顶部按钮
+
+```js
+(function() {
+    var divEle = document.createElement('div');
+    var style = 'cursor:pointer;position:fixed;width:60px;height:60px;background:rgba(210,210,210,.5);bottom:30%;right:10%;text-align:center;line-height:60px;color:#fff;border-radius:50%';
+    divEle.setAttribute('style', style);
+
+    divEle.innerHTML = 'Top';
+    document.body.append(divEle)
+
+    divEle.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    })
+})()
+```
+
+### 保留小数点后N位
+
+```js
+/**
+ * @param { number: Number } 要处理的数
+ * @param { n: Number } 保留的小数点位数
+*/
+function afterDecimalPoint(number, n){
+    if(typeof number === 'number') {
+        const digit = Math.pow(10, n);
+        /** 严格的四舍五入 */
+        number = Math.round(number * digit)/digit;
+        /** 非严格的四舍五入（具体查看toFixed说明） */
+        number = number.toFixed(2)
+        return number;
+    }
+    console.error('请输入Number类型');
+    return false;
+}
+```
+
+### 获取随机颜色 16进制 rgb rgba模式
+
+```js
+/**
+ * type：可以为 rgb rgba 默认不传，表示返回6位16进制
+*/
+function randomColor(type){
+    if(/rgb/.test(type)) {
+        const getVal = () => {
+            /** 这里使用256的原因同下 */
+            return Math.floor(Math.random() * 256);
+        }
+        const a = Math.random().toFixed(1);
+        let rgba = `rgba(${getVal()}, ${getVal()}, ${getVal()}`;
+        if(/rgba/.test(type)) rgba += `, ${a})`
+        return rgba;
+    } else {
+        /** 16777215 转换为16进制是 ffffff 所以用 16777216 保证能取到白色 */
+        const color = `#${Math.floor(Math.random() * 16777216).toString(16)}`;
+        /** 这里填充的值随意设置 */
+        return color.padEnd(7, 'f');
+    }
+}
 ```

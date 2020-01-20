@@ -4,7 +4,7 @@
 ---
 
 ## canvas
-- 在设置canvas标签的宽高时，要直接在标签上给设置（width=“100px”）
+- canvas 绘制的宽高不受css样式控制，要直接在标签上给设置，或是获取到canvas标签对象(canvasObj)，再设置(canvasObj.width = 1000)
 - getContext() 方法返回一个用于在画布上绘图的环境；现在只有“2d”;
 - 渐变的效果发生在所规定的坐标之间，之外的就会用相应的纯色填充。
 - .save()和.restore()之间定义的方法或定义只作用于他们之间
@@ -15,6 +15,29 @@
     3.（imgObj, 图像x位置，图像y位置,裁切图的宽度，裁切图的高度,
     相对画布x位置，相对画布y位置,被裁图宽，被裁图高
     ）
+
+- Path2D
+```
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+
+var path1 = new Path2D();
+path1.rect(10, 10, 100,100);
+
+var path2 = new Path2D(path1);
+path2.moveTo(220, 60);
+path2.arc(170, 60, 50, 0, 2 * Math.PI);
+
+ctx.stroke(path2);
+```
+
+- 设置宽高
+```
+window.addEventListener("resize", ()=>{
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}, false);
+```
 
 ## svg
 
@@ -39,9 +62,15 @@ render tree不包含隐藏的节点 (比如display:none的节点，还有head节
 
 ---
 
-disabled='disabled' 可用于option标签和input标签,该元素不可用。
+- input 标签相关操作：
+
+disabled='disabled' 可用于option标签和input标签
 
 readonly='readonly'用于input标签，不能修改的。仍然可以使用 tab 键切换到该字段，还可以选中或拷贝其文本。
+
+input 标签设置属性 autofocus 自动获取焦点
+
+inputElement.focus()
 
 ---
 
@@ -62,6 +91,21 @@ p 标签中不能放块级元素,内联元素中不能放块级元素;
 
 
 ## 标签
+
+- table 
+```
+属性:
+colspan= 2  占多少列；
+rowspan=2  占多少行；
+align=left；   
+cellspacing="0"：两个单元格之间空间的大小；
+cellpadding="0"：单元的内容和边框之间的空间； 
+border="1px"
+
+样式：
+border-collapse: collapse; 去掉 table 中边框间间隔，合并边框
+```
+
 
 < abbr title='people's republic of china'>PRC< /abbr>
 
@@ -250,43 +294,84 @@ none: SWF 文件可能不调用浏览器导航或浏览器交互API，并且它�
 
 ---
 
-## localStorage
+## 与 dom 操作相关
 
-本地存储是一个window的属性：window.localStorage
+- `document.querySelector('#iid').cloneNode(true)`  true表示子节点也clone，返回值用 appendChild() 等相似方法添加到 dom
 
-同一个目录下的页面的localStorage会存在一起
+### 元素宽高,与滑动条
+- window.innerHeight | innerWidth  浏览器窗口的内部高度  
 
-任何格式存储的时候都会被自动转为字符串
+- document.documentElement.clientHeight |  包括内边距（兼容性好）
 
-Storage事件（未完）；
+- offsetHeight，offsetWidth （包括内边距和边框的宽度）
 
-Key()方法：
+- document.body.scrollHeight  所有内容包括，未被滚动到的
 
-for(var i=0;i< localStorage.length;i++){
+- window.screen.width 获取电脑屏幕宽度  (兼容ie10，有问题)
 
-alert(localStorage.getItem(localStorage.key(i)));
+- window.innerHeight 浏览器窗口的视口高度
 
+- 没有滚动条时 scrollHeight 和 clientHeight 相同
+
+- element.scrollIntoView({ behavior: "smooth"});//js原生，让元素滚动到可见区域
+
+- js中是 element.scrollTop=100（scrollLeft）来设置或获取滑动条的位置;
+
+- 谷歌的页面滚动是用的body，火狐是用的html；
+
+- 谷歌:当scrollTop的值小于1时会直接返回0，所以用y=1除以a的x次方指数函数来趋近0来由快到慢的滑动。
+
+- window 没有 scrollTop 等方法，有 scrollX 等，只能获取值： scrollTo({ top: ,  }) 可以设置值
+```
+var s = document.body.scrollHeight || document.documentElement.scrollHeight;
+var c = window.innerHeight;
+var px = s-c; // 表示滑到底部
+if(window.scrollTo) {
+    window.scrollTo({
+        top: px,
+        behavior: "smooth"
+    });
+} else {
+    document.body.scrollTop = document.documentElement.scrollTop = px;
 }
+```
 
-sessionStorage.getItem(key):获取指定key本地存储的值
+- `Element.getBoundingClientRect()`  元素的大小及其相对于视口的位置
+```
+x: 推荐用left
+y: 推荐用top
+top: 距视口顶部距离
+left: 距视口左边距离
+width: 元素宽度
+height: 元素高度
+right: 元素右边距离视口左边的距离
+bottom: 元素底部距离视口顶部的距离
+```
 
-sessionStorage.setItem(key,value)：将value存储到key字段
+- 返回元素相对于父元素的位置，element.offsetLeft 和 offsetTop，用了position更精确。
 
-sessionStorage.removeItem(key):删除指定key本地存储的值
+### iframe
 
-sessionStorage.length是sessionStorage的项目数
+- window.parent.document.getElementById();
+在chrome中window.parent.document 要在服务器上才能使用。
 
-sessionStorage.clear();清除所有
+- 获取当前的内嵌页面url,就直接在该页面使用window.location.href即可。
+- 父页面查找子页面的元素：
+```
+// 跨域会有问题
+// 注意要放入 onload 中  等待子页面加载完成才能获取
+document.getElementById('iframeId').contentWindow.document||document.body||document.getElementById('子页面ID')；
+```
 
-localStorage与上面相同。
-
-localStorage.a = 3;
-localStorage['a'] = 'sfsf';
-var a1 = localStorage['a'];
-
-var a2 = localStorage.a;
-
----
+- 子页面查找父页面元素。
+- 不同域可以在两个页面都设置document.domain='主域名'。
+- 父子窗口传递消息
+```js
+// 父窗口
+document.getElementById('iframeId').contentWindow.postmessage('')
+// 子窗口iframe中使用
+window.onmessage=function(e){e.data}
+```
 
 
 ## Html5 消息通知
@@ -299,17 +384,52 @@ Notification.requestPermission(function(permission){}),方法要用onclick等用
 
 在手机上只有火狐的实现了
 
-## history API
-**主要是实现无刷新改变地址栏**
+## 预览pdf
 
-注意地址栏是queryString 请求要用path 地址栏的地址只是显示用不与请求接口一致
+```html
+<!-- 方式一 -->
+<embed src="./pdf.pdf" type="application/pdf" width="100%" height="100%" internalinstanceid="81" />
+            
+<!-- 方式二 -->
+<iframe src="./pdf.pdf" width="100%" height="100%">
+    当前浏览器不支持在线预览PDF，请<a href="./pdf.pdf">下载 PDF</a>
+</iframe>
 
-1. history.pushState(state,title(页面标题),url);
-    - state：一个与指定网址相关的状态对象，popstate事件触发时，该对象会传入回调函数。如果不需要这个对象，此处可以填null。
-    - title：新页面的标题，但是所有浏览器目前都忽略这个值，因此这里可以填null。
-    - url：新的网址，必须与当前页面处在同一个域。浏览器的地址栏将显示这个网址。
 
-2. history.replaceState(参数同上);
+<!-- 方式三 -->
+<object data="./pdf.pdf" type="application/pdf" width="100%" height="100%">
+    当前浏览器不支持在线预览PDF，请<a href="./pdf.pdf">下载 PDF</a>
+</object>
+```
+
+## html 打印
+
+原理为调用 `window.print()` 方法，但是该方法只能对当前页面全部打印，所以有了以下方案来解决局部打印
+
+1. 利用 iframe 将需要打印的元素和样式注入 在调用打印
+2. 利用 @media print
+```css
+@media print{
+    .hidden-element{
+        display:none;
+        /* visibility:hidden; */
+    }
+}
+/*纸张设置为宽1200px 高800px*/
+@page{
+    size:1200px 800px;
+}
+```
+
+---
+
+- `<link href="/example.css" media="print" rel="stylesheet" />`  标注打印时采用的样式
+
+- 检测媒体 @media 后可用的查询 `window.matchMedia('print').addListener((res) => {});`
+
+- 监听打印事件 `window.addEventListener('beforeprint|| afterprint', ()=> {});`
+
+
 
 
 

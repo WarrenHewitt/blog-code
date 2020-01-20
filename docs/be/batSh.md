@@ -41,9 +41,9 @@ start cmd /k "cd C:\Users\XXX\Desktop\getIP && python ip.py"
 
 ## sh
 
-Shell 脚本（shell script），是一种为 shell 编写的脚本程序
+实例查看当前项目的根目录下 deploy.sh 文件
 
-文档：https://www.runoob.com/linux/linux-shell.html
+Shell 脚本（shell script），是一种为 shell 编写的脚本程序
 
 - windows 下执行 .sh 文件 可以用 git bash 执行 ./xx.sh 来运行
 

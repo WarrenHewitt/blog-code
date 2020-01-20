@@ -217,7 +217,7 @@ for ( let i=1; i<=5; i++) {
 
 
 ## 事件
-- 任意事件触发后三个阶段：捕获（window到目标），目标，冒泡。addeventListener(,,false默认(冒泡阶段执行)||true)
+- 任意事件触发后三个阶段：捕获（window到目标）-> 目标 -> 冒泡。addeventListener(,,false默认(冒泡阶段执行)||true)
 
 ```html
 <div id="outDiv">
@@ -369,23 +369,41 @@ DNS预解析：
 最优方法：通过js初始化一个iframe异步加载一个页面，而这个页面里包含本站所有的需要手动dns prefetching的域名
 
 ### 缓存
-#### 强缓存
+- 强缓存
 两种方式：
 - Expires：Wed, 22 Oct 2018 08:41:00 GMT 改时间后过期
 - Cache-Control： max-age=30 30s后过期，HTTP/1.1 优先级高于Expire
 
 通过配置web服务器的方式，让web服务器在响应资源的时候统一添加Expires和Cache-Control Header。
 
-#### 协商缓存
+- 协商缓存
 如果缓存过期了，我们就可以使用协商缓存来解决问题。协商缓存需要请求，如果缓存有效会返回 304。
 
-#### 使用 HTTP / 2.0
-#### 预加载
+- 使用 HTTP / 2.0
+- 预加载
+
+### gzip 压缩
+
+- 客户端浏览器存在兼容问题
+```
+Response Headers
+Accept-Encoding: gzip
+```
+
+- tomcat 可配置
+
+- nginx 可配置
+
+- koa 用 koa-compress express 用 compression，使用webpack插件compression-webpack-plugin 将资源文件压缩为.gz文件，并且根据客户端的需求按需加载
+
+---
 
 ```js
 <link rel="preload" href="http://example.com">
 ```
 ....等[https://yuchengkai.cn/docs/zh/frontend/performance.html#cdn](https://yuchengkai.cn/docs/zh/frontend/performance.html#cdn)
+
+---
 
 ## 安全
 ### XSS(cross-site scripting) 
@@ -460,5 +478,13 @@ mvvm： 数据双向绑定
 补码：正数的补码就是其本身；负数的补码是在其原码的基础上, 符号位不变, 其余各位取反, 最后+1
 ```
 
+
+## 页面相关拦截
+
+1. 拦截 ajax 请求：修改 XMLHttpRequest 原型或重写 XMLHttpRequest 
+
+2. 拦截 a 标签，将 a 标签的 src属性值替换，并加上点击事件
+
+3. 拦截点击事件，可以在父元素上添加事件，缺点是只能在捕获阶段拦截，而且拦截后，若直接阻止传递，原本挂载的事件也无法执行
 
 

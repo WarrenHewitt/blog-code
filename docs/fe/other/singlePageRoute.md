@@ -1,11 +1,18 @@
 [toc]
-# 利用hash或history实现单页面路由
+## 利用hash或history实现单页面路由
 > 在chrome(版本 70.0.3538.110)测试正常
 > 编写涉及：css, html,js, node(koa)
 
 [在线演示codepen](https://codepen.io/Hewitt/pen/gQymam)
 
-# html代码
+1. history.pushState(state,title(页面标题),url);
+    - state：一个与指定网址相关的状态对象，popstate事件触发时，该对象会传入回调函数。如果不需要这个对象，此处可以填null。
+    - title：新页面的标题，但是所有浏览器目前都忽略这个值，因此这里可以填null。
+    - url：新的网址，必须与当前页面处在同一个域。浏览器的地址栏将显示这个网址。
+
+2. history.replaceState(参数同上);
+
+## html代码
 ```html
  <div class="hash">
         <div class="title">hash 路由</div>
@@ -27,7 +34,7 @@
     </div>
 ```
 
-# css代码
+## css代码
 ```css
 .hash a {
     display: inline-block;
@@ -70,8 +77,8 @@
 }
 ```
 
-# JavaScript代码
-## hash方式
+## JavaScript代码
+### hash方式
 ```js
 class HashRoute {
     setRoute() {
@@ -106,9 +113,9 @@ const hashRoute = new HashRoute()
 hashRoute.init()
 ```
 
-## history 方式
+### history 方式
 
-### 浏览器端代码
+#### 浏览器端代码
 ```js
 // 服务端有效
 class HistoryRoute {

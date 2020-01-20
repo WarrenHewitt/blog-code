@@ -16,6 +16,10 @@
 
 ---
 
+- 关闭 chrome 的下拉刷新 body 设置css样式 `overscroll-behavior-y: contain;`
+
+---
+
 - 获取屏幕宽度，兼容方案
 ```
 var w = window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth;
@@ -150,22 +154,6 @@ if (/iphone/i.test(navigator.appVersion)) {
     timeString = timeString.replace(/-/g, '/');
 }
 ```
-
-## gzip 压缩
-
-- 客户端浏览器存在兼容问题
-```
-Response Headers
-Accept-Encoding: gzip
-```
-
-- tomcat 可配置
-
-- nginx 可配置
-
-- koa 用 koa-compress express 用 compression，使用webpack插件compression-webpack-plugin 将资源文件压缩为.gz文件，并且根据客户端的需求按需加载
-
----
 
 ## 移动端相关说明
  
