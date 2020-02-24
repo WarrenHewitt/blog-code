@@ -355,4 +355,4 @@ sub.informSubscriber('s2', '来自s2的信息')
 
 优缺点：结构清晰，解耦较好；当有大量数据时，订阅过程比较消耗内存和时间
 
-> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog-note)
+> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog/issues)

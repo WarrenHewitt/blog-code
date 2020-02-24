@@ -1,7 +1,7 @@
 [toc]
 [[toc]]
 
----
+- 检测媒体 @media 后可用的查询 `window.matchMedia('print').addListener((res) => {});`
 
 ## canvas
 - canvas 绘制的宽高不受css样式控制，要直接在标签上给设置，或是获取到canvas标签对象(canvasObj)，再设置(canvasObj.width = 1000)
@@ -92,6 +92,12 @@ p 标签中不能放块级元素,内联元素中不能放块级元素;
 
 ## 标签
 
+- a
+```
+download: 添加该属性表示下载 href 内容而非导航，其值是下载文件的名称 
+href: 可以是 http开头的地址也可以是  blob: URL(URL.createObjectURL创建) 或 data: URL , tel: URLs, mailto URLs  等
+```
+
 - table 
 ```
 属性:
@@ -171,9 +177,9 @@ video 和 audio
 
 脚本的加载顺序：先下载，再执行，再下载下一个，再执行；
 
-< script defer>:下载好将本后，不执行，页面加载完才执行；
+< script defer>:下载后，不执行，页面加载完才执行；
 
-< script async>：下载好脚本后立即执行，但是不影响加载下面的文档，仅对外部文件；
+< script async>：下载后立即执行，但是不影响加载下面的文档，仅对外部文件；
 
 ---
 
@@ -230,12 +236,8 @@ tableindex='1'设置按tab键的时候跳转顺序；
 
 contentEditable=true用contentEditable来让元素的内容可以编辑，还提供了一个javascript方法，window.document.designMode='on/off'让所有的内容是否可以修改。
 
----
-打电话
-< a href='tel:1234565'>
-
 ## meta
-**全屏和禁止电话号码**
+**全屏**
 < meta name="apple-mobile-web-app-capable" content="yes" > 
 
 如果content设置为yes，Web应用会以全屏模式运行，反之，则不会。你可以通过只读属性window.navigator.standalone来确定网页是否以全屏模式显示。
@@ -249,11 +251,6 @@ contentEditable=true用contentEditable来让元素的内容可以编辑，还提
 如果content设置为default，则状态栏正常显示。如果设置为blank，则状态栏会有一个黑色的背景。如果设置为blank-translucent，则状态栏显示为黑色半透明。如果设置为default或blank，则页面显示在状态栏的下方，即状态栏占据上方部分，页面占据下方部分，二者没有遮挡对方或被遮挡。如果设置为blank-translucent，则页面会充满屏幕，其中页面顶部会被状态栏遮盖住（会覆盖页面20px高度，而iphone4和itouch4的Retina屏幕为40px）。默认值default。
 
 兼容性:iOS 2.1 +
-< meta name='format-detection' content='telephone=no'>
-
-默认情况下，设备会自动识别任何可能是电话号码的字符串。设置telephone=no可以禁用这项功能。
-
-兼容性:iOS 1.0 +
 
 ---
 
@@ -262,8 +259,7 @@ contentEditable=true用contentEditable来让元素的内容可以编辑，还提
 禁止浏览器从本地计算机的缓存中访问该页面
 
 ---
-< meta charset="UTF-8">
-大小写都可以
+< meta charset="UTF-8"> 大小写都可以
 
 ---
 < meta http-equiv="refresh" content="3;url="http://ww.baidu.com">
@@ -296,16 +292,41 @@ none: SWF 文件可能不调用浏览器导航或浏览器交互API，并且它�
 
 ## 与 dom 操作相关
 
-- `document.querySelector('#iid').cloneNode(true)`  true表示子节点也clone，返回值用 appendChild() 等相似方法添加到 dom
+[MDN DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
+
+- 元素的插入
+
+```
+parentElement.insertBefore(Element, 在父元素中的某个子元素); // 在元素插入到指定元素前面
+
+Element.appendChild(Element); // 在元素内部最后插入元素
+
+ParentNode.prepend(Node,DOMString,...); // 在元素内部第一个元素前插入节点 IE不支持所以建议用 insertBefore 替代
+```
+
+---
+
+- `document.querySelector('#id').cloneNode(true)`  true表示子节点也clone，返回新 Node
+
+- 获取原始图片的真实宽高，非css样式修改后的宽高
+```js
+// 注意是要在 onload 加载后才能调用
+var width = htmlImageElement.naturalWidth  
+var height = htmlImageElement.naturalHeight
+// htmlImageElement 可以是 document.querySelector 等类似方法获取的 img 元素 也可以是 new Image() 创建的元素
+```
 
 ### 元素宽高,与滑动条
-- window.innerHeight | innerWidth  浏览器窗口的内部高度  
 
-- document.documentElement.clientHeight |  包括内边距（兼容性好）
+- 获取 img 标签宽高：`htmlImageElement.width | height` htmlImageElement 提供了特别的属性和方法
 
-- offsetHeight，offsetWidth （包括内边距和边框的宽度）
+- window.innerWidth | innerHeight 只能通过window调用获取浏览器视口
 
-- document.body.scrollHeight  所有内容包括，未被滚动到的
+- htmlElement.clientWidth | clientHeight 包括内边距（兼容性好）
+
+- htmlElement.offsetWidth | offsetHeight 包括内边距和边框的宽度
+
+- htmlElement.scrollHeight  所有内容包括未被滚动到的
 
 - window.screen.width 获取电脑屏幕宽度  (兼容ie10，有问题)
 
@@ -360,7 +381,7 @@ bottom: 元素底部距离视口顶部的距离
 ```
 // 跨域会有问题
 // 注意要放入 onload 中  等待子页面加载完成才能获取
-document.getElementById('iframeId').contentWindow.document||document.body||document.getElementById('子页面ID')；
+document.getElementById('iframeId').contentWindow.[document||document.body||document.getElementById('子页面ID')]；
 ```
 
 - 子页面查找父页面元素。
@@ -378,7 +399,7 @@ window.onmessage=function(e){e.data}
 
 Notification（首字母大写） 或 刷新title
 
-谷歌测试时不要用 [file://的方式访问，要用服务器的方式]
+谷歌测试时,要启用本地服务的方式
 
 Notification.requestPermission(function(permission){}),方法要用onclick等用户操作方法来调用。
 
@@ -401,34 +422,6 @@ Notification.requestPermission(function(permission){}),方法要用onclick等用
     当前浏览器不支持在线预览PDF，请<a href="./pdf.pdf">下载 PDF</a>
 </object>
 ```
-
-## html 打印
-
-原理为调用 `window.print()` 方法，但是该方法只能对当前页面全部打印，所以有了以下方案来解决局部打印
-
-1. 利用 iframe 将需要打印的元素和样式注入 在调用打印
-2. 利用 @media print
-```css
-@media print{
-    .hidden-element{
-        display:none;
-        /* visibility:hidden; */
-    }
-}
-/*纸张设置为宽1200px 高800px*/
-@page{
-    size:1200px 800px;
-}
-```
-
----
-
-- `<link href="/example.css" media="print" rel="stylesheet" />`  标注打印时采用的样式
-
-- 检测媒体 @media 后可用的查询 `window.matchMedia('print').addListener((res) => {});`
-
-- 监听打印事件 `window.addEventListener('beforeprint|| afterprint', ()=> {});`
-
 
 
 

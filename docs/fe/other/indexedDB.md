@@ -1,11 +1,13 @@
 [toc]
-# indexedDB添加，删除，获取，修改
+[[toc]]
+
+## indexedDB添加，删除，获取，修改
 > 在chrome(版本 70.0.3538.110)测试正常
 > 编写涉及：css, html, js
 
 [在线演示codepen](https://codepen.io/Hewitt/pen/vQMxPe)
 
-# html代码
+## html代码
 ```html
 <h1>indexedDB</h1>
 <h2>在 DevTools 的 Application 中查看数据库信息</h2>
@@ -26,7 +28,7 @@
 <div id="display"></div>
 ```
 
-# css代码
+## css代码
 ```css
 button {
     margin: 10px 0;
@@ -41,7 +43,7 @@ input{
 }
 ```
 
-# JavaScript代码
+## JavaScript代码
 
 ```js      
 window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
@@ -194,4 +196,4 @@ function delDBData() {
 
 > [参考](https://developer.mozilla.org/zh-CN/docs/Web/API/IndexedDB_API/Using_IndexedDB)
 
-> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog-note)
+> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog/issues)

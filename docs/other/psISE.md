@@ -35,4 +35,4 @@
 - [posh-git](https://github.com/dahlbyk/posh-git)
 - [powershell](https://docs.microsoft.com/en-us/powershell/scripting/powershell-scripting?view=powershell-6)
 
-> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog-note)
+> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog/issues)

@@ -79,4 +79,4 @@ weChatShare('tit', 'des')
 
 本篇文章只是做了方法整合，详见 https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1445241432
 
-> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog-note)
+> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog/issues)

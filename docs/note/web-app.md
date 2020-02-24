@@ -47,6 +47,10 @@ user-select: none;
     1. 查询app的URL Scheme(如微信的为weixin) < a href="weixin://" >打开微信< /a> 
 ---
 
+- 打电话 `<a href='tel:1234565'>`
+
+---
+
 - 禁止识别手机号
     1. < meta name="format-detection" content="telephone=no">
 ---
@@ -171,9 +175,6 @@ if (/iphone/i.test(navigator.appVersion)) {
  <link rel="stylesheet" href="" media="screen and (max-width:320px)">
 
  rem ios6+ android 2.1+
-
- padding会增加宽度
- box-sizing：border-box
 
  px :css pixels 逻辑像素，浏览器使用的抽象单位
  dp,pt: device independent pixels 设备独立像素 物理像素

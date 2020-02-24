@@ -131,7 +131,7 @@ https://www.jianshu.com/p/a20f2023c78a
 
 - 深度作用域 
 ```
-.a >>> .b 
+.a >>> .b (实际使用中效果没有deep好)
 .a /deep/ .b
 ```
 
