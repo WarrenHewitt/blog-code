@@ -25,6 +25,13 @@ replace(/^[^1-9]+|[^\d]+/g, '')
 /^([\u4e00-\u9fa5]|[A-Za-z0-9])+$/
 ```
 
+> 删除前后空格
+```js
+replace(/((^\s+)|(\s+$))/g,'')
+
+// 用 .trim() 同效
+```
+
 > cookie
 或使用：https://github.com/js-cookie/js-cookie
 ```js

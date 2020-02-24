@@ -56,7 +56,7 @@ console.log(gt.next());
 
 ## 实现斐波拉契数列
 
-[链接](https://github.com/WarrenHewitt/blog-note/blob/master/algorithm/algorithm.md)
+[链接](https://github.com/WarrenHewitt/blog/issues/blob/master/algorithm/algorithm.md)
 
 
 ## 给原生对象添加Iterator
@@ -104,7 +104,7 @@ for (const [key, value] of objectAddIterator(nativeObj)) {
 
 ### 异步ajax请求
 
-代码中的loading函数代码行数较多，也并非关键代码，所以不作展示。[查看loading代码](https://github.com/WarrenHewitt/blog-note/blob/master/blog-files/toastAndLoading.md)
+代码中的loading函数代码行数较多，也并非关键代码，所以不作展示。[查看loading代码](https://github.com/WarrenHewitt/blog/issues/blob/master/blog-files/toastAndLoading.md)
 ```html
 <div id="ajax">初始数据</div>
 <button onclick="getSomeList()">请求ajax数据</button>
@@ -173,5 +173,5 @@ controlFlow()
 - [参考文章](http://es6.ruanyifeng.com/#docs/generator)
 
 
-> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog-note)
+> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog/issues)
 

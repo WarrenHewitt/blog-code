@@ -191,5 +191,5 @@ h3 {
 - [拖拽](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API)
 - [URL](https://developer.mozilla.org/zh-CN/docs/Web/API/URL/URL)
 
-> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog-note)
+> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog/issues)
 

@@ -7,7 +7,7 @@ actionText: 进入
 actionLink: /fe/
 features:
 - title: 博客
-  details: 各种博客内容。
+  details: 包括前后端等在内的一些技术总结博客。
 - title: 笔记
   details: 记录平时写代码过程中遇到的问题
 - title: 其它
@@ -16,12 +16,14 @@ footer: MIT Licensed | Copyright © 2019-present Warren
 ---
 
 
-**部分博客同步于 [cnblogs](http://www.cnblogs.com/he-wei/) | [segmentfault](https://segmentfault.com/u/hewei/articles?sort=vote) | [juejin](https://juejin.im/user/5a9f42e4518825556f54f0ac)**
+##### 部分博客同步于 [cnblogs](http://www.cnblogs.com/he-wei/) | [segmentfault](https://segmentfault.com/u/hewei/articles?sort=vote) | [juejin](https://juejin.im/user/5a9f42e4518825556f54f0ac)
 
 
-# 内容概览
+# 内容
 
-## 前端
+- 【2020-02-24】 [页面内容垂直方向循环滚动](https://warrenhewitt.github.io/blog/fe/other/vertical-roll.html)
+
+- 【2020-02-19】 [html 调用打印相关实现](https://warrenhewitt.github.io/blog/fe/other/print.html)
 
 - react-native 入门基础介绍
 
@@ -56,7 +58,7 @@ footer: MIT Licensed | Copyright © 2019-present Warren
 - js中常用的工具方法【ajax】【fetch】等等
 - 与数组相关的操作
 
-## 后端
+---
 
 - nodeJs跨域设置(express,koa2,eggJs)
 - egg 自学入门demo分享
@@ -73,7 +75,8 @@ footer: MIT Licensed | Copyright © 2019-present Warren
 
 - 脚本处理与 shell 语法
 
-## 其它
+---
+
 - 常见报错信息统计
 
 ---

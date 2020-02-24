@@ -45,6 +45,7 @@ module.exports = {
                     title: '实践示例', 
                     collapsable: false,
                     children: [
+                        ['/fe/other/print', 'html 打印相关操作与实现'],
                         ['/fe/other/dragDropPreview', '拖拽与拖拽文件上传'],
                         ['/fe/other/requestAnimationFrame', 'requestAnimationFrame 兼容'],
                         ['/fe/other/toastAndLoading', '页面弹窗toast和加载loading'],
@@ -133,6 +134,13 @@ module.exports = {
             ],
 
             '/other/': [
+                { 
+                    title: '插件', 
+                    collapsable: false,
+                    children: [
+                        ['/other/pluginBook', '一些插件、博客介绍'],
+                    ]
+                },
                 { 
                     title: '报错信息统计', 
                     collapsable: false,

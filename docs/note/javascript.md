@@ -50,13 +50,6 @@ obs.observe(article, { attributes: true, childList: true, subtree: true });
 // 打开注释可发现回调被执行
 // article.innerHTML = '123'
 ```
-
----
-
-- **获取img标签宽高**
-```js
-imgObject.naturalWidth  imgObject.naturalHeight
-```
 ---
 
 zepto.min.js 加载新的模块  直接在 https://github.com/madrobby/zepto/tree/master/src 将需要的模块拷贝到min.js中
@@ -135,7 +128,7 @@ new Error([message[, fileName[, lineNumber]]])
 - 也可以是由大括号括起来的复合语句
 
 ---
- **ready与onload的区别**
+ ** ready 与 onload 的区别**
  $(document).ready()是在DOM结构载入完后执行的，而window.onload是在所有文件都加载完后执行的。
  ```js
  // 原生实现ready
@@ -152,8 +145,7 @@ function handler() {
     //注销事件, 避免反复触发
     document.removeEventListener('DOMContentLoaded',arguments.callee, false);
 }
- ```
-
+```
 
 ---
 **正序遍历与反序遍历**
@@ -161,40 +153,17 @@ function handler() {
 反序更快 for(var i＝item.length; i--; ) *注意最后的分号,该方法会从length-1开始*  
  
 
- ---
-
- **continue | break | return  区分**
- - break,continue是一起的，return 是函数返回语句，但是返回的同时也将函数停止。  
- - break和continue这两个应用的范围是退出循环或者switch语句，在其他地方使用会导致错误.    
- - continue(跳出本次循环)语句只能用在while语句、do/while语句、for语句、或者for/in语句的循环体内，在其它地方使用都会引起错误！
- 
- - return 后面必须紧跟语句，不能换行
- - return 只能出现在函数体内 语法为：return 表达式。
- - 无函数结果，语法为：return，把控制权返回给页面
- - return false的作用一般是用来取消默认动作的，例如,默认情况下点击一个< a>元素。
-
 ---
 
-### window.localStorage
+**continue | break | return  区分**
+- break,continue是一起的，return 是函数返回语句，但是返回的同时也将函数停止。  
+- break和continue这两个应用的范围是退出循环或者switch语句，在其他地方使用会导致错误.    
+- continue(跳出本次循环)语句只能用在while语句、do/while语句、for语句、或者for/in语句的循环体内，在其它地方使用都会引起错误！
 
-任何格式存储的时候都会被自动转为字符串
-
-Storage事件（未完）；
-
-```js
-localStorage.getItem(localStorage.key('第几个保存的值：比如0，1，2等值'))
-sessionStorage.getItem(key) // 获取指定key本地存储的值
-sessionStorage.setItem(key,value) //将value存储到key字段
-sessionStorage.removeItem(key) // 删除指定key本地存储的值
-
-// sessionStorage.length是sessionStorage的项目数
-sessionStorage.clear(); //清除所有
-
-// localStorage与上面相同。
-// 或者直接设置值
-localStorage.a = 3;
-localStorage['a'] = 'sfsf';
-```
+- return 后面必须紧跟语句，不能换行
+- return 只能出现在函数体内 语法为：return 表达式。
+- 无函数结果，语法为：return，把控制权返回给页面
+- return false的作用一般是用来取消默认动作的，例如,默认情况下点击一个< a>元素。
 
 ---
 
@@ -222,6 +191,79 @@ syntax:JSON.stringify(value[, replacer[, space]]) **巴科斯范式(BNF)**
 - value:数组与对象的结合;
 - replacer:函数或是数组；一般设为null；
 - space：缩进 | 空格 | 换行 （数字或\t 等）；大于 10，则文本缩进 10 个空格；一般设为4
+
+
+### window
+
+- window.btoa(需要编码的字符串) 将字符串转base64  <=> window.atob(base64字符) 相反方法
+
+- window.URL.createObjectURL(File 对象、Blob 对象、 MediaSource 对象)
+
+静态方法会创建一个 DOMString(DOMString 是一个UTF-16字符串,如(`<a id="a"><b id="b">hey!</b></a>`)), 其中包含一个表示参数中给出的对象的URL,这个新的URL对象表示指定的 File 对象或 Blob 对象
+
+可以用于预览图片,a标签下载等
+
+#### window.localStorage
+
+任何格式存储的时候都会被自动转为字符串
+
+Storage事件（未完）；
+
+```js
+localStorage.getItem(localStorage.key('第几个保存的值：比如0，1，2等值'))
+sessionStorage.getItem(key) // 获取指定key本地存储的值
+sessionStorage.setItem(key,value) //将value存储到key字段
+sessionStorage.removeItem(key) // 删除指定key本地存储的值
+
+// sessionStorage.length是sessionStorage的项目数
+sessionStorage.clear(); //清除所有
+
+// localStorage与上面相同。
+// 或者直接设置值
+localStorage.a = 3;
+localStorage['a'] = 'sfsf';
+```
+---
+
+
+#### location对象：
+- location.search  // ?及之后的字符串,只有问号时返回空字符串。
+- window.location.port  // 设置，获取端口号
+- window.location.protocol  // 同上，协议部分
+- window.location.hash  // 同上，#号后面的分段  
+- window.location.host/hostname(不包含端口)  // 同上
+
+获取url中的参数:
+``` javascript
+function getURLParameter(url,name){
+        var regexp=new RegExp('(^|&amp;)'+name+'=([^&amp;]\*)(&amp;|$)','i');
+        return url.substr(1).match(regexp)[2];
+}
+getURLParameter('?name=b&amp;password=d','password')
+```
+
+---
+- 要判断的值 instanceof Array|String   返回true或false
+- typeof 'a'=="string"  返回true或false  
+ [1,2] instanceof Array
+
+---
+option标签在谷歌和ie低版本上是没有click事件的，一般对select都是用change事件；  
+获取option的value和text用  
+selectObj=document.getElementById('select');  
+selectObj.value;  selectObj.options[selectObj.selectedIndex].text;
+1. 可以直接获取到select对象执行以上操作；  
+2. 事件中用this替代selectObj 即可；  
+3. $(selectID).find("option:selected").text()  
+
+---
+火狐中是没有innerText，可以用textContent来代替（DOM3的标准）其它的浏览器也可以支持。
+
+---
+null:没有对象  
+undefined:表示缺少值（声明了变量但没有被赋值；调用函数时，应该提供的参数没有提  供，该参数返回undefined；对象没有赋值的属性；函数没有返回值时；）
+
+---
 
 ### Object
 
@@ -362,44 +404,14 @@ document.referrer获取上一个URL(服务器端)
 document.forms  返回文档中的所有Form对象引用  
 document.domain  获取域名不带端口
 
-HTML DOM location对象：
-- location.search  // ?及之后的字符串,只有问号时返回空字符串。
-- window.location.port  // 设置，获取端口号
-- window.location.protocol  // 同上，协议部分
-- window.location.hash  // 同上，#号后面的分段  
-- window.location.host/hostname(不包含端口)  // 同上
-
-获取url中的参数:
-``` javascript
-function getURLParameter(url,name){
-        var regexp=new RegExp('(^|&amp;)'+name+'=([^&amp;]\*)(&amp;|$)','i');
-        return url.substr(1).match(regexp)[2];
-}
-getURLParameter('?name=b&amp;password=d','password')
+#### Blob
+表示一个不可变、原始数据的类文件对象
 ```
+// array: ArrayBuffer, ArrayBufferView, Blob, DOMString
+// options: { type: 'MIME', endings: 'native'(结束符会被更改为适合宿主操作系统文件系统的换行符) || 'transparent'(默认，保持blob中保存的结束符不变) }
+const _Blob = new Blob( array, options ); 
 
----
-- 要判断的值 instanceof Array|String   返回true或false
-- typeof 'a'=="string"  返回true或false  
- [1,2] instanceof Array
-
----
-option标签在谷歌和ie低版本上是没有click事件的，一般对select都是用change事件；  
-获取option的value和text用  
-selectObj=document.getElementById('select');  
-selectObj.value;  selectObj.options[selectObj.selectedIndex].text;
-1. 可以直接获取到select对象执行以上操作；  
-2. 事件中用this替代selectObj 即可；  
-3. $(selectID).find("option:selected").text()  
-
----
-火狐中是没有innerText，可以用textContent来代替（DOM3的标准）其它的浏览器也可以支持。
-
----
-null:没有对象  
-undefined:表示缺少值（声明了变量但没有被赋值；调用函数时，应该提供的参数没有提  供，该参数返回undefined；对象没有赋值的属性；函数没有返回值时；）
-
----
+```
 
 #### Number
 
@@ -530,7 +542,7 @@ inputElement.onkeyup=function() {
 
 - onblur: 只要失去焦点就触发。
 
-- 支持onload的标签 < body>, < frame>, < frameset>, < iframe>, < img>, < input type="image">, < link>, < script>, < style>
+- 支持 onload 的标签 `< body>, < frame>, < frameset>, < iframe>, < img>, < input type="image">, < link>, < script>, < style>`
 
 - onscroll 事件 对div window都兼容; document，document.body,  document.documentElement 存在兼容问题 http://www.w3help.org/zh-cn/causes/SD9013
 监听了window后可以获取html的 scrollTop
@@ -842,7 +854,7 @@ ${${}}  //能嵌套
 
 >repeat(n):字符串重复次数
 - n.123 //取整 'r'.repeat(2.23) // 'rr'
-- -1<n<0  //取0
+- `-1<n<0`  //取0
 - n=NaN  //取0
 - n=字符串  //转换为数字
 - n=负数（-1等）或Infinity  //报错
@@ -854,7 +866,7 @@ includes(), startsWith(), endsWith()  //都返回boolean值
 padStart(字符串长度，用来补齐的字符串：默认用空格)() ：字符串补齐
 
 ---
-trim():去掉换行
+trim(): 两端删除空白字符,去掉换行
 
 #### 标签模板
 ```js

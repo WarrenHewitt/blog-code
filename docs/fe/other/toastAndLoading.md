@@ -70,4 +70,4 @@ const toast = (() => {
 任意可调用的地方调用 toast 方法即可
 
 
-> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog-note)
+> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog/issues)

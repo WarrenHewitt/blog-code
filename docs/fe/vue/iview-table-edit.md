@@ -105,4 +105,4 @@ export default {
 
 注意： 如果采用的是在 head 标签中引入 iView，该方法在项目中会失效；通过编译开发的项目可行；
 
-> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog-note)
+> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog/issues)

@@ -1,13 +1,17 @@
 
 与前端相关联的内容
 
+- 【2020-02-24】 [页面内容垂直方向循环滚动](https://warrenhewitt.github.io/blog/fe/other/vertical-roll.html)
+
+- 【2020-02-19】 [html 调用打印相关实现](https://warrenhewitt.github.io/blog/fe/other/print.html)
+
 - react-native
 
 - vue相关
 
 - 实现的前端功能示例
 
-- 一些工具函数
+- 常用工具函数
 
 【数组去重】【节流防抖】【ajax】【fetch】
 

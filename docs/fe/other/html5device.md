@@ -1,7 +1,7 @@
 [toc]
-# HTML5 device access 设备访问
+## HTML5 device access 设备访问
 
-## camera api (含图片预览)
+### camera api (含图片预览)
 > [参考地址](https://developer.mozilla.org/en-US/docs/Archive/B2G_OS/API/Camera_API/Introduction)
 
 - 主要为利用input type=file, accept="image/*" 进行处理
@@ -21,7 +21,7 @@ reader.onload = (e) => {
 reader.readAsDataURL(file);
 ``` 
 
-## touch events (触屏事件)
+### touch events (触屏事件)
 > [参考地址](https://developer.mozilla.org/en-US/docs/Web/API/Touch_events)
 
 - touchstart
@@ -40,7 +40,7 @@ reader.readAsDataURL(file);
 }
 ```
 
-## geolocation 
+### geolocation 
 > [参考地址](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/Using_geolocation)
 
 - 注意谷歌浏览器要https才能提供定位服务
@@ -61,7 +61,7 @@ reader.readAsDataURL(file);
     }
 ```
 
-## device orientation and motion
+### device orientation and motion
 > [参考地址](https://developer.mozilla.org/en-US/docs/Web/API/Detecting_device_orientation)
 
 ```js
@@ -81,7 +81,7 @@ reader.readAsDataURL(file);
     }, false)
 ```
 
-## Pointer Lock(鼠标锁定)
+### Pointer Lock(鼠标锁定)
 > [参考地址](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_Lock_API)
 
 ```html
@@ -111,4 +111,4 @@ reader.readAsDataURL(file);
     }
 ```
 
-> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog-note)
+> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog/issues)

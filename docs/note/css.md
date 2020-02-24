@@ -29,6 +29,12 @@
 
 - ::before css3 语法  :before 用来支持IE8
 
+- box-sizing
+```
+box-sizing: content-box; 默认，设置的 width 不包含padding和border宽度
+box-sizing: border-box; 设置的 width 包含padding和border，不包含 margin
+```
+
 - img
 replace 元素
 谷歌是不管有没有src属性，设置了宽高就会有一个边框显示，只能用一个小的透明图片占位去除边框;    
@@ -70,7 +76,10 @@ a:active {color: #0000FF} *鼠标按下去时的状态*
 3. line-height:10% 基于当前字体尺寸的百分比行间距
 
 ## background
-filter:blur(90px) //高斯模糊,ie不支持,其它都可，注意前缀。  
+
+filter:blur(90px) //高斯模糊,ie不支持,其它都可，注意前缀。 
+
+其它的一些滤镜效果参考 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/filter)
 
 ---
 background:hsl(色调hue，饱和度saturation，亮度luminance)  
@@ -81,6 +90,8 @@ background:hsl(色调hue，饱和度saturation，亮度luminance)
 
 ## 布局
 1. margin,padding用百分比时:都是相对于父元素的宽;  
+毗邻(同级或者嵌套的盒元素，并且之间没有非空内容、Padding或Border分隔)的两个或更多盒元素的margin将会合并为一个margin共享
+
 2. left,top:百分比相对宽,高
 3. ul,ol都有一个padding和margin;li前面的样式不会占用宽度，它是占用ul的padding,但是只针对outside而言,对于inside要占用宽度,去掉li前面点用 list-style-type: none;
 
