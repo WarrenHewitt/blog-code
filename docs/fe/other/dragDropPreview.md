@@ -93,7 +93,7 @@ dragEle.addEventListener('dragenter', function (event) {
 })
 
 /* 
-    @des 拖动上传文件代码 
+@des 拖动上传文件代码 
 */
 const dropFile = document.querySelector('#dropFile');
 
@@ -107,7 +107,7 @@ dropFile.addEventListener('drop', function (event) {
     console.log(file);
     const reader = new FileReader();
 
-    /* @des text 文本不能与图片文件一同上传，否则回报busy reading Blobs */
+    /* @des text 文本不能与图片文件一同上传，否则会报busy reading Blobs */
     for (let i = 0; i < file.length; i++) {
         /* @des 处理文件为text文本 */
         if(/txt/.test(file[i].name)) {

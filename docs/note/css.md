@@ -70,10 +70,39 @@ a:active {color: #0000FF} *鼠标按下去时的状态*
 
 -  :checked  可以作用于radio checkbox option
 
-## font
+## 文本处理
 1. font：normal bold 12px/50px(行高可以写在这里) arial,sans-serif；合并写必须要有size和family
 2. @font-face{ font-family: name; src: url()}
 3. line-height:10% 基于当前字体尺寸的百分比行间距
+
+### 超出省略文本
+单行： 
+```css
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis
+```
+
+多行：(不能设置高度)
+```css
+  text-overflow:ellipsis;
+  display:-webkit-box; // display:flex 之前的版本
+  -webkit-line-clamp:3;  // 依赖于box布局
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+```
+
+---
+word-spacing:10px    定义单词间的间距  
+letter-spacing:10px  定义每个字间的间距（与text-indent联用,否则起始位置缩进有问题）
+
+### 换行
+word-break:break-all;只对英文起作用，以字母作为换行依据  
+word-wrap:break-word; 只对英文起作用，以单词作为换行依据  
+white-space:pre-wrap; 只对中文起作用，强制换行  
+white-space:nowrap; 强制不换行，都起作用(对inner-block的标签也起作用) (文本不换行直到遇到< br/>;标签)
+
+
 
 ## background
 
@@ -94,6 +123,16 @@ background:hsl(色调hue，饱和度saturation，亮度luminance)
 
 2. left,top:百分比相对宽,高
 3. ul,ol都有一个padding和margin;li前面的样式不会占用宽度，它是占用ul的padding,但是只针对outside而言,对于inside要占用宽度,去掉li前面点用 list-style-type: none;
+
+- 右边固定宽度，左边自适应
+```
+1. float 方式
+html中，右边固定元素要在前，设置样式 float:right
+自适应元素设置 margin-right: 固定宽度
+
+2. flex实现
+```
+
 
 
 ### flex布局
@@ -223,33 +262,6 @@ inline:水平方向padding margin有效
 ---
 在页面上加载过一次该图片后，无论你是在当前页面再次使用该图片还是在该站点的其它页面使用，都会调用缓存。
 
----
-### 换行
-word-break:break-all;只对英文起作用，以字母作为换行依据  
-word-wrap:break-word; 只对英文起作用，以单词作为换行依据  
-white-space:pre-wrap; 只对中文起作用，强制换行  
-white-space:nowrap; 强制不换行，都起作用(对inner-block的标签也起作用) (文本不换行直到遇到< br/>;标签)
-
-#### 超出省略文本
-单行： 
-```css
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis
-```
-
-多行：(不能设置高度)
-```css
-  text-overflow:ellipsis;
-  display:-webkit-box; // display:flex 之前的版本
-  -webkit-line-clamp:3;  // 依赖于box布局
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-```
-
----
-word-spacing:10px    定义单词间的间距  
-letter-spacing:10px  定义每个字间的间距（还可与text-indent联用）
 
 ## 滑动条
 
@@ -272,6 +284,9 @@ background-clip: border/padding/content-box;背景从border/padding/content开�
 background-attachment: scroll默认 | fixed滚动轴背景图片不会移动
 
 对于多重背景，写在前的在上面；
+
+渐变 background: linear-gradient(blue, pink); 默认上到下
+background: linear-gradient(to right, blue, pink); 左到右
 ```
 
 
