@@ -15,21 +15,24 @@
 
 ### css 代码
 ```css
-.vertical-scroll{height:300px;overflow: hidden;}
-/* 防止内容中的margin样式影响高度获取 */
-.vs-content{ padding: 1px 0; }
+.vertical-scroll {
+    height: 300px;
+    overflow: hidden;
+}
 ```
 
 #### html代码
 ```html
 <div class="vertical-scroll">
     <div class="vs-content">
-        <div>content</div>
-        <img class="imgTag" src="https://cdn.pixabay.com/photo/2020/02/18/06/25/harvest-4858574_960_720.jpg" alt="no">
+        <div style="height: 30px;">content</div>
+        <!-- 固定高度 -->
+        <div style="height: 400px;background: url(https://cdn.pixabay.com/photo/2020/02/18/06/25/harvest-4858574_960_720.jpg) no-repeat center/cover;"></div>
+        <!-- 不固定高度 -->
+        <!-- <img class="imgTag" src="https://cdn.pixabay.com/photo/2020/02/18/06/25/harvest-4858574_960_720.jpg"alt="no"> -->
     </div>
 </div>
 ```
-
 
 #### js代码
 ```js
@@ -44,28 +47,35 @@ function setScrollAnimate() {
     /**
      * 获取内容高度
      * 如果内容中有图片一定确保图片加载完成，否则获取内容高度不准确
+     * 或者采用将图片设置为背景，在window.onload 中触发插入样式，让其滚动
     */
     const imgEle = document.querySelector('.imgTag');
 
     imgEle.addEventListener('load', (e) => {
         insertStyle(content.clientHeight)
     })
-
-    function insertStyle(h) {
-        /**
-         * 这里利用js插入样式的原因是要动态获取类容高度
-         * 如果内容高度可以确定，可在style样式中直接写如下内容，不需用js注入
-         */
-        const t = 20000;
-        const eleStyle = document.createElement('style');
-        eleStyle.innerHTML = 
-            '.vs-content{will-change:transform;animation: scrollAnimate '+ t +'ms linear infinite;}'+
-            '@keyframes scrollAnimate{from{transform: translateY(0);}to{transform: translateY(-'+h+'px);}}';
-        document.querySelector('head').appendChild(eleStyle);
-    }
 }
 
+function insertStyle(h) {
+    /**
+     * 这里利用js插入样式的原因是要动态获取类容高度
+     * 如果内容高度可以确定，可在style样式中直接写如下内容，不需用js注入
+     */
+    const t = 20000;
+    const eleStyle = document.createElement('style');
+    eleStyle.innerHTML =
+        '.vs-content{padding: 1px 0;height:'+h+'px;will-change:transform;animation: scrollAnimate ' + t + 'ms linear infinite;}' +
+        '@keyframes scrollAnimate{from{transform: translateY(0);}to{transform: translateY(-' + h + 'px);}}';
+    document.querySelector('head').appendChild(eleStyle);
+}
+
+/* 如果需要动态获取内容高度 */
 setScrollAnimate()
+
+window.onload = function() {
+    /* 固定高度 */
+    // insertStyle(432)
+}
 ```
 
 ### 方式二

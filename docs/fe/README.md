@@ -1,6 +1,8 @@
 
 与前端相关联的内容
 
+- 【2020-03-01】 [随意拖动内容位置的两种实现方式](https://warrenhewitt.github.io/blog/fe/other/dragMoveElement.html)
+
 - 【2020-02-24】 [页面内容垂直方向循环滚动](https://warrenhewitt.github.io/blog/fe/other/vertical-roll.html)
 
 - 【2020-02-19】 [html 调用打印相关实现](https://warrenhewitt.github.io/blog/fe/other/print.html)

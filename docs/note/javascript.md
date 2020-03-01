@@ -148,10 +148,8 @@ function handler() {
 ```
 
 ---
-**正序遍历与反序遍历**
 
-反序更快 for(var i＝item.length; i--; ) *注意最后的分号,该方法会从length-1开始*  
- 
+- 正序遍历与反序遍历：反序更快 for(var i＝item.length; i--; ) 注意最后的分号,该方法会从length-1开始 
 
 ---
 
@@ -164,6 +162,35 @@ function handler() {
 - return 只能出现在函数体内 语法为：return 表达式。
 - 无函数结果，语法为：return，把控制权返回给页面
 - return false的作用一般是用来取消默认动作的，例如,默认情况下点击一个< a>元素。
+
+---
+
+- 文件，图片等数据类型
+1. Blob : 表示一个不可变、原始数据的类文件对象
+```
+File 继承自 Blob
+
+// array: ArrayBuffer, ArrayBufferView, Blob, DOMString
+// options: { type: 'MIME', endings: 'native'(结束符会被更改为适合宿主操作系统文件系统的换行符) || 'transparent'(默认，保持blob中保存的结束符不变) }
+const _Blob = new Blob( array, options ); 
+```
+
+2. 将图片转 base64
+方法一：用ajax请求图片资源，设置返回值类型为Blob；或者获取input选择的图片
+`xhr.responseType = 'blob';`
+```
+let fr = new FileReader();
+fr.readAsDataURL(blob);
+fr.onloadend = function (e) {
+    let base64 = e.target.result;
+};
+```
+
+方法二：使用canvas
+```
+ctx.drawImage(imgElement,176,0,300,150, 0, 150, 300, 150);
+const base64 = canvas.toDataURL('image/png');
+```
 
 ---
 
@@ -202,6 +229,16 @@ syntax:JSON.stringify(value[, replacer[, space]]) **巴科斯范式(BNF)**
 静态方法会创建一个 DOMString(DOMString 是一个UTF-16字符串,如(`<a id="a"><b id="b">hey!</b></a>`)), 其中包含一个表示参数中给出的对象的URL,这个新的URL对象表示指定的 File 对象或 Blob 对象
 
 可以用于预览图片,a标签下载等
+
+---
+
+- 获取元素计算后的样式
+```js
+window.getComputedStyle('Element').getPropertyValue('border'); // 返回的是样式设置值，如宽度是百分比，即返回百分比
+window.getComputedStyle('Element')['border'];
+
+element.computedStyleMap().get('border') // 实验性质的方法，返回的是真实渲染结果值，比如百分比宽度，返回确切数值
+```
 
 #### window.localStorage
 
@@ -403,15 +440,6 @@ document.domain获取域名（服务器端）
 document.referrer获取上一个URL(服务器端)  
 document.forms  返回文档中的所有Form对象引用  
 document.domain  获取域名不带端口
-
-#### Blob
-表示一个不可变、原始数据的类文件对象
-```
-// array: ArrayBuffer, ArrayBufferView, Blob, DOMString
-// options: { type: 'MIME', endings: 'native'(结束符会被更改为适合宿主操作系统文件系统的换行符) || 'transparent'(默认，保持blob中保存的结束符不变) }
-const _Blob = new Blob( array, options ); 
-
-```
 
 #### Number
 

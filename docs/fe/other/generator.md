@@ -164,8 +164,9 @@ function controlFlow() {
 controlFlow()
 ```
 
-
 本文包括对generate基础的学习与练习，与一些心得！【会持续学习，更新】
+
+**推荐使用 async 函数**
 
 详细学习请移步下方参考链接
 

@@ -47,12 +47,13 @@ module.exports = {
                     children: [
                         ['/fe/other/print', 'html 打印相关操作与实现'],
                         ['/fe/other/dragDropPreview', '拖拽与拖拽文件上传'],
-                        ['/fe/other/requestAnimationFrame', 'requestAnimationFrame 兼容'],
-                        ['/fe/other/toastAndLoading', '页面弹窗toast和加载loading'],
+                        ['/fe/other/dragMoveElement', '随意拖动内容位置的两种实现方式'],
                         ['/fe/other/vertical-roll', '元素内容垂直循环滚动'],
+                        ['/fe/other/toastAndLoading', '页面弹窗toast和加载loading'],
                         ['/fe/other/cssHeart', '用css 实现心形'],
                         ['/fe/other/weChatGetUserInfo', '获取微信用户信息'],
                         ['/fe/other/weChatShare', '微信分享'],
+                        ['/fe/other/requestAnimationFrame', 'requestAnimationFrame 兼容'],
                     ]
                 },
                 { 

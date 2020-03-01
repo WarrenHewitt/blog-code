@@ -1,6 +1,13 @@
-## div 方式实现
+## 拖拽普通标签位置或拖拽canvas中的文本框位置
 
-```
+> 创建时间： 2020-03-01；测试：chrome v80.0.3987.122 正常
+
+### 1. 实现鼠标拖动标签元素到任意位置
+
+[演示地址](https://codepen.io/Hewitt/pen/orOgLW)
+
+- css 代码
+```css
 #range {
     position: relative;
     width: 600px;
@@ -17,16 +24,24 @@
     background-color: #ff9204;
     user-select: none;
 }
+```
 
+- html代码
+```html
 <div id="range">
     <div class="icon">100*100</div>
 </div>
+```
 
+- js代码
+
+```js
 const main = document.getElementById('range');
 const icon = document.querySelector('.icon');
 let move = false;
 let deltaLeft = 0, deltaTop = 0;
 
+// 拖动开始事件，要绑定在被移动元素上
 icon.addEventListener('mousedown', function (e) {
     /*
     * @des deltaLeft 即移动过程中不变的值
@@ -36,11 +51,12 @@ icon.addEventListener('mousedown', function (e) {
     move = true;
 })
 
+// 移动触发事件要放在，区域控制元素上
 main.addEventListener('mousemove', function (e) {
     if (move) {
         const cx = e.clientX;
         const cy = e.clientY;
-        /** 相减即可得到相对于父元素移动的位置 */
+        /** 相减即可得到相对于父元素移动的位置 */   
         let dx = cx - deltaLeft
         let dy = cy - deltaTop
 
@@ -53,41 +69,81 @@ main.addEventListener('mousemove', function (e) {
     }
 })
 
+// 拖动结束触发要放在，区域控制元素上
 main.addEventListener('mouseup', function (e) {
     move = false;
     console.log('mouseup');
 })
 ```
 
+### 2. canvas绘制文本框，并实现鼠标将其拖拽移动到任意位置
 
-## canvas实现
+- css 代码
 
+```css
+.cus-canvas{
+    background: rgb(50, 204, 243);
+}
+
+.input-ele{
+    display: none;
+    position: fixed;
+    width: 180px;
+    border: 0;
+    background-color: #fff;
+}
 ```
-<canvas id="canvas" className="cus-canvas"  width="1300" height="600"></canvas>
 
+- html 代码
+```html
+<div>
+    <canvas id="canvas" class="cus-canvas"  width="800" height="600"></canvas>
+    <input id="inputEle" class="input-ele"/>
+</div>
+```
+
+- js代码
+
+实现原理为记录鼠标移动的位置，不断的重绘矩形框和文本内容
+
+```js
 let mouseDown = false;
 let deltaX = 0;
 let deltaY = 0;
+let text = 'hello'
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const cw = canvas.width, ch = canvas.height;
 const rect = {
     x: 20,
     y: 20,
-    width: 200,
-    height: 100
+    width: 150,
+    height: 50
 }
 
-// const canvasLeft = canvas.getBoundingClientRect().left;
+/** 设置文字和边框样式 */
+ctx.font="16px Arial";
+ctx.fillStyle = "#fff"; 
+/** 设置为 center 时，文字段的中心会在 fillText的 x 点 */
+ctx.textAlign = 'center';
+ctx.lineWidth = '2';
+ctx.strokeStyle = '#fff';
 
-/** 画矩形 */
-ctx.rect(rect.x, rect.y, rect.width, rect.height)
-ctx.stroke();
+strokeRect()
 
-// ctx.strokeRect(rect.x, rect.y, rect.width, rect.height);
+const inputEle = document.getElementById('inputEle');
+inputEle.onkeyup =  function(e) {
+    if(e.keyCode === 13) {
+        text = inputEle.value
+        strokeRect()
+        inputEle.setAttribute('style', `display:none`)
+    }
+}
 
-// ctx.font="30px Arial";
-// ctx.fillText("这是文字",10,50);
+canvas.ondblclick = function(e){ 
+    inputEle.setAttribute('style', `left:${e.clientX}px;top:${e.clientY}px;display:block`);
+    inputEle.focus();
+}
 
 canvas.onmousedown = function(e){ 
     /** 获取视口左边界与canvas左边界的距离 加上 鼠标点击位置与canvas左边界的长度，这个值是相对移动过程中不变的值 */
@@ -95,7 +151,9 @@ canvas.onmousedown = function(e){
     deltaY=e.clientY - rect.y;
     mouseDown = true
 };  
+
 const judgeW = cw-rect.width, judgeH = ch-rect.height;
+
 canvas.onmousemove = function(e){ 
     if(mouseDown) {
         /** 相减即可获得矩形左边界与canvas左边界之间的长度 */
@@ -112,8 +170,7 @@ canvas.onmousemove = function(e){
             dy = judgeH;
         }
         rect.x = dx;
-        rect.y = dy;
-        clearRect()
+        rect.y = dy; 
         strokeRect()
     }
 };  
@@ -121,89 +178,22 @@ canvas.onmouseup = function(e){
     mouseDown = false
 };  
 
-/** isPointInPath 方法不支持 fillRect(),strokeRect() */
-console.log(ctx.isPointInPath(20, 20))
-
-
-// setTimeout(() => {
-//     /** 这里如果不调用 beginPath 历史的矩形会重新被绘制 */
-//     ctx.beginPath() 
-//     ctx.rect(rect.x +100, rect.y+100, rect.width, rect.height)
-//     ctx.stroke();
-// }, 4000)
-
+/** 清除指定区域 */
 function clearRect() {
-        /** 清除指定区域 */
     ctx.clearRect(0, 0, cw, ch)
 }
 
+/** 画矩形 */
 function strokeRect() {
+    clearRect()
+
+    /** 这里如果不调用 beginPath 历史的矩形会重新被绘制 */
     ctx.beginPath() 
     ctx.rect(rect.x, rect.y, rect.width, rect.height)
     ctx.stroke();
+    // 设置字体内容，以及在画布上的位置
+    ctx.fillText(text, rect.x + 70, rect.y + 30);
 }
 ```
 
-### 移动端
-```css
- body{margin:0;overscroll-behavior-y: contain;}
-.draw-board {
-    width: 100%;
-    height: 300px;
-    background-color: rgb(213, 252, 245);
-}
-```
-
-```html
-<canvas id="drawBoard" class="draw-board" height="300px"></canvas>
-<div>
-    <button onclick="handleClear()">清除</button>
-</div>
-```
-
-```js
-let mouseDown = false;
-const canvas = document.getElementById('drawBoard');
-const ctx = canvas.getContext('2d');
-
-canvas.width = window.innerWidth;
-
-const rect = canvas.getBoundingClientRect();
-/** canvas标签距离屏幕适口的位置 */
-const cl = rect.left;
-const ct = rect.top;
-
-const randomColor = () => {
-    const color = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-    return color.padEnd(7, 'f');
-}
-
-/** 记录起始位置 */
-let sx = '', sy = '';
-const draw = (x, y) => {
-    ctx.beginPath();
-    ctx.lineWidth = 5;
-    ctx.strokeStyle = randomColor();
-    ctx.moveTo(sx, sy);
-    /** 将结束位置设置为下一次起始位置 */
-    sx = x - cl;
-    sy = y - ct;
-    ctx.lineTo(sx, sy)
-    ctx.stroke();
-}
-canvas.addEventListener('touchstart', function(e) {
-    sx = e.touches[0].clientX - cl;
-    sy = e.touches[0].clientY - ct;
-})
-canvas.addEventListener('touchmove', (e) => {
-    draw(e.touches[0].clientX, e.touches[0].clientY)
-})
-canvas.addEventListener('touchend', (e) => {
-    console.log('end');
-})
-
-/** 清除画布 */
-handleClear = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-```
+> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog/issues)
