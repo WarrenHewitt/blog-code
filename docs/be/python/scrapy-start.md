@@ -93,4 +93,4 @@ class NovelSpider(scrapy.Spider):
 - async语法错误，把用到该名称作为参数的文件全部作修改 把这个参数名改为其它即可
 - 报错 No module named 'win32api'： 到https://pypi.org/project/pypiwin32/#files（下载文件pypiwin32-223-py3-none-any.whl 执行 pip install pypiwin32-223-py3-none-any.whl ）
 
-> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog-note)
+> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog/issues)

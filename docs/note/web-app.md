@@ -16,6 +16,10 @@
 
 ---
 
+- 关闭 chrome 的下拉刷新 body 设置css样式 `overscroll-behavior-y: contain;`
+
+---
+
 - 获取屏幕宽度，兼容方案
 ```
 var w = window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth;
@@ -41,6 +45,10 @@ user-select: none;
 
 - 打开app
     1. 查询app的URL Scheme(如微信的为weixin) < a href="weixin://" >打开微信< /a> 
+---
+
+- 打电话 `<a href='tel:1234565'>`
+
 ---
 
 - 禁止识别手机号
@@ -151,22 +159,6 @@ if (/iphone/i.test(navigator.appVersion)) {
 }
 ```
 
-## gzip 压缩
-
-- 客户端浏览器存在兼容问题
-```
-Response Headers
-Accept-Encoding: gzip
-```
-
-- tomcat 可配置
-
-- nginx 可配置
-
-- koa 用 koa-compress express 用 compression，使用webpack插件compression-webpack-plugin 将资源文件压缩为.gz文件，并且根据客户端的需求按需加载
-
----
-
 ## 移动端相关说明
  
 - 移动端 兼容所有h5
@@ -183,9 +175,6 @@ Accept-Encoding: gzip
  <link rel="stylesheet" href="" media="screen and (max-width:320px)">
 
  rem ios6+ android 2.1+
-
- padding会增加宽度
- box-sizing：border-box
 
  px :css pixels 逻辑像素，浏览器使用的抽象单位
  dp,pt: device independent pixels 设备独立像素 物理像素
