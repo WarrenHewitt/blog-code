@@ -43,4 +43,4 @@ fs.readFile(FILE_URL, 'utf8', (err, data) => {
 
 - [node fs api](https://nodejs.org/dist/latest-v8.x/docs/api/fs.html)
 
-> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog-note)
+> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog/issues)

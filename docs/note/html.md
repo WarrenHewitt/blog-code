@@ -1,20 +1,64 @@
 [toc]
 [[toc]]
 
----
+- 检测媒体 @media 后可用的查询 `window.matchMedia('print').addListener((res) => {});`
 
 ## canvas
-- 在设置canvas标签的宽高时，要直接在标签上给设置（width=“100px”）
+- canvas 绘制的宽高不受css样式控制，要直接在标签上给设置，或是获取到canvas标签对象(canvasObj)，再设置(canvasObj.width = 1000)
+
 - getContext() 方法返回一个用于在画布上绘图的环境；现在只有“2d”;
+
 - 渐变的效果发生在所规定的坐标之间，之外的就会用相应的纯色填充。
+
 - .save()和.restore()之间定义的方法或定义只作用于他们之间
-- 用drawImage的时候要注意图片是不是已经加载了
-    参数形式可以是：
-    1.（imgObj，相对画布x位置，相对画布y位置）；
-    2.（imgObj, 相对画布x位置，相对画布y位置,图宽，图高）；
-    3.（imgObj, 图像x位置，图像y位置,裁切图的宽度，裁切图的高度,
-    相对画布x位置，相对画布y位置,被裁图宽，被裁图高
-    ）
+
+- 判断点是否在矩形内 ctx.isPointInPath(20, 20) 方法不支持 fillRect(),strokeRect()
+
+- ctx.lineCap="round"; 线条条末端线帽的样式
+
+- ctx.lineJoin="round"; 线条边角，折角的类型
+
+- canvasElement.toDataURL(type, encoderOptions); 
+```
+返回：一个包含图片展示的 Data URLs(data:[<mediatype>][;base64],<data>)
+type: 默认为 image/png
+encoderOptions: 当图片格式为 image/jpeg 或 image/webp时，可从 0 到 1 的区间选择图片的质量。超出范围，取默认值0.92。
+```
+
+- 绘制文本：
+```js
+ctx.font='16px Arial'; // 与css的font属性一致，这里要设置字体
+ctx.fillStyle="#FF0000"; // 可以是颜色，渐变，图片
+ctx.fillText('Hello World!',50,50);
+```
+
+- ctx.drawImage()：将图片绘制到canvas上
+```
+注意图片是否已经加载完毕
+参数：
+1. (Element, 相对画布x位置, 相对画布y位置)
+2. (Element, 相对画布x位置, 相对画布y位置, 图宽, 图高)
+3. (Element, 图像x位置，图像y位置,裁切图的宽度，裁切图的高度,相对画布x位置，相对画布y位置,图宽，图高)
+```
+
+- Path2D 用于复制重用路径
+```js
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+var path1 = new Path2D();
+path1.rect(10, 10, 100,100);
+var path2 = new Path2D(path1);
+path2.moveTo(220, 60);
+ctx.stroke(path2);
+```
+
+- 设置宽高
+```
+window.addEventListener("resize", ()=>{
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}, false);
+```
 
 ## svg
 
@@ -39,9 +83,15 @@ render tree不包含隐藏的节点 (比如display:none的节点，还有head节
 
 ---
 
-disabled='disabled' 可用于option标签和input标签,该元素不可用。
+- input 标签相关操作：
+
+disabled='disabled' 可用于option标签和input标签
 
 readonly='readonly'用于input标签，不能修改的。仍然可以使用 tab 键切换到该字段，还可以选中或拷贝其文本。
+
+input 标签设置属性 autofocus 自动获取焦点
+
+inputElement.focus()
 
 ---
 
@@ -62,6 +112,26 @@ p 标签中不能放块级元素,内联元素中不能放块级元素;
 
 
 ## 标签
+
+- a
+```
+download: 添加该属性表示下载 href 内容而非导航，其值是下载文件的名称 
+href: 可以是 http开头的地址也可以是  blob: URL(URL.createObjectURL创建) 或 data: URL , tel: URLs, mailto URLs  等
+```
+
+- table 
+```
+属性:
+colspan= 2  占多少列；
+rowspan=2  占多少行；
+align=left；   
+cellspacing="0"：两个单元格之间空间的大小；
+cellpadding="0"：单元的内容和边框之间的空间； 
+border="1px"
+
+样式：
+border-collapse: collapse; 去掉 table 中边框间间隔，合并边框
+```
 
 < abbr title='people's republic of china'>PRC< /abbr>
 
@@ -127,9 +197,9 @@ video 和 audio
 
 脚本的加载顺序：先下载，再执行，再下载下一个，再执行；
 
-< script defer>:下载好将本后，不执行，页面加载完才执行；
+< script defer>:下载后，不执行，页面加载完才执行；
 
-< script async>：下载好脚本后立即执行，但是不影响加载下面的文档，仅对外部文件；
+< script async>：下载后立即执行，但是不影响加载下面的文档，仅对外部文件；
 
 ---
 
@@ -186,12 +256,8 @@ tableindex='1'设置按tab键的时候跳转顺序；
 
 contentEditable=true用contentEditable来让元素的内容可以编辑，还提供了一个javascript方法，window.document.designMode='on/off'让所有的内容是否可以修改。
 
----
-打电话
-< a href='tel:1234565'>
-
 ## meta
-**全屏和禁止电话号码**
+**全屏**
 < meta name="apple-mobile-web-app-capable" content="yes" > 
 
 如果content设置为yes，Web应用会以全屏模式运行，反之，则不会。你可以通过只读属性window.navigator.standalone来确定网页是否以全屏模式显示。
@@ -205,11 +271,6 @@ contentEditable=true用contentEditable来让元素的内容可以编辑，还提
 如果content设置为default，则状态栏正常显示。如果设置为blank，则状态栏会有一个黑色的背景。如果设置为blank-translucent，则状态栏显示为黑色半透明。如果设置为default或blank，则页面显示在状态栏的下方，即状态栏占据上方部分，页面占据下方部分，二者没有遮挡对方或被遮挡。如果设置为blank-translucent，则页面会充满屏幕，其中页面顶部会被状态栏遮盖住（会覆盖页面20px高度，而iphone4和itouch4的Retina屏幕为40px）。默认值default。
 
 兼容性:iOS 2.1 +
-< meta name='format-detection' content='telephone=no'>
-
-默认情况下，设备会自动识别任何可能是电话号码的字符串。设置telephone=no可以禁用这项功能。
-
-兼容性:iOS 1.0 +
 
 ---
 
@@ -218,8 +279,7 @@ contentEditable=true用contentEditable来让元素的内容可以编辑，还提
 禁止浏览器从本地计算机的缓存中访问该页面
 
 ---
-< meta charset="UTF-8">
-大小写都可以
+< meta charset="UTF-8"> 大小写都可以
 
 ---
 < meta http-equiv="refresh" content="3;url="http://ww.baidu.com">
@@ -250,66 +310,145 @@ none: SWF 文件可能不调用浏览器导航或浏览器交互API，并且它�
 
 ---
 
-## localStorage
+## 与 dom 操作相关
 
-本地存储是一个window的属性：window.localStorage
+[MDN DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
 
-同一个目录下的页面的localStorage会存在一起
+- 元素的插入
 
-任何格式存储的时候都会被自动转为字符串
+```
+parentElement.insertBefore(Element, 在父元素中的某个子元素); // 在元素插入到指定元素前面
 
-Storage事件（未完）；
+Element.appendChild(Element); // 在元素内部最后插入元素
 
-Key()方法：
-
-for(var i=0;i< localStorage.length;i++){
-
-alert(localStorage.getItem(localStorage.key(i)));
-
+ParentNode.prepend(Node,DOMString,...); // 在元素内部第一个元素前插入节点 IE不支持所以建议用 insertBefore 替代
+if(parentNode.prepend) {
+    parentNode.prepend(Element);
+} else {
+    var firstNode = parentNode.childNodes[1];
+    parentNode.insertBefore(Element, firstNode);
 }
-
-sessionStorage.getItem(key):获取指定key本地存储的值
-
-sessionStorage.setItem(key,value)：将value存储到key字段
-
-sessionStorage.removeItem(key):删除指定key本地存储的值
-
-sessionStorage.length是sessionStorage的项目数
-
-sessionStorage.clear();清除所有
-
-localStorage与上面相同。
-
-localStorage.a = 3;
-localStorage['a'] = 'sfsf';
-var a1 = localStorage['a'];
-
-var a2 = localStorage.a;
+```
 
 ---
+
+- `document.querySelector('#id').cloneNode(true)`  true表示子节点也clone，返回新 Node
+
+- 获取原始图片的真实宽高，非css样式修改后的宽高
+```js
+// 注意是要在 onload 加载后才能调用
+var width = htmlImageElement.naturalWidth  
+var height = htmlImageElement.naturalHeight
+// htmlImageElement 可以是 document.querySelector 等类似方法获取的 img 元素 也可以是 new Image() 创建的元素
+```
+
+### 元素宽高,与滑动条
+
+- 获取 img 标签宽高：`htmlImageElement.width | height` htmlImageElement 提供了特别的属性和方法
+
+- window.innerWidth | innerHeight 只能通过window调用获取浏览器视口
+
+- htmlElement.clientWidth | clientHeight 包括内边距（兼容性好）
+
+- htmlElement.offsetWidth | offsetHeight 包括内边距和边框的宽度
+
+- htmlElement.scrollHeight  所有内容包括未被滚动到的
+
+- window.screen.width 获取电脑屏幕宽度  (兼容ie10，有问题)
+
+- window.innerHeight 浏览器窗口的视口高度
+
+- 没有滚动条时 scrollHeight 和 clientHeight 相同
+
+- element.scrollIntoView({ behavior: "smooth"});//js原生，让元素滚动到可见区域
+
+- js中是 element.scrollTop=100（scrollLeft）来设置或获取滑动条的位置;
+
+- 谷歌的页面滚动是用的body，火狐是用的html；
+
+- 谷歌:当scrollTop的值小于1时会直接返回0，所以用y=1除以a的x次方指数函数来趋近0来由快到慢的滑动。
+
+- window 没有 scrollTop 等方法，有 scrollX 等，只能获取值： scrollTo({ top: ,  }) 可以设置值
+```
+var s = document.body.scrollHeight || document.documentElement.scrollHeight;
+var c = window.innerHeight;
+var px = s-c; // 表示滑到底部
+if(window.scrollTo) {
+    window.scrollTo({
+        top: px,
+        behavior: "smooth"
+    });
+} else {
+    document.body.scrollTop = document.documentElement.scrollTop = px;
+}
+```
+
+- `Element.getBoundingClientRect()`  元素的大小及其相对于视口的位置
+```
+x: 推荐用left
+y: 推荐用top
+top: 距视口顶部距离
+left: 距视口左边距离
+width: 元素宽度
+height: 元素高度
+right: 元素右边距离视口左边的距离
+bottom: 元素底部距离视口顶部的距离
+```
+
+- 返回元素相对于父元素的位置，element.offsetLeft 和 offsetTop，用了position更精确。
+
+### iframe
+
+- window.parent.document.getElementById();
+在chrome中window.parent.document 要在服务器上才能使用。
+
+- 获取当前的内嵌页面url,就直接在该页面使用window.location.href即可。
+- 父页面查找子页面的元素：
+```
+// 跨域会有问题
+// 注意要放入 onload 中  等待子页面加载完成才能获取
+document.getElementById('iframeId').contentWindow.[document||document.body||document.getElementById('子页面ID')]；
+```
+
+- 子页面查找父页面元素。
+- 不同域可以在两个页面都设置document.domain='主域名'。
+- 父子窗口传递消息
+```js
+// 父窗口
+document.getElementById('iframeId').contentWindow.postmessage('')
+// 子窗口iframe中使用
+window.onmessage=function(e){e.data}
+```
 
 
 ## Html5 消息通知
 
 Notification（首字母大写） 或 刷新title
 
-谷歌测试时不要用 [file://的方式访问，要用服务器的方式]
+谷歌测试时,要启用本地服务的方式
 
 Notification.requestPermission(function(permission){}),方法要用onclick等用户操作方法来调用。
 
 在手机上只有火狐的实现了
 
-## history API
-**主要是实现无刷新改变地址栏**
+## 预览pdf
 
-注意地址栏是queryString 请求要用path 地址栏的地址只是显示用不与请求接口一致
+```html
+<!-- 方式一 -->
+<embed src="./pdf.pdf" type="application/pdf" width="100%" height="100%" internalinstanceid="81" />
+            
+<!-- 方式二 -->
+<iframe src="./pdf.pdf" width="100%" height="100%">
+    当前浏览器不支持在线预览PDF，请<a href="./pdf.pdf">下载 PDF</a>
+</iframe>
 
-1. history.pushState(state,title(页面标题),url);
-    - state：一个与指定网址相关的状态对象，popstate事件触发时，该对象会传入回调函数。如果不需要这个对象，此处可以填null。
-    - title：新页面的标题，但是所有浏览器目前都忽略这个值，因此这里可以填null。
-    - url：新的网址，必须与当前页面处在同一个域。浏览器的地址栏将显示这个网址。
 
-2. history.replaceState(参数同上);
+<!-- 方式三 -->
+<object data="./pdf.pdf" type="application/pdf" width="100%" height="100%">
+    当前浏览器不支持在线预览PDF，请<a href="./pdf.pdf">下载 PDF</a>
+</object>
+```
+
 
 
 
