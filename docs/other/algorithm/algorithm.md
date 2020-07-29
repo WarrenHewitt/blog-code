@@ -1,3 +1,5 @@
+[[toc]]
+[toc]
 ## 时间和空间算法复杂度
 - 用 O 表示 
 
@@ -222,5 +224,57 @@ function findValueBetweenInArray() {
     } else {
         console.log(`在${a[index[0]]}与${a[index[1]]}之间`);
     }
+}
+```
+
+## 获取频谱中的波峰波谷
+
+```js
+function findPeak(arr) {
+    // 满足一阶导数为0，并且满足二阶导数为负；而波谷点，则满足一阶导数为0，二阶导数为正
+    const peak = []
+    const peakIndex = []
+    const len = arr.length
+    const tempArr = []
+
+    // 一阶求导,获取每个点的斜率
+    for (let i = 0; i < len; i++){
+        if (arr[i + 1] - arr[i]>0) {
+            // 表示向上倾斜，斜率为正
+            tempArr[i] = 1;
+        } else if (arr[i + 1] - arr[i] < 0){
+            // 表示向下倾斜，斜率为负
+            tempArr[i] = -1;
+        } else {
+            // 出现了水平线，或是超过了数组边界
+            tempArr[i] = 0;
+        }
+    }
+    // 处理水平的点位
+    for (let i = len - 1; i >= 0; i--) {
+        // 判断最后一个数是不是0
+        if (tempArr[i] == 0 && i == len - 1){
+            tempArr[i] = 1;
+        } else if (tempArr[i] == 0){
+            if (tempArr[i + 1] >= 0) {
+                // 将水平位置的点斜率设置为向上
+                tempArr[i] = 1;
+            } else{
+                // 将水平位置的点斜率设置为向下
+                tempArr[i] = -1;
+            }
+        }
+    }
+
+    for (i = 0; i < len; i++){
+        // 当 i+1 为波峰时，其对应的值减去 i 个值必为 -2
+        if (tempArr[i + 1] - tempArr[i] == -2) {
+            peak.push(arr[i + 1])
+            peakIndex.push(i + 1)
+        }
+    }
+
+    // 返回波峰及其对应的下标
+    return [peak,peakIndex]
 }
 ```
