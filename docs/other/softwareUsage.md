@@ -18,7 +18,18 @@
 
 安装路径： C:\Users\hewei\AppData\Local\Programs\Microsoft VS Code
 
-用户配置说明
+
+- `jsconfig.json` 文件配置
+
+其中一项配置是让，vscode可以识别webpack配置的别名
+
+https://code.visualstudio.com/docs/languages/jsconfig
+
+配置完成后要重启一下当前vscode项目
+
+---
+
+- 用户配置说明
 
 settings.json（可用setting sync共享）
 ```json
@@ -59,6 +70,10 @@ settings.json（可用setting sync共享）
     "path-intellisense.mappings": {
 		"@": "${workspaceRoot}/src"
     },
+
+    // vue-helper Element-UI, VUX, IVIEW  扩展  以及组件、函数文件跳转
+    "vue-helper.alias": {
+    }
 }
 ```
 
@@ -118,8 +133,6 @@ body用数组，每一项的值表示一行代码
 monocloud 添加pac：在安装目录中找到pac.txt 在rules数组中加入网址 "||google.com"
 
 
-### bottom-anchor
-
 # photoshop cc
 1. 官网下载
 2. 登录安装
@@ -146,3 +159,34 @@ monocloud 添加pac：在安装目录中找到pac.txt 在rules数组中加入网
 ## 激活(推荐用社区版)
 
 - 微信公众号 “读书写诗” 或 百度网盘/intellij/压缩包，查看里面readMe使用
+
+# Chrome
+## DevTools
+- Network: 查看gzip原始文件大小，将鼠标悬浮到 size 上 
+- Performance: 解析 JS、计算样式、重绘等页面加载等
+- Memory: 页面 JS 对象和相关联的 DOM 节点的内存分布情况
+- Security: 检测当面页面的安全性
+- LightHouse：对页面的加载进行分析，然后给出性能的建议
+
+- 类比 ：$ document.querySelector $$ document.querySelectorAll
+
+
+## 插件
+
+## 快捷键
+
+- ctrl + shift + D 切换控制台显示位置
+- ctrl + [ 和 ctrl + ] 切换面板
+- f6 将焦点锁定到地址栏
+- ctrl + n 打开新窗口。 
+- ctrl + t 打开新标签页
+- ctrl + 1 2 3  ... 跳转不同标签
+- alt + 左右箭头 返回上一页下一页
+
+# github 页面快捷键
+
+常用：
+
+- T 检索文件
+- L 跳转到代码指定行
+- S 或 /  搜索框获得焦点

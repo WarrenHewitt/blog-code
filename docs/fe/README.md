@@ -1,6 +1,10 @@
 
 与前端相关联的内容
 
+- 【2020-03-16】 [导出Excel、PDF和下载图片](https://warrenhewitt.github.io/blog/fe/other/exportFile.html)
+
+- 【2020-03-09】 [canvas画板多端实现](https://warrenhewitt.github.io/blog/fe/other/drawBoard.html)
+
 - 【2020-03-01】 [随意拖动内容位置的两种实现方式](https://warrenhewitt.github.io/blog/fe/other/dragMoveElement.html)
 
 - 【2020-02-24】 [页面内容垂直方向循环滚动](https://warrenhewitt.github.io/blog/fe/other/vertical-roll.html)
