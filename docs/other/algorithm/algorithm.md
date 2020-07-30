@@ -1,3 +1,5 @@
+[[toc]]
+[toc]
 ## 时间和空间算法复杂度
 - 用 O 表示 
 
@@ -26,7 +28,7 @@ while(i<n)
 {
     i = i * 2;
 }
-循环x次 i达到n  n=2*x => x = log2^n
+循环x次 i达到n  n=2^x => x = log2n
 ```
 
 - 线性 O(n) 如上for循环
@@ -50,30 +52,37 @@ n*O(logN) => O(nlogN)
 - 指数 O(2^n)
 
 ### 空间复杂度
-S(n) = O()
+
+1. 固定部分： 指令空间（即代码空间）、数据空间（常量、简单变量）等所占的空间，这部分属于静态空间
+
+2. 可变空间：动态分配的空间，以及递归栈所需的空间等，这部分的空间大小与算法有关
+
+算法占用的内存包括：代码所占空间、输入输出数据占用空间、变量占用的空间
+
+算法的空间复杂度：是计算整个算法的辅助空间单元的个数
+
+S(n) = O(f(n))
 
 - 常用的
 
-- O(1) 执行时，变量所需要的临时空间不会变化
+- O(1) 常量级 执行时，变量所需要的临时空间不会变化，没有空间的改变
 ```
 var i = 1
 var j = 2
 var x = i + j 
 ```
 
-- O(n)
+- O(n) 递归  每次调用都新建了变量
+```js
+ fun(n) {  
+    var a = 1  
+    if(){
+        console.log(n)
+    } else {
+        fun(n-1);
+    }
+} 
 ```
-var arr = new Array(n)
-for(i=1; i<=n; ++i)
-{
-   xxx;
-   sss;
-   ...
-}
-新建数组 占用了空间n 后面虽有循环  但是没有新增加空间
-```
-
-- O(n^2)
 
 ## 斐波拉契数列
 > 利用生成器
@@ -105,6 +114,21 @@ var a = 'abcba';
 var b = a.split('').reverse().join('')
 if(a === b) // 相等即回文
 ```
+
+## 不利用变量交换两个数
+
+```js
+var a = 1, b = 2;
+a = a + b;
+b = a - b;
+a = a - b;
+
+// 或者
+a = a ^ b;
+b = a ^ b;
+a = a ^ b;
+```
+
 ## 数组相关
 
 ### 数组去重
@@ -123,6 +147,7 @@ console.log(newArr) // 去重后的数组
 ```js
 var a = [1,2,3,1,4,4,4]
 var b = new Set(a)
+/* 一定要将Set转为数组 */
 console.log([...b]); // [1,2,3,4]
 ```
 
@@ -222,5 +247,83 @@ function findValueBetweenInArray() {
     } else {
         console.log(`在${a[index[0]]}与${a[index[1]]}之间`);
     }
+}
+```
+
+### 返回某一指定范围内固定步长的数组
+
+```js
+function getRange(start, end, steep) {
+    const arr = [];
+    let val = start;
+    while(val < end) {
+        arr.push(val)
+        val += steep
+    }
+    return arr
+}
+```
+
+### 获取指定数组中的某一范围内的值
+```js
+function getRangeValue(orange, startValue, endValue) {
+    const length = orange.length
+    let startIndex = 0, endIndex = length-1;
+    startValue = startValue || orange[0];
+    endValue = endValue || orange[endIndex];
+    /* 获取起始值下标 */
+    for (let i = 0,len=orange.length; i < len; i++) {
+        if(orange[i] >= startValue) { startIndex = i; break; }
+    }
+    /* 获取结尾值下标 */
+    for (let j = startIndex,len=orange.length; j < len; j++) {
+        if(orange[j] >= endValue) { endIndex = j; break; }
+    }
+    return orange.slice(startIndex, endIndex+1)
+}
+```
+
+### 获取一组数中的波峰
+频谱相关
+```js
+function findPeak(arr) {
+    // 满足一阶导数为0，并且满足二阶导数为负；而波谷点，则满足一阶导数为0，二阶导数为正
+    const peak = []
+    const len = arr.length
+    const tempArr = []
+    // 一阶求导,获取每个点的斜率
+    for (let i = 0; i < len; i++){
+        if (arr[i + 1] - arr[i]>0) {
+            // 表示向上倾斜，斜率为正
+            tempArr[i] = 1;
+        } else if (arr[i + 1] - arr[i] < 0){
+            // 表示向下倾斜，斜率为负
+            tempArr[i] = -1;
+        } else {
+            // 出现了水平线，或是超过了数组边界
+            tempArr[i] = 0;
+        }
+    }
+    // 处理水平的点位
+    for (let i = len - 1; i >= 0; i--) {
+        // 判断最后一个数是不是0
+        if (tempArr[i] == 0 && i == len - 1){
+            tempArr[i] = 1;
+        } else if (tempArr[i] == 0){
+            if (tempArr[i + 1] >= 0) { 
+                // 将水平位置的点斜率设置为向上 
+                tempArr[i] = 1;
+            } else{
+                // 将水平位置的点斜率设置为向下
+                tempArr[i] = -1;
+            }
+        }
+    }
+
+    for (i = 0; i < len; i++){
+        // 当 i+1 为波峰时，其对应的值减去 i 个值必为 -2
+        if (tempArr[i + 1] - tempArr[i] == -2) peak.push(arr[i + 1]);
+    }
+    return peak
 }
 ```

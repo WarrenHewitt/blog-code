@@ -1,16 +1,22 @@
+[[toc]]
 [toc]
 
-## 公用方法
-
-### ajax
+## ajax
 
 ```javascript
 function ajaxFn() {
     // IE5,6用 new ActiveXObject('Microsoft.XMLHTTP');
     var xhr=new XMLHttpRequest();
+    xhr.onreadystatechange=function(){//这个事件函数放在哪里都可
+        if(xhr.readyState===4){//针对open方法可以调用并且接受了全部响应数据
+            if(xhr.status===200){//响应的http状态
+                alert(xhr.responseText);
+            }
+        }
+    };
     
     /* @des get方式 */
-    xhr.open('get','https://aa.cc.com/api',true);（true表示异步）//规定请求的内容
+    xhr.open('get','https://aa.cc.com/api',true); // true表示异步,当设置为同步时，一旦发出，后续的所有代码不再执行，等待接口返回
     xhr.send(null);//将请求发送到服务器
 
     /* @des post方式 */
@@ -20,14 +26,6 @@ function ajaxFn() {
 
     /* @des 设置返回值的格式 */
     // xhr.responseType = 'json';
-
-    xhr.onreadystatechange=function(){//这个事件函数放在哪里都可
-        if(xhr.readyState==4){//针对open方法可以调用并且接受了全部响应数据
-            if(xhr.status==200){//响应的http状态
-                alert(xhr.responseText);
-            }
-        }
-    };
 } 
 ```
 status 200表示成功，304表示 资源没有修改可以直接使用浏览器缓存
@@ -35,7 +33,7 @@ status 200表示成功，304表示 资源没有修改可以直接使用浏览器
 必须在调用open()方法之后且调用send()方法之前调用setRequestHeader()
 
 
-### fetch
+## fetch
 
 ```js
 fetch('http://localhost:1025/121', {
@@ -56,8 +54,20 @@ fetch('http://localhost:1025/121', {
 // 默认情况下 fetch不会接受或者发送cookies
 ```
 
+## 将对象转换为query String所需格式
 
-### 批量动态插入元素
+```js
+function objectToQueryString(obj) {
+    const arr = [];
+    Object.keys(obj).forEach(key => {
+        if(obj[key]) arr.push(`${key}=${obj[key]}`)
+    })
+    return arr.join('&')
+}
+```
+
+
+## 批量动态插入元素
 ```js
 const loopInsert = (element, attribute, parent) => {
     const s = document.createElement(element);
@@ -76,7 +86,7 @@ loopInsert('link', attribute, 'head');
 
 ```
 
-### time format 时间格式化
+## time format 时间格式化
 moment.js | Day.js(https://github.com/iamkun/dayjs)
 ```js
 function formatTime(data = {}) {
@@ -126,9 +136,32 @@ function formatTime() {
 
     return y + '-' + mon + '-' + day + ' ' + h + ':' + m + ':' + s;
 }
+
+/**
+ * 转换为中文日期格式
+ * t 格式为 2020-03-13 13:36:02
+*/
+function timeZh(t) {
+    var str = t.slice(0,4) + '年'
+    str += t.slice(5,7) + '月'
+    str += t.slice(8,10) + '日 '
+    str += t.slice(11,13) + '时'
+    str += t.slice(14,16) + '分'
+    str += t.slice(17) + '秒'
+    return str;
+}
+
+/**
+ * 返回今天星期几
+*/
+function weekZh() {
+    const week = new Date().getDay()
+    const map = new Map([[0, '日'], [1, '一'],[2, '二'],[3, '三'],[4, '四'],[5, '五'],[6, '六']])
+    return `星期${map.get(week)}`;
+}
 ```
 
-### 浏览器全屏
+## 浏览器全屏
 ```js
 function fullScreen() {
     // 方法必须放到用户触发的事件里面  
@@ -146,9 +179,33 @@ function fullScreen() {
 }
 ```
 
-### 复制内容
+## 浏览器类别和版本
 
-#### 简单实现
+```js
+/**
+ * @return [浏览器名称, 版本]
+*/
+function browserInfo() {
+    var ua= navigator.userAgent, tem, 
+    M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+    if(/trident/i.test(M[1])){
+        tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
+        return ['msie', (tem[1] || '')];
+    }
+    if(M[1]=== 'Chrome'){
+        tem= ua.match(/\b(OPR|Edge)\/(\d+)/);
+        if(tem!= null) return tem.slice(1).join(' ').replace('OPR', 'opera').split(' ');
+    }
+    M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+    if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
+    return [M[0].toLocaleLowerCase(), Number(M[1])];
+}
+```
+
+
+## 复制内容
+
+### 简单实现
 ```html
 <textarea cols="20" rows="10" id="content">用户定义的代码区域</textarea>
 <input type="button" onClick="copy()" value="点击复制代码" />
@@ -163,11 +220,44 @@ function copy() {
 }
 ```
 
-#### 使用插件 clipboard.js
+### 使用插件 clipboard.js
 
 https://github.com/zenorocha/clipboard.js
 
-### 递归遍历树
+## 递归
+
+### 简单的深拷贝,包含数组和对象的值
+```js
+const deepCopy = (beCopied) => {
+    /* 拷贝数组 */ 
+    if(beCopied instanceof Array) {
+        const arr = []
+        for (let i = 0; i < beCopied.length; i++) {
+            if(typeof beCopied[i] === 'object') {
+                arr[i] = deepCopy(beCopied[i])
+            } 
+            arr[i] = beCopied[i]
+        }
+        return arr
+    } else if (typeof beCopied === 'object') {
+        /* 拷贝对象 */ 
+        const obj = {}
+        for (let key in beCopied) {
+            if(typeof beCopied[key] === 'object') {
+                obj[key] = deepCopy(beCopied[key])
+            } else {
+                obj[key] = beCopied[key]
+            }
+        }
+        return obj
+    } else {
+        return beCopied
+    }
+}
+```
+
+
+### 遍历树
 ```js
 const tree = [
     {
@@ -206,24 +296,40 @@ const tree = [
         }]
     }]
 
-const loopTree = (data) => {
+const loopTree = (data, level) => {
     const tempArr = [];
     data.forEach(v => {
         const tempObj = {}
         tempObj.id = v.id
-        tempObj.label = `new ${v.label}`
-        if(v.children && v.children.length) {
-            tempObj.list = loopTree(v.children)
+        tempObj.label = `new ${v.label}-level:${level}`
+        if (v.children && v.children.length) {
+            tempObj.list = loopTree(v.children, level+1)
         }
         tempArr.push(tempObj)
     })
     return tempArr
 }
 
-console.log(loopTree(tree));
+console.log(loopTree(tree, 0));
 ```
 
-### 返回顶部按钮
+## 判断数组内容是否相同
+
+当前只针对简单的基础类型数组值判断
+```js
+const equalArray = (arr1, arr2) => {
+    if(!(arr1 instanceof Array) || !(arr2 instanceof Array)) return false
+    if (arr1.length !== arr2.length) return false
+    for (let i = 0; i < arr1.length; i++) { 
+        if(!arr2.includes(arr1[i])) return false
+    }
+    return true
+}
+```
+
+## 滑动到页面指定位置
+
+- 返回顶部按钮
 
 ```js
 (function() {
@@ -237,13 +343,47 @@ console.log(loopTree(tree));
     divEle.addEventListener('click', function() {
         window.scrollTo({
             top: 0,
-            behavior: "smooth"
+            behavior: 'smooth'
         });
     })
 })()
 ```
 
-### 保留小数点后N位
+- 滑动到页面底部
+
+```js
+function scrollToPageBottom(){
+    var s = document.body.scrollHeight || document.documentElement.scrollHeight;
+    var c = window.innerHeight;
+    var px = s-c; // 表示滑到底部
+    if(window.scrollTo) {
+        window.scrollTo({
+            top: px,
+            behavior: "smooth"
+        });
+    } else {
+        document.body.scrollTop = document.documentElement.scrollTop = px;
+    }
+}
+```
+
+- 任意元素滑动到页面顶部
+
+```js
+function backToTop(element) {
+    var v = element.getBoundingClientRect().top+window.pageYOffset
+    if(/msie/i.test(navigator.userAgent)) {
+        window.scrollTo(0,v)
+    } else {
+        window.scroll({
+            top: v,
+            behavior: 'smooth'
+        })
+    }
+}
+```
+
+## 保留小数点后N位
 
 ```js
 /**
@@ -255,7 +395,7 @@ function afterDecimalPoint(number, n){
         const digit = Math.pow(10, n);
         /** 严格的四舍五入 */
         number = Math.round(number * digit)/digit;
-        /** 非严格的四舍五入（具体查看toFixed说明） */
+        /** 非严格的四舍五入（具体查看 笔记 => javascript toFixed说明） */
         number = number.toFixed(2)
         return number;
     }
@@ -264,7 +404,7 @@ function afterDecimalPoint(number, n){
 }
 ```
 
-### 获取随机颜色 16进制 rgb rgba模式
+## 获取随机颜色 16进制 rgb rgba模式
 
 ```js
 /**
@@ -286,5 +426,31 @@ function randomColor(type){
         /** 这里填充的值随意设置 */
         return color.padEnd(7, 'f');
     }
+}
+```
+
+## 简单生成随机字符串
+
+```js
+function randomStr() {
+    return Math.random().toString(32).slice(2)
+}
+```
+
+或者使用 uuid 插件  参考插件 [uuid](https://warrenhewitt.github.io/blog/other/plugin.html)
+
+## 检测用户是否打开了控制台
+
+```js
+function checkOpenDevTool() {
+    let element = document.createElement('div');
+    Object.defineProperty(element, 'id', {
+        get: function () {
+            window.location.href = 'https://www.baidu.com'
+        }
+    });
+    // 原理为开发者工具会自动读取元素id的特性  针对chrome 72 以上版本
+    // debug 输出的信息不会显示，只有在打开显示级别在verbose的情况下，才会显示
+    console.debug(element);
 }
 ```
