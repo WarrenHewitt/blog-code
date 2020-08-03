@@ -142,7 +142,9 @@ white-space:nowrap; 强制不换行，都起作用(对inner-block的标签也起
 
 ## background
 
-filter:blur(90px) //高斯模糊,ie不支持,其它都可，注意前缀。 
+filter:blur(90px) // 高斯模糊,ie不支持,其它都可，注意前缀。 
+
+`filter:grayscale()`  html 标签添加该属性，可让页面变黑白
 
 其它的一些滤镜效果参考 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/filter)
 

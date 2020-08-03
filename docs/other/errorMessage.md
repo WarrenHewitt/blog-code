@@ -56,3 +56,7 @@ Router.prototype.push = function push (location, onResolve, onReject) {
 报错： Previous operation has not finished; run 'cleanup' if it was interrupted
 
 执行命令 `svn cleanup` 如果被拒绝，查看是否有文件没有关闭
+
+## vscode
+
+vetur 1261 :  File name … differs from already included file name … only in casing ；保证自己文件引用没有错后，将vscode重启一下

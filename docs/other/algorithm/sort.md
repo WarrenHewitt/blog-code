@@ -6,9 +6,9 @@
 冒泡排序 | O(n) | O(n^2) | O(1) 
 选择排序 |  O(n^2) | O(n^2) | O(1) 
 插入排序 | O(n) | O(n^2) | O(1) 
-布尔 | O(n) | O(n^2) | O(1) 
+希尔排序 | O(n*log2n) | O(n^2) | O(1) 
+归并排序 | O(nlogn) | O(n) | O(n) 
 堆 | O(n) | O(n^2) | O(1) 
-归并 | O(n) | O(n^2) | O(1) 
 快速 | O(n) | O(n^2) | O(1) 
 
 以上时间和空间复杂度会根据算法的优化有所不同
@@ -95,67 +95,92 @@ function insertionSort(array) {
 }
 ```
 
+## 希尔排序
 
- function shellSort(array) {
-        console.time('s2')
+原理：
 
-            let len = array.length,
-                temp,
-                gap = 1;
-            while(gap < len/3) {
-                gap =gap*3+1;
-            }
+插入排序的一种优化
 
-            while(gap>0) {
-                for (let i = gap; i < len; i++) {
-                    let current = array[i]
-                    let endIndex = i - gap
-                    while(endIndex>=0 && array[endIndex] > current) {
-                        array[endIndex + gap] = array[endIndex]
-                        endIndex -= gap
-                    }
-                    array[endIndex+gap] = current
-                }
-                console.log('gap', gap);
-                gap = Math.floor(gap/3)
-            }
-            console.timeEnd('s2');
-            console.log(array);
-            return array
-        }
+1. 设置一个增量，将数组中的数按此增量进行分组（比如增量为4，那下标为0，4，8...的数为一组）
+2. 对分组的数进行插入排序
+3. 缩小增量
+4. 重复步骤1、2、3，直到增量为1
+5. 当增量为1时，对整个数组进行一次插入排序，输出最后结果
 
+时间复杂度与增量选取有关,以下算法时间复杂度为 O(n^(3/2))
 
-    function insertionSort(array) {
-        console.time('s1')
-        let len = array.length
-        for (let i = 1; i < len; i++) {
-            /* 记录当前未排序的数，该数将会和有序数列中的数进行比较 */
+非稳定排序（2个相等的数，在排序完成后，原来在前面的数还是在前面，即为稳定排序）
+
+```js
+function shellSort(array) {
+    let len = array.length, gap = 1;
+    /* 此处获取一个最大增量，增量的获取方法不固定，这里采用比较常见的方式，一定要保证最后能取到1 */
+    while(gap < len/3) {
+        gap = gap*3+1;
+    }
+
+    /* 每更新一次增量就进行一次插入排序 */
+    while(gap>0) {
+        /* 以下逻辑与插入排序一致，当增量变为1时即完全一致 */
+        for (let i = gap; i < len; i++) {
+            /* 这里要循环到数组最后是因为要保障当前分组中的每一个数都经过排序，所以当前分组靠前的数据会被与后面的数据进行多次排序 */
             let current = array[i]
-            /* 有序数列的最后一个数（如果是从小到大排列，也就是最大的数） */
-            let endIndex = i - 1 
-            while (endIndex >=0 && array[endIndex] > current) {
-                /* 将有序数列中的数，逐一与当前未排序数进行比较直到，找出比当前未排序数小的数即停止 */
-                array[endIndex + 1] = array[endIndex]
-                endIndex--
+            let endIndex = i - gap
+            while(endIndex>=0 && array[endIndex] > current) {
+                array[endIndex + gap] = array[endIndex]
+                endIndex -= gap
             }
-            /* 将最后一个往后移动空出来的位置赋值为，当前未排序数 */
-            /* 因为上面的 while 循环中多减了 1 所以这里加上 */
-            array[endIndex+1] = current
+            array[endIndex+gap] = current
         }
-        console.timeEnd('s1');
-        return array
+        gap = Math.floor(gap/3)
+    }
+    return array
+}
+```
+
+分治法：把一个复杂的问题分成两个或更多的相同或相似的子问题，再把子问题分成更小的子问题……直到最后子问题可以简单的直接求解，原问题的解即子问题的解的合并
+
+## 归并排序
+
+原理：将当前数组，递归分组，比较大小后再一一合并分组，是采用分治法的一个应用
+
+1. 获取一个中间值，分组
+2. 递归进行分组
+3. 比较当前两个分组，将其合并为一个数组
+
+```js
+function mergeSort(array) {
+    const len = array.length
+    if(len<2) return array
+    const middle = Math.floor(len/2)
+    
+    /* 取中间值进行分组 */
+    const left = array.slice(0, middle)
+    const right = array.slice(middle)
+
+    /* 递归分组 */
+    return merge(mergeSort(left), mergeSort(right))
+}
+
+function merge(left, right) {
+    const result = []
+    /* 两个分组都有值时，逐个进行比较 */
+    while (left.length && right.length) {
+        if(left[0] <= right[0]) {
+            result.push(left.shift())
+        } else {
+            result.push(right.shift())
+        }
     }
 
-    const a1 = []
-    for (let k = 0; k < 5; k++) {
-        a1.push(Math.random())
+    /* 只有一个分组时，表明其全部为最大值，直接全部放入结果数组即可 */
+    if(left.length){
+        result.push(...left)
     }
-    // const a2 = []
-    // for (let k = 0; k < 100000; k++) {
-    //     a2.push(Math.random())
-    // }
 
-    // console.log(shellSort(a1));
-    // console.log(insertionSort(a2));
-    shellSort([1,2,67,3,56,4,6,1,34,12])
-    // insertionSort(a2)
+    if(right.length){
+        result.push(...right)
+    }
+    return result
+}
+```
