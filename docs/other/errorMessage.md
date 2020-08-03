@@ -1,10 +1,27 @@
-# 报错信息总结
+## 报错信息总结
 
 - axios net::ERR_BLOCKED_BY_CLIENT  (检查是否广告插件拦截)
 
 - cannot find global value 'promise'.ts2468 (修改ts配置文件的 target 值为 es6)
 
-# 服务端报错信息
+- [Vue Warn]: Error compiling template  在模板中出现了 script 标签 应该将其放到模板外 
+
+- 利用push 跳转路由，当重复点击跳转同一个路由地址, 提示错误 NavigationDuplicated 
+
+解决方法：（在后续版本会修复）
+```js
+const originalPush = Router.prototype.push
+Router.prototype.push = function push (location, onResolve, onReject) {
+    if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
+    /* 添加 catch 不向上抛出错误 */
+    return originalPush.call(this, location).catch(err => err)
+}
+```
+
+- `%E2%80%8B` 一个看不见的字符 ZERO-WIDTH SPACE 如果出现在了url中会导致接口 404
+
+
+## 服务端报错信息
 - 403 权限访问此站，服务器收到请求但拒绝提供服务
 - 502： bad gateway 错误的网关
 
@@ -39,3 +56,7 @@
 报错： Previous operation has not finished; run 'cleanup' if it was interrupted
 
 执行命令 `svn cleanup` 如果被拒绝，查看是否有文件没有关闭
+
+## vscode
+
+vetur 1261 :  File name … differs from already included file name … only in casing ；保证自己文件引用没有错后，将vscode重启一下
