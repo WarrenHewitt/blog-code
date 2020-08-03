@@ -26,7 +26,8 @@ java python 解释型语言（java 将程序编译成字节码：理解为一种
 - 全局变量 防止未定义 请用window.variable调用 如果不加window可导致报错，阻塞后续代码执行
 
 ---
-console 输出占位符
+
+- console 输出占位符
 ```js
 console.log('String: %s, Int: %d,Float: %f, Object: %o', 'string', 1, 1.23, { name: 'name' })
 console.log('%c红色%c绿色%c蓝色', 'color:red','color:green', 'color:blue')
@@ -37,6 +38,8 @@ console.log('%c ', 'padding:0 1000px;line-height:1000px;background:url(httpxxxx)
 > copy(location)
 > ctrl + c  // 输出拷贝的 location
 ```
+
+console.trace() 输出一个堆栈跟踪
 
 ---
 
@@ -898,9 +901,13 @@ A.a3=3;//静态属性，在构造实例的时候，实例是不能访问的，�
 
 Number类型统一按浮点数处理，64位存储，整数是按最大54位来算最大最小数的，否则会丧失精度；某些操作（如数组索引还有位操作）按32位处理
 
-- + 操作是将该元素转换为number类型，转换不了就返回NaN。
+- `+` 操作是将该元素转换为number类型，转换不了就返回NaN。
 
 - Number.toString(param) param 可以是2-32
+
+- 数字转字符串
+
+toString() 最慢；1 + '' 字符串拼接 和 `` 模板字符串 都更快，速度基本相同 
 
 - 字符串转数字
   1. Number(new Date()|new Boolean()|'123');  
@@ -909,7 +916,7 @@ Number类型统一按浮点数处理，64位存储，整数是按最大54位来�
 
   4. parseFloat(一个参数); 
 
-  6. 【+'10'】 | 【~~'10'】  // 10 
+  6. `+'10'` | `~~'10'`  // 10 
 
 - ~ (按位非运算) 与 ~~ 
 ```
@@ -1231,6 +1238,13 @@ import { default as xxx } from 'modules'; 等同于import xxx from 'modules';
 
 ### 函数扩展
 1. 尾递归（只存在一个帧调用，所以效率高，不会出现栈溢出的情况）
+
+尾调用：一个函数执行的最后一步是将另外一个函数调用并返回
+```js
+function a(p){
+  return b(p);
+}
+```
 
 ### 数组的扩展
 1. 扩展运算符与函数参数结合

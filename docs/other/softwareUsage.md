@@ -77,6 +77,11 @@ settings.json（可用setting sync共享）
 }
 ```
 
+## 快捷键
+
+- ctrl+d 选中当前单词 连续操作可选中下一个相同单词
+
+
 ## 插件迁移
 
 使用 setting sync 插件
@@ -90,6 +95,9 @@ settings.json（可用setting sync共享）
 2. ctrl+shift+p 输入 sync 选择 download 会要求登录，点击登录github即可(目的是获取token)
 3. ctrl+shift+p 输入 sync 选择 advance options ->继续选择setting， 输入gist id (打开对应gist，在url上可找到)（）
 4. 重复上面的步骤2
+
+- 更新
+1. ctrl+shift+p 输入 sync 选择 update/upload  根据提示操作即可 
 
 ## snippets
 
@@ -105,10 +113,6 @@ ctrl+shift+p => configure user snippets => 选择对应的语言进行编写
 body用数组，每一项的值表示一行代码
 
 .vue文件中写的js代码片段还是要写到JavaScript.json中，而不是写到vue.json中
-
----
-
-- ctrl+d 选中当前单词 连续操作可选中下一个相同单词
 
 ---
 **Ctrl+P**
@@ -159,6 +163,8 @@ monocloud 添加pac：在安装目录中找到pac.txt 在rules数组中加入网
 ## 激活(推荐用社区版)
 
 - 微信公众号 “读书写诗” 或 百度网盘/intellij/压缩包，查看里面readMe使用
+
+---
 
 # Chrome
 ## DevTools

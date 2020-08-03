@@ -220,6 +220,28 @@ function copy() {
 }
 ```
 
+复制粘贴时带上作者等信息
+```js
+// copy、cut、paste 事件
+document.body.oncopy = e => {
+    /*
+        clipboardData对象:用于访问以及修改剪贴板中的数据
+        getData()、setData()、clearData()
+    */
+    e.preventDefault(); 
+    let clipboardData = (e.clipboardData || window.clipboardData); // 兼容处理
+    copyContent = window.getSelection(0).toString()
+    combineContent = `${copyContent} \n 作者：warren \n 时间：2020-08-03 \n`
+    if (e.clipboardData) {
+        return clipboardData.setData('text/plain', combineContent)
+    } else {
+        // IE
+        return window.clipboardData.setData("text/plain", combineContent);
+    }
+}
+```
+
+
 ### 使用插件 clipboard.js
 
 https://github.com/zenorocha/clipboard.js
