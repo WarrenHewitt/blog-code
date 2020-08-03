@@ -12,8 +12,10 @@ function print () {
         const content = ifElement.contentWindow || ifElement.contentDocument
         content.document.body.innerHTML = this.detailTable
         const styleEle = document.createElement('style')
-        /* 去掉打印时的页头和页脚 */
-        styleEle.innerHTML = '@media print {@page { margin: 5mm; }}'
+        /* 
+          * 去掉打印时的页头和页脚
+        */
+        styleEle.innerHTML = '@media print {@page { margin: 0mm 10mm; }  添加其它样式}'
         content.document.getElementsByTagName('head')[0].appendChild(styleEle)
 
         /* 保障 iframe 中资源加载完成，图片要用 img 形式引入 */
@@ -24,16 +26,15 @@ function print () {
     this.getDetailTable()
 
     if (ifElement) {
-        // 若已经创建，则直接打印
-        addHtmlPrint()
-    } else {
-        ifElement = document.createElement('iframe')
-        ifElement.setAttribute('id', 'ifId')
-        ifElement.setAttribute('style', 'display:none')
-        document.body.appendChild(ifElement)
-
-        addHtmlPrint()
+        // 删除的原因是，复用会影响，插入iframe中的onload事件
+        document.body.removeChild(ifmEle)
     }
+    ifElement = document.createElement('iframe')
+    ifElement.setAttribute('id', 'ifId')
+    ifElement.setAttribute('style', 'display:none')
+    document.body.appendChild(ifElement)
+
+    addHtmlPrint()
 }
 ```
 2. 利用 @media print，在当前页面设置打印操作时需要隐藏的元素

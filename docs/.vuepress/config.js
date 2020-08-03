@@ -45,8 +45,10 @@ module.exports = {
                     title: '实践示例', 
                     collapsable: false,
                     children: [
+                        ['/fe/other/exportFile', '导出Excel、PDF和下载图片'],
+                        ['/fe/other/drawBoard', 'canvas画板多端实现'],
                         ['/fe/other/print', 'html 打印相关操作与实现'],
-                        ['/fe/other/dragDropPreview', '拖拽与拖拽文件上传'],
+                        ['/fe/other/dragDropPreview', '拖拽与拖拽文件上传以及预览'],
                         ['/fe/other/dragMoveElement', '随意拖动内容位置的两种实现方式'],
                         ['/fe/other/vertical-roll', '元素内容垂直循环滚动'],
                         ['/fe/other/toastAndLoading', '页面弹窗toast和加载loading'],
@@ -54,6 +56,7 @@ module.exports = {
                         ['/fe/other/weChatGetUserInfo', '获取微信用户信息'],
                         ['/fe/other/weChatShare', '微信分享'],
                         ['/fe/other/requestAnimationFrame', 'requestAnimationFrame 兼容'],
+                        ['/fe/other/codepen', 'codepen 实例'],
                     ]
                 },
                 { 
@@ -71,7 +74,6 @@ module.exports = {
                     title: '工具方法', 
                     collapsable: false,
                     children: [
-                        ['/fe/tools/arrayFun', '数组相关'],
                         ['/fe/tools/debounceThrottle', '防抖/节流'],
                         ['/fe/tools/publicFn', '常用工具函数'],
                         ['/fe/tools/regexpRules', '正则表达式'],
@@ -112,34 +114,41 @@ module.exports = {
             /** @des 笔记 */
             '/note/': [
                 { 
-                    title: '所有', 
+                    title: '语言学习', 
                     collapsable: false,
                     children: [
-                        ['examination', '笔试'],
-                        ['javascript', 'javascript'], 
-                        ['html', 'html'], 
-                        ['css', 'css'], 
-                        ['react', 'react'], 
-                        ['vue', 'vue'], 
-                        ['web-app', 'web-app'], 
-                        ['typescript', 'typescript'], 
-                        ['mini-programe', 'mini-programe'], 
-                        ['node', 'node'], 
-                        ['java', 'java'], 
-                        ['python', 'python'], 
-                        ['mysql-mongo', 'mysql-mongo'], 
-                        ['git', 'git'], 
-                        ['D3', 'D3'],
+                        ['/note/language/javascript', 'javascript'], 
+                        ['/note/language/html', 'html'], 
+                        ['/note/language/css', 'css'], 
+                        ['/note/language/react', 'react'], 
+                        ['/note/language/vue', 'vue'], 
+                        ['/note/language/web-app', 'web-app'], 
+                        ['/note/language/typescript', 'typescript'], 
+                        ['/note/language/mini-programe', 'mini-programe'], 
+                        ['/note/language/node', 'node'], 
+                        ['/note/language/java', 'java'], 
+                        ['/note/language/python', 'python'], 
+                        ['/note/language/mysql-mongo', 'mysql-mongo'], 
+                        ['/note/language/git', 'git'], 
+                        ['/note/language/D3', 'D3'],
                     ]
                 },
+                {
+                    title: '综合', 
+                    collapsable: false,
+                    children: [
+                        ['/note/comprehensive/canvasAndSvg', 'canvas和svg相关用法'],
+                        ['/note/comprehensive/examination', '笔试'],
+                    ]
+                }
             ],
 
             '/other/': [
                 { 
-                    title: '插件', 
+                    title: '插件、包介绍', 
                     collapsable: false,
                     children: [
-                        ['/other/pluginBook', '一些插件、博客介绍'],
+                        ['/other/plugin', '一些包的使用介绍'],
                     ]
                 },
                 { 
@@ -160,9 +169,10 @@ module.exports = {
                     ]
                 },
                 { 
-                    title: 'hexo搭建博客', 
+                    title: '博客和书籍', 
                     collapsable: false,
                     children: [
+                        ['/other/blogBook', '技术书籍和博客'],
                         ['/other/githubHexo', '搭建步骤'],
                     ]
                 },
@@ -171,13 +181,6 @@ module.exports = {
                     collapsable: false,
                     children: [
                         ['/other/algorithm/algorithm', '算法实践'],
-                    ]
-                },
-                { 
-                    title: 'codepen', 
-                    collapsable: false,
-                    children: [
-                        ['/other/codepen', 'codepen 实例'],
                     ]
                 }
             ]
