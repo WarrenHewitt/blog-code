@@ -251,20 +251,6 @@ function findValueBetweenInArray() {
 }
 ```
 
-### 返回某一指定范围内固定步长的数组
-
-```js
-function getRange(start, end, steep) {
-    const arr = [];
-    let val = start;
-    while(val < end) {
-        arr.push(val)
-        val += steep
-    }
-    return arr
-}
-```
-
 ### 获取指定数组中的某一范围内的值
 ```js
 function getRangeValue(orange, startValue, endValue) {
@@ -281,6 +267,20 @@ function getRangeValue(orange, startValue, endValue) {
         if(orange[j] >= endValue) { endIndex = j; break; }
     }
     return orange.slice(startIndex, endIndex+1)
+}
+```
+
+### 返回某一指定范围内固定步长的数组
+
+```js
+function getRange(start, end, steep) {
+    const arr = [];
+    let val = start;
+    while(val < end) {
+        arr.push(val)
+        val += steep
+    }
+    return arr
 }
 ```
 
@@ -323,8 +323,10 @@ function findPeak(arr) {
 
     for (i = 0; i < len; i++){
         // 当 i+1 为波峰时，其对应的值减去 i 个值必为 -2
+        // 当 i+1 为波谷时，其对应的值减去 i 个值必为 2  注意除去最后一个数被误判位波谷的情况
         if (tempArr[i + 1] - tempArr[i] == -2) peak.push(arr[i + 1]);
     }
+
     return peak
 }
 ```
