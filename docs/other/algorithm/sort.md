@@ -144,7 +144,7 @@ function shellSort(array) {
 
 原理：将当前数组，递归分组，比较大小后再一一合并分组，是采用分治法的一个应用
 
-1. 获取一个中间值，分组
+1. 获取一个中间位置的值，然后以该位置为中心点分组
 2. 递归进行分组
 3. 比较当前两个分组，将其合并为一个数组
 
@@ -182,5 +182,27 @@ function merge(left, right) {
         result.push(...right)
     }
     return result
+}
+```
+
+## 快速排序
+
+需要 O(n) 的额外存储空间，也就跟归并排序一样
+
+但是代码更清晰的体现快排的思想
+```js
+function quickSort (array) {
+    if (array.length < 2) return array;
+    const pivot = array[0];
+    let left = []
+    let right = []
+    for (let i = 1, length = array.length; i < length; i++) {
+        if(array[i] < pivot) {
+            left.push(array[i])
+        } else {
+            right.push(array[i])
+        }
+    }
+    return quickSort(left).concat([pivot], quickSort(right));
 }
 ```
