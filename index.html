@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>test</title>
+    <!-- <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script> -->
+    <style>
+        div {
+            height: 300px;
+        }
+
+        .b {
+            visibility: hidden;
+        }
+
+        #cusMenu {
+            position: fixed;
+            display: none;
+            width: 200px;
+            height: 30px
+        }
+    </style>
+</head>
+
+<body>
+
+    分别复制到txt和富文本查看效果
+    <div id="answer">测试数据1<b>测试</b></div>
+    <input type="text">
+
+    <div class="a">1</div>
+    <div class="b">2</div>
+    <div class="c">3</div>
+
+    <div id="cusMenu">
+        删除
+    </div>
+    <script>
+
+
+        // function quickSort(arr, left, right) {
+        //     var len = arr.length,
+        //         partitionIndex,
+        //         left = typeof left != 'number' ? 0 : left,
+        //         right = typeof right != 'number' ? len - 1 : right;
+
+        //     if (left < right) {
+        //         partitionIndex = partition(arr, left, right);
+        //         quickSort(arr, left, partitionIndex-1);
+        //         quickSort(arr, partitionIndex+1, right);
+        //     }
+        //     return arr;
+        // }
+
+        // function partition(arr, left ,right) {     // 分区操作
+        //     var pivot = left,                      // 设定基准值（pivot）
+        //         index = pivot + 1;
+        //     for (var i = index; i <= right; i++) {
+        //         if (arr[i] < arr[pivot]) {
+        //             swap(arr, i, index);
+        //             index++;
+        //         }        
+        //     }
+        //     swap(arr, pivot, index - 1);
+        //     return index-1;
+        // }
+    // console.log(qs([6, 2, 7, 1,5,9], 0, 5));
+
+
+        // function quickSort(array, left, right) {
+        //     if(left<right) {
+        //         pivotIndex = rank(array, left, right)
+        //         console.log(pivotIndex);
+        //         quickSort(array, left, pivotIndex-1)
+        //         quickSort(array, pivotIndex+1, right)
+        //     }
+
+        //     return array
+        // }
+
+        // function rank(array, left, right) {
+        //     const pivotValue = array[left]
+        //     while(left < right){
+        //         /* 右边大于基准的数据不需要移动位置 */
+        //         while(array[right] >= pivotValue && left < right){
+        //             right--
+        //         }
+        //         /* 将右边第一个扫描到的小于基准的数据移动到左边的空位 */
+        //         array[left] = array[right]
+
+        //         /* 左边小于基准的数据不需要移动位置 */
+        //         while(array[left] < pivotValue && left < right){
+        //             left++
+        //         }
+        //         array[right] = array[left]
+        //     }
+
+        //     /* 这里right和left 相等了 */
+        //     array[right] = pivotValue
+
+        //     return right
+        // }
+        // const arr = [6, 2, 7, 1,5,9,5]
+        // console.log('90', quickSort(arr, 0, arr.length-1)); 
+
+
+
+        console.log(quickSort([3,2,3,1,5]));
+
+    </script>
+</body>
+
+</html>

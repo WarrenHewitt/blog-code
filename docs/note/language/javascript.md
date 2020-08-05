@@ -746,7 +746,8 @@ Array.prototype.slice.call(obj);//  ["first", "second"]
 - includes: [].includes('some value') // return true/false ,与indexOf相比，可以避免返回的0，判断时的错误
 
 ---
-a[i++];先执行a[i]，再i++
+
+在表达式中：`var a = i++` a等于i原来的值，`var a = ++i` a等于i加1后的值；但最后i的值都会加1
 
 ---
 splice(x,y,z1,z2,z3,z4....):会直接对当前数组进行修改；  
@@ -1239,7 +1240,11 @@ import { default as xxx } from 'modules'; 等同于import xxx from 'modules';
 ### 函数扩展
 1. 尾递归（只存在一个帧调用，所以效率高，不会出现栈溢出的情况）
 
+
+
 尾调用：一个函数执行的最后一步是将另外一个函数调用并返回
+
+每个函数在调用另一个函数的时候，并没有 return 该调用，所以JS引擎会认为你还没有执行完，会保留你的调用帧，所以在return后调用函数，不需要保留外层函数的调用记录
 ```js
 function a(p){
   return b(p);
