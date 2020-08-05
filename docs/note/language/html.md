@@ -179,7 +179,20 @@ rel:shortcut icon
 
 
 ---
-< ol reversed(倒序) start='5' (从5开始) type='1，a，A，i，I'>;
+
+- 列表
+
+``` html
+<!-- 描述说明性质的列表 -->
+<dl> <dt>Name 类似标题</dt> <dd>Warren 这里会缩进</dd> <dl/>
+
+<!-- 属性 type = 1，a，A，i，I 显示的序号类型-->
+<!-- 属性 start = 2 表示从2开始 -->
+<!-- 属性 reversed = true 表示是否反序显示 -->
+<!-- li 中的 value 属性 重新定义序号的值 -->
+<ol reversed="true" start='5' type='I'><li value="2"></li></ol>
+
+```
 
 ---
 `< input type='file' multiple(多选文件)/>` 元素的files属性则是一个FileList对象，
