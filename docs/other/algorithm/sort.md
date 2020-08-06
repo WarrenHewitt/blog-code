@@ -3,13 +3,13 @@
 
 排序名称|最快时间|最慢时间|空间复杂度
 --|--|--|--|--|
-冒泡排序 | O(n) | O(n^2) | O(1) 
-选择排序 |  O(n^2) | O(n^2) | O(1) 
-插入排序 | O(n) | O(n^2) | O(1) 
+冒泡排序 | O(n)       | O(n^2) | O(1) 
+选择排序 | O(n^2)     | O(n^2) | O(1) 
+插入排序 | O(n)       | O(n^2) | O(1) 
 希尔排序 | O(n*log2n) | O(n^2) | O(1) 
-归并排序 | O(nlogn) | O(n) | O(n) 
-堆 | O(n) | O(n^2) | O(1) 
-快速 | O(n) | O(n^2) | O(1) 
+归并排序 | O(nlogn)   | O(n)   | O(n) 
+堆排序   | O(n)       | O(n^2) | O(1) 
+快速排序 | O(nlogn)   | O(n^2) | O(1),O(n) 
 
 以上时间和空间复杂度会根据算法的优化有所不同
 
@@ -187,11 +187,16 @@ function merge(left, right) {
 
 ## 快速排序
 
+原理：
+
+1. 在数组中找一个基准
+2. 数组中的数与该基准相比较，比它小的放在其前面，比它大的放在其后面（分区操作）
+3. 再递归的去操作基准前、后的分区
 
 - 方式一：
 需要 O(n) 的额外存储空间，也就跟归并排序一样
 
-但是代码更清晰的体现快排的思想
+但是代码更清晰的体现快排的思想 84ms
 ```js
 function quickSort (array) {
     if (array.length < 2) return array;
@@ -208,3 +213,44 @@ function quickSort (array) {
     return quickSort(left).concat([pivot], quickSort(right));
 }
 ```
+
+- 方式二：
+
+原地排序 34ms
+
+```js
+ function quickSort(array, left, right) {
+    if(left<right) {
+        pivotIndex = fill(array, left, right)
+        quickSort(array, left, pivotIndex-1)
+        quickSort(array, pivotIndex+1, right)
+    }
+    return array
+}
+
+function fill(array, left, right) {
+    const pivotValue = array[left]
+    while(left < right){
+        /* 右边大于基准的数据不需要移动位置 */
+        /* 这里或下面的循环，一定要确保有一处把相等的情况包含在内 */
+        while(array[right] >= pivotValue && left < right){
+            right--
+        }
+        /* 将右边第一个扫描到的小于基准的数据移动到左边的空位 */
+        array[left] = array[right]
+
+        /* 左边小于基准的数据不需要移动位置 */
+        while(array[left] < pivotValue && left < right){
+            left++
+        }
+        array[right] = array[left]
+    }
+
+    /* 这里right和left 相等了 */
+    array[right] = pivotValue
+
+    return right
+}
+```
+
+还有一些更好的优化，比如基准数的选取，避免最坏时间复杂度情况的发生，可自行探索
