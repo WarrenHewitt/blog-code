@@ -30,8 +30,8 @@
             /* 第二步 将堆顶元素与堆尾元素交换 再将前 (n-1) 个数重复构建堆 */
             for (let j = length - 1; j > 0; j--) {
                 swap(array, 0, j)
-                const _node = Math.floor((j-1)/2) - 1
-                maxHeap(array, _node, j-1)
+                /* 这里相当于把第一个叶子节点改变了，所以下面从 0 开始 重新构建堆 */
+                maxHeap(array, 0, j-1)
             }
 
             return array
