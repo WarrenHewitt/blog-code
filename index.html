@@ -5,98 +5,71 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>test</title>
+    <title>blog-code-test</title>
     <!-- <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script> -->
     <style>
         
-        ol{
-            display: flex;
-            flex-direction: column-reverse;
-        }
-        li{
-            
-        }
        
     </style>
 </head>
 
 <body>
-    <ol>
-        <li>c</li>
-        <li>b</li>
-        <li>a</li>
-    </ol>
     <script>
 
 
-        // function quickSort(arr, left, right) {
-        //     var len = arr.length,
-        //         partitionIndex,
-        //         left = typeof left != 'number' ? 0 : left,
-        //         right = typeof right != 'number' ? len - 1 : right;
+        function heapSort(array) {
+            let length = array.length
+            /* 第一个非叶子节点（叶子节点：没有子节点的节点）： n/2 -1 */
+            const node =  Math.floor(length/2) - 1
 
-        //     if (left < right) {
-        //         partitionIndex = partition(arr, left, right);
-        //         quickSort(arr, left, partitionIndex-1);
-        //         quickSort(arr, partitionIndex+1, right);
-        //     }
-        //     return arr;
+            /* 第一步先将数组构建为堆 这里是大顶堆 */
+            for (let i = node; i >= 0 ; i--) {
+                maxHeap(array, i, length)
+            }
+
+            /* 第二步 将堆顶元素与堆尾元素交换 再将前 (n-1) 个数重复构建堆 */
+            for (let j = length - 1; j > 0; j--) {
+                swap(array, 0, j)
+                const _node = Math.floor((j-1)/2) - 1
+                maxHeap(array, _node, j-1)
+            }
+
+            return array
+        }
+
+        function maxHeap(array, i, length) {
+            let left = i*2 + 1
+            let right = i*2 + 2
+            let parent = i
+
+            /* 找出子节点中比父节点大的数进行交换 */
+            if(left < length && array[left] > array[parent]) {
+                parent = left
+            }
+
+            if(right < length && array[right] > array[parent]) {
+                parent = right
+            }
+
+            if(parent !== i) {
+                swap(array,i, parent)
+                /* 表示有数据移动，所以要重排一下数据移动后所影响到的父子节点 */
+                maxHeap(array, parent, length)
+            } 
+        }
+
+        function swap(arr, i, j) {
+            var temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+
+        // var arr = []
+        // for (let i = 0; i < 100000; i++) {
+        //     arr.push(Math.random())
         // }
 
-        // function partition(arr, left ,right) {     // 分区操作
-        //     var pivot = left,                      // 设定基准值（pivot）
-        //         index = pivot + 1;
-        //     for (var i = index; i <= right; i++) {
-        //         if (arr[i] < arr[pivot]) {
-        //             swap(arr, i, index);
-        //             index++;
-        //         }        
-        //     }
-        //     swap(arr, pivot, index - 1);
-        //     return index-1;
-        // }
-    // console.log(qs([6, 2, 7, 1,5,9], 0, 5));
-
-
-        // function quickSort(array, left, right) {
-        //     if(left<right) {
-        //         pivotIndex = rank(array, left, right)
-        //         console.log(pivotIndex);
-        //         quickSort(array, left, pivotIndex-1)
-        //         quickSort(array, pivotIndex+1, right)
-        //     }
-
-        //     return array
-        // }
-
-        // function rank(array, left, right) {
-        //     const pivotValue = array[left]
-        //     while(left < right){
-        //         /* 右边大于基准的数据不需要移动位置 */
-        //         while(array[right] >= pivotValue && left < right){
-        //             right--
-        //         }
-        //         /* 将右边第一个扫描到的小于基准的数据移动到左边的空位 */
-        //         array[left] = array[right]
-
-        //         /* 左边小于基准的数据不需要移动位置 */
-        //         while(array[left] < pivotValue && left < right){
-        //             left++
-        //         }
-        //         array[right] = array[left]
-        //     }
-
-        //     /* 这里right和left 相等了 */
-        //     array[right] = pivotValue
-
-        //     return right
-        // }
-        // const arr = [6, 2, 7, 1,5,9,5]
-        // console.log('90', quickSort(arr, 0, arr.length-1)); 
-
-
-
-        // console.log(quickSort([3,2,3,1,5]));
+            console.log(heapSort([0,1,2,3,4,5]));
 
     </script>
 </body>
