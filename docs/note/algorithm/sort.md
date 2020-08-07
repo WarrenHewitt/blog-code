@@ -1,8 +1,17 @@
-[toc]
 [[toc]]
 
+## 常见排序算法原理及JS代码实现
+
+`创建时间：2020-08-07`
+
+本文只是将作者学习的过程以及算法理解进行简单的分享，提供多一个角度的理解说明，或许让你的困惑能得以解决（**代码或说明若有问题，欢迎留言、联系更正！以免造成更多困惑**）
+
+如果要更深入研究这些算法的同学，社区中同类型更优秀，单个算法更深入剖析的文章也是比比皆是，**这里或许作为一个常见排序算法入门学习了解更准确**
+
+---
+
 排序名称|最快时间|最慢时间|空间复杂度
---|--|--|--|--|
+--|--|--|--|
 冒泡排序 | O(n)       | O(n^2)   | O(1) 
 选择排序 | O(n^2)     | O(n^2)   | O(1) 
 插入排序 | O(n)       | O(n^2)   | O(1) 
@@ -13,6 +22,34 @@
 
 以上时间和空间复杂度会根据算法的优化有所不同
 
+---
+
+生成测试所用，包含随机十万条数据的数组
+
+```js
+const arr = []
+for (let i = 0; i < 100000; i++) {
+    arr.push(Math.random())
+}
+```
+
+以下标注的时间均为对该随机数组的数据排序的时间，这里的时间只是作为一个参考，因为并没有控制到只有唯一变量（每个排序算法用到的数组长度相同，但数组值不同），
+所以这里的时间只反应常规情况
+
+运行时间的计算使用 `console.time()`
+
+## 数组 sort() 方法
+
+实现也是基于快排做了很多的优化算法，以保障各种情况都能稳定较快的实现排序 [查看C++实现源码](http://trac.webkit.org/browser/trunk/Source/JavaScriptCore/runtime/ArrayPrototype.cpp?rev=138530#L647)
+
+> 时间：≈ 75ms
+
+```js
+function sortCompare(array) {
+    array.sort((a, b) => (a-b))
+}
+```
+
 ## 冒泡排序
 
 原理：依次比较两个相邻的元素，将较大的放到右边（升序排列）
@@ -21,33 +58,39 @@
 
 以下是经过简单优化的算法实现：
 
+> 时间：≈ 21899ms
+
 ```js
-function bubbling(arr) {
-    const len = arr.length
+function bubbling(array) {
+    const len = array.length
     let sorted = true
     /* 每找到一个最值，需要一次循环 */
     for (let i = 0; i < len; i++) {
-        /* 必须每轮循环前，假设是排好序后的数组，防止只需要前几次循环就排好的情况 */ 
+        /* 必须每轮循环前，假设是排好序后的数组，防止只需要前几次循环就排好的情况 */
         sorted = true
         /* 这里的循环是找出当前轮的最值 */
         /* len-1-i 保障 j+1 能取到，同时放到最后的数，不用参与下一轮的循环，因为它已经是上一轮找出的最值 */
-        for (let j = 0; j < len-1-i; j++) {
-            if(arr[j]>arr[j+1]) {
-                let temp = arr[j]
-                arr[j] = arr[j+1]
-                arr[j+1] = temp
+        for (let j = 0; j < len - 1 - i; j++) {
+            if (array[j] > array[j + 1]) {
+                let temp = array[j]
+                array[j] = array[j + 1]
+                array[j + 1] = temp
                 sorted = false
             }
         }
         /* 如果是已经排好序了就直接退出循环，此时最优时间复杂度 O(n) */
-        if(sorted) break
-    } 
+        if (sorted) break
+    }
+
+    return array
 }
 ```
 
 ## 选择排序
 
 原理：从**剩余**未排序序列中找到最小（大）元素，放置在已排序序列的末尾位置，以此循环，直到所有元素均排序完毕
+
+> 时间：≈ 6353ms
 
 ```js
 function selectionSort(array) {
@@ -74,6 +117,10 @@ function selectionSort(array) {
 ## 插入排序
 
 原理： 将未排序队列中的数值，逐个与已排序队列中的数进行比较，当出现大于或小于已排序队列中的某个数时，进行插入操作
+
+注意与选择排序的区别，选择排序是在未排序的数中找最值，然后交换位置，插入排序则是在已排序的的数中找对应的第一个相对最值
+
+> 时间：≈ 2416ms
 
 ```js
 function insertionSort(array) {
@@ -109,7 +156,9 @@ function insertionSort(array) {
 
 时间复杂度与增量选取有关,以下算法时间复杂度为 O(n^(3/2))
 
-非稳定排序（2个相等的数，在排序完成后，原来在前面的数还是在前面，即为稳定排序）
+**非稳定排序（2个相等的数，在排序完成后，原来在前面的数还是在前面，即为稳定排序）**
+
+> 时间：≈ 35ms
 
 ```js
 function shellSort(array) {
@@ -138,15 +187,17 @@ function shellSort(array) {
 }
 ```
 
-分治法：把一个复杂的问题分成两个或更多的相同或相似的子问题，再把子问题分成更小的子问题……直到最后子问题可以简单的直接求解，原问题的解即子问题的解的合并
+**分治法：把一个复杂的问题分成两个或更多的相同或相似的子问题，再把子问题分成更小的子问题……直到最后子问题可以简单的直接求解，原问题的解即子问题的解的合并**
 
 ## 归并排序
 
-原理：将当前数组，递归分组，比较大小后再一一合并分组，是采用分治法的一个应用
+原理：将当前数组，递归分组，比较大小后再一 一合并分组，是采用分治法的一个应用
 
 1. 获取一个中间位置的值，然后以该位置为中心点分组
 2. 递归进行分组
 3. 比较当前两个分组，将其合并为一个数组
+
+> 时间：≈ 1170ms
 
 ```js
 function mergeSort(array) {
@@ -194,7 +245,8 @@ function merge(left, right) {
 2. 将堆顶和堆尾互换，将堆长度减1
 3. 递归步骤1、2
 
-55ms
+> 时间：≈ 46ms
+
 ```js
 function heapSort(array) {
     let length = array.length
@@ -210,8 +262,9 @@ function heapSort(array) {
     /* 第二步 将堆顶元素与堆尾元素交换 再将前 (n-1) 个数重复构建堆 */
     for (let j = length - 1; j > 0; j--) {
         swap(array, 0, j)
-        /* 这里相当于把第一个叶子节点改变了，所以下面从 0 开始 重新构建堆 */
-        maxHeap(array, 0, j-1)
+        length--
+        /* 这里相当于把第一个叶子节点改变了，所以下面从 0 开始, 当前堆的堆尾前一个数为结束 重新构建堆 */
+        maxHeap(array, 0, length)
     }
 
     return array
@@ -258,9 +311,12 @@ function swap(arr, i, j) {
 3. 再递归的去操作基准前、后的分区
 
 - 方式一：
-需要 O(n) 的额外存储空间，也就跟归并排序一样
+需要 O(n) 的额外存储空间，和归并排序一样
 
-但是代码更清晰的体现快排的思想 84ms
+但是代码更清晰的体现快排的思想 
+
+> 时间：≈ 77ms
+
 ```js
 function quickSort (array) {
     if (array.length < 2) return array;
@@ -280,10 +336,12 @@ function quickSort (array) {
 
 - 方式二：
 
-原地排序 34ms
+原地排序 
+
+> 时间： ≈ 34ms
 
 ```js
- function quickSort(array, left, right) {
+function quickSort(array, left, right) {
     if(left<right) {
         pivotIndex = fill(array, left, right)
         quickSort(array, left, pivotIndex-1)
@@ -319,3 +377,14 @@ function fill(array, left, right) {
 
 还有一些更好的优化，比如基准数的选取，避免最坏时间复杂度情况的发生，可自行探索
 
+---
+
+总结：
+
+在实际项目中可能直接用到这些算法就能解决掉业务需求的情况并不多，甚至直接用 `Array.sort()`  也能解决。
+
+但是业务需求千变万化，多种多样，总有需要你从底层去更改、优化、变异算法的情况，此时就需要用你理解的这些基本算法的原理来快速解决业务问题。
+
+最后祝大家数据结构某几个章节复习顺利！
+
+> 欢迎交流 [Github](https://github.com/WarrenHewitt/blog/issues)

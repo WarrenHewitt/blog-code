@@ -15,6 +15,10 @@
 ```
 ---
 
+- `background-image: url(base64 | http-url)` 不支持使用本地图片地址 
+
+- .wxss 文件中 `page{ background: #fff }` 默认有个 page 标签 可设置当前页的页面背景色等
+
 ### 遇到的问题
 
 - 自定义弹窗防止底层内容滑动添加事件 catchtouchmove="catchMove" catchMove 是空函数即可
