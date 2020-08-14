@@ -177,7 +177,11 @@ monocloud 添加pac：在安装目录中找到pac.txt 在rules数组中加入网
 - 类比 ：$ document.querySelector $$ document.querySelectorAll
 
 
+实验性功能： `chrome://flags/`
+
 ## 插件
+
+插件列表 `chrome://extensions/`
 
 ## 快捷键
 
