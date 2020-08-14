@@ -148,6 +148,13 @@ module.exports = {
                         ['/note/algorithm/algorithm', '算法实践'],
                         ['/note/algorithm/sort', '常见排序算法原理及JS代码实现']
                     ]
+                },
+                { 
+                    title: 'leetcode 题解', 
+                    collapsable: false,
+                    children: [
+                        ['/note/leetCode/easy', '简单难度'],
+                    ]
                 }
             ],
 

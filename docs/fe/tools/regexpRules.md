@@ -68,7 +68,9 @@ string.replace(/(^\s*|\s*$)/g, '')
 两种创建方式：  
 ```js
 const regexp1 = new RegExp('12','g');  
-const regexp2 = /12/g;  //不适用于要用到变量，但是适用于有转义的，主要因为字符不加引号。  
+const regexp2 = /12/g;  //不适用于要用到变量，但是适用于有转义的，主要因为字符不加引号。 
+
+regexp1.test(value)
 ```
 - g:全局匹配  。查找所有的匹配而非在找到第一个匹配后就停止；  
 - i:不分大小写；  

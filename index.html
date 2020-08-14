@@ -15,50 +15,11 @@
 
 <body>
     <script>
+       var obj = {
+           1: 23
+       }
 
-        function quickSort(array, left, right) {
-            if (left < right) {
-                pivotIndex = fill(array, left, right)
-                quickSort(array, left, pivotIndex - 1)
-                quickSort(array, pivotIndex + 1, right)
-            }
-            return array
-        }
-
-        function fill(array, left, right) {
-            const pivotValue = array[left]
-            while (left < right) {
-                /* 右边大于基准的数据不需要移动位置 */
-                /* 这里或下面的循环，一定要确保有一处把相等的情况包含在内 */
-                while (array[right] >= pivotValue && left < right) {
-                    right--
-                }
-                /* 将右边第一个扫描到的小于基准的数据移动到左边的空位 */
-                array[left] = array[right]
-
-                /* 左边小于基准的数据不需要移动位置 */
-                while (array[left] < pivotValue && left < right) {
-                    left++
-                }
-                array[right] = array[left]
-            }
-
-            /* 这里right和left 相等了 */
-            array[right] = pivotValue
-
-            return right
-        }
-
-
-        var arr = []
-        for (let i = 0; i < 100000; i++) {
-            arr.push(Math.random())
-        }
-
-        console.time('s')
-        // console.log(quickSort([9, 8, 1, 2, 45, 2, 47, 5],0,7))
-        quickSort(arr, 0, arr.length-1)
-        console.timeEnd('s')
+       console.log(obj);
 
     </script>
 </body>
