@@ -160,7 +160,7 @@ const toast = (() => {
     let clearTime
     return (text, time) => {
         if(!time || time<1000 ) time = 1500
-        const updata = () => {
+        const update = () => {
             once.innerHTML = text || ''
             once.setAttribute('style', 'position: fixed;left: 50%;z-index: 9000;max-width: 300px;padding: 5px 12px;-webkit-transform: translateX(-50%);text-align: center;border-radius: 4px;font-size: 14px;color: #fff;background-color: rgba(0,0,0,0.6);')
             clearTime = setTimeout(() => {
@@ -173,9 +173,9 @@ const toast = (() => {
             const div = document.createElement('div');
             bodyEle.appendChild(div)
             once = div
-            updata()
+            update()
         } else {
-            updata()
+            update()
         }
     }
 })()
