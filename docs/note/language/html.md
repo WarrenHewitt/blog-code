@@ -62,7 +62,12 @@ download: 添加该属性表示下载 href 内容而非导航，其值是下载�
 href: 可以是 http开头的地址也可以是  blob: URL(URL.createObjectURL创建) 或 data: URL(base64 的 URL) , tel: URLs, mailto URLs  等
 ```
 
+---
+
 - table 
+
+重置样式查看 `css.md`
+
 ```
 属性:
 colspan= 2  占多少列；

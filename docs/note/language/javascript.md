@@ -364,6 +364,10 @@ undefined:表示缺少值（声明了变量但没有被赋值；调用函数时�
 
 ---
 
+`obj.hasOwnProperty('b')`  判断 obj 对象是否有属性 b  返回布尔值
+
+---
+
 - Object.seal() 密封对象，可以修改属性值
 - Object.freeze() 冻结对象，只冻结第一层，其它的都不能修改
 

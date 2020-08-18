@@ -40,10 +40,21 @@ box-sizing: border-box; 设置的 width 包含padding和border，不包含 margi
 ```
 
 - 重置 table border(注意某些用到了单元合并的行可能会出现重复，要单独处理)
+```html
+<table border="0">
+    <thead> <tr><th>时间</th><th>ID</th><th>操作</th></tr></thead>
+    <tbody>
+        <tr><td>2015</td> <td>1001</td> <td><button>详情</button></td></tr>
+    </tbody>
+</table>
+```
 ```css
-tr:first-child td{border-top: 1px solid #222;}
-td{border-bottom: 1px solid #222;border-right: 1px solid #222;}
-td:first-child{border-left: 1px solid #222;}
+table{ border-collapse: collapse; }
+th{ padding: 10px; background-color: red;color:#fff;}
+tr:first-child td{border-top: 1px solid red;}
+td{border-bottom: 1px solid red;border-right: 1px solid red;padding: 10px 0}
+td:first-child, th:first-child{border-left: 1px solid red;}
+th:last-child{ border-right: 1px solid red; }
 ```
 
 - img
