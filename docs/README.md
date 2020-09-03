@@ -16,7 +16,7 @@ footer: MIT Licensed | Copyright © 2019-present Warren
 ---
 
 
-##### 部分博客同步于 [cnblogs](http://www.cnblogs.com/he-wei/) | [segmentfault](https://segmentfault.com/u/hewei/articles?sort=vote) | [juejin](https://juejin.im/user/5a9f42e4518825556f54f0ac)
+##### 部分博客同步于 [cnblogs](http://www.cnblogs.com/he-wei/) | [segmentfault](https://segmentfault.com/u/warren_hewitt) | [juejin](https://juejin.im/user/5a9f42e4518825556f54f0ac)
 
 
 # 内容

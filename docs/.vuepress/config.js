@@ -148,13 +148,6 @@ module.exports = {
                         ['/note/algorithm/algorithm', '算法实践'],
                         ['/note/algorithm/sort', '常见排序算法原理及JS代码实现']
                     ]
-                },
-                { 
-                    title: 'leetcode 题解', 
-                    collapsable: false,
-                    children: [
-                        ['/note/leetCode/easy', '简单难度'],
-                    ]
                 }
             ],
 
@@ -188,7 +181,7 @@ module.exports = {
                     collapsable: false,
                     children: [
                         ['/other/blogBook', '技术书籍和博客'],
-                        ['/other/githubHexo', '搭建步骤'],
+                        ['/other/githubHexo', 'Hexo搭建博客过程'],
                     ]
                 },
             ]
