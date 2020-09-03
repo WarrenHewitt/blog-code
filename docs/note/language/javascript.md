@@ -4,9 +4,9 @@
 
 ---
 
-动静态语言： 声明的变量是否可以存储不同类型的值，在编译阶段会检测类型
+动、静态语言： 声明的变量是否可以存储不同类型的值，在编译阶段会检测类型
 
-强弱类型语言： 其产物是，是否允许不同类型值之间进行计算
+强、弱类型语言： 其产物是，是否允许不同类型值之间进行计算
 
 js(动态弱类型语言)
 
@@ -52,7 +52,7 @@ for(var _i = 0; _i<10; _i++) {}  console.log(i) // i is not defined
 
 ```
 
-实现 const 
+实现 const (原理：将其设置为window的属性时，重置其读写权限)
 ```js
 function constFn(key, value) {
     window[key] = value
@@ -494,9 +494,11 @@ Opera:presto(-o-)
 window.top.document.compatMode;返回模式（标准和怪异）
 
 ---
+
 location.reload():当参数为false（默认）如果文档没有改变就从缓存中去取，如果改变就在此下载该文档；当参数为true，直接从服务器重新下载该文档。
 
 ---
+
 document.documentElement:获取 HTML 元素对象  
 document.body:获取body节点对象  
 document.doctype获取< !DOCTYPE>    
@@ -744,7 +746,13 @@ Array.prototype.slice.call(obj);//  ["first", "second"]
 
 - find 返回第一个符合的值
 
+---
+
 - findIndex(() => {}) 返回第一个符合的值的数组下标(没有返回-1与indexOf一致) 与 indexOf 区别为传入的参数，前者为函数,函数有利于匹配数组项为对象
+
+indexOf(str) 参数可以是字符或字符串
+
+---
 
 - includes: [].includes('some value') // return true/false ,与indexOf相比，可以避免返回的0，判断时的错误
 
@@ -929,10 +937,7 @@ toString() 最慢；1 + '' 字符串拼接 和 `` 模板字符串 都更快，�
 ~x 等同于 -(x+1)
 ~~x 等同于 -(-(x+1)+1)
 
-应用：
-if([].indexOf(x) > -1) {}
-=>
-if(~[].indexOf(x)) {} 
+应用： if([].indexOf(x) > -1) {} => if(~[].indexOf(x)) {}  判断条件结果相同  后者结果为0 表示没有匹配到
 
 向下取整 ~~1.23 => 1  比 parseInt 效率相对较高
 
@@ -958,7 +963,11 @@ var str = '<div class="d-p-people">'+n===1?n:2+'</div>'
 ```
 
 - substring(start,end)  
-若end比start小，会先交换这两个参数，若有负数变为0。 
+若end比start小，会先交换这两个参数，若有负数变为0, end 下标取不到
+
+substr(start, length)  // 建议不使用，将来会被废弃
+
+---
 
 - charAt: `"Hello world!".charAt(1)`  //e 
 
@@ -980,7 +989,7 @@ console.log(str.match(/name=([^;]+)(;|$)/g))
 2. str.search();  //返回匹配字符开始的位置，没有返回-1  
 3. str.replace(字符|正则，替换值|函数);  函数返回值为替代值，当用字符时不是全局替换，函数第一个参数为匹配结果字符，然后依次是子表达式值…,出现位置，被匹配字符串。返回被替换过后的新字符串  
 4. str.split();   //以传入的字符或正则匹配的字符分割成数组，并删除该字符，必填，没有默认  
-5. substr
+5. substr 
 
 ## es6
 

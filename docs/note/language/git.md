@@ -124,7 +124,7 @@ X：未知状态
 ---
 ### git 相关配置
 
-配置用户名和邮件地址：可以随便改
+配置用户名和邮件地址：`可以随便改` 这个与代码上传 拖取时输入的账号密码无关,
 ```
 git config --global user.name 'username'
 git config --global user.email 'email'
