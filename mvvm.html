@@ -14,9 +14,9 @@
     <div id="app">
         <!-- <div><span>姓名：</span> <span>{{ name }}</span></div>
         <div style="margin:5px 0"><span>学号：</span> <span>{{ number }}</span></div> -->
-        <!-- <div style="margin:5px 0"><span>成绩(数学)：</span> <span>{{ score.math }}</span></div> -->
         <div style="margin:5px 0"> 姓名：<input type="text" v-model="name"></div>
-        <!-- <div>学号：<input type="text" v-model="number"></div> -->
+        <div>学号：<input type="text" v-model="number"></div>
+        <div style="margin:5px 0"><span>学号：</span> <span>{{ number }}</span></div>
 
         <div style="margin:5px 0"><span>描述：</span> <span>{{ getStudent }}</span></div>
 
@@ -33,11 +33,12 @@
             /*
             * 预先为每一个不同属性创建一个独有的dep
             */
+
             const dep = new Dep()
             Object.defineProperty(obj, key, {
                 get: function() {
                     /*
-                    * 只在创建Watcher时调用
+                    * 根据不同的属性创建且只在创建Watcher时调用
                     */
                     if(Dep.target) {
                         dep.targetAddDep()
@@ -74,8 +75,8 @@
             // 存放所有的监听watcher
             this.subs = []
         }
-        Dep.prototype.addSub = function(sub) {
-            this.subs.push(sub)
+        Dep.prototype.addSub = function(watcher) {
+            this.subs.push(watcher)
         }
         Dep.prototype.targetAddDep = function() {
             // 这里 this 是实例化后的 dep
@@ -83,8 +84,8 @@
         }
         Dep.prototype.notify = function() {
             console.log('dep notify', this.subs);
-            this.subs.forEach(sub => {
-                sub.update()
+            this.subs.forEach(_watcher => {
+                _watcher.update()
             })
         }
         Dep.target = null
@@ -110,7 +111,9 @@
             addDep: function(dep) {
                 if(!this.depId.hasOwnProperty(dep.id)) {
                     dep.addSub(this)
-                    this.depId[dep.id] = dep
+                    this.depId[dep.id] = dep.id
+                } else {
+                    console.log('already exist');
                 }
             },
             pushWatcher: function() {
