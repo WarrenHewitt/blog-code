@@ -1,14 +1,12 @@
 [[toc]]
 
----
-
 ## Javascript
 
 ---
 
-动静态语言： 声明的变量是否可以存储不同类型的值，在编译阶段会检测类型
+动、静态语言： 声明的变量是否可以存储不同类型的值，在编译阶段会检测类型
 
-强弱类型语言： 其产物是，是否允许不同类型值之间进行计算
+强、弱类型语言： 其产物是，是否允许不同类型值之间进行计算
 
 js(动态弱类型语言)
 
@@ -54,7 +52,7 @@ for(var _i = 0; _i<10; _i++) {}  console.log(i) // i is not defined
 
 ```
 
-实现 const 
+实现 const (原理：将其设置为window的属性时，重置其读写权限)
 ```js
 function constFn(key, value) {
     window[key] = value
@@ -228,7 +226,7 @@ const _Blob = new Blob( array, options );
 2. 将图片转 base64
 方法一：用ajax请求图片资源，设置返回值类型为Blob；或者获取input选择的图片
 `xhr.responseType = 'blob';`
-```
+```js
 let fr = new FileReader();
 fr.readAsDataURL(blob);
 fr.onloadend = function (e) {
@@ -237,7 +235,7 @@ fr.onloadend = function (e) {
 ```
 
 方法二：使用canvas
-```
+```js
 ctx.drawImage(imgElement,176,0,300,150, 0, 150, 300, 150);
 const base64 = canvas.toDataURL('image/png');
 ```
@@ -363,6 +361,12 @@ undefined:表示缺少值（声明了变量但没有被赋值；调用函数时�
 ---
 
 ### Object
+
+- 通过 `obj[key] = 'xx'` 添加、获取属性值时，属性名可以是任何字符串（包括只包含空格的字符串和空字符串）
+
+---
+
+`obj.hasOwnProperty('b')`  判断 obj 对象是否有属性 b  返回布尔值
 
 ---
 
@@ -492,9 +496,11 @@ Opera:presto(-o-)
 window.top.document.compatMode;返回模式（标准和怪异）
 
 ---
+
 location.reload():当参数为false（默认）如果文档没有改变就从缓存中去取，如果改变就在此下载该文档；当参数为true，直接从服务器重新下载该文档。
 
 ---
+
 document.documentElement:获取 HTML 元素对象  
 document.body:获取body节点对象  
 document.doctype获取< !DOCTYPE>    
@@ -742,7 +748,13 @@ Array.prototype.slice.call(obj);//  ["first", "second"]
 
 - find 返回第一个符合的值
 
+---
+
 - findIndex(() => {}) 返回第一个符合的值的数组下标(没有返回-1与indexOf一致) 与 indexOf 区别为传入的参数，前者为函数,函数有利于匹配数组项为对象
+
+indexOf(str) 参数可以是字符或字符串
+
+---
 
 - includes: [].includes('some value') // return true/false ,与indexOf相比，可以避免返回的0，判断时的错误
 
@@ -768,10 +780,12 @@ start和end都为下标（下标从0开始）；返回包含下标start但不包
 
 ---
 array.join('!');将数组的每个元素放到一个字符串中，不传参就用逗号隔开(此时与toString() 方法一样),传就用该符号。  
+
 `array.push(element1[, ...[, elementN]]);` 末尾压栈，返回数组长度；通过索引值来添加比push方法更快  
-array.pop();末尾出栈，返回去掉的值；  
-array.shift(),对头出栈，返回去掉的值；  
-array.unshift(),对头入栈，返回数组长度；
+array.pop(); 末尾出栈，返回去掉的值 
+
+array.shift() 对头出栈，返回去掉的值
+array.unshift() 对头入栈，返回数组长度
 
 array.reverse();逆向排序的数组  
 
@@ -925,10 +939,7 @@ toString() 最慢；1 + '' 字符串拼接 和 `` 模板字符串 都更快，�
 ~x 等同于 -(x+1)
 ~~x 等同于 -(-(x+1)+1)
 
-应用：
-if([].indexOf(x) > -1) {}
-=>
-if(~[].indexOf(x)) {} 
+应用： if([].indexOf(x) > -1) {} => if(~[].indexOf(x)) {}  判断条件结果相同  后者结果为0 表示没有匹配到
 
 向下取整 ~~1.23 => 1  比 parseInt 效率相对较高
 
@@ -954,7 +965,11 @@ var str = '<div class="d-p-people">'+n===1?n:2+'</div>'
 ```
 
 - substring(start,end)  
-若end比start小，会先交换这两个参数，若有负数变为0。 
+若end比start小，会先交换这两个参数，若有负数变为0, end 下标取不到
+
+substr(start, length)  // 建议不使用，将来会被废弃
+
+---
 
 - charAt: `"Hello world!".charAt(1)`  //e 
 
@@ -976,7 +991,7 @@ console.log(str.match(/name=([^;]+)(;|$)/g))
 2. str.search();  //返回匹配字符开始的位置，没有返回-1  
 3. str.replace(字符|正则，替换值|函数);  函数返回值为替代值，当用字符时不是全局替换，函数第一个参数为匹配结果字符，然后依次是子表达式值…,出现位置，被匹配字符串。返回被替换过后的新字符串  
 4. str.split();   //以传入的字符或正则匹配的字符分割成数组，并删除该字符，必填，没有默认  
-5. substr
+5. substr 
 
 ## es6
 
@@ -1010,13 +1025,24 @@ fn`str`
 
 ### class
 
-类的所有方法都是定义在类的prototype上
+```js
+class Test {
+    constructor(x) {
+        /* 对应es5 的构造函数 */
+        this.name = 12222
+        this.x = x || 'original x'
 
-```
-constructor() {
-    this.name = 12222
-    this.__proto__.m = 23333 // 这里类似使用原来的构造函数添加 prototype
+        /* 这里类似使用原来的构造函数添加 prototype */
+        this.__proto__.m = 23333 
+    }
+
+    /* 类的所有方法都是定义在类的prototype上 */
+    getX() {
+        return this.x
+    }
 }
+
+new Test().getX()   // 'original x'
 ```
 
 #### 静态属性和方法
@@ -1032,6 +1058,44 @@ super(参数) 这里的参数是传给父类的构造函数
 子类必须在 constructor 方法中调用super方法，否则新建实例时会报错。这是因为子类没有自己的this对象，而是继承父类的this对象，然后对其进行加工。如果不调用super方法，子类就得不到this对象。constructor 中this指向实例
 
 ES6 的继承机制，先创造父类的实例对象this（所以必须先调用super方法），然后再用子类的构造函数修改this
+
+
+#### 单向链表
+
+```js
+class Node {
+    constructor(value) {
+        this.value = value
+        this.next = null
+    }
+}
+
+class ListNode {
+    constructor() {
+        this.length = 0
+        /* 头指针 */
+        this.head = null
+    }
+
+    append(value) {
+        const node = new Node(value)
+        if(this.head) {
+            let endHead = this.head
+            /* 找到最后一个 node */
+            while(endHead.next) {
+                endHead = endHead.next
+            }
+            endHead.next = node
+        } else {
+            this.head = node
+        }
+
+        this.length++
+    }
+}
+```
+
+---
 
 ### Promise
 一种异步编程解决方案，语法上是一个对象。
@@ -1246,7 +1310,6 @@ import { default as xxx } from 'modules'; 等同于import xxx from 'modules';
 
 ### 函数扩展
 1. 尾递归（只存在一个帧调用，所以效率高，不会出现栈溢出的情况）
-
 
 
 尾调用：一个函数执行的最后一步是将另外一个函数调用并返回

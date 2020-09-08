@@ -86,6 +86,8 @@ settings.json（可用setting sync共享）
 
 使用 setting sync 插件
 
+安装后 先使用 github 登录，再进行以下操作
+
 插件主要步骤如下：
 - 上传配置
 1. 基本同下
@@ -177,7 +179,11 @@ monocloud 添加pac：在安装目录中找到pac.txt 在rules数组中加入网
 - 类比 ：$ document.querySelector $$ document.querySelectorAll
 
 
+实验性功能： `chrome://flags/`
+
 ## 插件
+
+插件列表 `chrome://extensions/`
 
 ## 快捷键
 
@@ -196,3 +202,29 @@ monocloud 添加pac：在安装目录中找到pac.txt 在rules数组中加入网
 - T 检索文件
 - L 跳转到代码指定行
 - S 或 /  搜索框获得焦点
+
+# MobaXterm
+- 创建session
+
+    - 选择 Session 
+
+    - 选择 SSH
+
+    - 输入 Remote host ； 勾选 Specify username 并输入 账号
+
+    - 点击 ok ；双击 创建的 session 然后输入密码 （这里会提示输入一个密码保存，可以随便设置一个，保存记住即可）
+
+    - 找到对应的文件夹替换文件，完成上线
+
+---
+
+1. 给session 加上备注
+
+编辑 session 选择 Bookmark settings
+
+修改 Session name
+
+2. 同步命令行和Sftp的地址
+
+编辑 session 选择 Advanced SSH settings  勾选 Follow SSH path
+

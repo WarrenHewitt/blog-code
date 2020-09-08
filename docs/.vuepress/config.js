@@ -140,6 +140,14 @@ module.exports = {
                         ['/note/comprehensive/canvasAndSvg', 'canvas和svg相关用法'],
                         ['/note/comprehensive/examination', '笔试'],
                     ]
+                },
+                { 
+                    title: '算法', 
+                    collapsable: false,
+                    children: [
+                        ['/note/algorithm/algorithm', '算法实践'],
+                        ['/note/algorithm/sort', '常见排序算法原理及JS代码实现']
+                    ]
                 }
             ],
 
@@ -173,16 +181,9 @@ module.exports = {
                     collapsable: false,
                     children: [
                         ['/other/blogBook', '技术书籍和博客'],
-                        ['/other/githubHexo', '搭建步骤'],
+                        ['/other/githubHexo', 'Hexo搭建博客过程'],
                     ]
                 },
-                { 
-                    title: '算法', 
-                    collapsable: false,
-                    children: [
-                        ['/other/algorithm/algorithm', '算法实践'],
-                    ]
-                }
             ]
         }
     },
