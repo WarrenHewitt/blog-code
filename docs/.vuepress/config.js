@@ -63,6 +63,7 @@ module.exports = {
                     title: '探索原理实践', 
                     collapsable: false,
                     children: [
+                        ['/fe/other/vueMvvm', 'vue实现原理'],
                         ['/fe/other/designPattern', '设计模式的理解与实现'],
                         ['/fe/other/generator', '生成器'],
                         ['/fe/other/html5device', 'HTML5 设备访问'],
