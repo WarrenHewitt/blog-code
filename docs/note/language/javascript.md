@@ -1,4 +1,3 @@
-[toc]
 [[toc]]
 
 ---
@@ -177,7 +176,9 @@ new Error([message[, fileName[, lineNumber]]])
 - 也可以是由大括号括起来的复合语句
 
 ---
- ** ready 与 onload 的区别**
+
+ **ready 与 onload 的区别**
+
  $(document).ready()是在DOM结构载入完后执行的，而window.onload是在所有文件都加载完后执行的。
  ```js
  // 原生实现ready
@@ -1262,8 +1263,11 @@ function a(p){
 2. 当参数是数组时不再依赖apply拆分数组为参数
 3. 任何 Iterator 接口的对象，都可以通过...扩展运算符转为真正的数组
 
+---
+
 ### Proxy | defineProperty | defineProperties
-'拦截'对目标对象的访问
+
+**拦截** 对目标对象的访问
 
 Proxy 与 Object.defineProperty 对比
 
@@ -1323,7 +1327,27 @@ const proxy = new Proxy(target, handler)
 console.log(proxy);
 ```
 
-Object.create(proto, [propertiesObject])
+- Object.defineProperty(obj, 属性名称, descriptor),在现有对象上新建一个属性，或修改现有属性，并返回这个对象
+
+- Object.defineProperties(obj, props)
+
+```js
+props: {
+    property: descriptor
+}
+descriptor: {
+    configurable: 默认false；表示属性是否能删除，以及除writeable以外的属性可否被修改；
+    writable: 默认true；属性值可否被修改
+    enumerable: 默认true 属性是否可以被for...in和Object.keys()获取
+    value: 属性值
+    get() {
+        // 这里注意 又使用 obj.key  形成死循环
+    }
+    set() {}  当设置了get或set后不能设置value或writeable
+}
+```
+
+---
 
 ### Object.create(proto, [propertiesObject])
 
@@ -1346,26 +1370,9 @@ const a = Object.create({
         }
     }
 })
-a.age=12
-console.log(a.age);
-```
+a.age=12  // can't set 12
+console.log(a.age) // 250
 
-```js
-Object.defineProperty(obj, 属性名称, descriptor),在现有对象上新建一个属性，或修改现有属性，并返回这个对象
-Object.defineProperties(obj, props)
-props: {
-    property: descriptor
-}
-descriptor: {
-    configurable: 默认false；表示属性是否能删除，以及除writeable以外的属性可否被修改；
-    writable: 默认true；属性值可否被修改
-    enumerable: 默认true 属性是否可以被for...in和Object.keys()获取
-    value: 属性值
-    get() {
-        // 这里注意 又使用 obj.key  形成死循环
-    }
-    set() {}  当设置了get或set后不能设置value或writeable
-}
 ```
 
 ---
@@ -1373,7 +1380,7 @@ descriptor: {
 ### 装饰器 Decorator
 参考 `react-admin/src/pages/practice/decorator.js`
 
-- 装饰类时：添加的静态属性是 name 时，可能报错，不能呢个修改只读属性
+- 装饰类时：添加的静态属性是 name 时，可能报错，不能修改只读属性
 
 - 装饰类方法：提供了三个参数 target, name, descriptor
 
