@@ -16,10 +16,12 @@ footer: MIT Licensed | Copyright © 2019-present Warren
 ---
 
 
-##### 部分博客同步于 [cnblogs](http://www.cnblogs.com/he-wei/) | [segmentfault](https://segmentfault.com/u/hewei/articles?sort=vote) | [juejin](https://juejin.im/user/5a9f42e4518825556f54f0ac)
+##### 部分博客同步于 [cnblogs](http://www.cnblogs.com/he-wei/) | [segmentfault](https://segmentfault.com/u/warren_hewitt) | [juejin](https://juejin.im/user/5a9f42e4518825556f54f0ac)
 
 
 # 内容
+- 【2020-08-07】 [常见排序算法原理及JS代码实现](https://warrenhewitt.github.io/blog/note/algorithm/sort.html)
+
 - 【2020-03-16】 [导出Excel、PDF和下载图片](https://warrenhewitt.github.io/blog/fe/other/exportFile.html)
 
 - 【2020-03-09】 [canvas画板多端实现](https://warrenhewitt.github.io/blog/fe/other/drawBoard.html)

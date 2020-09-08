@@ -5,7 +5,7 @@ tags:
 ---
 
 
-## 搭建过程
+## Hexo 搭建博客过程
 
 前置条件：有github账号，会创建github page；了解node；了解git；
 

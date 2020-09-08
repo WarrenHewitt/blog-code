@@ -350,10 +350,14 @@ express()是express模块导出的一个入口函数。
 
 
 ### graphql 实现
+
 - 安装 apollo-server-koa 和 koa，看提示再安装graphql
 
 #### 学习
+
 - 是一个用于 API 的查询语言，通过定义类型和类型上的字段来创建的，然后给每个类型上的每个字段提供解析函数
+
+---
 
 ### koa-router 
 - /page/:id  利用 ctx.params.id 获取
