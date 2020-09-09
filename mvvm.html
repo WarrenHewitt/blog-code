@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>双向绑定</title>
+    <style>
+        p{  margin: 20px }
+    </style>
 </head>
 <body>
     <p class="a" v-model="123">Observe 监听器 监听属性变化并通知订阅者</p>
@@ -12,28 +15,22 @@
     <p>compile 解析器 解析指令，初始化模板，绑定订阅者 </p>
 
     <div id="app">
-        <!-- <div><span>姓名：</span> <span>{{ name }}</span></div>
-        <div style="margin:5px 0"><span>学号：</span> <span>{{ number }}</span></div> -->
-        <div style="margin:5px 0"> 姓名：<input type="text" v-model="name"></div>
-        <div>学号：<input type="text" v-model="number"></div>
-        <div style="margin:5px 0"><span>学号：</span> <span>{{ number }}</span></div>
+        <p> 姓名：<input type="text" v-model="name"></p>
+        <p>学号：<input type="text" v-model="number"></p>
+        <p><span>学号：</span> <span>{{ number }}</span></p>
+        <p><span>computed实现：</span> <span>{{ getStudent }}</span></p>
 
-        <div style="margin:5px 0"><span>描述：</span> <span>{{ getStudent }}</span></div>
-
-        <div>
-            <button v-on:click="setData">v-method</button>
-        </div>
+        <p>
+            <button v-on:click="setData">事件绑定</button>
+        </p>
     </div>
     <script>
-        // https://blog.seosiwei.com/detail/35
-
         const defineProp = function(obj, key, value) {
             observe(value)
 
             /*
             * 预先为每一个不同属性创建一个独有的dep
             */
-
             const dep = new Dep()
             Object.defineProperty(obj, key, {
                 get: function() {
@@ -72,18 +69,19 @@
         let UUID = 0
         function Dep() {
             this.id = UUID++
-            // 存放所有的监听watcher
+            // 存放当前属性的所有的监听watcher
             this.subs = []
         }
         Dep.prototype.addSub = function(watcher) {
             this.subs.push(watcher)
         }
+        // 目的是将当前 dep 实例 传入 watcher
         Dep.prototype.targetAddDep = function() {
             // 这里 this 是实例化后的 dep
             Dep.target.addDep(this)
         }
         Dep.prototype.notify = function() {
-            console.log('dep notify', this.subs);
+            // 触发当前属性的所有 watcher
             this.subs.forEach(_watcher => {
                 _watcher.update()
             })
@@ -108,6 +106,7 @@
                     this.callback(value)
                 }
             },
+            // 目的是接收 dep 实例，用于将当前watcher实例放入 subs
             addDep: function(dep) {
                 if(!this.depId.hasOwnProperty(dep.id)) {
                     dep.addSub(this)
@@ -302,6 +301,7 @@
             })
         }
         FakeVue.prototype._initComputed = function() {
+            // 简单的实现: 将值挂载到跟上即可
             const computed = this._computed
             Object.keys(computed).forEach((v) => {
                 Object.defineProperty(this, v, {
@@ -315,8 +315,8 @@
             let vm = new FakeVue({
                 el: '#app',
                 data: {
-                    name: '初始 name',
-                    number: '初始 number',
+                    name: 'warren',
+                    number: '10011',
                     score: {
                         math: 90
                     }
@@ -324,17 +324,17 @@
 
                 computed: {
                     getStudent: function() {
-                        return `${this.name}得分${this.number}`
+                        return `${this.name}：学号是 ${this.number}`
                     }
                 },
 
                 methods:{
+                    // 通过在compile中给元素绑定事件实现
                     setData: function() {
-                        console.log(this.name);
+                        alert('name：'+this.name);
                     }
                 }
             });
-            console.log(vm);
         } catch(error) {
             console.error(error)
         }

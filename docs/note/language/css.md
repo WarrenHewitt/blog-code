@@ -81,7 +81,7 @@ input::-webkit-input-placeholder{ color: #cacaca; }
 [codepen 示例](https://codepen.io/pen/)
 
 ```css
-.level1{ counter-reset: count1 3;} // 3 表示序号从4开始
+.level1{ counter-reset: count1 3;} // 3 表示序号从4开始  count1 为任意命名
 .level1::before{ content: counter(count1， upper-roman)"、"; counter-increment: count1;}
 ```
 
