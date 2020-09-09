@@ -14,11 +14,17 @@
 </head>
 
 <body>
+    <input type="text" name="" id="file">
+    <button onclick="handle()"> clear </button>
     <script>
-        const read = (n) => {
+        function handle() {
+            console.log(document.getElementById('file').value);
 
+            setTimeout(() => {
+                
+                document.getElementById('file').value = '233333'
+            }, 5000);
         }
-
     </script>
 </body>
 
