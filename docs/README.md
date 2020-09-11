@@ -20,6 +20,8 @@ footer: MIT Licensed | Copyright © 2019-present Warren
 
 
 # 内容
+- 【2020-09-11】 [vue 实现原理及简单示例实现](https://warrenhewitt.github.io/blog/fe/other/vueMvvm.html)
+
 - 【2020-08-07】 [常见排序算法原理及JS代码实现](https://warrenhewitt.github.io/blog/note/algorithm/sort.html)
 
 - 【2020-03-16】 [导出Excel、PDF和下载图片](https://warrenhewitt.github.io/blog/fe/other/exportFile.html)
