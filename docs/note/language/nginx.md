@@ -99,6 +99,27 @@ http {
     keepalive_timeout  65;
 
     #gzip  on;
+    gzip on;
+
+    # 禁止IE使用gzip 以免假死
+    gzip_disable "MSIE [1-6].";
+
+    # 不压缩小于256字节的文件
+    gzip_min_length 256; 
+
+    # gzip_vary on;
+    # gzip_proxied any;
+
+    # gzip压缩比，1压缩比最小处理速度最快，9压缩比最大但处理速度最慢(传输快但比较消耗cpu)
+    gzip_comp_level 2;
+    
+    # gzip_buffers 16 8k;
+    # gzip_http_version 1.1;
+
+    # 表示压缩的文件类型
+    # gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+
+
 
     # server块
     # 这里的server块也可以通过 include 方式加载，可将server块独立开来，因为后期主要修改几乎为server块
