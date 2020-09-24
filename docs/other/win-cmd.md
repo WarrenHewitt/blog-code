@@ -35,6 +35,8 @@
 
 1. hosts文件所在位置：`C:\Windows\System32\drivers\etc`
 
+- 查看是否固态硬盘： 右键任意盘 -> 属性 -> 工具 -> 优化
+
 ### 快捷键
 
 - win + s ：搜索  （calculator 计算器）
@@ -62,6 +64,8 @@
 - msconfig : 打开 "系统设置" 
 
 - mspaint 打开画板
+
+- dxdiag  查看电脑硬件信息
 
 
 ### 修改账户名称

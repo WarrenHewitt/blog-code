@@ -1,6 +1,7 @@
 [toc]
 
-# markdown
+# markdown 语法
+
 | 居左 | 居右 | 居中 |
 | :- | -: | :-: |
 | aaaaaaaa  | bbbbbbbb | cccccccc |
@@ -19,17 +20,23 @@
 安装路径： C:\Users\hewei\AppData\Local\Programs\Microsoft VS Code
 
 
-- `jsconfig.json` 文件配置
-
-其中一项配置是让，vscode可以识别webpack配置的别名
+## `jsconfig.json` 文件配置
 
 https://code.visualstudio.com/docs/languages/jsconfig
 
+文件所在目录下的所有js代码做出个性化支持
+
+- 可以排除 `node_modules` 文件夹 提升性能
+
+- 让vscode可以识别webpack配置的别名，这样可完成文件跳转配置
+
 配置完成后要重启一下当前vscode项目
+
+> 示例在 `vue-admin` 项目中
 
 ---
 
-- 用户配置说明
+## 用户配置说明
 
 settings.json（可用setting sync共享）
 ```json
@@ -45,13 +52,16 @@ settings.json（可用setting sync共享）
     "eslint._legacyModuleResolve": true,
     "eslint.alwaysShowStatus": true,
     // 在保存时自动修复
-    "eslint.autoFixOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true,
+        "source.fixAll.eslint": true
+    },
     // 使如下语言生效
     "eslint.validate": [ 
         "javascript",
         "javascriptreact",
         "html",
-        { "language": "vue", "autoFix": true }
+        "vue",
     ],
     // 地址中为双斜线
     "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
@@ -63,7 +73,8 @@ settings.json（可用setting sync共享）
 
     // 拼写检测支持vue文件
     "cSpell.enabledLanguageIds": [
-        "vue"
+        "vue",
+        "html"
     ],
 
     // Path intellisense 识别路径中的特殊符号，以便于给出子目录提示
@@ -73,6 +84,7 @@ settings.json（可用setting sync共享）
 
     // vue-helper Element-UI, VUX, IVIEW  扩展  以及组件、函数文件跳转
     "vue-helper.alias": {
+        "@": "src/*"
     }
 }
 ```
@@ -82,11 +94,27 @@ settings.json（可用setting sync共享）
 - ctrl+d 选中当前单词 连续操作可选中下一个相同单词
 
 
-## 插件迁移
+## 插件
+
+### 插件使用
+
+- ESLint ： 代码风格校验
+
+- Live Server：启动一个本地服务，访问相关 html 文件
+
+- Setings Sync：插件同步，查看下面的 插件迁移 介绍
+
+- Draw.io：画流程图插件
+
+- svg viewer：svg 图片查看
+
+- vetur：vue 插件
+
+### 插件迁移
 
 使用 setting sync 插件
 
-安装后 先使用 github 登录，再进行以下操作
+安装后 按说明 先使用 github 登录，再进行以下操作
 
 插件主要步骤如下：
 - 上传配置

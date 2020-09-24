@@ -1,6 +1,8 @@
 
 与前端相关联的内容
 
+- 【2020-09-11】 [vue 实现原理及简单示例实现](https://warrenhewitt.github.io/blog/fe/other/vueMvvm.html)
+
 - 【2020-03-16】 [导出Excel、PDF和下载图片](https://warrenhewitt.github.io/blog/fe/other/exportFile.html)
 
 - 【2020-03-09】 [canvas画板多端实现](https://warrenhewitt.github.io/blog/fe/other/drawBoard.html)
