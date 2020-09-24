@@ -1,4 +1,5 @@
 
+[[toc]]
 [toc]
 
 ---
@@ -207,7 +208,7 @@ url: 远程仓库地址链接  如：https://github.com/WarrenHewitt/blog-code.g
 
 - 取消最近一次的commit： `git reset --soft HEAD^`
 
-- 查看某个作者的所有commit: `git log --author=name`
+- 查看某个作者的所有commit: `git log --author=name -5`  
 
 - 完成撤销,同时将代码恢复到commit_id对应版本 `git reset --hard commit_id`
 

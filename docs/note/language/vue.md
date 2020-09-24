@@ -1,5 +1,5 @@
-[toc]
 [[toc]]
+[toc]
 
 
 ## Vue
@@ -204,7 +204,7 @@ export default { data () { data1: { name: 'warren1' } data2: { name: 'warren2' }
             <!-- 作用域插槽简写 v-slot: default="data" === v-slot="data"  -->
             <template v-slot="data">
                 {{ data }}
-                <!-- 这里显示显示 { data1: { name: 'warren1' } } 没有具名的slot-->
+                <!-- 这里显示显示 { data1: { name: 'warren1' } } 没有具名的slot (即上面定义的第二个slot)-->
             </template>
 
             <template v-slot:scopedSlotData1="data">
@@ -374,5 +374,17 @@ commit 触发 mutation store.commit('name')
 dispatch 触发 action store.dispatch('increment')
 
 
+## elementUI
+
+- 表单重置  `this.$refs.ruleForm.resetFields()`  只会清除 新输入的数据 ，当表单有默认数据时，是不会被清除的
+
+- 当表单数据有多层嵌套对象时，在设置prop时要将 嵌套关系用字符串形式 赋值
+
+- 动态表格列，需要用 `template` 来包裹
+```vue
+<template v-if="judge"> <el-table-column prop="prop" label="name"></el-table-column> </template>
+```
+
+- `el-cascader` 需要点击两次才能选中，其中一个原因是，多次赋值操作；解决办法为，保证只有在初始化时进行一次赋值操作
 
 
