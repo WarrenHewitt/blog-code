@@ -1,7 +1,13 @@
+[[toc]]
 [toc]
 
 # vue 实现原理及简单示例实现
 
+> 创建时间：2020-09-11
+
+[在线演示demo](https://codepen.io/Hewitt/pen/ExKQvOb)
+
+---
 
 主要理解、实现如下方法：
 
@@ -399,10 +405,12 @@ try{
 
 ## 结语
 
-这是一个简单的vue实现原理示例，主要的复杂点在于对 html 模板的解析，数据的双向绑定。
+这是从作者的理解角度，阐述的一个简单的vue实现原理示例，希望对正在探索的你有所帮助
+
+在这个示例中，主要的复杂点在于对 html 模板的解析，数据的双向绑定。
 
 建议跟着代码的执行顺序了解整个过程，关键点的代码都有必要的注释，若发现问题请指正。
 
-最后附上 vue [源码地址](https://github.com/vuejs/vue/tree/dev/src)，主要关注其中的 `core` 和 `compiler` 文件
+最后附上 vue [源码地址](https://github.com/vuejs/vue/tree/dev/src)，主要关注其中的 `core` 和 `compiler` 文件；
 
 > 欢迎交流 [Github](https://github.com/WarrenHewitt/blog/issues)

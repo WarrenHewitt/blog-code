@@ -14,10 +14,41 @@
 </head>
 
 <body>
+    <div>
     <input type="text" name="" id="file">
     <button onclick="handle()"> clear </button>
     <script>
-       
+        console.log('/view/equip/measuring-point/measuringPoint.html?devId='+233333+'&fid='+12, ''+5555+'-测点管理');
+       const a = Object.create({
+            name: 'hew'
+        }, {
+            age: {
+                set(value){
+                    console.log("can't set", value);
+                    return value
+                },
+                get() {
+                    return 250
+                }
+            }
+        })
+        console.log(a) // 250
+
+        // const b = {
+        //     bb: '123'
+        // }
+
+        // function C() {
+        //     this.nn = '12'
+        // }
+
+        // C.prototype.kk = '2333'
+
+        // const cc = new C()
+
+        // console.log(b);
+        // console.log(cc);
+
     </script>
 </body>
 

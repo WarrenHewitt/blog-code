@@ -444,9 +444,9 @@ Fn.prototype.do=function(some){
 }
 
 function F1(name){
-	Fn.call(this,name);//不会继承原型方法
+	Fn.call(this,name);// 不会继承原型方法
 }
-F1.prototype=Object.create(Fn.prototype)||new Fn(); // 用原型即可以不用重复声明函数
+F1.prototype=Object.create(Fn.prototype)||new Fn(); // 用原型,即可以不用重复声明函数
 F1.prototype.way=function(way){
 	console.log(way)
 }
@@ -1434,7 +1434,7 @@ const a = Object.create({
     }
 })
 a.age=12  // can't set 12
-console.log(a.age) // 250
+console.log(a) // { age: 250, get age: f, get age: f, _proto_: { name: 'hew' } }
 
 ```
 

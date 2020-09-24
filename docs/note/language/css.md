@@ -1,5 +1,5 @@
-[toc]
 [[toc]]
+[toc]
 
 - user agent stylesheet 浏览器自动添加的最底层样式 直接覆盖样式即可
 
@@ -162,7 +162,7 @@ word-wrap:break-word; 只对英文起作用，以单词作为换行依据
 white-space:pre-wrap; 只对中文起作用，强制换行  
 white-space:nowrap; 强制不换行，都起作用(对inner-block的标签也起作用) (文本不换行直到遇到< br/>;标签)
 
-
+---
 
 ## background
 
