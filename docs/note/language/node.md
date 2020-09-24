@@ -3,6 +3,15 @@
 
 ---
 
+> node 与 Deno 异同
+
+- node为js的运行平台；Deno为 js和ts的运行平台
+
+- Deno 采用沙箱模式运行代码，某些权限需要配置添加
+
+---
+
+
 ## npm
 
 - 引入包中的某个文件 `import xx from '包名/xx/xx/x'` 该地址会被解析为 `./node_modules/包名/xx/xx/x.js`
