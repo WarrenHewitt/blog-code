@@ -1,5 +1,5 @@
-[toc]
 [[toc]]
+[toc]
 
 - 检测媒体 @media 后可用的查询 `window.matchMedia('print').addListener((res) => {});`
 
@@ -127,7 +127,7 @@ datalist: < input id='myCar' list='car'/>< datalist id='car'>
 
 用于输入时，提示预先存储的值。
 
-pre: 定义预格式化的文本（保留文本中的空格和换行符）；通常用来包含代码。
+`<pre></pre>`: 定义预格式化的文本（保留文本中的空格和换行符）和 `white-space:pre` 类似；通常用来包含代码
 
 ---
 video 和 audio

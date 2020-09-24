@@ -158,6 +158,7 @@ module.exports = {
                     collapsable: false,
                     children: [
                         ['/other/plugin', '一些包的使用介绍'],
+                        ['/other/eslintConfig', 'eslint 相关的配置说明'],
                     ]
                 },
                 { 
