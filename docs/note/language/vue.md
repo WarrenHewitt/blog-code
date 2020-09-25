@@ -247,6 +247,8 @@ cypress: Fast, easy and reliable testing for anything that runs in a browser.
 
 - 在样式文件中引入图片，注意路径应该按照，引入样式的那个.vue文件为相对路径
 
+- "lint": "vue-cli-service lint" ： 执行该命令，eslint 校验并修复文件中的错误
+
 
 ### 脚手架打包出来的文字图标不显示
 
@@ -351,6 +353,11 @@ created () { /** 这里请求不需要频繁更新的数据 */ },
 - 在 beforeRouteLeave 中处理和当前需要保存状态页面走同一个 router-view 的页面，否则在这些页面间切换，页面的状态也会被保留（data中的数据）
 
 
+## 包
+
+- Vue Class Component ：使用类的形式写 vue 组件 [地址](https://class-component.vuejs.org/)
+
+
 ## vuex
 
 - 实践使用参见 `vue-admin/src/store`
@@ -376,7 +383,7 @@ dispatch 触发 action store.dispatch('increment')
 
 ## elementUI
 
-- 表单重置  `this.$refs.ruleForm.resetFields()`  只会清除 新输入的数据 ，当表单有默认数据时，是不会被清除的
+- 表单重置  `this.$refs.ruleForm.resetFields()`  只会清除 新输入的数据 ；当在data上配置表单数据时设置了初始化值时，该默认值是不会被清除的，并且修改该默认值，重置后的值也是初始值
 
 - 当表单数据有多层嵌套对象时，在设置prop时要将 嵌套关系用字符串形式 赋值
 
