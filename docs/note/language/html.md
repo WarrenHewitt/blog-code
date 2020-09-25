@@ -97,8 +97,6 @@ article：定义页面独立的区域
 
 aside：侧边栏内容
 
-header：
-
 hgroup：对网页或是区块（section）的标题进行整合
 
 footer：定义section或是文档的页脚
