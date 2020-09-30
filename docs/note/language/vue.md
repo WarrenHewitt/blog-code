@@ -264,7 +264,7 @@ cypress: Fast, easy and reliable testing for anything that runs in a browser.
 }
 ```
 
-## cue-cli-3
+## cue-cli
 
 - 在js中动态控制图片加载用 `require('地址')` 获取图片后赋值给src
 - CSS Pre-processors：选择CSS 预处理类型：sass 或less
@@ -351,6 +351,22 @@ created () { /** 这里请求不需要频繁更新的数据 */ },
 - 最好一个模块有一个单独的 router-view 
 - 在 activated 中请求需要实时更新的数据 
 - 在 beforeRouteLeave 中处理和当前需要保存状态页面走同一个 router-view 的页面，否则在这些页面间切换，页面的状态也会被保留（data中的数据）
+
+
+## vue-3
+
+- 组件不强制要求唯一跟标签
+
+### setup
+
+- 在 beforCreate 之后 created 之前执行，并且替换了这两个周期函数
+
+- 两个参数：
+    - props 使用时不要直接用es6的解构，如果要用，可以用 toRefs 处理后结构
+    - context
+
+- reactive 创建响应数据  类似原来的 data 数据 
+
 
 
 ## 包
