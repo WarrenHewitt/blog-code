@@ -2,16 +2,11 @@
 [toc]
 
 
-## Vue
+# Vue
 
+
+## vue-2
 - `__ob__: Observer` vue设置的数据监听器，一般不可枚举
-
-- iview 引起的BUG, 在table中使用drop down 被遮挡，将外层的class重置
-```
-.ivu-table-wrapper{
-    overflow: visible;
-}
-```
 
 - 重置数据到初始化状态
 ```js
@@ -262,58 +257,6 @@ cypress: Fast, easy and reliable testing for anything that runs in a browser.
 }
 ```
 
-## cue-cli-3
-
-- 在js中动态控制图片加载用 `require('地址')` 获取图片后赋值给src
-- CSS Pre-processors：选择CSS 预处理类型：sass 或less
-- Linter / Formatter：选择eslint 标准，以及是否在保存时格式化代码
-
-- 图片资源放到assets，不要放到public中否则打包出来的图片会是两份
-- 其它的js资源可以放到public中
-
-- `vue inspect > output.js` 输出当前vue-cli默认的webpack配置
-- 在开发模式时，环境变量 process.env.NODE_ENV 为 development；打包时为 production
-- 生产环境部署：https://cn.vuejs.org/v2/guide/deployment.html
-- 环境变量和模式 (webpack-pure和node-koa项目中有相关实例内容)
-  - 链接https://cli.vuejs.org/zh/guide/mode-and-env.html#%E6%A8%A1%E5%BC%8F
-  - 可以在命令行传参
-  - 有固定的参数
-
-## vue-loader
-
-- 在style中用别名引入scss文件时，如果报错，在别名前~
-
-- `@import '@/x/x/x.scss'`;  引用文件时，不加后缀可能导致编译错误
-
-- 深度作用域 
-```
-.a >>> .b (实际使用中效果没有deep好)
-.a /deep/ .b  (容易报错)
-.a ::v-deep .b  (最新版，vue/cli 4.4.1,只有这个有效)
-```
-
-## 深入响应式原理
- - 非侵入性的响应式系统
- - 数据模型为js对象，对其修改时，视图更新
-
-### 如何追踪变化
-
-- vue将接收的data全部用Object.defineProperty把属性转为getter/setter(导致不支持ie8以及一下)
-
-- 属性被访问和修改时通知变化
-
-- 每个组件实例都有对应的watcher实例对象（它会在组件渲染的过程中把属性记录为依赖，当依赖的setter被调用时，会通知watcher重新计算，从而使相关组件更新）
-
-### 检测变化的注意事项
-
-- 只有在data对象上的属性才是响应式的
-
-- 改变对象和数组的一些情况不会被检测到更新
-
-- 要用到的状态，提前在data对象中声明
-
-### 异步更新队列
-
 ## vue router
 
 - router-view 与路由表中的 children 有关
@@ -373,6 +316,60 @@ commit 触发 mutation store.commit('name')
 
 dispatch 触发 action store.dispatch('increment')
 
+## cue-cli
+
+- TypeScript 配置
+    - Use class-style component syntax: 是否使用 使用 类 风格的组件语法
+    - Use Babel alongside TypeScript for auto-detected polyfills? ：是否使用babel做转义（建议是使用20200924）
+
+- CSS Pre-processors：选择CSS 预处理类型：sass 或less
+
+- Linter / Formatter：选择eslint 标准，以及是否在保存时格式化代码
+
+- 在js中动态控制图片加载用 `require('地址')` 获取图片后赋值给src
+
+- 图片资源放到assets，不要放到public中否则打包出来的图片会是两份
+
+- 其它的js资源可以放到public中
+
+- `vue inspect > output.js` 输出当前vue-cli默认的webpack配置
+- 在开发模式时，环境变量 process.env.NODE_ENV 为 development；打包时为 production
+- 生产环境部署：https://cn.vuejs.org/v2/guide/deployment.html
+- 环境变量和模式 (webpack-pure和node-koa项目中有相关实例内容)
+  - 链接https://cli.vuejs.org/zh/guide/mode-and-env.html#%E6%A8%A1%E5%BC%8F
+  - 可以在命令行传参
+  - 有固定的参数
+
+- vue-cli 脚手架打包出来的文字图标不显示
+
+修改webpack.base.conf.js 的
+```js
+{
+  test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+  loader: 'url-loader',
+  options: {
+    limit: 100000, // 这里的值改大一点
+    name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+  }
+}
+```
+
+## vue-loader
+
+- 在style中用别名引入scss文件时，如果报错，在别名前~
+
+- `@import '@/x/x/x.scss'`;  引用文件时，不加后缀可能导致编译错误
+
+- 深度作用域 
+```
+.a >>> .b (实际使用中效果没有deep好)
+.a /deep/ .b  (容易报错)
+.a ::v-deep .b  (最新版，vue/cli 4.4.1,只有这个有效)
+```
+
+## vue-3 
+
+- 
 
 ## elementUI
 
@@ -387,4 +384,13 @@ dispatch 触发 action store.dispatch('increment')
 
 - `el-cascader` 需要点击两次才能选中，其中一个原因是，多次赋值操作；解决办法为，保证只有在初始化时进行一次赋值操作
 
+
+## iview
+
+- iview 引起的BUG, 在table中使用drop down 被遮挡，将外层的class重置
+```
+.ivu-table-wrapper{
+    overflow: visible;
+}
+```
 
