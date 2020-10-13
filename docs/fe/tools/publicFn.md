@@ -14,6 +14,7 @@ function ajaxFn() {
             }
         }
     };
+    xhr.timeout = 2000; // 超时时间，单位是毫秒(设置的超时值，在请求头中不显示)
     
     /* @des get方式 */
     xhr.open('get','https://aa.cc.com/api',true); // true表示异步,当设置为同步时，一旦发出，后续的所有代码不再执行，等待接口返回
@@ -22,6 +23,7 @@ function ajaxFn() {
     /* @des post方式 */
     xhr.open('post', '.com/api',true);
     xhr.setRequestHeader('Content-type','application/json'); 
+    xhr.setRequestHeader('Auther','hewitt'); 
     xhr.send(JSON.stringify(data));
 
     /* @des 设置返回值的格式 */
