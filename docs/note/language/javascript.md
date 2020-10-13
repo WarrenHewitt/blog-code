@@ -397,7 +397,7 @@ function Fn(name, age) {
     this.age = age;
 }
 function F1(name, age, num) {
-    //让Fn内部的this指向F1的实例对象,由于执行了Fn(),所以给实例对象也绑定了Fn中的属性
+    // 让Fn内部的 this 指向F1的实例对象,由于执行了Fn(),所以给实例对象也绑定了Fn中的属性
     Fn.call(this, name, age); 
     this.num = num;
 }

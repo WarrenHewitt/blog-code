@@ -19,6 +19,7 @@ function print () {
         content.document.getElementsByTagName('head')[0].appendChild(styleEle)
 
         /* 保障 iframe 中资源加载完成，图片要用 img 形式引入 */
+        /* 如果没有动态加载新内容 或有兼容问题，可以去掉 onload 直接调用 print */
         ifElement.onload = () => {
             content.print()
         }
@@ -36,7 +37,22 @@ function print () {
 
     addHtmlPrint()
 }
+
+/* 当连续打印时需要做延时处理，防止后一个覆盖前一个打印 */
+let i = 0
+const executeFn = () => {
+    list[i]()
+    i++
+    if (i < list.length) {
+        setTimeout(() => {
+            executeFn()
+        }, 2000)
+    }
+}
+
+executeFn()
 ```
+
 2. 利用 @media print，在当前页面设置打印操作时需要隐藏的元素
 ```css
 @media print{

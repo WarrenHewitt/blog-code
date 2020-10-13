@@ -21,10 +21,25 @@
         <h1 style="text-align: center;">tit</h1>
     </div>
     <script>
-      
-        // const b = {
-        //     bb: '123'
-        // }
+
+        function A() {
+            this.a = 'a in A'
+        }
+        
+        var aa = new A()
+
+        function B() {
+            this.b = 'b in B'
+            A.call(this)
+        }
+
+        var bb = new B()
+
+        const b = {
+            bb: '123'
+        }
+
+        console.log(bb);
 
         // function C() {
         //     this.nn = '12'
