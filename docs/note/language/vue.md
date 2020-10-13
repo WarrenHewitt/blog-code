@@ -236,12 +236,14 @@ cypress: Fast, easy and reliable testing for anything that runs in a browser.
 
 
 ## vue-cli
+
 - assets 目录一般主要放样式代码 会被webpack编译
 
 - 最好用相对路径
 
 - 在样式文件中引入图片，注意路径应该按照，引入样式的那个.vue文件为相对路径
 
+- "lint": "vue-cli-service lint" ： 执行该命令，eslint 校验并修复文件中的错误
 
 ### 脚手架打包出来的文字图标不显示
 
@@ -256,6 +258,28 @@ cypress: Fast, easy and reliable testing for anything that runs in a browser.
     }
 }
 ```
+
+## 深入响应式原理
+ - 非侵入性的响应式系统
+ - 数据模型为js对象，对其修改时，视图更新
+
+### 如何追踪变化
+
+- vue将接收的data全部用Object.defineProperty把属性转为getter/setter(导致不支持ie8以及一下)
+
+- 属性被访问和修改时通知变化
+
+- 每个组件实例都有对应的watcher实例对象（它会在组件渲染的过程中把属性记录为依赖，当依赖的setter被调用时，会通知watcher重新计算，从而使相关组件更新）
+
+### 检测变化的注意事项
+
+- 只有在data对象上的属性才是响应式的
+
+- 改变对象和数组的一些情况不会被检测到更新
+
+- 要用到的状态，提前在data对象中声明
+
+### 异步更新队列
 
 ## vue router
 
@@ -292,6 +316,34 @@ created () { /** 这里请求不需要频繁更新的数据 */ },
 - 最好一个模块有一个单独的 router-view 
 - 在 activated 中请求需要实时更新的数据 
 - 在 beforeRouteLeave 中处理和当前需要保存状态页面走同一个 router-view 的页面，否则在这些页面间切换，页面的状态也会被保留（data中的数据）
+
+
+## vue-3
+
+- 组件不强制要求唯一跟标签
+
+### setup
+
+- 在 beforCreate 之后 created 之前执行，并且替换了这两个周期函数
+
+- 两个参数：
+    - props 使用时不要直接用es6的解构，如果要用，可以用 toRefs 处理后结构
+    - context
+
+- reactive 创建响应数据  类似原来的 data 数据 
+
+- 返回 state 时 如果要解构对象，需要用 toRefs 处理一下
+
+---
+
+- ref() ： 返回值是一个对象，这个对象上只包含一个 .value 属性; 目的是让一些定义的基本数据类型，可以成为相应式的数据,当挂载到 reactive() 上时，会自动把响应式数据对象展开为原始的值，不需通过 .value 就可以直接被访问
+
+
+---
+
+## 包
+
+- Vue Class Component ：使用类的形式写 vue 组件 [地址](https://class-component.vuejs.org/)
 
 
 ## vuex
@@ -340,20 +392,6 @@ dispatch 触发 action store.dispatch('increment')
   - 可以在命令行传参
   - 有固定的参数
 
-- vue-cli 脚手架打包出来的文字图标不显示
-
-修改webpack.base.conf.js 的
-```js
-{
-  test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-  loader: 'url-loader',
-  options: {
-    limit: 100000, // 这里的值改大一点
-    name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
-  }
-}
-```
-
 ## vue-loader
 
 - 在style中用别名引入scss文件时，如果报错，在别名前~
@@ -367,13 +405,9 @@ dispatch 触发 action store.dispatch('increment')
 .a ::v-deep .b  (最新版，vue/cli 4.4.1,只有这个有效)
 ```
 
-## vue-3 
-
-- 
-
 ## elementUI
 
-- 表单重置  `this.$refs.ruleForm.resetFields()`  只会清除 新输入的数据 ，当表单有默认数据时，是不会被清除的
+- 表单重置  `this.$refs.ruleForm.resetFields()`  只会清除 新输入的数据 ；当在data上配置表单数据时设置了初始化值时，该默认值是不会被清除的，并且修改该默认值，重置后的值也是初始值
 
 - 当表单数据有多层嵌套对象时，在设置prop时要将 嵌套关系用字符串形式 赋值
 

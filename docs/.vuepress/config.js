@@ -130,8 +130,11 @@ module.exports = {
                         ['/note/language/java', 'java'], 
                         ['/note/language/python', 'python'], 
                         ['/note/language/mysql-mongo', 'mysql-mongo'], 
+                        ['/note/language/nginx', 'nginx'], 
+                        ['/note/language/docker', 'docker'], 
                         ['/note/language/git', 'git'], 
                         ['/note/language/D3', 'D3'],
+                        ['/note/language/threeJs', 'threeJs'],
                     ]
                 },
                 {

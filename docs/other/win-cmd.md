@@ -31,6 +31,12 @@
 
 - cat options file 【显示文件内容】
 
+- `vi filename ` 打开或新建文件
+
+- `touch filename ` 用于修改文件或者目录的时间属性，若文件不存在，系统会建立一个新的文件
+
+---
+
 ## windows下的相关操作
 
 1. hosts文件所在位置：`C:\Windows\System32\drivers\etc`
