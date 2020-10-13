@@ -177,6 +177,25 @@ Unicode前128个编码单元等于ascii值
 
 [未完](https://github.com/KieSun/Blog/issues/2)
 
+### `__proto__` 和 constructor prototype
+
+- constructor 和 `__proto__` 是对象独有的
+- prototype 是函数独有的，但函数也是一种对象，所以函数都拥有上诉属性
+
+`constructor`
+> 指向对象的构造函数
+> Function这个对象比较特殊，它的构造函数就是它自己（因为Function可以看成是一个函数，也可以是一个对象）
+> 所有函数和对象最终都是由Function构造函数得来，所以constructor属性的终点就是Function这个函数
+
+`__proto__`
+> 指向创建该对象的构造函数的原型, 在其 constructor 属性的 name 属性值，表示原型名；
+> 这样一层一层的构成了原型链
+> 当访问一个对象的属性值时，也会按照该方式一层一层的找，直到 `__proto__` 指向 null
+
+`prototype` 
+> 指向函数的原型对象（也是当前函数所创建的实例的原型对象）  所以构造函数的prototype 和实例的 `__proto__` 指向同一个原型对象
+> 作用：实例共享属性和方法
+
 ### new
 自己实现new（未完成）
 
@@ -195,6 +214,8 @@ Unicode前128个编码单元等于ascii值
 - 优先级：有函数调用的会覆盖指向window的，用new创建的优先级最高
 
 - 箭头函数没有this，它的 this 只取决于他外面的第一个不是箭头函数的函数的 this
+
+---
 
 ## 执行上下文
 变量提升的过程中，相同的函数会覆盖上一个函数，并且函数优先于变量提升
