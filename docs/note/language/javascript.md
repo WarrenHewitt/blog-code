@@ -634,7 +634,7 @@ return result[value]
 
 - oncontextmenu  鼠标右键点击，一般用作更改右键弹出选项
 
-- 内联事件 `onkeyup="handleEnter(event)">` 传递 event
+- 内联事件 `onkeyup="handleEnter(event, type, this, '2333')">` 传递 event, 这里名称必须是event
 
 - 判断输入回车
 ```js

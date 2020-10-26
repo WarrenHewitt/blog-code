@@ -249,23 +249,6 @@ cypress: Fast, easy and reliable testing for anything that runs in a browser.
 
 - "lint": "vue-cli-service lint" ： 执行该命令，eslint 校验并修复文件中的错误
 
-
-### 脚手架打包出来的文字图标不显示
-
-修改webpack.base.conf.js 的
-```js
-{
-    test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-    loader: 'url-loader',
-    options: {
-        limit: 100000, // 这里的值改大一点
-        name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
-    }
-}
-```
-
-## cue-cli
-
 - 在js中动态控制图片加载用 `require('地址')` 获取图片后赋值给src
 - CSS Pre-processors：选择CSS 预处理类型：sass 或less
 - Linter / Formatter：选择eslint 标准，以及是否在保存时格式化代码
@@ -280,6 +263,21 @@ cypress: Fast, easy and reliable testing for anything that runs in a browser.
   - 链接https://cli.vuejs.org/zh/guide/mode-and-env.html#%E6%A8%A1%E5%BC%8F
   - 可以在命令行传参
   - 有固定的参数
+
+
+### 脚手架打包出来的文字图标不显示
+
+修改webpack.base.conf.js 的
+```js
+{
+    test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+    loader: 'url-loader',
+    options: {
+        limit: 100000, // 这里的值改大一点
+        name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+    }
+}
+```
 
 ## vue-loader
 
@@ -357,15 +355,41 @@ created () { /** 这里请求不需要频繁更新的数据 */ },
 
 - 组件不强制要求唯一跟标签
 
-### setup
+### 语法
+
+> setup
 
 - 在 beforCreate 之后 created 之前执行，并且替换了这两个周期函数
 
 - 两个参数：
-    - props 使用时不要直接用es6的解构，如果要用，可以用 toRefs 处理后结构
-    - context
+    - props 使用时不要直接用es6的解构，如果要用，可以用 toRefs 处理后解构
+    - context  上下文对象，这个上下文对象中包含了一些有用的属性 如 slots
 
-- reactive 创建响应数据  类似原来的 data 数据 
+
+> reactive() 
+
+创建响应数据  类似原来的 data 数据 
+
+> ref()
+
+根据给定的值创建，响应式的数据对象，返回一个包含 value 属性的对象
+
+将创建的值挂载到 reactive 上，可以不用通过 .value 直接访问，因为被展开为原始的值
+
+用 isRef 来判断是否是 ref() 创建的值
+
+
+> toRefs() 
+
+将 reactive() 创建出来的响应式对象，转换为每个属性节点都是 ref() 类型的响应式数据
+
+> computed() 
+
+用来创建计算属性，computed() 函数的返回值是一个 ref 的实例
+
+> provide() 和 inject()
+
+可以实现嵌套组件之间的数据传递。在 setup() 函数中使用。父级组件中使用 provide() 函数向下传递数据；子级组件中使用 inject() 获取上层传递过来的数据。
 
 
 

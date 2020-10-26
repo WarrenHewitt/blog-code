@@ -15,31 +15,16 @@
 
 <body>
     <input type="text" name="" id="file">
-    <button onclick="handle()"> clear </button>
+    <button onclick="handle(event, type,this,  '2333')"> clear </button>
     <div>
         <div style="float:right">23333</div>
         <h1 style="text-align: center;">tit</h1>
     </div>
     <script>
 
-        function A() {
-            this.a = 'a in A'
+        function handle(e, a, c, v){
+            console.log(e, a, c, v);
         }
-        
-        var aa = new A()
-
-        function B() {
-            this.b = 'b in B'
-            A.call(this)
-        }
-
-        var bb = new B()
-
-        const b = {
-            bb: '123'
-        }
-
-        console.log(bb);
 
         // function C() {
         //     this.nn = '12'
