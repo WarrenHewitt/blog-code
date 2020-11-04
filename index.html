@@ -8,23 +8,54 @@
     <title>blog-code-test</title>
     <!-- <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script> -->
     <style>
-
+        .aa{
+            position:sticky;
+            top: 100px
+        }
+        .p{
+            height: 300px;
+            margin: 20px;
+            background-color: rgb(77, 168, 211);
+        }
 
     </style>
 </head>
 
 <body>
     <input type="text" name="" id="file">
-    <button onclick="handle(event, type,this,  '2333')"> clear </button>
+    <p class="p">weeee</p>
+    <div class="aa">stickystickystickysticky</div>
+    <p class="p">weeee</p>
+    <p class="p">weeee</p>
     <div>
         <div style="float:right">23333</div>
         <h1 style="text-align: center;">tit</h1>
+        <button onclick="handle(1)">111111111</button>
+        <button onclick="handle(2)">222222222</button>
     </div>
     <script>
 
-        function handle(e, a, c, v){
-            console.log(e, a, c, v);
+        function handle(n){
+            var inp = document.getElementById('file')
+            inp.parentNode.removeChild(inp)
+            if(n===1) {
+                callb(() => 1)
+            } else {
+                callb(() => 2)
+            }
         }
+
+        function callb(c) {
+            console.log(c());
+        }
+
+        arr = [1,2,3,4]
+
+        var a = arr.concat([1,2, 4])
+
+        var b = [...arr, ...[1,2,4]]
+
+        console.log(a, b)
 
         // function C() {
         //     this.nn = '12'

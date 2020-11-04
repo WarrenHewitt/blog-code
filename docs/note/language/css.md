@@ -356,7 +356,10 @@ background-attachment: scroll默认 | fixed滚动轴背景图片不会移动
 
 渐变 background: linear-gradient(blue, pink); 默认上到下
 
-background: linear-gradient(to right, blue 沿着渐变轴的终点数值或百分比, pink);
+background: linear-gradient(to right, blue 百分比1, pink 百分比2);
+
+百分比1 默认是0  表示从哪个位置开始向后一个颜色进行渐变
+百分比2 表示从哪个位置完全变为当前色，在此位置前进行渐变
 ```
 
 ## 动画
