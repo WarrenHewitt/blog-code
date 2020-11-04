@@ -175,7 +175,7 @@ module.exports = {
                     title: '软件操作相关', 
                     collapsable: false,
                     children: [
-                        ['/other/win-cmd', 'windows系统相关操作'],
+                        ['/other/windows-linux', 'windows-linux系统相关操作'],
                         ['/other/softwareUsage', '常用软件操作'],
                         ['/other/charles-proxy-phone', 'charles抓包手机数据'],
                         ['/other/psISE', 'powershell ISE，集成git命令'],

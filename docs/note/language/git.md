@@ -7,6 +7,23 @@
 ## github  
 - 直接访问版本号前7位也是可以访问的。  
 
+### github 授权
+
+github 头像下拉  -> settings -> Developer settings -> Personal access tokens -> Generate new token
+
+Note 提示信息随意命名
+
+勾选 repo 全部选项
+
+勾选 admin:public_key 全部选项
+
+勾选 admin:repo_hook 全部选项
+
+以上的勾选 根据不同的情况会有所区别
+
+点击生成，记得复制保存，这里只显示一次，刷新进入后 不再显示
+
+
 ## git
 
 - .gitignore  以斜杠“/”开头表示目录

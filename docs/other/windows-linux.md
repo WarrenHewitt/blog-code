@@ -15,6 +15,10 @@
 
 - mv name1 name2 将文件或文件夹改名
 
+- `find / -name fileName ` 命令用来在指定目录下查找文件docker 
+
+- `sed -i 's/xx/yy/g' fileName`  -i 表示插入  s 表示取代，这里是利用正则将文件中的xx替换为yy
+
 --- 
 
 - rm 地址 参数 【删除一个目录中的一个或多个文件或目录】 
@@ -26,6 +30,9 @@
 --preserve-root：不对根目录进行递归操作；
 -v：显示指令的详细执行过程。
 ``` 
+`rm -f *` 删除当前目录下的文件，只能删文件
+
+`rm -rf *` 递归删除当前目录下的文件和文件夹
 
 ---
 
@@ -34,6 +41,77 @@
 - `vi filename ` 打开或新建文件
 
 - `touch filename ` 用于修改文件或者目录的时间属性，若文件不存在，系统会建立一个新的文件
+
+- `ifconfig` 查看 ip 地址
+
+
+## Linux
+
+#### vi vim 操作
+
+vim 需要安装在 centOS 上
+
+```
+按ESC键跳到命令模式，然后：
+:w 保存文件但不退出vi.
+:w file 将修改另外保存到file中，不退出vi.
+:w! 强制保存，不推出vi.
+:wq 保存文件并退出vi.
+:wq! 强制保存文件，并退出vi.
+:q 不保存文件，退出vi.
+:q! 不保存文件，强制退出vi
+
+a    //在当前光标位置的右边添加文本 
+i    //在当前光标位置的左边添加文本 
+A    //在当前行的末尾位置添加文本 
+I    //在当前行的开始处添加文本(非空字符的行首) 
+O    //在当前行的上面新建一行 
+o    //在当前行的下面新建一行
+```
+
+### centOS
+
+- 上一页：shift +pageup
+- 下一页：shift +pagedown
+
+- `uname -r` 查看 centos 内核版本
+
+- reboot          普通重启
+- shutdown -r now 立刻重启(root用户使用)
+
+#### curl
+
+是一个利用URL规则在命令行下工作的文件传输工具，支持文件的上传和下载，习惯称url为下载工具
+
+curl由于可自定义各种请求参数所以在模拟web请求方面更擅长
+
+#### wget
+
+yum -y install wget 安装
+
+命令用来从指定的URL下载文件，wget由于支持ftp和Recursive所以在下载文件方面更擅长
+
+`wget --limit-rate=300k url`  下载限速
+
+#### systemctl命令
+
+是系统服务管理器指令
+
+``
+
+#### dnf
+
+DNF是新一代的rpm软件包管理器。它取代了yum，正式成为 Fedora 22 的包管理器。
+
+#### yum
+
+在Fedora和RedHat以及CentOS中的Shell前端软件包管理器
+
+- `yum list installed` 查看已安装的包
+
+- `yum info packageName` 查看包信息
+
+- `yum-config-manager` 这个命令在 yum-utils 包里，管理yum配置选项和存储库
 
 ---
 
