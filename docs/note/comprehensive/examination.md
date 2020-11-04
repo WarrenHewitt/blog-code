@@ -264,6 +264,15 @@ const result = arr.map(item => ({ ...item }))
 - CommonJs 是 Node 独有的规范
 - AMD 是由 RequireJS 提出的
 
+CommonJs模块输出的是一个值的拷贝，ES6模块输出的是值的引用。
+CommonJs模块是运行时加载，ES6模块是编译时输出接口。
+
+require、动态 import() 运行在 JS 运行阶段；静态 import 运行在编译阶段；
+require 同步执行，动态 import()异步执行 返回 promise；静态 import 运行在编译阶段，总是最先执行；
+require、静态 import、动态 import()都是有缓存的；
+
+import() 是 es6 动态引入新规范
+
 
 ## 事件
 - 任意事件触发后三个阶段：捕获（window到目标）-> 目标 -> 冒泡。addeventListener(,,false默认(冒泡阶段执行)||true)

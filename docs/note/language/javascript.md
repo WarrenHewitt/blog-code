@@ -224,7 +224,7 @@ const _Blob = new Blob( array, options );
 ```
 
 2. 将图片转 base64
-方法一：用ajax请求图片资源，设置返回值类型为Blob；或者获取input选择的图片
+方法一：用 ajax 请求图片资源，设置返回值类型为Blob；或者获取input选择的图片
 `xhr.responseType = 'blob';`
 ```js
 let fr = new FileReader();
@@ -816,7 +816,7 @@ function compareNumber(a,b) {
 
 **reverse和sort都不返回新数组，且都是对数组才能操作**
 
-arrayA.concat(arrayB);返回拼接后的数组
+arrayA.concat(arrayB); 返回拼接后的新数组，不会覆盖数组间重复的值
 
 var newArray = [].concat(arr1,arr2,arr3)
 
