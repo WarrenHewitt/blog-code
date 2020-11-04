@@ -279,6 +279,12 @@ none: SWF 文件可能不调用浏览器导航或浏览器交互API，并且它�
 
 [MDN DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
 
+以下接口都从 Node 继承其方法和属性：
+
+Document, Element, Attr, CharacterData (which Text, Comment, and CDATASection inherit), ProcessingInstruction, DocumentFragment, DocumentType, Notation, Entit
+
+---
+
 - 元素的插入
 
 ```
@@ -297,7 +303,9 @@ if(parentNode.prepend) {
 
 ---
 
-- `node.parentElement`  `node.parentElement` (an Element node, a Document node, or a DocumentFragment node.) 兼容性都好
+- `node.parentElement` 返回当前节点的父元素节点
+
+- `node.parentNode` 指定节点的父节点 返回值可能是一个元素(Element )节点,也可能是一个文档(Document )节点,或者是个文档碎片(DocumentFragment)节点
 
 ---
 
@@ -305,7 +313,7 @@ if(parentNode.prepend) {
 
 ---
 
-- 移除元素 `Node.removeChild(childNode)` 兼容性好
+- 移除元素 `node.parentNode.removeChild(node)` 兼容性好 
 
 ---
 

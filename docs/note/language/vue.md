@@ -245,6 +245,29 @@ cypress: Fast, easy and reliable testing for anything that runs in a browser.
 
 - "lint": "vue-cli-service lint" ： 执行该命令，eslint 校验并修复文件中的错误
 
+- 在js中动态控制图片加载用 `require('地址')` 获取图片后赋值给src
+
+- CSS Pre-processors：选择CSS 预处理类型：sass 或less
+
+- Linter / Formatter：选择eslint 标准，以及是否在保存时格式化代码
+
+- 图片资源放到assets，不要放到public中否则打包出来的图片会是两份
+
+- 其它的js资源可以放到public中
+
+- `vue inspect > output.js` 输出当前vue-cli默认的webpack配置
+- 在开发模式时，环境变量 process.env.NODE_ENV 为 development；打包时为 production
+- 生产环境部署：https://cn.vuejs.org/v2/guide/deployment.html
+- 环境变量和模式 (webpack-pure和node-koa项目中有相关实例内容)
+  - 链接https://cli.vuejs.org/zh/guide/mode-and-env.html#%E6%A8%A1%E5%BC%8F
+  - 可以在命令行传参
+  - 有固定的参数
+
+- TypeScript 配置
+    - Use class-style component syntax: 是否使用 使用 类 风格的组件语法
+    - Use Babel alongside TypeScript for auto-detected polyfills? ：是否使用babel做转义（建议是使用20200924）
+
+
 ### 脚手架打包出来的文字图标不显示
 
 修改webpack.base.conf.js 的
@@ -257,6 +280,19 @@ cypress: Fast, easy and reliable testing for anything that runs in a browser.
         name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
     }
 }
+```
+
+## vue-loader
+
+- 在style中用别名引入scss文件时，如果报错，在别名前~
+
+- `@import '@/x/x/x.scss'`;  引用文件时，不加后缀可能导致编译错误
+
+- 深度作用域 
+```
+.a >>> .b (实际使用中效果没有deep好)
+.a /deep/ .b  (容易报错)
+.a ::v-deep .b  (最新版，vue/cli 4.4.1,只有这个有效)
 ```
 
 ## 深入响应式原理
@@ -322,15 +358,41 @@ created () { /** 这里请求不需要频繁更新的数据 */ },
 
 - 组件不强制要求唯一跟标签
 
-### setup
+### 语法
+
+> setup
 
 - 在 beforCreate 之后 created 之前执行，并且替换了这两个周期函数
 
 - 两个参数：
-    - props 使用时不要直接用es6的解构，如果要用，可以用 toRefs 处理后结构
-    - context
+    - props 使用时不要直接用es6的解构，如果要用，可以用 toRefs 处理后解构
+    - context  上下文对象，这个上下文对象中包含了一些有用的属性 如 slots
 
-- reactive 创建响应数据  类似原来的 data 数据 
+
+> reactive() 
+
+创建响应数据  类似原来的 data 数据 
+
+> ref()
+
+根据给定的值创建，响应式的数据对象，返回一个包含 value 属性的对象
+
+将创建的值挂载到 reactive 上，可以不用通过 .value 直接访问，因为被展开为原始的值
+
+用 isRef 来判断是否是 ref() 创建的值
+
+
+> toRefs() 
+
+将 reactive() 创建出来的响应式对象，转换为每个属性节点都是 ref() 类型的响应式数据
+
+> computed() 
+
+用来创建计算属性，computed() 函数的返回值是一个 ref 的实例
+
+> provide() 和 inject()
+
+可以实现嵌套组件之间的数据传递。在 setup() 函数中使用。父级组件中使用 provide() 函数向下传递数据；子级组件中使用 inject() 获取上层传递过来的数据。
 
 - 返回 state 时 如果要解构对象，需要用 toRefs 处理一下
 
@@ -367,30 +429,6 @@ async mounted () {
 commit 触发 mutation store.commit('name')
 
 dispatch 触发 action store.dispatch('increment')
-
-## cue-cli
-
-- TypeScript 配置
-    - Use class-style component syntax: 是否使用 使用 类 风格的组件语法
-    - Use Babel alongside TypeScript for auto-detected polyfills? ：是否使用babel做转义（建议是使用20200924）
-
-- CSS Pre-processors：选择CSS 预处理类型：sass 或less
-
-- Linter / Formatter：选择eslint 标准，以及是否在保存时格式化代码
-
-- 在js中动态控制图片加载用 `require('地址')` 获取图片后赋值给src
-
-- 图片资源放到assets，不要放到public中否则打包出来的图片会是两份
-
-- 其它的js资源可以放到public中
-
-- `vue inspect > output.js` 输出当前vue-cli默认的webpack配置
-- 在开发模式时，环境变量 process.env.NODE_ENV 为 development；打包时为 production
-- 生产环境部署：https://cn.vuejs.org/v2/guide/deployment.html
-- 环境变量和模式 (webpack-pure和node-koa项目中有相关实例内容)
-  - 链接https://cli.vuejs.org/zh/guide/mode-and-env.html#%E6%A8%A1%E5%BC%8F
-  - 可以在命令行传参
-  - 有固定的参数
 
 ## vue-loader
 
