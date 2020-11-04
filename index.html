@@ -13,12 +13,21 @@
     <!-- <script src="https://cdn.bootcdn.net/ajax/libs/three.js/110/three.js"></script> -->
     <script src="https://cdn.bootcdn.net/ajax/libs/three.js/110/three.min.js"></script>
     <style>
-
+        .aa{
+            position:sticky;
+            top: 100px
+        }
+        .p{
+            height: 300px;
+            margin: 20px;
+            background-color: rgb(77, 168, 211);
+        }
 
     </style>
 </head>
 
 <body>
+<<<<<<< HEAD
     <!-- 作为Three.js渲染器输出元素 -->
     <div id="cusThree" style="width:500px;height:500px;margin: 0 auto;">
     <script>
@@ -26,22 +35,42 @@
 
         function A() {
             this.a = 'a in A'
+=======
+    <input type="text" name="" id="file">
+    <p class="p">weeee</p>
+    <div class="aa">stickystickystickysticky</div>
+    <p class="p">weeee</p>
+    <p class="p">weeee</p>
+    <div>
+        <div style="float:right">23333</div>
+        <h1 style="text-align: center;">tit</h1>
+        <button onclick="handle(1)">111111111</button>
+        <button onclick="handle(2)">222222222</button>
+    </div>
+    <script>
+
+        function handle(n){
+            var inp = document.getElementById('file')
+            inp.parentNode.removeChild(inp)
+            if(n===1) {
+                callb(() => 1)
+            } else {
+                callb(() => 2)
+            }
+>>>>>>> fcc31f41865cc6018b84c9e9ebbf2838c8138ae1
         }
-        
-        var aa = new A()
 
-        function B() {
-            this.b = 'b in B'
-            A.call(this)
+        function callb(c) {
+            console.log(c());
         }
 
-        var bb = new B()
+        arr = [1,2,3,4]
 
-        const b = {
-            bb: '123'
-        }
+        var a = arr.concat([1,2, 4])
 
-        console.log(bb);
+        var b = [...arr, ...[1,2,4]]
+
+        console.log(a, b)
 
     </script>
 </body>

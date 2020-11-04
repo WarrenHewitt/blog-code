@@ -224,7 +224,7 @@ const _Blob = new Blob( array, options );
 ```
 
 2. 将图片转 base64
-方法一：用ajax请求图片资源，设置返回值类型为Blob；或者获取input选择的图片
+方法一：用 ajax 请求图片资源，设置返回值类型为Blob；或者获取input选择的图片
 `xhr.responseType = 'blob';`
 ```js
 let fr = new FileReader();
@@ -634,7 +634,7 @@ return result[value]
 
 - oncontextmenu  鼠标右键点击，一般用作更改右键弹出选项
 
-- 内联事件 `onkeyup="handleEnter(event)">` 传递 event
+- 内联事件 `onkeyup="handleEnter(event, type, this, '2333')">` 传递 event, 这里名称必须是event
 
 - 判断输入回车
 ```js
@@ -816,7 +816,7 @@ function compareNumber(a,b) {
 
 **reverse和sort都不返回新数组，且都是对数组才能操作**
 
-arrayA.concat(arrayB);返回拼接后的数组
+arrayA.concat(arrayB); 返回拼接后的新数组，不会覆盖数组间重复的值
 
 var newArray = [].concat(arr1,arr2,arr3)
 

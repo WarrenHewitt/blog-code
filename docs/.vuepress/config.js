@@ -36,6 +36,7 @@ module.exports = {
                     title: 'vue',
                     collapsable: false,
                     children: [
+                        ['/fe/vue/elementUiTree', 'ElementUI Tree 自定义选择'],
                         ['/fe/vue/vue-sass-config', 'vue配置sass'],
                         ['/fe/vue/iview-table-edit', 'iview可编辑表格'],
                         ['/fe/vue/iview-ud-table-header', 'iview自定义多级表头'],
