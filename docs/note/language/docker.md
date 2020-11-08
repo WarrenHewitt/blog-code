@@ -12,9 +12,13 @@ centos  重启后 需要重启 docker  `systemctl start docker.service | service
 
 - 容器： 与镜像的唯一区别在于容器的最上面那一层是可读可写的
 
+- 启动 docker 服务  `service docker start`
+
 - `systemctl restart docker`  重启docker服务,systemctl命令它实际上将 service 和 chkconfig 这两个命令组合到一起
 
 当运行容器时，使用的镜像如果在本地中不存在，docker 就会自动从 docker 镜像仓库中下载，默认是从 Docker Hub 公共镜像源下载
+
+- `docker inspect containerName|containerID` 查看容器配置信息
 
 - `docker images` 查看本机的镜像
 
