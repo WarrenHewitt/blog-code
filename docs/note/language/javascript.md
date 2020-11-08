@@ -151,6 +151,7 @@ new Error([message[, fileName[, lineNumber]]])
 
 - setInterval 一定要确认清除
 - 第三个及之后的参数都作为回调函数的参数
+- 同时设置时间0  哪个代码在前 执行哪个
 
 **requestAnimationFrame**
 > [示例：](https://codepen.io/Hewitt/pen/VgZapr)

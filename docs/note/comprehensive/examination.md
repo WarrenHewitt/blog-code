@@ -323,17 +323,28 @@ addeventListener('click',function(){},false) //w3c
 
 ## event loop
 
+主线程从"任务队列"中读取事件，这个过程是循环不断的
+
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/EventLoop
+
+进程 ： 运行的程序就是一个进程，比如正在运行的浏览器，它会有一个进程。
+线程 ： 程序中独立运行的代码段。一个进程 由单个或多个 线程 组成，线程是负责执行代码的。
+
+对象被分配在一个堆中
+
+"任务队列"是一个事件的队列（也可以理解成消息的队列）
+
 - js执行过程中会产生执行环境，这些环境会被顺序加入到执行栈中。
 - 遇到异步代码，会被挂起并加入到Task(有多种)队列中
 - 执行栈空了后，Event loop 便从Task队列中拿出需要执行的放入执行栈执行
-- setTimeout后面的是异步函数，即便设置了0秒延迟，也是在同步之后执行，HTML5规定延迟不得小于4ms，不足自动增加，和浏览器也有关联
+- setTimeout后面的是异步函数，即便设置了0秒延迟，也是在同步之后执行，HTML5规定延迟不得小于4ms，不足自动增加，和浏览器也有关联，设置的时间代表了消息被实际加入到队列后才计算的延迟时间,而不是从代码执行到 setTimeout 就开始计算延迟时间
 - 不同任务源会被分配到不同Task队列，任务源分为微任务（micro task：es6中叫jobs）和宏任务（macro task：es6中叫task）
 
-    微任务：promise，process.nextTick，Object.observe，MutationObserver
+    微任务：promise process.nextTick Object.observe MutationObserver ; process.nextTick优先级大于promise.then 如果微任务中又有微任务加入 也会在宏任务前执行
 
-    宏任务：script，setTimeout，setInterval，setImmediate，I/O，UI rendering
+    宏任务：script setTimeout  setInterval setImmediate I/O UI rendering
 
-    浏览器会先执行一个宏任务，然后的异步代码会优先微任务
+await后面的表达式会先执行一遍，将await后面的代码加入到微任务中
 
 - 一次EventLoop顺序：
     - 执行同步代码（属于宏任务）
@@ -341,6 +352,42 @@ addeventListener('click',function(){},false) //w3c
     - 执行微任务
     - 若有需要，渲染UI
     - 下一轮的EventLoop，执行宏任务的异步代码
+
+```js
+setTimeout(() => {
+    console.log('set timeout 中的宏任务');
+}, 0)
+
+setTimeout(() => {
+    console.log('set timeout ： 2000');
+}, 2000)
+
+var c = new Promise((res) => {
+    console.log('in promise 同步任务');
+    res('params')
+})
+
+c.then((r) => {
+    console.log('微任务 in promise then:' + r);
+    var ak = new Promise((re) => {
+        console.log('promise in promise');
+        re()
+    })
+
+    ak.then(() => {
+        console.log('promise in promise then');
+    })
+})
+
+console.log('script 中的宏任务');
+// in promise 同步任务
+// script 中的宏任务
+// 微任务 in promise then:params
+// promise in promise
+// promise in promise then
+// set timeout 中的宏任务
+// set timeout ： 2000
+```
 
 ## 存储
 cookie（4K）：删除 同名加max-age=0

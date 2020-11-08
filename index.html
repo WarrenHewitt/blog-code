@@ -27,52 +27,18 @@
 </head>
 
 <body>
-<<<<<<< HEAD
     <!-- 作为Three.js渲染器输出元素 -->
     <div id="cusThree" style="width:500px;height:500px;margin: 0 auto;">
     <script>
 
-
-        function A() {
-            this.a = 'a in A'
-=======
-    <input type="text" name="" id="file">
-    <p class="p">weeee</p>
-    <div class="aa">stickystickystickysticky</div>
-    <p class="p">weeee</p>
-    <p class="p">weeee</p>
-    <div>
-        <div style="float:right">23333</div>
-        <h1 style="text-align: center;">tit</h1>
-        <button onclick="handle(1)">111111111</button>
-        <button onclick="handle(2)">222222222</button>
-    </div>
-    <script>
-
-        function handle(n){
-            var inp = document.getElementById('file')
-            inp.parentNode.removeChild(inp)
-            if(n===1) {
-                callb(() => 1)
-            } else {
-                callb(() => 2)
-            }
->>>>>>> fcc31f41865cc6018b84c9e9ebbf2838c8138ae1
-        }
-
-        function callb(c) {
-            console.log(c());
-        }
-
-        arr = [1,2,3,4]
-
-        var a = arr.concat([1,2, 4])
-
-        var b = [...arr, ...[1,2,4]]
-
-        console.log(a, b)
-
-    </script>
+        var a = setInterval(() => {
+            clearInterval(a)
+            console.log('set interval');
+        }, 0)
+setTimeout(() => {
+    console.log('set timeout ： 2000');
+}, 0)
+        </script>
 </body>
 
 </html>
