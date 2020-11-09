@@ -1,10 +1,29 @@
-- centeos 安装 docker `https://docs.docker.com/engine/install/centos/` 
+## centeos 安装 docker 
+
+官方教程 `https://docs.docker.com/engine/install/centos/` 
+
+```shell
+# 安装 yum-utils 包
+yum install -y yum-utils
+
+# 添加docker仓库
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo 
+# 用阿里云的镜像更快
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+
+yum install docker-ce docker-ce-cli containerd.io
+
+```
 
 如果提示 containerd 提示版本过低 `https://download.docker.com/linux/` 下载最新版的 containerd.io 和其它的一些 docker 资源
 
 示例下载： `dnf install -y https://download.docker.com/linux/centos/8/x86_64/stable/Packages/containerd.io-1.3.7-3.1.el8.x86_64.rpm`
 
 centos  重启后 需要重启 docker  `systemctl start docker.service | service docker start`
+
+---
+
+Is the docker daemon running ：报错解决办法 service docker start
 
 ---
 
@@ -56,10 +75,15 @@ centos  重启后 需要重启 docker  `systemctl start docker.service | service
 
 ```
 {
-    "registry-mirrors": ["https://almtd3fa.mirror.aliyuncs.com"]
+    // 阿里云的账号是需要自己去注册然后生成的
+    "registry-mirrors": [
+      "http://docker.mirrors.ustc.edu.cn",
+      "https://almtd3fa.mirror.aliyuncs.com",
+      "https://3laho3y3.mirror.aliyuncs.com",
+      "http://hub-mirror.c.163.com"
+    ]
 }
 ```
-
 
 ### 客户端
 
@@ -67,11 +91,7 @@ centos  重启后 需要重启 docker  `systemctl start docker.service | service
 
 ```json
 "registry-mirrors": [
-    "http://docker.mirrors.ustc.edu.cn",
-    "https://almtd3fa.mirror.aliyuncs.com" // 最快
-    "http://hub-mirror.c.163.com"
-    "https://mirror.ccs.tencentyun.com",
-    "http://registry.docker-cn.com",
+    // 同上
 ],
 "insecure-registries": [
     "registry.docker-cn.com",
@@ -194,19 +214,21 @@ services:                                      # 集合
 3. 创建和运行容器： `docker run -d --name containerName -p 2014:8080 -p 2015:50000 -v /var/jenkins_home:/var/jenkins_home jenkins/jenkins:latest`  容器的 8080 和 50000 端口是固定的 映射的 容器地址也是固定的 
 
 
-浏览器进入 2014端口 ； 如果是虚拟机 ip是 docker的ip
+浏览器进入 2014端口 ； 如果是虚拟机， ip是 docker的ip； 有些虚拟机可以直接用，虚拟机的 ip （enp0s3 中的 IP）
 
 ---
 
 - jenkins 插件下载慢处理
 
-    1. 先查找 jenkins 的安装目录下的 default.json 文件 不知道安装目录可以用 `find / -name default.json` 查找
+    1. 先查找 jenkins 的安装目录下的 default.json 文件 不知道安装目录可以用 `find / -name default.json` 查找 一般在 /var/jenkins_home/updates/default.json
 
     2. 替换文件中的内容，可以用命令 
     `sed -i 's/www.google.com/www.baidu.com/g' default.json`
     `sed -i 's/updates.jenkins-ci.org\/download/mirrors.tuna.tsinghua.edu.cn\/jenkins/g' default.json`
 
-    3. 重启 jenkins， 安装
+    3. 重启 jenkins （ 在浏览器 ip地址后加restart 跳转点击重启 ）
+
+或者是在页面中点击 插件管理 => 高级 最下面的url 源切换 https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json
 
 - 下载 jenkins 插件
 
@@ -241,6 +263,13 @@ tar -zcvf package.tar.gz *
 
 SSH Publishers 配置 
 
+构建后操作 -> Send build artifacts over SSH
+
+Source files：源文件地址，地址的目录是相对于jenkins workspace的目录，如果只需要执行命令不需要传输文件的时候，此处可以为空，**最好是一个打包后的文件**
+
+插件配置处，配置了具体的地址，这里的 Remote 相关的可以不填
+
+Exec command  在目标机器上执行的命令 要先进入目标文件 如下示例：
 ```
 cd /home/cicd/nginx/html/
 
@@ -266,3 +295,12 @@ webhooks  需要域名或公共 ip
 Jenkins 的两个映射文件 /var/jenkins_home  和 /var/jenkins_home_gitee/
 
 Nginx 的映射文件 /home/cicd/nginx/
+
+
+pwd
+
+npm install --registry=https://registry.npm.taobao.org
+
+npm run build
+
+tar -zcvf package.tar.gz dist
