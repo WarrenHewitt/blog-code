@@ -21,6 +21,14 @@
 
 --- 
 
+- `df -h` 查看磁盘占用情况
+
+- 压缩: `tar -zcvf 压缩文件名.tar.gz 被压缩文件名`
+
+- 解压: `tar -zxvf 压缩文件名.tar.gz`
+
+- `mv /xx  /yy`  将文件夹或文件 xx 放到 yy 文件夹下
+
 - rm 地址 参数 【删除一个目录中的一个或多个文件或目录】 
 ```
 -f：强制删除文件或目录；
@@ -74,10 +82,21 @@ o    //在当前行的下面新建一行
 - 上一页：shift +pageup
 - 下一页：shift +pagedown
 
-- `uname -r` 查看 centos 内核版本
+- `uname -r 或 -a` 查看 centos 内核版本 和是否是64位（带有64就是64位）
 
 - reboot          普通重启
 - shutdown -r now 立刻重启(root用户使用)
+
+安装 node
+
+先到官网下载 Linux 安装包  https://nodejs.org/en/download/  
+
+下载后上传到服务器，解压
+
+添加环境变量，在 `/ect/profile` 文件最后添加 `export PATH=$PATH:/安装地址（也就是解压缩地址）/bin`
+
+使配置生效 `source /etc/profile`
+
 
 #### curl
 
@@ -111,7 +130,11 @@ DNF是新一代的rpm软件包管理器。它取代了yum，正式成为 Fedora 
 
 - `yum info packageName` 查看包信息
 
+- `yum install -y yum-utils` 安装 yum-utils 包
+
 - `yum-config-manager` 这个命令在 yum-utils 包里，管理yum配置选项和存储库
+
+- `yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo` 给 yum 添加一个仓库
 
 ---
 

@@ -14,6 +14,8 @@
 
 ## npm
 
+- 换源 `npm install --registry=https://registry.npm.taobao.org`
+
 - 引入包中的某个文件 `import xx from '包名/xx/xx/x'` 该地址会被解析为 `./node_modules/包名/xx/xx/x.js`
 
 - npm  ls  –g  --depth=1 2>/dev/null | grep generator-
