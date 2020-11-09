@@ -254,18 +254,18 @@ services:                                      # 集合
 
 具体的操作请网上搜索参考
 
-ssh插件来远程登录服务器，运行脚本 插件 `SSH Agent`
-    
 
-```shell
-pwd
+- SSH Publishers 配置 
 
-# 压缩所有文件
-tar -zcvf package.tar.gz *
-    
-```
+全局配置：
 
-SSH Publishers 配置 
+Passphrase： 远程服务器的密码
+
+Hostname：远程服务器的ip地址
+
+Username： 远程服务器的账号名
+
+Remote Directory：要将文件发送到的远程服务器的目录
 
 构建后操作 -> Send build artifacts over SSH
 
@@ -301,10 +301,18 @@ Jenkins 的两个映射文件 /var/jenkins_home  和 /var/jenkins_home_gitee/
 Nginx 的映射文件 /home/cicd/nginx/
 
 
-pwd
+安装 nodeJs 插件：  在 centos 上安装，再将安装地址 配置到Jenkins中
 
+
+构建 shell
+```shell
 npm install --registry=https://registry.npm.taobao.org
 
 npm run build
 
-tar -zcvf package.tar.gz dist
+cd dist
+
+tar -zcvf dist.tar.gz *
+
+mv dist.tar.gz ..
+```
