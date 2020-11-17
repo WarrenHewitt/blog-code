@@ -418,6 +418,9 @@ f2.call(obj); // other 1 2
 Math.min.apply(null,[100,2,3])  // 返回 2
 Math.max.apply(null|Math,[1,2,3]) // 返回3
 
+Math.min(2, 3, 1) // 1
+Math.max(1, 3, 2) // 3  不传参数返回 infinity （min 也是）
+
 Array.prototype.push.apply(array1, array2);
 ```
 
@@ -861,6 +864,10 @@ var function_name = new Function(arg1, arg2, ..., argN, function_body)
 参数必须是字符串,最后一个参数是函数主体（要执行的代码）
 
 ---
+
+同名的变量声明，后者会被忽略；同名的函数声明，前者会被覆盖；同名的函数声明和变量声明，提升函数声明会提升到变量声明之前，变量会被忽略，所以结果是函数声明有效
+
+---
 - 变量提升
 1. 变量提升，就是把变量提升提到函数的top的地方  
     (function(){  
@@ -1108,6 +1115,7 @@ var promise=new Promise(function(resolve,reject){
 })
 ```
 1. 三种状态Pending，Resolve，Rejected   
+
 2. var promise=new Promise(function(resolve,reject){})。   
 resolve和reject由js引擎提供。    
 resolve将Promise对象的状态从“未完成”变为“成功”    
@@ -1117,10 +1125,22 @@ reject将Promise对象的状态从“未完成”变为“失败”
 then()方法作用是：为Promise实例添加状态改变时的回调函数，分别为resolve和reject指定回掉方法。   
 Promise.prototype.then()。  
 then()中返回的值将会被作为参数传递给下一个then(),**如果上一个then返回的是一个Promise对象**，这时后一个回调函数(即then)，会等待该Promise的状态改变来调用回调函数。
+
 4. catch()  
 Promise对象的错误具有冒泡性质，会一直向后传递，直到被捕获为止。     
 一般来说，不要在then中定义使用Reject状态的回调函数，而是用catch。
+
 5. Promise.all([])  返回一个Promise实例
+
+```js
+Promise.resolve('foo')
+// 等价于
+new Promise(resolve => resolve('foo'))
+
+const p = Promise.reject('出错了');
+// 等同于
+const p = new Promise((resolve, reject) => reject('出错了'))
+```
 
 串行promise (异步引入高德地图，参见 vue-admin -> utils)
 ```js

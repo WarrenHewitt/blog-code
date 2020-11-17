@@ -342,9 +342,11 @@ https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/EventLoop
 
     微任务：promise process.nextTick Object.observe MutationObserver ; process.nextTick优先级大于promise.then 如果微任务中又有微任务加入 也会在宏任务前执行
 
-    宏任务：script setTimeout  setInterval setImmediate I/O UI rendering
+    宏任务：script setTimeout  setInterval setImmediate I/O UI rendering requestAnimationFrame
 
 await后面的表达式会先执行一遍，将await后面的代码加入到微任务中
+
+node > 11 : 一旦执行一个阶段里面的任务就会立即执行微任务队列（和浏览器中一致），例如 setTimeout 中有微任务，当执行 setTimeout 的回调函数时，也会将微任务立即执行了，而不是先执行下一个 setTimeout 的回调中的同步代码，再返回来执行微任务
 
 - 一次EventLoop顺序：
     - 执行同步代码（属于宏任务）
@@ -356,10 +358,22 @@ await后面的表达式会先执行一遍，将await后面的代码加入到微�
 ```js
 setTimeout(() => {
     console.log('set timeout 中的宏任务');
+    new Promise((resolve) => {
+        console.log(1);
+        resolve()
+    }).then(() => {
+        console.log(2);
+    })
 }, 0)
 
 setTimeout(() => {
     console.log('set timeout ： 2000');
+    new Promise((resolve) => {
+        console.log(3);
+        resolve()
+    }).then(() => {
+        console.log(4);
+    })
 }, 2000)
 
 var c = new Promise((res) => {
@@ -380,13 +394,18 @@ c.then((r) => {
 })
 
 console.log('script 中的宏任务');
+// 输出：
 // in promise 同步任务
 // script 中的宏任务
 // 微任务 in promise then:params
 // promise in promise
 // promise in promise then
 // set timeout 中的宏任务
+// 1
+// 2
 // set timeout ： 2000
+// 3
+// 4
 ```
 
 ## 存储
@@ -399,23 +418,33 @@ indexDB（无限）
 ## Service worker
 [https://yuchengkai.cn/docs/zh/frontend/browser.html#service-worker](https://yuchengkai.cn/docs/zh/frontend/browser.html#service-worker)
 
-## 渲染机制
-1. 处理html并构建DOM树
-2. 处理css构建CSSOM树
-3. 将DOM与CSSOM合并成一颗渲染树
-4. 根据渲染树来布局(layout)，计算每个节点的位置
-5. 调用GPU绘制，合成图层，显示
+## html 渲染解析
 
-构建CSSOM树
-- 会阻塞渲染，直到构建完成。
-- 十分消耗性能
-- 所以应尽量保证层级扁平
-- css选择器层级越多，执行越慢，最好用id，class
+- 处理html并构建DOM(document object model)树
+- 处理css构建CSSOM(cascading style sheets object model)树,与构建DOM是可以同时进行的
+- 将DOM与CSSOM合并成一颗渲染树 render tree
+- 根据渲染树来布局(layout)，计算每个节点的位置
+- 调用GPU绘制，合成图层，显示
 
-html解析到script标签，会暂停构建DOM，完成后继续。如果头引入了css，会等解析完样式才会执行js
+- 构建CSSOM树 应尽量保证层级扁平 css选择器层级越多，执行越慢，最好用id，class
+
+- 必须等CSSOM构建完毕才能进入下一个阶段，即使DOM已经构建完；如果有外部的样式表处于下载中，也会等待下载并解析完毕才会开始构建 render tree，所以CSS 放头部
+
+css的加载和构建cssom并不会阻塞DOM树的生成，前提是 link 放在 head 内
+
+当解析器发现非阻塞资源，例如图片，浏览器会请求这些资源并且继续解析 当遇到一个CSS文件时，解析也可以继续进行
+
+遇到普通 `script` 标签，会先等CSSOM下载和构建完毕（如果js要修改 cssom，必须拿到一个完整的cssom），再执行js，等JavaScript执行完后，再继续构建DOM，由于js可以修改cssom和dom 导致阻塞，所以一般js放最后
+
+普通脚本的加载顺序：先下载，再执行，再下载下一个，再执行；
+
+`<script defer>`: 开启一个线程去下载js文件，不会立即执行，会阻塞DOMContentLoaded事件，并在其之前执行，不会阻塞DOM树创建，需要等待DOM树生成完毕后执行
+
+`<script async>`：开启一个线程去下载js文件，下载完成后立刻执行，多个脚本间下载是无顺序的，load 触发之前执行，不会阻塞DOM树的创建和DOMContentLoaded事件的执行
 
 ## load与DOMContentLoaded
-Load 事件触发代表页面中的 DOM，CSS，JS，图片已经全部加载完毕。
+
+Load 事件触发代表页面中的 DOM，CSS，JS，图片已经全部加载完毕
 
 DOMContentLoaded 事件触发代表初始的 HTML 被完全加载和解析
 
