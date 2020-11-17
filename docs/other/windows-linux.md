@@ -144,6 +144,8 @@ DNF是新一代的rpm软件包管理器。它取代了yum，正式成为 Fedora 
 
 - 查看是否固态硬盘： 右键任意盘 -> 属性 -> 工具 -> 优化
 
+- power shell 无法执行 vue 等命令，输入 set-ExecutionPolicy RemoteSigned， 选择 A
+
 ### 快捷键
 
 - win + s ：搜索  （calculator 计算器）

@@ -11,7 +11,7 @@
     <!-- <script src="https://cdn.bootcdn.net/ajax/libs/three.js/10/three.js"></script> -->
     <!-- <script src="https://cdn.bootcdn.net/ajax/libs/three.js/r120/three.min.js"></script> -->
     <!-- <script src="https://cdn.bootcdn.net/ajax/libs/three.js/110/three.js"></script> -->
-    <script src="https://cdn.bootcdn.net/ajax/libs/three.js/110/three.min.js"></script>
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/three.js/110/three.min.js"></script> -->
     <style>
         .aa{
             position:sticky;
@@ -30,15 +30,26 @@
     <!-- 作为Three.js渲染器输出元素 -->
     <div id="cusThree" style="width:500px;height:500px;margin: 0 auto;">
     <script>
+        var a = 1;
+        function a() {
+            a = 12
+            console.log(a)
+        }
 
-        var a = setInterval(() => {
-            clearInterval(a)
-            console.log('set interval');
-        }, 0)
-setTimeout(() => {
-    console.log('set timeout ： 2000');
-}, 0)
-        </script>
+        function b () {
+            
+        }
+
+        var b = 12
+
+
+
+        // a()
+
+        console.log(b);
+
+       
+    </script>
 </body>
 
 </html>

@@ -23,8 +23,21 @@ Note 提示信息随意命名
 
 点击生成，记得复制保存，这里只显示一次，刷新进入后 不再显示
 
+`Travis CI` 只支持 Github，不支持其他代码托管服务
+
+## gitlab
+
+clone 时出现， fatal: unable to access 'http://xxxx/front-end/smart-safety-pc.git/': Could not resolve host: xxxx
+
+其中的 xxxx 是一串表示仓库的字符 要将字符改为，当前域名
+
+
 
 ## git
+
+crlf: "\r\n", windows系统的换行方式
+
+lf: "\n", Linux系统的换行方式
 
 - .gitignore  以斜杠“/”开头表示目录
 
@@ -43,6 +56,8 @@ git add -A(--all) 提交所有变化
 ```
 
 - commit 将暂存区文件提交到当前分支
+
+如果不填写注释信息会报错： Aborting commit due to empty commit message.
 
 ### 创建SSH
 
@@ -64,11 +79,11 @@ ssh-keygen
 -t：指定要创建的密钥类型(rsa和dsa; 都是非对称加密算法,DSA 只能用于数字签名，而无法用于加密；RSA 即可作为数字签名，也可以作为加密算法)
 ```
 
-### 钩子
+### Git Hooks 
 
-实例查看本项目的 pre-push文件
+实例查看本项目的 pre-push 文件
 
-- 在初始化git时会在 `./git/hooks/` 中生成钩子脚本，默认加了 `.sample` 后缀，防止默认执行
+- 在初始化git时会在 `./git/hooks/` 中生成钩子脚本，默认加了 `.sample` 后缀，防止默认执行,是样本文件
 
 - 安装一个钩子只需要去掉.sample拓展名即可
 
@@ -114,15 +129,6 @@ ssh-keygen
 - git checkout -- 文件地址加名称
 
 ---
-
-husky npm包
-```
-"husky": {
-  "hooks": {
-    "pre-commit": "npm run lint-staged"
-  }
-}
-```
 
 ### 状态
 
