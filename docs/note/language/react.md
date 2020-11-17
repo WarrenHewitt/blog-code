@@ -139,9 +139,31 @@ props是不可以改变的
 
 ### Hook
 
-- 不编写 class 的情况下使用 state 以及其他的 React 特性
+实践代码： react-admin/src/pages/practice/hooks
 
+- 使函数组件拥有状态
 - 只能放到函数组件中，如（useParams）
+- 复杂状态用 `useReducer()`
+
+```js
+// 必须放在函数内顶部
+const [ val, setVal ] = useState('initValue')  // 返回数组,第一个值是设置的值，第二个值是更新这个值的函数
+
+setVal(old => old+1)  // 采用回调方式更新，更好，修改后 react 会自动渲染对应UI，不会将新的 state和旧的state 合并
+``` 
+
+原理：全局维护了一个 workInProgressHook 变量，多个数据间是采用链式的通过 next 进行的串联结构，所以不能在判断，循环，嵌套中使用，否则破坏链式结构
+
+拥有了生命周期的概念(对应关系):
+```
+constructor              -> useState
+getDerivedStateFromProps -> useState 中的 update 函数
+shouldComponentUpdate    -> useMemo
+render                   -> 函数本身
+componentDidMount        -> useEffect
+componentDidUpdate       -> useEffect
+componentWillUnmount     -> useEffect 里返回的函数
+```
 
 ## Redux
 ### redux杂项

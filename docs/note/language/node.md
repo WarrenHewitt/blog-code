@@ -31,8 +31,11 @@ token需要查库验证token 是否有效，而JWT不用查库或者少查库
 
 利用 secret 来加密和解密  所以千万不能泄露
 
+## yarn
 
+1. yarn add 安装包 
 
+2. yarn remove 卸载包
 
 ## npm
 
