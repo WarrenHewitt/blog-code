@@ -51,7 +51,7 @@ v5：namespace + 输入内容 SHA1
 
 ---
 
-- git hools 操作，阻止不符合的commit和push [Husky](https://github.com/typicode/husky)
+- git Hooks 操作，阻止不符合的commit和push [Husky](https://github.com/typicode/husky)
 
 ---
 

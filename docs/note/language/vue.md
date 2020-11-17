@@ -267,6 +267,29 @@ cypress: Fast, easy and reliable testing for anything that runs in a browser.
     - Use class-style component syntax: 是否使用 使用 类 风格的组件语法
     - Use Babel alongside TypeScript for auto-detected polyfills? ：是否使用babel做转义（建议是使用20200924）
 
+---
+
+husky 和 yorkie 包的安装 会对 .git/hooks里的钩子进行了更改
+
+husky npm 包 
+```json
+"husky": {
+  "hooks": {
+    "pre-commit": "npm run lint-staged"
+  }
+}
+```
+
+yorkie 是fork husky 而来，具体说明 https://cli.vuejs.org/zh/guide/cli-service.html#git-hook
+
+lint-staged 的作用是每次提交只检查本次提交所修改的文件
+
+`"vue-cli-service lint --no-eslintrc -c .eslintrcCommit.js"` 利用修改默认配置文件，使用指定配置文件，在提交时做校验(与开发时的lint不同在于，不允许提交有console.log的代码)
+
+一般是设置了在保存文件时，就进行 eslint 语法校验，这里的 githoots 是在 commit 时，再进行一次 eslint 语法校验（因为用的是 vue-cli-service lint）
+
+代码检测与规范参考： https://juejin.im/post/6844904013368934407#heading-22
+
 
 ### 脚手架打包出来的文字图标不显示
 
@@ -429,6 +452,11 @@ async mounted () {
 commit 触发 mutation store.commit('name')
 
 dispatch 触发 action store.dispatch('increment')
+
+
+- `namespaced: true` 命名空间
+
+两个用法 `store.dispatch('模块名/actionSetUserInfo')`  `...mapState('模块名', ['roles'])`
 
 ## vue-loader
 

@@ -110,6 +110,8 @@ settings.json（可用setting sync共享）
 
 - vetur：vue 插件
 
+- EditorConfig for Visual Studio Code  设置代码规范
+
 ### 插件迁移
 
 使用 setting sync 插件

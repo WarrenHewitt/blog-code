@@ -147,15 +147,6 @@ video 和 audio
 ---
 
 
-脚本的加载顺序：先下载，再执行，再下载下一个，再执行；
-
-< script defer>: 开启一个线程去下载js文件， DOM加载完毕后，才执行；
-
-< script async>：开启一个线程去下载js文件，下载完成后立刻执行，而不是会等到DOM加载完成之后再执行；
-
----
-
-
 < link rel='icon'  type='images/png'sizes='16\*16' href='images/delete.png'/>
 
 图像通常可以使用任何被浏览器支持的图像格式
