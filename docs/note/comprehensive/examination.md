@@ -118,8 +118,10 @@ typeof a // object
 ### 类型转换
 - 条件判断时，除了undefined,null,NaN,'',0,-0,false其它值都转换为true
 
+- NaN,{}和任意值比较都是返回false;
+
 ### 对象转基本类型
-- 先调valueOf()然后调toString(),且都可以被重写
+- 先调 valueOf() 然后调toString(),且都可以被重写 valueOf是Object的原型方法
 ```js
 let a = {
     [Symbol.toPrimitive](){
@@ -221,6 +223,9 @@ Unicode前128个编码单元等于ascii值
 ## 闭包
 一个函数X返回另一个函数Y，且Y使用了X的变量，Y就被称为闭包，X已经出了调用栈，Y能调用X的变量原因是X的变量此时已存贮在堆上，JS引擎通过逃逸分析哪些变量
 需要存贮在堆上，哪些需要存贮在栈上。
+
+闭包  
+销毁 函数名=null
 
 ```js
 for ( let i=1; i<=5; i++) {
