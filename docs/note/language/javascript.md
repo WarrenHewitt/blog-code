@@ -18,6 +18,8 @@ java python 解释型语言（java 将程序编译成字节码：理解为一种
 
 - void 运算符 对给定的表达式进行求值，然后返回 undefined
 
+- 放在运算符中的函数声明  在执行阶段是是找不到的  `if(function a() {}) { 找不到 a }`
+
 ---
 
 - 全局变量 防止未定义 请用window.variable调用 如果不加window可导致报错，阻塞后续代码执行
@@ -367,6 +369,22 @@ undefined:表示缺少值（声明了变量但没有被赋值；调用函数时�
 
 ---
 
+- 可枚举属性 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Enumerability_and_ownership_of_properties
+
+可以用 Object.keys() 获取
+
+---
+
+- delete 
+
+可删除： 1. 可配置对象的属  2. 隐式申明的全局变量(没有用 var let const 声明)  3. const 或 let 申明的 tdz 中的（没有找到验证代码） 4. 修饰属性 configurable 为 false 的
+
+不可删： 1. 从原型继承而来的属性
+
+删数组： length 不会变 删掉的位置变为 empty  用 join 会保留空 `1,,3`
+
+---
+
 `obj.hasOwnProperty('b')`  判断 obj 对象是否有属性 b  返回布尔值
 
 ---
@@ -595,7 +613,7 @@ for(var 变量 in 数组名 ){  //不推荐
     alert(变量) //返回数组下标  
     alert(数组名[变量])  //返回对应下标的数组值  
 }  
-for...in 遍历（当前对象及其原型上的）每一个属性名称,而 for...of遍历（当前对象上的）每一个属性值  
+for...in 遍历（当前对象及其原型上的）每一个属性名称,而 for...of遍历（当前对象上的）每一个属性值  （可枚举与不可枚举）
 
 for...of  不可以遍历原生对象 {a:1,b:2} 因为原生对象不具有 Iterator 接口
 ```
@@ -828,21 +846,13 @@ var newArray = [].concat(arr1,arr2,arr3)
 
 ### Function
 
-- 一般的函数调用都是同步
+- 一种特殊的 命名函数表达式
+
 ```js
-function ss() {
-	var i=0;
-	while(i<10000000000){
-		i++
-	}
-	console.log(12)
+var fnName = function fn() {
+    // 这里可以调用 fn  fnname
 }
-function bb() {
-    console.log(34)
-}
-ss()
-bb()
-// 先返回12，再返回34
+// 这里只能调用 fnName
 ```
 
 - 异步编程
@@ -1354,15 +1364,6 @@ function a(p){
 ### Proxy | defineProperty | defineProperties
 
 **拦截** 对目标对象的访问
-
-Proxy 与 Object.defineProperty 对比
-
-Object.defineProperty
-
-- 只能对属性进行数据劫持，所以需要深度遍历整个对象
-
-- 对于数组不能监听到数据的变化
-
 #### Proxy(target,handler)
 
 target：要拦截的对象
@@ -1413,18 +1414,29 @@ const proxy = new Proxy(target, handler)
 console.log(proxy);
 ```
 
-- Object.defineProperty(obj, 属性名称, descriptor),在现有对象上新建一个属性，或修改现有属性，并返回这个对象
+- Object.defineProperty
 
-- Object.defineProperties(obj, props)
+Object.defineProperty(obj, 属性名称, descriptor),在现有对象上新建一个属性，或修改现有属性，并返回这个对象
+
+Object.defineProperties(obj, props)
+
+只能对属性进行数据劫持，所以需要深度遍历整个对象
+
+对于数组不能监听到数据的变化
 
 ```js
+Object.defineProperty(object1, 'property1', {
+  value: 42,
+  writable: false
+});
+
 props: {
     property: descriptor
 }
 descriptor: {
     configurable: 默认false；表示属性是否能删除，以及除writeable以外的属性可否被修改；
-    writable: 默认true；属性值可否被修改
-    enumerable: 默认true 属性是否可以被for...in和Object.keys()获取
+    writable:  // 默认 false 属性值可否被修改
+    enumerable: // 默认 false  属性是否可以被 for...in 和 Object.keys() 获取
     value: 属性值
     get() {
         // 这里注意 又使用 obj.key  形成死循环

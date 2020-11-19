@@ -30,18 +30,14 @@
     <!-- 作为Three.js渲染器输出元素 -->
     <div id="cusThree" style="width:500px;height:500px;margin: 0 auto;">
     <script>
-        var a = [0]
+     var foo = {
+         bar: function() {
+             return this.baz
+         },
+         baz: 1
+     }
 
-        // https://www.jianshu.com/p/541485cef912
-
-        console.log(a == true);
-
-        console.log({}==false)
-
-        console.log(!!Number({}) == false);
-
-        console.log(NaN == false);
-
+     console.log( foo.baz, foo.lll);
 
        
     </script>

@@ -241,7 +241,7 @@ align-items: center;
 
 1. order:< number>；默认0，越小越靠前；
 2. flex-grow:< number>;默认0，项目的放大比例，当都设置为1时就等分，当有一个是2时该项目将会是其它的两倍。
-3. flex-shrink:< number>;默认1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。
+3. flex-shrink:< number>;默认1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，设置为0的不缩小。
 4. flex-basis:auto|px|%;设置宽度。
 5. flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。**建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值**。
 6. align-self:属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。除了auto，其他都与align-items属性完全一致。
