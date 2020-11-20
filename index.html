@@ -39,14 +39,14 @@
     <!-- 作为Three.js渲染器输出元素 -->
     <div id="cusThree" style="width:500px;height:500px;margin: 0 auto;">
     <script>
+     var foo = {
+         bar: function() {
+             return this.baz
+         },
+         baz: 1
+     }
 
-        var a = [2]
-
-        var nameValllue = ''
-
-        console.log(Number(a));
-        
-
+     console.log( foo.baz, foo.lll);
 
        
     </script>
