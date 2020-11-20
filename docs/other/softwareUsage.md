@@ -48,6 +48,7 @@ settings.json（可用setting sync共享）
     "workbench.colorTheme": "Monokai",
     //eslint 配置解释可以setting查看
     "editor.fontSize": 15,
+    /* 改为在setting中设置 */
     "eslint.enable": true,
     "eslint._legacyModuleResolve": true,
     "eslint.alwaysShowStatus": true,
@@ -111,6 +112,8 @@ settings.json（可用setting sync共享）
 - vetur：vue 插件
 
 - EditorConfig for Visual Studio Code  设置代码规范
+
+- code spell checker: 检查拼写 注意添加要检测的文件 "cSpell.allowCompoundWords": true  允许使用一些网络单词
 
 ### 插件迁移
 
