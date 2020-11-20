@@ -83,6 +83,9 @@ a[i] = value; // 1270ms obj[property] = value; // 960ms
 [https://yuchengkai.cn/docs/zh/frontend/](https://yuchengkai.cn/docs/zh/frontend/)
 
 ## js
+
+- 判断为 false 的情况只有： 0 false '' null undefined 未定义的值;  其它都为 true
+
 ### 类型
 
 - 基本类型 `string boolean number null undefined symbol` 
