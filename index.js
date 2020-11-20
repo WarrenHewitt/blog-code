@@ -37,3 +37,5 @@ setTimeout(() => {
         console.log(12);
     })
 })
+
+const nameValllue = '22'

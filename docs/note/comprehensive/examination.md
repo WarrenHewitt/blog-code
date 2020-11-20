@@ -7,6 +7,8 @@
 
 ---
 
+- 严格模式( use strict )：要求显示的引用全局作用域
+
 ## 内核
 ie **trident** || chrome，Safari **webkit** || firefox **gecko** || Opera **presto**  
 chrome Opera 现在： Blink(基于webkit，Google与Opera Software共同开发)
@@ -116,11 +118,16 @@ typeof a // object
 ```
 
 ### 类型转换
+- 除 Object 以外的所有类型都是不可变的,值本身无法被改变,称这些类型的值为“原始值” primitive
+
 - 条件判断时，除了undefined,null,NaN,'',0,-0,false其它值都转换为true
 
-- NaN,{}和任意值比较都是返回false;
+- NaN,{}和任意值比较都是返回false;，对象会先转为数字 NaN
+
+- 数组转化为Number时（会隐式的调用join方法）： 空的[]转为0，有两个或以上元素的数组转为NaN，只有一个元素时，根据该元素进行Nunber转换
 
 ### 对象转基本类型
+- 对象转数字 返回 NaN
 - 先调 valueOf() 然后调toString(),且都可以被重写 valueOf是Object的原型方法
 ```js
 let a = {

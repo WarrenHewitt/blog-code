@@ -230,6 +230,7 @@ chai：断言库，即各种判断(expect方法)
 
 Karma: 一个启动浏览器运行测试并生成报告的测试运行器
 
+
 sinon: 模拟与其它系统或函数对接，主要有三个方法 spy stub mock
 
 cypress: Fast, easy and reliable testing for anything that runs in a browser.
