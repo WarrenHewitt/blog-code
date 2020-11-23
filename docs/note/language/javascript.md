@@ -42,7 +42,7 @@ console.trace() 输出一个堆栈跟踪
 
 ---
 
-- let 是块作用域，一个函数或一个for或if语句中
+- let 是块作用域，一个函数或一个for或if语句中，其定义的值并不会挂载到window上
 - const 常量索引 只可以在声明的时候赋值 变量名在内存中的指针不会变，但是指向这个变量的值可以变  
 
 实现 let 
@@ -113,7 +113,7 @@ zepto.min.js 加载新的模块  直接在 https://github.com/madrobby/zepto/tre
 try{
 
 } catch (error) {
-
+    // 这里没有作用域  只有参数有个相对的作用域
 } finally {
     // 无论是否有异常，finally中的语句都会执行，即使try，catch中有return
 }
@@ -555,7 +555,7 @@ n为0到20之间值;
 - Math.ceil(X):上舍入；  
 - Math.floor(X):下舍入；  
 - Math.round(X):四舍五入；  
-- Math.pow(X，y):x的y次方；  
+- Math.pow(x, y):x的y次方
 - Math.random(): 返回 [0，1) 之间的随机数  
 - Math.sin(以弧度表示的角度)：（2*PI/360）度数，就是弧度
 
@@ -757,6 +757,22 @@ Array.prototype.slice.call(obj);//  ["first", "second"]
 
 ---
 
+- Array.reduce() 对数组中的每个元素执行一个提供的reducer函数，将结果汇总为单个返回值
+
+```js
+var a = [2,5,8]
+// accumulator 上一次返回的值 currentValue 当前值 index 当前正在处理的元素索引
+console.log(a.reduce((accumulator, currentValue, index) => { 
+    console.log(index); // index 从1开始
+    var r = accumulator
+    if(index === 1) r = accumulator*10
+    return 1
+}));
+// 返回 150
+```
+
+---
+
 #### filter/map/forEach/some/every/find/findIndex/includes
 - filter 返回符合条件的新数组
 
@@ -855,6 +871,8 @@ var fnName = function fn() {
 // 这里只能调用 fnName
 ```
 
+---
+
 - 异步编程
   1. 函数回调
   2. 事件监听
@@ -875,7 +893,7 @@ var function_name = new Function(arg1, arg2, ..., argN, function_body)
 
 ---
 
-同名的变量声明，后者会被忽略；同名的函数声明，前者会被覆盖；同名的函数声明和变量声明，提升函数声明会提升到变量声明之前，变量会被忽略，所以结果是函数声明有效，注意是声明，并没有赋值
+同名的变量声明，后者会被忽略；同名的函数声明，前者会被覆盖；同名的函数声明和变量声明，提升函数声明会提升到变量声明之前，变量会被忽略，所以结果是函数声明有效，**注意是声明，并没有赋值**
 
 ---
 - 变量提升
@@ -911,14 +929,18 @@ IIFE: Immediately Invoked Function Expression，意为立即调用的函数表�
 构造：
 ``` javascript
 function A(){
-   var a1=1;//私有属性
-   this.a2=2;//公有属性
-   this.aaa=function(){
-    alert(a1);//在实例化中是可以访问该私有属性的
-	}
+    var a1=1;//私有属性
+    this.a2=2;//公有属性
+    this.aaa=function(){
+        alert(a1);//在实例化中是可以访问该私有属性的
+    }
 }
+
+A.prototype.a2 = 3 // 这个在实例化后会被  this.a2 覆盖
+A.a3=3; // 静态属性  
+var obj = new A()
+obj.constructor.a3 // 实例中 只能这样访问
 ```
-A.a3=3;//静态属性，在构造实例的时候，实例是不能访问的，只有用访问构造函数的该属性才可以，实例名.constructor.属性名。  
 
 **this指向**
 - this指的是调用函数的对象。  
@@ -947,7 +969,9 @@ toString() 最慢；1 + '' 字符串拼接 和 `` 模板字符串 都更快，�
 
 - 字符串转数字
   1. Number(new Date()|new Boolean()|'123');  
-  2. parseInt(该参数会被强制转化为字符串 | 注意科学计数法,进制默认10进制)  
+  2. parseInt(该参数会被强制转化为字符串 | 注意科学计数法, radix(一定要指定一个,不指定就会有不同的默认))  解析一个字符串并**返回指定基数的十进制整数**
+        https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/parseInt
+
   3. parseInt(0.0000008) === 8  //true
 
   4. parseFloat(一个参数); 

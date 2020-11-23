@@ -54,7 +54,7 @@ objA.valueA = null;
 **页面解构设计**
 **细节**
 
-## 垃圾回收
+## 垃圾回收 garbage collection
 垃圾回收机制依赖引用计数，如果一个值的引用次数不为0，垃圾回收机制就不会释放这块内存，当使用了值之后未取消引用，可能导致内存泄漏
 
 - 当没有变量指向某一内存 a={b:1}; a={c:2}; 存贮{b:1} 会被回收
@@ -109,7 +109,7 @@ a.toString() // 此时变为引用类型
 ```
 
 ### typeof
-- 返回的值都是小写,有number,boolean,string,function,object,undefined
+- 返回的值都是小写,有number,boolean,string,function,object,undefined symbol
 - 当变量没有定义时可以用 if(typeof variable === 'undefined') 来判断，若直接判断则会报错阻碍程序后续执行
 - Array,null 返回 object
 ```js
@@ -209,7 +209,7 @@ Unicode前128个编码单元等于ascii值
 - 绑定 this
 - 返回新对象
 
-优先级：new Foo() 的优先级大于 new Foo，前者是函数，后者是对象
+优先级：new Foo() 的优先级大于 new Foo，有参数的优先级高  new fn.getValue() 等价于 将 getValue 作为构造函数，因为 . 优先级高于 无参 new ； . 的优先级与有参 new 相同为18
 
 ### this
 指向调用函数前的对象
@@ -268,7 +268,8 @@ const result = arr.map(item => ({ ...item }))
 ## 模块化
 - ES6
 - CommonJs 是 Node 独有的规范
-- AMD 是由 RequireJS 提出的
+- AMD 是由 RequireJS 提出的，推崇依赖前置，提前执行，用户体验好
+- CMD 由 SeaJS  提出，推崇依賴就近，延迟执行 ，性能好，用户需要时才执行 
 
 CommonJs模块输出的是一个值的拷贝，ES6模块输出的是值的引用。
 CommonJs模块是运行时加载，ES6模块是编译时输出接口。
