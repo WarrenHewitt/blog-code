@@ -13,26 +13,34 @@
     <!-- <script src="https://cdn.bootcdn.net/ajax/libs/three.js/110/three.js"></script> -->
     <!-- <script src="https://cdn.bootcdn.net/ajax/libs/three.js/110/three.min.js"></script> -->
     <style>
-        .aa{
-            position:sticky;
+        .aa {
+            position: sticky;
             top: 100px
         }
-        .p{
+
+        .p {
             height: 300px;
             margin: 20px;
             background-color: rgb(77, 168, 211);
         }
-
     </style>
 </head>
 
 <body>
     <!-- 作为Three.js渲染器输出元素 -->
     <div id="cusThree" style="width:500px;height:500px;margin: 0 auto;">
-    <script>
-        let a = 23
-        console.log(window.a);
-    </script>
+        <script>
+            var a = 0
+            if (true) {
+                a = 10
+                console.log(a, window.a) // 10 0
+                function a() { } // 此处运行后 才会覆盖全局同名变量
+                console.log(a, window.a) // 10 10
+                a = 20
+                console.log(a, window.a) // 20 10
+            }
+
+        </script>
 </body>
 
 </html>
