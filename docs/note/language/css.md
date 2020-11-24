@@ -440,14 +440,18 @@ backface-visibility:visible|hidden
 控制当前元素旋转到背面对着我们的视角时是否显示
 
 ## sass
+
 先安装ruby  
-sass：采用的是空格缩进(文件为.sass后缀)  
+```css
+/* sass：采用的是空格缩进(文件为.sass后缀)   */
 h1  
   color:red  
-scss: 采用花括号方式(文件为.scss后缀)  
+/* scss: 采用花括号方式(文件为.scss后缀)   */
 h1{  
   color:red  
 }  
+```
+
 安装了sass后，进入文件夹用sass-convert 被替换文件名 要得到文件名  
 gem是ruby写的应用程序，用来管理安装各种包，等同于node的npm  
 Ruby 安装sass源更换  
@@ -517,7 +521,7 @@ body{ font-size:$fontSize; }
 @function 来声明函数   一般很少用
 
 ---
-当只用来继承的样式不想输出到css  可以用%名称{}和@extend %名称来使用。  
+当只用来继承的样式不想输出到css  可以用 `%名称{}` 和 `@extend %名称` 来使用。  
 ```css
 %cor{
   color: transparent;
@@ -528,12 +532,16 @@ body{ font-size:$fontSize; }
 }
 ```
 ---
-```
+```css
 @at-root{
   .cla{}
 }  
 ``` 
 用于将嵌套再某个类下面的类.cla渲染到css的根下而不是跟在某个类之后。
+
+---
+
+- `#{}` 用于将变量设置为属性名，或包裹 变量计算
 
 ---
 #### 混合 mixin

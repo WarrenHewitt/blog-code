@@ -9,6 +9,16 @@
 
 - 严格模式( use strict )：要求显示的引用全局作用域
 
+- 优先级： + 高于 ?
+
+```js
+// 点的优先级大于等号
+var a = { n: 1 } var b = a
+a.x = a = { n:2 }  // 先执行 a.x  给x赋值 undefined
+console.log(a, b);
+// { n: 2 }  { n: 1, x { n: 2 } }
+```
+
 ## 内核
 ie **trident** || chrome，Safari **webkit** || firefox **gecko** || Opera **presto**  
 chrome Opera 现在： Blink(基于webkit，Google与Opera Software共同开发)
