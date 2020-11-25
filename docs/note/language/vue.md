@@ -21,6 +21,11 @@ Object.assign(this.$data, this.$options.data.call(this));
 
 - `Vue.component( id, [definition] )`  注册或获取全局组件
 
+- 虚拟 DOM 
+    1. 需要适配上层 API 对 dom 的操作，所以需要具有普适性，所以不是最优性能实现，但是比所有的都直接操作DOM要更好，保障了性能的下限
+    2. 跨平台，因为本质是js对象，，可以做服务端渲染 weex 等
+    3. 有些高性能应用中，无法极致优化，比如vscode手动操作DOM进行的性能优化
+
 ### 自定义组件用 v-model
 父组件：
 ```
@@ -360,6 +365,7 @@ next({ path: '/' })  // 跳转到一个不同的地址。当前的导航被中�
 2. 通过同一个 router-view 进入的路由间切换, keep-alive 都有效,都会缓存页面。
 3. 只要通过keep-alive下的路由(前提是要包含在include中) ，每次都会触发activated, 只有第一次进入会触发mounted（切换过router-view入口 再进入也会触发mounted）
 4. 注意include 如果用字符串值，后面名称与逗号之间不要有空格
+5. exclude 优先级更高
 ```js
 beforeRouteLeave (to, from, next) {
     /** 这里主要是重置数据，当要去往的地址是新增、编辑、详情这些时，即可以不用重置数据 */

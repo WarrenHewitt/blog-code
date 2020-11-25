@@ -39,15 +39,18 @@
     <!-- 作为Three.js渲染器输出元素 -->
     <div id="cusThree" style="width:500px;height:500px;margin: 0 auto;">
     <script>
-    var a = { n: 1 }
-    var b = a
+       const  a = {
+           b: {
+                c: 1
+           }
+       }
 
-    a.x = a = { n:2 }
-    console.log(a, b.toString());
-
-    // { n: 2 }
-    // { n: 1, x { n: 2 } }
-       
+       const { b } = a
+       const bb = b
+       b.c = 56
+       delete a.b
+       console.log(a);
+       console.log(bb);
     </script>
 </body>
 
