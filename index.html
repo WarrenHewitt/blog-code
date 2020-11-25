@@ -30,15 +30,21 @@
     <!-- 作为Three.js渲染器输出元素 -->
     <div id="cusThree" style="width:500px;height:500px;margin: 0 auto;">
         <script>
-            var a = 0
-            if (true) {
-                a = 10
-                console.log(a, window.a) // 10 0
-                function a() { } // 此处运行后 才会覆盖全局同名变量
-                console.log(a, window.a) // 10 10
-                a = 20
-                console.log(a, window.a) // 20 10
+
+            function isEven(num) {
+                const isI = (num|0) === num
+                if(!isI) {
+                    return false
+                }
+                const n = num/2
+                console.log('-----', n);
+                console.log(parseInt(n) ,'-=-=', Math.round(n));
+                
+                return parseInt(n) === Math.round(n)
             }
+
+            console.log(isEven(2));
+
 
         </script>
 </body>
