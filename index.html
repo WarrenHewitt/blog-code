@@ -31,19 +31,26 @@
     <div id="cusThree" style="width:500px;height:500px;margin: 0 auto;">
         <script>
 
-            function isEven(num) {
-                const isI = (num|0) === num
-                if(!isI) {
-                    return false
+            function plus() {
+                var r = [].slice.call(arguments).reduce((r, c) => r+c)
+                console.log('---', r);
+                var fn = function() {
+                    r += [].slice.call(arguments).reduce((r, c) => r+c)
+                    
+                    console.log('====', r);
+                    return fn
                 }
-                const n = num/2
-                console.log('-----', n);
-                console.log(parseInt(n) ,'-=-=', Math.round(n));
+
+                fn.toString = function() {
+                    return r+""
+                }
+
+                console.log(r);
                 
-                return parseInt(n) === Math.round(n)
+                return fn
             }
 
-            console.log(isEven(2));
+            console.log(-1/0 === -Infinity);
 
 
         </script>
