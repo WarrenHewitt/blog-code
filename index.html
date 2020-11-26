@@ -13,11 +13,12 @@
     <!-- <script src="https://cdn.bootcdn.net/ajax/libs/three.js/110/three.js"></script> -->
     <!-- <script src="https://cdn.bootcdn.net/ajax/libs/three.js/110/three.min.js"></script> -->
     <style>
-        .aa{
-            position:sticky;
+        .aa {
+            position: sticky;
             top: 100px
         }
-        p{
+
+        .p {
             height: 300px;
             width: 100px;
             margin: 20px;
@@ -30,7 +31,6 @@
 
             background-color: rgb(199, 199, 199);
         }
-
     </style>
 </head>
 
@@ -38,20 +38,27 @@
     <p>ddddddd</p>
     <!-- 作为Three.js渲染器输出元素 -->
     <div id="cusThree" style="width:500px;height:500px;margin: 0 auto;">
-    <script>
-       const  a = {
-           b: {
-                c: 1
-           }
-       }
+        <script>
+            var data = {
+                a: {
+                    b: {
+                        c: 'c'
+                    }
+                }
+            }
+            var strInit = 'a.b'
 
-       const { b } = a
-       const bb = b
-       b.c = 56
-       delete a.b
-       console.log(a);
-       console.log(bb);
-    </script>
+            const getObjectValue = (data,path) => {
+                try {
+                    return path.split('.').reduce((result, current) => result[current], data)
+                } catch {
+                    return undefined
+                }
+            }
+
+            console.log(getObjectValue(data, strInit));
+
+        </script>
 </body>
 
 </html>
