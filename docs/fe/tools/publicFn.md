@@ -445,7 +445,7 @@ function randomColor(type){
         if(/rgba/.test(type)) rgba += `, ${a})`
         return rgba;
     } else {
-        /** 16777215 转换为16进制是 ffffff 所以用 16777216 保证能取到白色 */
+        /** 16777215 (2的24次方) 转换为16进制是 ffffff 所以用 16777216 保证能取到白色 */
         const color = `#${Math.floor(Math.random() * 16777216).toString(16)}`;
         /** 这里填充的值随意设置 */
         return color.padEnd(7, 'f');
