@@ -195,8 +195,6 @@ html中，右边固定元素要在前，设置样式 float:right
 2. flex实现
 ```
 
-
-
 ### flex布局
 - 子元素的float，clear，vertical-aline属性将失效。
 

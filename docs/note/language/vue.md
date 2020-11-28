@@ -235,7 +235,6 @@ chai：断言库，即各种判断(expect方法)
 
 Karma: 一个启动浏览器运行测试并生成报告的测试运行器
 
-
 sinon: 模拟与其它系统或函数对接，主要有三个方法 spy stub mock
 
 cypress: Fast, easy and reliable testing for anything that runs in a browser.
@@ -490,6 +489,8 @@ dispatch 触发 action store.dispatch('increment')
 ```
 
 - `el-cascader` 需要点击两次才能选中，其中一个原因是，多次赋值操作；解决办法为，保证只有在初始化时进行一次赋值操作
+
+- 在表格中使用 dropdown 的基础形式 也就是没有用 split-button 需要把 v-slot="scope" 加上
 
 
 ## iview
