@@ -148,6 +148,14 @@ new Error([message[, fileName[, lineNumber]]])
 - 用new和不用，输出的结果一样
 - 还有其它类型错误：ReferenceError（引用错误）,TypeError(类型错误)，RangeError(范围错误) 等
 
+```js
+var err = new Error('909090')
+err.code = 56
+console.log(JSON.stringify(err)) // { code: 56 }
+
+// axios 的错误也是类似的封装 https://github.com/axios/axios/blob/master/lib/core/enhanceError.js
+```
+
 
 ---
 **setTimeout | setInterval**
@@ -397,8 +405,8 @@ undefined:表示缺少值（声明了变量但没有被赋值；调用函数时�
 
 ---
 
-- Object.seal() 密封对象，可以修改属性值
-- Object.freeze() 冻结对象，只冻结第一层，其它的都不能修改
+- Object.seal() 密封对象，可以修改属性值,禁止添加新属性
+- Object.freeze() 冻结对象，什么都不能修改，只冻结第一层
 
 ---
 
@@ -547,7 +555,9 @@ document.domain  获取域名不带端口
 
 - Number('true') 返回 NaN
 
--  浮点数运算精度问题 `0.1+0.2=0.30000000000000004、1-0.9=0.09999999999999998 3*0.2=0.6000000000000001`
+- 浮点数运算精度问题 `0.1+0.2=0.30000000000000004、1-0.9=0.09999999999999998 3*0.2=0.6000000000000001`
+
+- js 运算是带符号的  一个数除以 0 得无穷 1/0 等于 Infinity  -1/0 等于 -Infinity
 
 ---
 
@@ -571,7 +581,6 @@ n为0到20之间值;
 - .ceil(X):上舍入；  
 - .floor(X):下舍入；  
 - .round(X):四舍五入；  
-- .pow(x, y):x的y次方
 - .pow(x, y):x的y次方
 - .sqrt() 平方根
 - .random(): 返回 [0，1) 之间的随机数  
@@ -763,17 +772,20 @@ Window||document.body.onbeforeunload=function(e){
 
 ### Array
 
-**ArrayLick 类数组**
+- 伪数组 Array like 
 
-Javascript中存在一种名为伪数组的对象结构。比较特别的是 arguments 对象，还有像调用 getElementsByTagName ,document.childNodes之类的，它们返回NodeList对象都属于伪数组。不能应用 Array下的 push , pop 等方法。
+像 arguments 对象，还有像调用 getElementsByTagName ,document.childNodes之类的，它们返回NodeList对象都属于伪数组。不能应用 Array下的 push , pop 等方法。
 
 当给其定义了 push 方法后，是根据定义的length 在指定的下标处开始插入
 
+将伪数组转化为数组
 ```js
-// 将类数组转化为数组
 // Array.prototype.slice.call(arguments) || [].slice.call(arguments)
 const obj={length:2,0:'first',1:'second'};
 Array.prototype.slice.call(obj);//  ["first", "second"]
+
+const args = Array.from(arguments);
+const args = [...arguments];
 ```
 
 ---
@@ -799,6 +811,14 @@ console.log(a.reduce((accumulator, currentValue, index) => {
 ```
 
 ---
+
+- `.from` 从一个类似数组或可迭代对象创建一个新的 浅拷贝的数组
+
+```js
+Array.from('abc');  // [a,b,c]
+
+Array.from([1, 2, 3], x => x + x) // [2,4,6]
+```
 
 #### filter/map/forEach/some/every/find/findIndex/includes
 - filter 返回符合条件的新数组,没有赋值或删除了的项，会被跳过
