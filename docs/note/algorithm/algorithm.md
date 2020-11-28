@@ -85,6 +85,47 @@ var x = i + j
 } 
 ```
 
+## 判断偶数 不用 %
+
+```js
+ function isEven(num) {
+    // 判断是不是整数
+    const isI = (num|0) === num
+    if(!isI) {
+        return false
+    }
+    const n = num/2
+    
+    return parseInt(n) === Math.round(n)
+}
+```
+
+## 判断质数
+
+质数是指在大于1的自然数中，除了1和它本身以外不再有其他因数的自然数
+```js
+function isPrime(n) {
+    if(typeof n !== 'number' || !Number.isInteger(n)){
+        return false
+    }
+    /* 偶数中 除了2其它都是 */
+    if(n===2) {
+        return true
+    }
+    if(n<2 || n%2 === 0){
+        return false
+    }
+    const sqrt = Math.sqrt(n)
+    /* 这里只循环奇数即可 */
+    for (let i = 3; i < sqrt; i+=2) {
+        if (n%i === 0) {
+            return false
+        }
+    }
+    return true
+}
+```
+
 ## 斐波拉契数列
 > 利用生成器
 
@@ -123,7 +164,7 @@ a = a ^ b;
 ## 数组相关
 
 ### 数组去重
-#### 利用对象表形式
+- 利用对象表形式
 ```js
 var arr=[],hash={},newArr=[];
 for(var i=0;i<arr.length;i++) {
@@ -134,12 +175,19 @@ for(var i=0;i<arr.length;i++) {
 }
 console.log(newArr) // 去重后的数组
 ```
-#### 利用Set
+- 利用Set
 ```js
 var a = [1,2,3,1,4,4,4]
 var b = new Set(a)
 /* 一定要将Set转为数组 */
 console.log([...b]); // [1,2,3,4]
+```
+
+- 利用 reduce
+```js
+function uniq(arr) {
+    return arr.reduce((r, c) => r.includes(c) ? r : r.concat(c), [])
+}
 ```
 
 ### 计算数组中任意两个数的和等于数组中某个值的组数

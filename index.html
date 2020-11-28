@@ -39,24 +39,12 @@
     <!-- 作为Three.js渲染器输出元素 -->
     <div id="cusThree" style="width:500px;height:500px;margin: 0 auto;">
         <script>
-            var data = {
-                a: {
-                    b: {
-                        c: 'c'
-                    }
-                }
-            }
-            var strInit = 'a.b'
+           
 
-            const getObjectValue = (data,path) => {
-                try {
-                    return path.split('.').reduce((result, current) => result[current], data)
-                } catch {
-                    return undefined
-                }
-            }
+            console.log(isEven(2));
 
-            console.log(getObjectValue(data, strInit));
+            console.log('weyuansuan', (12.33 | 0))
+
 
         </script>
 </body>
