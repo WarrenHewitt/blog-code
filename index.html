@@ -39,11 +39,16 @@
     <!-- 作为Three.js渲染器输出元素 -->
     <div id="cusThree" style="width:500px;height:500px;margin: 0 auto;">
         <script>
-           
+            var a = {}
 
-            console.log(isEven(2));
+            var err = new Error('909090')
 
-            console.log('weyuansuan', (12.33 | 0))
+            err.code = 56
+
+            console.log(JSON.stringify(err));
+
+            console.log(err.code);
+
 
 
         </script>
