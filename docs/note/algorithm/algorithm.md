@@ -111,6 +111,19 @@ function isPrime(n) {
 }
 ```
 
+## 将数字改为： 1,234,567,890
+
+```js
+function formatNumber(str) {
+    var num = str.split('').reverse().reduce((a, c, i) => {
+        return `${i%3===0 ? `${c},` : `${c}`}${a}`
+    })
+    return num
+}
+
+console.log(formatNumber('1234567890')); // 1,234,567,890
+```
+
 ## 斐波拉契数列
 > 利用生成器
 

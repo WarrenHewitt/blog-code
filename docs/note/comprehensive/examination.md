@@ -123,8 +123,23 @@ typeof a // object
 
 - NaN,{}和任意值比较都是返回false;
 
-### 对象转基本类型
-- 先调 valueOf() 然后调toString(),且都可以被重写 valueOf是Object的原型方法
+---
+
+- 对象转字符串：
+
+先调 toString() 后调 valueOf() 
+
+---
+
+- 对象转数字：
+
+先调 valueOf() 如果返回原始值( null undefined 布尔值 字符串 数字 ) 将其转换为数字， 就是直接作为返回值
+
+再调 toString() 过程同上
+
+如果都没有返回原始值 则抛出错误
+
+以上两个方法都可以被重写
 ```js
 let a = {
     [Symbol.toPrimitive](){
@@ -137,12 +152,15 @@ let a = {
         return 'SB'
     }
 }
-console.log(a+a.toString()) 
+console.log(a) // 9 
+console.log(a.toString()) // SB
 // 没有重写valueOF 返回 SBSB
 // 没有重写toString 返回 you are[object Object]
 // 返回 you areSB
 // 有了toPrimitive方法，即不返回valueOf的值
 ```
+
+---
 
 ### 逗号操作符
 
@@ -190,14 +208,16 @@ Unicode前128个编码单元等于ascii值
 > Function这个对象比较特殊，它的构造函数就是它自己（因为Function可以看成是一个函数，也可以是一个对象）
 > 所有函数和对象最终都是由Function构造函数得来，所以constructor属性的终点就是Function这个函数
 
-`__proto__`
-> 指向创建该对象的构造函数的原型, 在其 constructor 属性的 name 属性值，表示原型名；
+`__proto__`  隐式原型
+> 指向创建该对象的构造函数的 prototype, 在其 constructor 属性的 name 属性值，表示原型名；
 > 这样一层一层的构成了原型链
 > 当访问一个对象的属性值时，也会按照该方式一层一层的找，直到 `__proto__` 指向 null
 
-`prototype` 
-> 指向函数的原型对象（也是当前函数所创建的实例的原型对象）  所以构造函数的prototype 和实例的 `__proto__` 指向同一个原型对象
-> 作用：实例共享属性和方法
+`prototype`   显示原型
+
+函数创建后都有一个（Function.prototype.bind 方法构造出来的函数没有），指向向函数的原型对象  也是当前函数所创建的实例的原型对象）  所以构造函数的prototype 和实例的 `__proto__` 指向同一个原型对象
+
+作用：实例共享属性和方法
 
 ### new
 自己实现new（未完成）

@@ -30,27 +30,17 @@
     <!-- 作为Three.js渲染器输出元素 -->
     <div id="cusThree" style="width:500px;height:500px;margin: 0 auto;">
         <script>
-
-            function plus() {
-                var r = [].slice.call(arguments).reduce((r, c) => r+c)
-                console.log('---', r);
-                var fn = function() {
-                    r += [].slice.call(arguments).reduce((r, c) => r+c)
-                    
-                    console.log('====', r);
-                    return fn
-                }
-
-                fn.toString = function() {
-                    return r+""
-                }
-
-                console.log(r);
-                
-                return fn
+            
+            function formatNumber(str) {
+                var num = str.split('').reverse().reduce((a, c, i) => {
+                    return `${i%3===0 ? `${c},` : `${c}`}${a}`
+                })
+                return num
             }
+            
+            console.log(formatNumber('1234567890'));
 
-            console.log(-1/0 === -Infinity);
+
 
 
         </script>
