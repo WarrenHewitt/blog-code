@@ -43,6 +43,8 @@ lf: "\n", Linux系统的换行方式
 
 - git subtree 实现一个仓库作为其他仓库的子仓库
 
+- 上传空文件夹  添加 `.gitkeep` 文件即可
+
 ### 基础命令
 - init 此命令初始化一个新本地仓库，它在工作目录下生成一个名为.git的隐藏文件夹
 
@@ -273,4 +275,6 @@ git stash apply stash@{值} // 查看列表获取的值
 git stash drop stash@{值} // 移除某个暂存
 
 git stash clear // 清空本地暂存栈信息
+
+
 

@@ -20,13 +20,22 @@
 
         .p {
             height: 300px;
+            width: 100px;
             margin: 20px;
-            background-color: rgb(77, 168, 211);
+            /* box-shadow:  
+                -10px 0 10px red, 
+                10px 0 10px yellow,     
+                0 -10px 10px blue, 
+                0 0 10px 10px green;  */
+                box-shadow: 10px 0, -10px 0 green, 0 -10px, 3px 1px 4px 0 red;
+
+            background-color: rgb(199, 199, 199);
         }
     </style>
 </head>
 
 <body>
+    <p>ddddddd</p>
     <!-- 作为Three.js渲染器输出元素 -->
     <div id="cusThree" style="width:500px;height:500px;margin: 0 auto;">
         <script>
@@ -40,6 +49,15 @@
             
             console.log(formatNumber('1234567890'));
 
+            var a = {}
+
+            var err = new Error('909090')
+
+            err.code = 56
+
+            console.log(JSON.stringify(err));
+
+            console.log(err.code);
 
 
 

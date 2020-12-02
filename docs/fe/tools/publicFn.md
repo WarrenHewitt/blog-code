@@ -248,6 +248,18 @@ document.body.oncopy = e => {
 
 https://github.com/zenorocha/clipboard.js
 
+## 形如 'a.b.c' 的方式获取对象值
+
+```js
+ const getObjectValue = (data,path) => {
+    try {
+        return path.split('.').reduce((result, current) => result[current], data)
+    } catch {
+        return undefined
+    }
+}
+```
+
 ## 递归
 
 ### 简单的深拷贝,包含数组和对象的值

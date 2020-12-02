@@ -7,6 +7,18 @@
 
 ---
 
+- 严格模式( use strict )：要求显示的引用全局作用域
+
+- 优先级： + 高于 ?
+
+```js
+// 点的优先级大于等号
+var a = { n: 1 } var b = a
+a.x = a = { n:2 }  // 先执行 a.x  给x赋值 undefined
+console.log(a, b);
+// { n: 2 }  { n: 1, x { n: 2 } }
+```
+
 ## 内核
 ie **trident** || chrome，Safari **webkit** || firefox **gecko** || Opera **presto**  
 chrome Opera 现在： Blink(基于webkit，Google与Opera Software共同开发)
@@ -119,9 +131,13 @@ typeof a // object
 ```
 
 ### 类型转换
+- 除 Object 以外的所有类型都是不可变的,值本身无法被改变,称这些类型的值为“原始值” primitive
+
 - 条件判断时，除了undefined,null,NaN,'',0,-0,false其它值都转换为true
 
-- NaN,{}和任意值比较都是返回false;
+- NaN,{}和任意值比较都是返回false;，对象会先转为数字 NaN
+
+- 数组转化为Number时（会隐式的调用join方法）： 空的[]转为0，有两个或以上元素的数组转为NaN，只有一个元素时，根据该元素进行Nunber转换
 
 ---
 
@@ -294,8 +310,9 @@ const result = arr.map(item => ({ ...item }))
 CommonJs模块输出的是一个值的拷贝，ES6模块输出的是值的引用。
 CommonJs模块是运行时加载，ES6模块是编译时输出接口。
 
-require、动态 import() 运行在 JS 运行阶段；静态 import 运行在编译阶段；
-require 同步执行，动态 import()异步执行 返回 promise；静态 import 运行在编译阶段，总是最先执行；
+require/exports 是运行时动态加载
+动态 import() 运行在 JS 运行阶段；静态 import 运行在编译阶段,总是最先执行；
+require 同步执行，动态 import()异步执行 返回 promise；
 require、静态 import、动态 import()都是有缓存的；
 
 import() 是 es6 动态引入新规范
