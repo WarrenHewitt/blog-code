@@ -490,6 +490,8 @@ dispatch 触发 action store.dispatch('increment')
 
 - `el-cascader` 需要点击两次才能选中，其中一个原因是，多次赋值操作；解决办法为，保证只有在初始化时进行一次赋值操作
 
+- 在表格中使用 dropdown 的基础形式 也就是没有用 split-button 需要把 v-slot="scope" 加上
+
 
 ## iview
 

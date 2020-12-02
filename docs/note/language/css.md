@@ -195,8 +195,6 @@ html中，右边固定元素要在前，设置样式 float:right
 2. flex实现
 ```
 
-
-
 ### flex布局
 - 子元素的float，clear，vertical-aline属性将失效。
 
@@ -243,14 +241,14 @@ align-items: center;
 2. flex-grow:< number>;默认0，项目的放大比例，当都设置为1时就等分，当有一个是2时该项目将会是其它的两倍。
 3. flex-shrink:< number>;默认1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，设置为0的不缩小。
 4. flex-basis:auto|px|%;设置宽度。
-5. flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。**建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值**。
+5. flex: 属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。**建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值**。
 6. align-self:属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。除了auto，其他都与align-items属性完全一致。
 
 当某个子元素设置了 `flex:1` 其它子元素没有设置，它将占据剩余的所有宽度
 
 ---
 
-box-shadow:水平阴影位置可为负必须，垂直阴影位置可为负必须，模糊距离值越大边沿越模糊，阴影扩展半径(就是元素外面的阴影的宽度值)值越大阴影面积越大为负值时阴影缩小，阴影颜色，将inset改为outset;  
+box-shadow:水平阴影位置可为负**必须**，垂直阴影位置可为负**必须**，模糊距离值越大边沿越模糊，阴影扩展半径(就是元素外面的阴影的宽度值)值越大阴影面积越大为负值时阴影缩小，阴影颜色，将inset改为outset;  
 
 阴影的大小和被设置的元素大小一样；
 
@@ -262,11 +260,11 @@ box-shadow:
 0 -10px 10px blue, *顶部阴影*  
 0 0 10px 10px green; *底边阴影*  
 
-如果只要一边阴影，就把扩展阴影设为负值。
+如果只要一边阴影，就把扩展阴影设为负值。注意所有的边都是一个整体的矩形，意思是设置右边的阴影时 如果水平移动过多 会在左边出现
 
 ### 居中
 
-- 利用calc()
+- 利用 calc() 计算
 ```css
 .ele{
   margin-left: 50px; 
@@ -440,14 +438,18 @@ backface-visibility:visible|hidden
 控制当前元素旋转到背面对着我们的视角时是否显示
 
 ## sass
+
 先安装ruby  
-sass：采用的是空格缩进(文件为.sass后缀)  
+```css
+/* sass：采用的是空格缩进(文件为.sass后缀)   */
 h1  
   color:red  
-scss: 采用花括号方式(文件为.scss后缀)  
+/* scss: 采用花括号方式(文件为.scss后缀)   */
 h1{  
   color:red  
 }  
+```
+
 安装了sass后，进入文件夹用sass-convert 被替换文件名 要得到文件名  
 gem是ruby写的应用程序，用来管理安装各种包，等同于node的npm  
 Ruby 安装sass源更换  
@@ -517,7 +519,7 @@ body{ font-size:$fontSize; }
 @function 来声明函数   一般很少用
 
 ---
-当只用来继承的样式不想输出到css  可以用%名称{}和@extend %名称来使用。  
+当只用来继承的样式不想输出到css  可以用 `%名称{}` 和 `@extend %名称` 来使用。  
 ```css
 %cor{
   color: transparent;
@@ -528,12 +530,16 @@ body{ font-size:$fontSize; }
 }
 ```
 ---
-```
+```css
 @at-root{
   .cla{}
 }  
 ``` 
 用于将嵌套再某个类下面的类.cla渲染到css的根下而不是跟在某个类之后。
+
+---
+
+- `#{}` 用于将变量设置为属性名，或包裹 变量计算
 
 ---
 #### 混合 mixin

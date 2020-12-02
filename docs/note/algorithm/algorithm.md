@@ -85,6 +85,21 @@ var x = i + j
 } 
 ```
 
+## 判断偶数 不用 %
+
+```js
+ function isEven(num) {
+    // 判断是不是整数
+    const isI = (num|0) === num
+    if(!isI) {
+        return false
+    }
+    const n = num/2
+    
+    return parseInt(n) === Math.round(n)
+}
+```
+
 ## 判断质数
 
 质数是指在大于1的自然数中，除了1和它本身以外不再有其他因数的自然数

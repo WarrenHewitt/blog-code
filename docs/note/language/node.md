@@ -242,15 +242,15 @@ console.log(path.resolve('a/b/c', '../m')); // G:\GitHub\webpack-pure\a\b\m
 
 ---
 
-Module.exports=add和 exports.add=add推荐使用后者;
+module.exports=add和 exports.add=add 推荐使用后者;
 
 module.exports=与exports=的区别
 
 module.exports=exports={}//是按照这个方式赋值
 
-当先设置了module.exports, exports.属性 将失效
+当先设置了module.exports, `exports.属性` 将失效
 
-require()返回的是module.exports
+require() 返回的是module.exports
 
 把一个对象封装到模块当中
 
