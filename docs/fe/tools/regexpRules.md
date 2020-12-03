@@ -94,11 +94,12 @@ console.log('regexp', RegExp.$1); // 3-4
 ```
 
 - 用选择'或'|时 ，要用（）分组将所有的内容括起来；
-- \$ 符号表示这个字符串的结束,并不是从字符最后面开始匹配.  
+- `$` 符号表示这个字符串的结束,并不是从字符最后面开始匹配.  
 /^1\d{1}$/ 表示匹配以1开始的任意两位数(因为匹配完一位数字后,就表示要匹配的字符串结束了),而不是123这种还要从后面来匹配一次。
 
-- \u4e00-\u9fa5表示在unicode表中的第一个汉字和最后一个汉字  
-\un:匹配n，其中n是一个用四个十六进制数字表示的Unicode字符。例如，\u00A9匹配版权符号（©）。
+- `\u4e00-\u9fa5` 表示在unicode表中的第一个汉字和最后一个汉字 
+
+- `\un` 匹配n，其中n是一个用四个十六进制数字表示的Unicode字符。例如，\u00A9匹配版权符号（©）。
 
 - [] 多种字符的匹配或：[0-9a-zA-Z] 里面可以是任意字符 但是要注意 - 出现的位置 避免被误认为是范围 其中的特殊字符也不用转义
 
@@ -108,9 +109,9 @@ console.log('regexp', RegExp.$1); // 3-4
 
 - \w 任意一个字母或数字或下划线，也就是 A~Z,a~z,0~9,_ 中任意一个
 
-- \b:匹配单词边界
-- \d：匹配数字。  
-- .：表示匹配单个字符，除了换行和结束。
+- \b 匹配单词边界
+- \d 匹配数字。  
+- . 表示匹配单个字符，除了换行和结束。
 
 ---
 var str = 'a123'
@@ -129,21 +130,35 @@ var str = 'a123'
 
 ---
 
-RegExpObject.exec(字符串)：  
+- RegExp.test()    检测到有就返回true
+
+---
+
+- RegExpObject.exec(字符串)：  
 
 没有匹配值返回null，并把lastIndex（属于RegExpObject）置为0； 
 
 当没有用到分组时，返回的数组只有匹配到的第一个字符串，若分组再依次返回分组。
 
-当使用了RegExpObject匹配了一次，必须把RegExpObject的lastIndex重新 
+当使用了RegExpObject匹配了一次，必须把 `RegExpObject.lastIndex` 重新置为0，不然它会从新的字符串的 lastIndex 位开始匹配；（全局模式下）  
 
-置为0，不然它会从新的字符串的lastIndex位开始匹配；（全局模式下）  
+非全局模式下，与 match() 方法返回结果一样；返回第一个匹配的结果和其它位置等信息
 
-非全局模式下，与match()方法返回结果一样；  
-
-exec()还会返回两个属性，index（匹配字符的起始下标），input（被匹配的
-字符串）  
+exec()还会返回两个属性，index（匹配字符的起始下标），input（被匹配的字符串）  
 
 全局模式下用循环只要返回的不是null就一直循环匹配；这种方法获取的信息是最全的，因为每一个匹配值的位置等都有，但match()只返回一个数组；  
+```js
+const str = '/:a/:b'
+const RegExpObject = /:([a-z]+)/ig
+console.log(str.match(/:([a-z]+)/ig)) // [":a", ":b"]
+let result = ''
+let resultArr = []
+while ((result = RegExpObject.exec(str)) !== null) {
+    console.log('循环体输出：', result,  RegExpObject.lastIndex)
+    // 循环体输出： [":a", "a", index: 1, input: "/:a/:b", groups: undefined] 3
+    // 循环体输出： [":b", "b", index: 4, input: "/:a/:b", groups: undefined] 6
+    resultArr.push(result[1])
+}
 
-RegExp.test()    检测到有就返回true
+console.log(resultArr); // ["a", "b"]
+```
