@@ -286,6 +286,8 @@ text/xml  提交xml格式数据
 
 > GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS, TRACE
 
+- PUT是修改了整条记录，不变的字段也重写，PATCH只是修改一个字段 局部修改
+
 - OPTIONS: 询问服务器支持的方法。当浏览器发现，是一个非简单请求，就自动发出一个"预检"请求，"预检"请求用的请求方法是OPTIONS
 
 - 当header 的content-type 类型是以下类型时不触发options

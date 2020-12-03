@@ -143,7 +143,7 @@ try{
 }
 ```
 
-new Error([message[, fileName[, lineNumber]]])
+`new Error([message[, fileName[, lineNumber]]])`
 - chrome 不支持后两个参数
 - 用new和不用，输出的结果一样
 - 还有其它类型错误：ReferenceError（引用错误）,TypeError(类型错误)，RangeError(范围错误) 等
@@ -190,11 +190,12 @@ console.log(JSON.stringify(err)) // { code: 56 }
 
 ---
 
- **ready 与 onload 的区别**
+- ready 与 onload 的区别
 
- $(document).ready()是在DOM结构载入完后执行的，而window.onload是在所有文件都加载完后执行的。
- ```js
- // 原生实现ready
+ `$(document).ready()`是在DOM结构载入完后执行的，而window.onload是在所有文件都加载完后执行的
+ 
+```js
+// 原生实现ready
 if(document.addEventListener) {
     document.addEventListener('DOMContentLoaded', handler, false);
     document.addEventListener('readystatechange', handler, false); //IE9+
@@ -212,7 +213,7 @@ function handler() {
 
 ---
 
-- 正序遍历与反序遍历：反序更快 for(var i＝item.length; i--; ) 注意最后的分号,该方法会从length-1开始 
+- 正序遍历与反序遍历：反序更快 `for(var i＝item.length; i--; )` 注意最后的分号,该方法会从length-1开始 
 
 ---
 
@@ -401,7 +402,7 @@ undefined:表示缺少值（声明了变量但没有被赋值；调用函数时�
 
 ---
 
-`obj.hasOwnProperty('b')`  判断 obj 对象是否有属性 b  返回布尔值
+`obj.hasOwnProperty('b')`  判断 obj 对象是否有属性 b  返回布尔值 与 in 功能一致
 
 ---
 
@@ -629,8 +630,8 @@ console.log(Date.UTC(2018, 3, 3, 8, 40, 0))
 
 
 ### 循环
----
-```
+
+```js
 for(var 变量 in 对象名 ){ 
     // 如果对象是 null 则会自动忽略 
     alert(变量) //返回对象键值对中的属性名  
@@ -640,17 +641,22 @@ for(var 变量 in 数组名 ){  //不推荐
     alert(变量) //返回数组下标  
     alert(数组名[变量])  //返回对应下标的数组值  
 }  
-for...in 遍历（当前对象及其原型上的）每一个属性名称,而 for...of遍历（当前对象上的）每一个属性值  （可枚举与不可枚举）
+for...in // 遍历（当前对象及其原型上的）每一个属性名称,而 for...of遍历（当前对象上的）每一个属性值  （可枚举与不可枚举）
 
-for...of  不可以遍历原生对象 {a:1,b:2} 因为原生对象不具有 Iterator 接口
+for...of  // 不可以遍历原生对象 {a:1,b:2} 因为原生对象不具有 Iterator 接口
 ```
 
 ---
-in 的用法  
-判断数组是否有该索引  
-alert(1 in array)  //这里的1表示下标  
-判断某一属性是否在该对象中  
-alert('name' in  Object)   //'name'表示属性名称  
+
+- in 的用法  
+
+```js
+console.log()
+// 判断数组是否有该索引  
+console.log(1 in array)  //这里的1表示下标  
+// 判断某一属性是否在该对象中  
+console.log('name' in  Object)   //'name'表示属性名称  
+```
 
 ---
 **switch**  
@@ -1024,7 +1030,7 @@ obj.constructor.a3 // 实例中 只能这样访问
 
 Number类型统一按浮点数处理，64位存储，整数是按最大54位来算最大最小数的，否则会丧失精度；某些操作（如数组索引还有位操作）按32位处理
 
-- `+` 操作是将该元素转换为number类型，转换不了就返回NaN。
+- `+` 一元运算符 将元素转换为number类型，转换不了就返回NaN。
 
 - Number.toString(param) param 可以是2-32
 
@@ -1096,12 +1102,14 @@ toLocaleLowerCase()和toLowerCase()区别主要是前者会根据地区的语言
 1. str.match();  
 不设置全局，只返回第一个匹配值,并且返回子表达式的值。和属性index,input。  
 设置全局，只返回所有的匹配值，不返回子表达式的值。  
+```js
 var str='name=hew;a=c;name=hi';  
 console.log(str.match(/name=([^;]+)(;|$)/g))  
-//返回 ["name=hew;", "name=hi"]  
+// 返回 ["name=hew;", "name=hi"]  
+```
 
 2. str.search();  //返回匹配字符开始的位置，没有返回-1  
-3. str.replace(字符|正则，替换值|函数);  函数返回值为替代值，当用字符时不是全局替换，函数第一个参数为匹配结果字符，然后依次是子表达式值…,出现位置，被匹配字符串。返回被替换过后的新字符串  
+3. str.replace(字符|正则，替换值|函数);  函数返回值为替换值，当用字符时不是全局替换，函数第一个参数为匹配结果字符，然后依次是子表达式值…,出现位置，被匹配字符串。返回被替换过后的新字符串  
 4. str.split();   //以传入的字符或正则匹配的字符分割成数组，并删除该字符，必填，没有默认  
 5. substr 
 
@@ -1325,8 +1333,9 @@ function a(b,c=1){}
 - 设置了参数的默认值，函数进行声明初始化时，参数会形成一个单独的作用域（context）。初始化结束，作用域消失。不设置参数默认值时，不会出现的。
 
 ---
-(param,..)=>{}  
-- 不支持new方法。  
+
+箭头函数 `(param,..) => {}`  
+- 不支持new方法 没有 arguments，super或new.target
 - 不会改变指向对象（例如call，apply方法）  
 - 箭头函数没有它自己的this值，它内部的this继承自外层作用域(箭头函数绑定父级上下文)，但是function函数是无论你需不需要都会自动接收一个this，  
 - 在定义对象方法的时候必须用非箭头函数定义，这些函数会从调用者的作用域获取一个有意义的this
@@ -1353,6 +1362,9 @@ arr1.push(...arr2);
 `[...a, ...b]` 不会覆盖重复的值， 不同于对象
 
 ```js
+const { 0: a, 1: b, 2: c  } = [4,5,6]
+console.log(a,b,c) // 4,5,6
+
 var [a, [[b], c]] = [1, [[2], 3]];  
 
 var [,,third] = ['a', 'b', 'c'];  
@@ -1584,8 +1596,7 @@ console.log(a) // { age: 250, get age: f, get age: f, _proto_: { name: 'hew' } }
 
 - includes：参考上文
 
-- 求幂 Math.pow() 的简洁写法 ** 
-Math.pow(3, 3) === 3 ** 3
+- 求幂 Math.pow() 的简洁写法 `Math.pow(3, 3) === 3 ** 3`
 
 ### es8
 - String.prototype.padStart(总长度, 被填充字符串：默认空格) // 返回新的字符串 
