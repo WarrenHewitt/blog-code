@@ -9,14 +9,21 @@
 
 - 严格模式( use strict )：要求显示的引用全局作用域
 
-- 优先级： + 高于 ?
+- 全局作用域下打印 length 不会报 is not defined 会返回 iframe 的个数
+
+---
+
+- 优先级： `+ > ? `  `! > == `  `. > =`
 
 ```js
-// 点的优先级大于等号
-var a = { n: 1 } var b = a
+var a = { n: 1 } 
+var b = a
 a.x = a = { n:2 }  // 先执行 a.x  给x赋值 undefined
 console.log(a, b);
 // { n: 2 }  { n: 1, x { n: 2 } }
+
+[] == ![] // true
+// 先执行 ![] 返回 false ； [] 转换为空字符串 返回 false
 ```
 
 ## 内核
@@ -133,11 +140,11 @@ typeof a // object
 ### 类型转换
 - 除 Object 以外的所有类型都是不可变的,值本身无法被改变,称这些类型的值为“原始值” primitive
 
-- 条件判断时，除了undefined,null,NaN,'',0,-0,false其它值都转换为true
+- 条件判断时，除了 undefined,null,NaN,'',0,-0,false 其它值都转换为true
 
 - NaN,{}和任意值比较都是返回false;，对象会先转为数字 NaN
 
-- 数组转化为Number时（会隐式的调用join方法）： 空的[]转为0，有两个或以上元素的数组转为NaN，只有一个元素时，根据该元素进行Nunber转换
+- 数组转化为Number时（会隐式的调用join方法）： 空的[]转为空字符串再转为 0，有两个或以上元素的数组转为NaN，只有一个元素时，根据该元素进行Nunber转换
 
 ---
 
@@ -149,7 +156,7 @@ typeof a // object
 
 - 对象转数字：
 
-先调 valueOf() 如果返回原始值( null undefined 布尔值 字符串 数字 ) 将其转换为数字， 就是直接作为返回值
+依照 toPrimitive 规则 先调 valueOf() 如果返回原始值( null undefined 布尔值 字符串 数字 ) 将其转换为数字， 就是直接作为返回值
 
 再调 toString() 过程同上
 
@@ -212,6 +219,10 @@ Unicode前128个编码单元等于ascii值
 
 中文是按照Unicode编码比较的
 
+- null 只和 undefined  相等，其它都不等
+
+- `1<2<3` 返回 true 从左到右计算  与等号不同
+
 ## 原型
 
 ### `__proto__` 和 constructor prototype
@@ -262,6 +273,14 @@ Unicode前128个编码单元等于ascii值
 ## 闭包
 一个函数X返回另一个函数Y，且Y使用了X的变量，Y就被称为闭包，X已经出了调用栈，Y能调用X的变量原因是X的变量此时已存贮在堆上，JS引擎通过逃逸分析哪些变量
 需要存贮在堆上，哪些需要存贮在栈上。
+```js
+function fn () {
+    var a = 'a'
+    return function() {
+        console.log(a)
+    }
+}
+```
 
 闭包  
 销毁 函数名=null

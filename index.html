@@ -39,23 +39,23 @@
     <!-- 作为Three.js渲染器输出元素 -->
     <div id="cusThree" style="width:500px;height:500px;margin: 0 auto;">
         <script>
+            let aa = {
+                a:1,b:2
+            }
 
-            function aa() {
-                var flag = true
-
-                return function() {
-                    if(flag) {
-                        flag = false
-                        setTimeout(() => {
-                            console.log(233333)
-                            flag = true
-                        }, 2000)
-                    }
+            var obj = {
+                name: 'hew',
+                get getName() {
+                    return 'get ' + this.name
+                },
+                set getName(val) {
+                    this.name = val
                 }
             }
 
-
-            document.getElementById('ddd').addEventListener('click', aa())
+            console.log(obj.getName);
+            obj.getName = 'new name'
+            console.log(obj.getName);
 
         </script>
 </body>
