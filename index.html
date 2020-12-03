@@ -35,15 +35,28 @@
 </head>
 
 <body>
-    <p>ddddddd</p>
+    <p id="ddd">ddddddd</p>
     <!-- 作为Three.js渲染器输出元素 -->
     <div id="cusThree" style="width:500px;height:500px;margin: 0 auto;">
         <script>
-            const url = 'ssssnnn'
-            url.replace('n')
-            console.log(url);
-            const { 0: a, 1: b, 2: c  } = [4,5,6]
-console.log(a,b,c) // 4,5,6
+
+            function aa() {
+                var flag = true
+
+                return function() {
+                    if(flag) {
+                        flag = false
+                        setTimeout(() => {
+                            console.log(233333)
+                            flag = true
+                        }, 2000)
+                    }
+                }
+            }
+
+
+            document.getElementById('ddd').addEventListener('click', aa())
+
         </script>
 </body>
 

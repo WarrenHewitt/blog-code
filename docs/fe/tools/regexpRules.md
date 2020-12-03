@@ -75,7 +75,7 @@ string.replace(/(^\s*|\s*$)/g, '')
 const regexp1 = new RegExp('12','g');  
 const regexp2 = /12/g;  //不适用于要用到变量，但是适用于有转义的，主要因为字符不加引号。 
 
-regexp1.test(value)
+regexp1.test(value)  value 会被转换为字符串 返回 `treu/false`
 ```
 - g:全局匹配  。查找所有的匹配而非在找到第一个匹配后就停止；  
 - i:不分大小写；  
@@ -141,7 +141,7 @@ var str = 'a123'
 当没有用到分组时，返回的数组只有匹配到的第一个字符串，若分组再依次返回分组。
 
 当使用了RegExpObject匹配了一次，必须把 `RegExpObject.lastIndex` 重新置为0，不然它会从新的字符串的 lastIndex 位开始匹配；（全局模式下）  
-
+ 
 非全局模式下，与 match() 方法返回结果一样；返回第一个匹配的结果和其它位置等信息
 
 exec()还会返回两个属性，index（匹配字符的起始下标），input（被匹配的字符串）  
@@ -159,6 +159,6 @@ while ((result = RegExpObject.exec(str)) !== null) {
     // 循环体输出： [":b", "b", index: 4, input: "/:a/:b", groups: undefined] 6
     resultArr.push(result[1])
 }
-
+ 
 console.log(resultArr); // ["a", "b"]
 ```

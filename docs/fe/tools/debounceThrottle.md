@@ -43,6 +43,26 @@ fn()
 应用场景：
 - 连续的操作，不仅仅是最后一次触发需要执行，中途的也需要执行，但不需太过频繁
 
+- 计时器的方式实现
+
+```js
+function throttleTime() {
+    var flag = true
+    return function() {
+        if(flag) {
+            flag = false
+            setTimeout(() => {
+                console.log(233333)
+                flag = true
+            }, 2000)
+        }
+    }
+}
+
+
+```
+
+- 时间戳的方式实现
 ```js
 function throttle (time) {
     let startTime = Date.now()
