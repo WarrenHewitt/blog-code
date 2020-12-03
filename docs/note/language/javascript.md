@@ -392,6 +392,28 @@ undefined:表示缺少值（声明了变量但没有被赋值；调用函数时�
 
 ---
 
+- 对象取值函数
+
+在使用 { ...obj } 时会被执行
+
+```js
+var obj = {
+    name: 'hew',
+    get getName() {
+        return 'get ' + this.name
+    },
+    set getName(val) {
+        this.name = val
+    }
+}
+
+console.log(obj.getName); // get hew
+obj.getName = 'new name'
+console.log(obj.getName); // get new name
+```
+
+---
+
 - delete 
 
 可删除： 1. 可配置对象的属  2. 隐式申明的全局变量(没有用 var let const 声明)  3. const 或 let 申明的 tdz 中的（没有找到验证代码） 4. 修饰属性 configurable 为 false 的
@@ -616,11 +638,9 @@ Date.parse(‘October 13, 1975 11:13:00’)||(d);
 
 是Date对象的静态方法，不需要用dateObject(就是new出来的d).parse来调用     
     
-var d=new Date() d.toISOString()。//2017-01-09T06:19:11.004Z     
+var d=new Date() d.toISOString() // 2017-01-09T06:19:11.004Z     
 
 - new Date(+new Date()+8*3600*1000).toISOString()  返回正确的时区时间，valueOf() 方法返回一个 Date 对象的原始值，等同于getTime() 。
-
-- 时间大小比较（采用如下的js中的方法获取毫秒数来比较，不要直接比较，直接比较为错误方法）
 
 ```js
 var d = new Date('2018-04-03T16:40:00'); 
@@ -631,7 +651,6 @@ console.log(Date.parse('date string'))
 console.log(Date.UTC(2018, 3, 3, 8, 40, 0))
 // 当给定的时间一样，返回值相同
 ```
-
 
 ### 循环
 
@@ -792,9 +811,9 @@ Window||document.body.onbeforeunload=function(e){
 ```js
 // Array.prototype.slice.call(arguments) || [].slice.call(arguments)
 const obj={length:2,0:'first',1:'second'};
-Array.prototype.slice.call(obj);//  ["first", "second"]
+Array.prototype.slice.call(obj);//  ["first", "second"]  返回的是 稀疏数组  也就是可能有 [1, empty, 2]  forEach 循环打印时输出空  直接访问输出 undefined
 
-const args = Array.from(arguments);
+const args = Array.from(arguments); // 有空的位置 赋值 undefined
 const args = [...arguments];
 ```
 
@@ -874,17 +893,20 @@ start||end=-1表示最后一个元素。
 start和end都为下标（下标从0开始）；返回包含下标start但不包含下标end的数组；
 
 ---
-array.join('!');将数组的每个元素放到一个字符串中，不传参就用逗号隔开(此时与toString() 方法一样),传就用该符号。  
+- `.join('!')` 将数组的每个元素放到一个字符串中，不传参就用逗号隔开(此时与toString() 方法一样),传就用该符号  
 
-`array.push(element1[, ...[, elementN]]);` 末尾压栈，返回**数组长度**；通过索引值来添加比push方法更快  
-array.pop(); 末尾出栈，返回去掉的值 
+- `array.push(element1[, ...[, elementN]]);` 末尾压栈，返回**数组长度**；通过索引值来添加比push方法更快  
 
-array.shift() 对头出栈，返回去掉的值
-array.unshift() 对头入栈，返回数组长度
+- `.pop()` 末尾出栈，返回去掉的值 
 
-array.reverse(); 逆向排序的数组  返回数组的引用
+- `.shift()` 对头出栈，返回去掉的值
 
-``` javascript
+- `.unshift()` 对头入栈，返回数组长度
+
+- `.reverse()`; 逆向排序的数组  返回数组的引用
+
+- `.sort()`
+```js
 const arr = [1,55,6,2]
 function compare(a,b) { 
     // 这里是从大到小排列
@@ -909,7 +931,7 @@ function compareNumber(a,b) {
 }
 ```
 
-reverse 和 sort 都是直接操作原数组
+reverse 和 sort 都是直接操作原数组 返回数组引用
 
 arrayA.concat(arrayB); 返回拼接后的新数组，不会覆盖数组间重复的值
 
@@ -1064,6 +1086,14 @@ toString() 最慢；1 + '' 字符串拼接 和 `` 模板字符串 都更快，�
 向下取整 ~~1.23 => 1  比 parseInt 效率相对较高
 
 ```
+
+- `??` 空值合并操作符, 当左边的值为 null 或 undefined 时 返回右边操作数，否则返回左侧操作数 
+```js
+`null ?? 1` // 1
+`10 ?? 1` // 10
+```
+
+- `a?.b?.c`  等价于 `a&&a.b&&a.b.c` 返回 a.b.c 的值
 
 - 位运算
 1. 逻辑位运算：&(与) |(或) ^(异或，两个位相同为0，相异为1) ~(非 取反)
@@ -1369,6 +1399,12 @@ a={
 }
 
 ### 扩展运算符
+
+```js
+[...null, ...undefined] // 抛出异常
+{...null, ...undefined} // {}
+```
+
 多个参数（用于函数调用）或者多个元素（用于数组字面量(直接使用的数据值如1,2)）或者多个变量（用于解构赋值）。  
 ```js
 var args=[1,2,3]  
