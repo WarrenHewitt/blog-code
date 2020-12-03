@@ -560,6 +560,10 @@ document.domain  获取域名不带端口
 
 - js 运算是带符号的  一个数除以 0 得无穷 1/0 等于 Infinity  -1/0 等于 -Infinity
 
+- `1.toString()`  报错  应为 1. 会优先执行 相当于 `(1.)toString`
+
+- `1.` `.1` 都是合法的数字 
+
 ---
 
 - `.isFinite()` 判断是不是有限值  只有 NaN 正无穷 负无穷 返回 false
@@ -878,7 +882,7 @@ array.pop(); 末尾出栈，返回去掉的值
 array.shift() 对头出栈，返回去掉的值
 array.unshift() 对头入栈，返回数组长度
 
-array.reverse();逆向排序的数组  
+array.reverse(); 逆向排序的数组  返回数组的引用
 
 ``` javascript
 const arr = [1,55,6,2]
@@ -905,7 +909,7 @@ function compareNumber(a,b) {
 }
 ```
 
-**reverse和sort都不返回新数组，且都是对数组才能操作**
+reverse 和 sort 都是直接操作原数组
 
 arrayA.concat(arrayB); 返回拼接后的新数组，不会覆盖数组间重复的值
 
@@ -1147,7 +1151,22 @@ fn`str`
 
 ```js
 class Test {
-    constructor(x) {
+    // 私有属性 es2019
+    #name; 
+ 
+    constructor(x, n) {
+        // 私有属性
+        let _name = 'hew'
+
+        this.#name = n
+
+        this.setName = function (name) {
+            _name = name;
+        };
+        this.getName = function () {
+            return _name;
+        };
+
         /* 对应es5 的构造函数 */
         this.name = 12222
         this.x = x || 'original x'
@@ -1158,6 +1177,8 @@ class Test {
 
     /* 类的所有方法都是定义在类的prototype上 */
     getX() {
+        console.log(this.#name)
+        console.log(this.getName())
         return this.x
     }
 }
@@ -1165,10 +1186,12 @@ class Test {
 new Test().getX()   // 'original x'
 ```
 
+- 在 class 中用 = 声明变量属于 Field declarations ，实际将被挂载到 实例属性上读取优于原型链
+
 #### 静态属性和方法
-- 静态属性： 在属性前加 static(草案阶段) 或是  ClassName.propertyName = 'xx'(目前只支持这个方法) 方式设置
+- 静态属性： 在属性前加 static 或是  ClassName.propertyName = 'xx' 方式设置
 - 在方法前加 static
-- 只能通过类来调用 不能被子类继承（静态方法）,静态方法中的this指向类而非实例
+- 只能通过类来调用 不能被子类继承（静态方法不行，静态属性可以）,静态方法中的this指向类而非实例
 
 #### 继承
 super ：表示父类的构造函数，用来新建父类的this对象
@@ -1401,6 +1424,11 @@ console.log(b)  //[2,3,4]
 ---
 
 ### 模块功能
+
+- 在纯js环境中使用 `<script type="module"></script>` 需要设置type  并且要启动服务来执行
+
+- `import.meta` 打印执行这个语句的文件地址   // 类似 http://127.0.0.1:5500/index.html
+
 ES6 的模块自动采用严格模式，不管你有没有在模块头部加上"use strict";。  
 - es6 模块不是对象  而是通过export输出的代码
 - es6 模块是在编译时加载
