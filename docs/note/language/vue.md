@@ -41,8 +41,8 @@ data() {
 子组件：
 ```
 model: {
-    prop: 'sel', // 与下面 props 中的 sel 一致
-    event: 'anyName' // 用于 this.$emit('anyName', '参数') 触发
+    prop: 'sel', // 与下面 props 中的 sel 一致  默认是 'value'
+    event: 'eventName' // 用于 this.$emit('eventName', '参数') 触发 默认 eventName 是 input
 },
 props: {
     sel: {
@@ -84,8 +84,17 @@ methods: { fn(str, event) {}}
 
 组件中，可以用 $on,$once 监听所有的生命周期钩子函数，如监听组件的 updated 钩子函数可以写成 `this.$on('hook:updated', () => {})` 其他周期函数同理
 
-在组件外部监听组件生命周期函数
-```
+父组件监听子组件生命周期函数
+```js
+// 方式一
+// 父组件
+<SomeCustomComponent @created="someFn" />
+// 子组件
+created() {
+    this.$emit('created')
+}
+
+// 方式二
 @hook:created 监听组件的 created 生命钩子函数 同理 其它周期函数也可以这样 监听
 <SomeCustomComponent @hook:created="someFn" />
 ```

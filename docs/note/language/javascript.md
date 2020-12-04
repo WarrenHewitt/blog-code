@@ -1271,7 +1271,7 @@ class ListNode {
 ---
 
 ### Promise
-一种异步编程解决方案，语法上是一个对象。
+一种异步编程解决方案
 
 ```js
 var promise=new Promise(function(resolve,reject){
