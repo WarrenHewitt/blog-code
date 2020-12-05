@@ -640,14 +640,17 @@ CryptoJS.SHA1('123').toString() // 注意方法名的大小写
 - MD5 信息摘要算法（Message-Digest Algorithm）：把一个任意长度的字节串变换成一定长的十六进制数字串
 - SHA 安全哈希算法（Secure Hash Algorithm）
 
-框架知识
+## 框架知识
 angluar
 - 脏数据检测
 触发事件调用$digest(遍历所有数据观察者，判断值是否变化),有变化调用$watch,然后再调$digest,2<=循环<=10，可批量检测出更新值再统一更新UI。
 
-vue
-- 数据劫持
-Object.definedProperty() 实现双向绑定
+- vue 与 react 差异
+现代前端框架有两种方式侦听变化， pull 和 push
+
+**pull：** react为代表 通常用 setStateAPI 显式更新，然后react 通过 virtual Dom Diff 找出差异 再 patch 到Dom上，所有react一开始是不知道哪里变化了，只是知道了有变化，然后通过暴力的diff知道哪里发生了变化  agular的脏值检测也是如此
+
+**push：** cue就是在初始的时候会对数据行监听收集，一旦数据变化，就会立刻得知，所以vue是一开始就知道哪里有变化；这就导致了一个问题，一个数据就有一个watcher，一旦绑定的细粒度过高，就会产生大量的watcher，就会带来内存以及依赖追踪的开销，但细粒度过低又无法完成精准的追踪，所以vue采用了中等粒度的方案，即在组件级别进行push侦测，然后及时发现发生变化的组件，再在组件内用 Virtual Dom Diff 获得更具体的变化，所以vue是 pull+push的集合方式
 
 ---
 
