@@ -347,12 +347,41 @@ lint-staged 的作用是每次提交只检查本次提交所修改的文件
 
 ## vue router
 
+路由的加载，管理，匹配都是 vueRouter 创建的实例属性 router.matcher 处理
+
+vueRouter 的两个方法 match addRouter 都是 matcher 暴露的方法
+
+https://juejin.cn/post/6844904030687199239
+
+```js
+new Router({
+    /* 这里的键名必须是 routes */
+    routes: baseRouter
+})
+```
+
 - router-view 与路由表中的 children 有关
 
 - router.push 改为了 Promise
 
-- 导航守卫的钩子中  
+- 参数传递： 
+
+```js
+/* params 针对的是 定义的path形如 /xx/xx/:id   */
+// 注意如果 path是 /xx/xx/ 的话，刷新页面  传递的数据会掉
+router.push({ name: 'user', params: { id: '123' }})
+
+// path 和 params 同时设置 将无效
+router.push({ path: '/user', params: { id: '123' }})
+
+// name 和 path 都可以和 query 一起用  
+// 定义的路由 path: '/user' 以下两种方式跳转后url都是： /user?id=123
+router.push({ name: 'user', query: { id: '123' }})
+router.push({ path: '/user', query: { id: '123' }})
 ```
+
+- 导航守卫的钩子中  
+```js
 next() // 进行管道中的下一个钩子
 next({ path: '/' })  // 跳转到一个不同的地址。当前的导航被中断，然后进行一个新的导航
 // 以上两个的区别，前者表示，路由完成，显示对应页面；后者表示，需要开启一个新的路由过程，与跳转路由相似

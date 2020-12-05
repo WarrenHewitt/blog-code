@@ -909,19 +909,13 @@ start和end都为下标（下标从0开始）；返回包含下标start但不包
 ```js
 const arr = [1,55,6,2]
 function compare(a,b) { 
-    // 这里是从大到小排列
-    if (a > b) {
-        return -1; 
-    }else if(a < b) {
-        return 1; 
-    }else{
-        return 0;
-    }
+    // 取数组中的两个数 a, b
+    return a-b; // 注意这里是 a-b 如果是 b-a ab的位置会相反
+    // 重点关注返回值即刻
+    // 返回0 位置不变
+    // 返回负数 a放到b左边（简单理解为降序）
+    // 返回正数 a放到b右边（简单理解为升序）
 }
-// compare(a,b) 重点关注返回值即刻
-// 返回0 位置不变
-// 返回负数 a放到b之前（这里输入a，b参数不代表a就在b之前）
-// 返回正数 a放到b之后 （简单理解为升序）
 arr.sort(compare);
 // 默认小到大排列（即没有compare函数）按照数组元素对应的字符串的 Unicode 从小到大进行排序。  
 
