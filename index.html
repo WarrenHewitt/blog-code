@@ -39,23 +39,17 @@
     <!-- 作为Three.js渲染器输出元素 -->
     <div id="cusThree" style="width:500px;height:500px;margin: 0 auto;">
         <script>
-            let aa = {
-                a:1,b:2
-            }
+            let aa = [
+                { id: 23 },
+                { id: 29 },
+                { id: 2 },
+            ]
 
-            var obj = {
-                name: 'hew',
-                get getName() {
-                    return 'get ' + this.name
-                },
-                set getName(val) {
-                    this.name = val
-                }
-            }
+            aa.sort((a, b) => {
+                return a.id - b.id
+            })
 
-            console.log(obj.getName);
-            obj.getName = 'new name'
-            console.log(obj.getName);
+            console.log(aa);
 
         </script>
 </body>
