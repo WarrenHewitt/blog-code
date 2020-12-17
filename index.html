@@ -6,52 +6,46 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>blog-code-test</title>
-    <!-- <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script> -->
-    <!-- <script src="https://cdn.bootcss.com/three.js/r83/three.js"></script> -->
-    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/three.js/10/three.js"></script> -->
-    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/three.js/r120/three.min.js"></script> -->
-    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/three.js/110/three.js"></script> -->
-    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/three.js/110/three.min.js"></script> -->
     <style>
-        .aa {
-            position: sticky;
-            top: 100px
-        }
 
-        .p {
-            height: 300px;
-            width: 100px;
-            margin: 20px;
-            /* box-shadow:  
-                -10px 0 10px red, 
-                10px 0 10px yellow,     
-                0 -10px 10px blue, 
-                0 0 10px 10px green;  */
-                box-shadow: 10px 0, -10px 0 green, 0 -10px, 3px 1px 4px 0 red;
-
-            background-color: rgb(199, 199, 199);
-        }
     </style>
 </head>
 
 <body>
-    <p id="ddd">ddddddd</p>
-    <!-- 作为Three.js渲染器输出元素 -->
-    <div id="cusThree" style="width:500px;height:500px;margin: 0 auto;">
-        <script>
-            let aa = [
-                { id: 23 },
-                { id: 29 },
-                { id: 2 },
-            ]
 
-            aa.sort((a, b) => {
-                return a.id - b.id
-            })
+    <script>
+        function zhToNumber(str) {
+            var zhNumber = { '零': 0, '一': 1, '二': 2, '三': 3, '四': 4, '五': 5, '六': 6, '七': 7, '八': 8, '九': 9 }
+            var zhLevel = { '十': 10, '百': 100, '千': 1000, '万': 10000, '亿': 100000000 }
 
-            console.log(aa);
+            var count = 0
+            /* 亿或万前面的一段数字 */
+            var tempNum = 0
+            var len = str.length
+            for (let i = 0; i < len; i++) {
+                var current = str[i]
+                if(current === '零') continue
+                /* 只有亿和万前面可以包含许多级数字，所以以它们两个来分段划分数字 */
+                if(current === '万' || current === '亿') {
+                    /* 把前面一段数字乘以对应的单位 */
+                    count += tempNum * zhLevel[current]
+                    tempNum = 0
+                } else {
+                    var next = str[i+1]
+                    if (next && next !== '万' && next !== '亿') {
+                        tempNum +=  zhNumber[current] * zhLevel[next]
+                        i++
+                    } else {
+                        /* 下一位不存在或是万或亿的情况 */
+                        tempNum += zhNumber[current]
+                    }
+                }
+            }
+            return count + temp
+        }
 
-        </script>
+        console.log(zhToNumber('四十二亿九千四百九十六万七千二百零九'));
+    </script>
 </body>
 
 </html>
