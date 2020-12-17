@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p{
+            height: 300px;
+            background-color: rgb(7, 151, 144);
+        }
+    </style>
+</head>
+<body>
+    <p></p>
+
+    <img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1819216937,2118754409&fm=26&gp=0.jpg" alt="no">
+
+    <img id="img" data-src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1819216937,2118754409&fm=26&gp=0.jpg">
+
+    <script>
+        var imgEle = document.querySelector('#img');
+        var bodyEle = document.body
+        var scrollTop = bodyEle.scrollTop
+        bodyEle.addEventListener('scroll', function(e) {
+
+        }, false)
+
+    </script>
+    
+</body>
+</html>

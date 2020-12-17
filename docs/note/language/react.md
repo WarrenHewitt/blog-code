@@ -5,6 +5,12 @@
 
 ## React
 
+- React.Component React.PureComponent 区别
+
+PureComponent 通过 props 和 state 的 浅对比实现 shouldComponentUpdate；前者需要自己实现 
+
+---
+
 - 当input设置了value，但是没有设置onChange时会报错，可设置defaultValue或把onChange事件加上
 
 - ReactDOM.render(< div>当要添加多个标签时要用div包含在内</ div>,容器元素对象)

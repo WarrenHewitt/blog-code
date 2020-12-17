@@ -390,6 +390,8 @@ undefined:表示缺少值（声明了变量但没有被赋值；调用函数时�
 
 可以用 Object.keys() 获取
 
+- Objetc.keys 返回对象可枚举属性，不包含 原型链和 Symbol
+
 ---
 
 - 对象取值函数
@@ -664,9 +666,9 @@ for(var 变量 in 数组名 ){  //不推荐
     alert(变量) //返回数组下标  
     alert(数组名[变量])  //返回对应下标的数组值  
 }  
-for...in // 遍历（当前对象及其原型上的）每一个属性名称,而 for...of遍历（当前对象上的）每一个属性值  （可枚举与不可枚举）
+for...in // 遍历（当前对象及其原型上的）每一个可枚举的非 Symbol 属性
 
-for...of  // 不可以遍历原生对象 {a:1,b:2} 因为原生对象不具有 Iterator 接口
+for...of  // 不可以遍历原生对象 {a:1,b:2} 因为原生对象不具有 Iterator 接口 （可枚举与不可枚举），可枚举数组，Map Set 和某些部署 Symbol.iterator
 ```
 
 ---
@@ -721,6 +723,32 @@ inputElement.onkeyup=function() {
 　　　　// 判断回车
 　　}
 }
+```
+
+- onerror  无法监听资源加载的错误，只能声明一次 不能重复执行多个回调 可以换成 window.addEventListener('error'),能监听网络错误 但是不知道状态
+
+可以使用 `performance.getEntries()` 获取已经加载成功的资源 与要加载的资源进行对比 得到没有加载成功的资源
+
+vue 中用 errorHandler  react 中用 componentDidCatch
+```js
+// source(文件), lineno(行), colno(列)
+ window.onerror = function(message, source, lineno, colno, error) {
+    console.log(message, source, lineno, colno, error)
+    return true  // 返回false(默认) 就在浏览器显示错误； 返回 true 不显示错误了 只打印上面的输出，如果没有写输出  就看不到错误信息
+}
+a() // a是没有定义的
+```
+
+- unhandledrejection
+
+```js
+window.addEventListener('unhandledrejection', function(err){
+    console.log('promise',err); // 产生了reject  但是没有设置 catch 捕获
+})
+
+var a = new Promise((resolve, reject) => {
+    reject(23333)
+})
 ```
 
 #### 事件说明
@@ -796,10 +824,9 @@ Window||document.body.onbeforeunload=function(e){
 
 ---
 
-#### window.onerror
- function(message, source(文件), lineno(行), colno(列), error) { ... }
-
 ### Array
+
+- `.isArray(被判断的值)` 判断是否是数组
 
 - 伪数组 Array like 
 
@@ -819,13 +846,13 @@ const args = [...arguments];
 
 ---
 
-- Array.from() 方法从一个类似数组或可迭代对象创建一个新的，浅拷贝的数组实例
+- `.from()` 方法从一个类似数组或可迭代对象创建一个新的，浅拷贝的数组实例
 
 将字符串、Set、Map arguments 转为数组
 
 ---
 
-- Array.reduce(callback, 初始值(如果不设置默认为数组第一个值)) 对数组中的每个元素执行一个提供的reducer函数，将结果汇总为单个返回值
+- `.reduce(callback, 初始值(如果不设置默认为数组第一个值))` 对数组中的每个元素执行一个提供的reducer函数，将结果汇总为单个返回值
 
 ```js
 var a = [2,5,8]
@@ -843,11 +870,10 @@ console.log(a.reduce((accumulator, currentValue, index) => {
 
 - `.from` 从一个类似数组或可迭代对象创建一个新的 浅拷贝的数组
 
-```js
-Array.from('abc');  // [a,b,c]
+- `.from('abc')`  // [a,b,c]
 
-Array.from([1, 2, 3], x => x + x) // [2,4,6]
-```
+- `.from([1, 2, 3], x => x + x)` // [2,4,6]
+
 
 #### filter/map/forEach/some/every/find/findIndex/includes
 - filter 返回符合条件的新数组,没有赋值或删除了的项，会被跳过
@@ -1041,6 +1067,8 @@ obj.constructor.a3 // 实例中 只能这样访问
 
 
 ### String
+
+- `String.fromCharCode(97)` a  `'a'.charCodeAt(0)` 97 
 
 - 字符串存储的大小：理论最大长度是2^53-1
 
@@ -1273,6 +1301,10 @@ var promise=new Promise(function(resolve,reject){
     resolve('这里传递的参数将在then中接收')
 })
 ```
+- Promise.reject(reason) 返回一个新的 Promise 实例，该实例的状态为rejected
+
+- Promise.resolve('xx') 等价于 new Promise(resolve => resolve('xx')) 注意特殊得参数会有不同结果 请参考文档
+
 1. 三种状态Pending，Resolve，Rejected   
 
 2. var promise=new Promise(function(resolve,reject){})。   
@@ -1280,7 +1312,7 @@ resolve和reject由js引擎提供。
 resolve将Promise对象的状态从“未完成”变为“成功”    
 reject将Promise对象的状态从“未完成”变为“失败”  
 
-3. promise.then(function(value){//success}), function(value){//failure});   
+3. `promise.then(function(value){//success}), function(value){//failure})`;   
 then()方法作用是：为Promise实例添加状态改变时的回调函数，分别为resolve和reject指定回掉方法。   
 Promise.prototype.then()。  
 then()中返回的值将会被作为参数传递给下一个then(),**如果上一个then返回的是一个Promise对象**，这时后一个回调函数(即then)，会等待该Promise的状态改变来调用回调函数。
@@ -1372,6 +1404,8 @@ console.log(map.get('name')) // hew
 
 ---
 ### 函数
+
+- 函数重载：js没有，即多个函数，它们的函数名称相同，但是参数个数、类型、顺序不同
 
 ---
 function a(b,c=1){}
