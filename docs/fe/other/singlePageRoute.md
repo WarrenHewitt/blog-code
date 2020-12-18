@@ -172,12 +172,15 @@ class HistoryRoute {
         }
 
         this.currentPath = path;
-        commandObj[path]()
+        if(path) {
+            commandObj[path]()
+        }
     }
 
     init() {
         window.addEventListener('DOMContentLoaded', () => {
             // 针对F5刷新问题:
+            // 比如页面当前url 是： http://127.0.0.1:5500/index.html 点击跳转后 变为：http://127.0.0.1:5500/pushStateOne 此时点刷新  页面就会报 404， 所以要后端配合
             // 1.可以使用？后面跟参数形式
             // 2.统一入口利用忽略地址方式（后端配置 /page/:path 忽略page后跟的所有地址，通过前端去请求page后的对应路由数据，如下）
 

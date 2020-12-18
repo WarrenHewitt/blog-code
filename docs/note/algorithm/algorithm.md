@@ -140,9 +140,23 @@ console.log(formatNumber('1234567890')); // 1,234,567,890
 ```
 
 ## 斐波拉契数列
-> 利用生成器
+
+
+爬楼梯问题： 一次走一层或两层  要到80层 有多少种可能 fn = f(n-1) + f(n-2)
 
 f0 = 0; f1 = 1; fn = f(n-1) + f(n-2); n>=2
+
+```js
+function fabonacci(n) {
+    let a = b = 1
+    for(let i=0; i<n; i++) {
+        [a,b] = [b, a+b] 
+    }
+    return a
+}
+```
+
+-  利用生成器
 ```js
 function* fibonacci() {
     let [current, v] = [0, 1]
