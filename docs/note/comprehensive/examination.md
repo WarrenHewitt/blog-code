@@ -326,15 +326,15 @@ const result = arr.map(item => ({ ...item }))
 - AMD 是由 RequireJS 提出的，推崇依赖前置，提前执行，用户体验好
 - CMD 由 SeaJS  提出，推崇依賴就近，延迟执行 ，性能好，用户需要时才执行 
 
-CommonJs模块输出的是一个值的拷贝，ES6模块输出的是值的引用。
-CommonJs模块是运行时加载，ES6模块是编译时输出接口。
+CommonJs 模块输出的是一个值的拷贝（当修改模块内部的值，再去获取，还是原来的值），ES6模块输出的是值的引用。
+CommonJs 模块是运行时加载，ES6模块是编译时输出接口。
 
 require/exports 是运行时动态加载
 动态 import() 运行在 JS 运行阶段；静态 import 运行在编译阶段,总是最先执行；
 require 同步执行，动态 import()异步执行 返回 promise；
 require、静态 import、动态 import()都是有缓存的；
 
-import() 是 es6 动态引入新规范
+import() 是 es6 动态引入新规范,原理简单的来说就是闭包，输出值的引用
 
 
 ## 事件
@@ -411,7 +411,7 @@ https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/EventLoop
 
 await后面的表达式会先执行一遍，将await后面的代码加入到微任务中
 
-node > 11 : 一旦执行一个阶段里面的任务就会立即执行微任务队列（和浏览器中一致），例如 setTimeout 中有微任务，当执行 setTimeout 的回调函数时，也会将微任务立即执行了，而不是先执行下一个 setTimeout 的回调中的同步代码，再返回来执行微任务
+node > 11 : 一旦执行一个阶段里面的任务就会立即执行微任务队列（和浏览器中一致），例如 setTimeout 中有微任务时将其加入当前宏任务中，当执行 setTimeout 的回调函数时，也会将微任务立即执行了，而不是先执行下一个 setTimeout 的回调中的同步代码，再返回来执行微任务
 
 - 一次EventLoop顺序：
     - 执行同步代码（属于宏任务）
@@ -553,6 +553,15 @@ DOMContentLoaded 事件触发代表初始的 HTML 被完全加载和解析
 - 将频繁运行的动画变为图层，图层能够阻止该节点回流影响别的元素。比如对于 video 标签
 
 ## 性能
+
+### DOM 操作
+
+- 多用伪元素实现页面样式，清除浮动等，它不属于html页面 不会增加页面渲染的负担，也不会增加页面js查询的负担
+- 按需加载
+- 缓存节点  即将节点获取到存到变量上 不要在for循环之类的中去重复获取
+- 将修改的元素 存入文档片段 一次性插入
+
+
 ### 网络相关
 DNS预解析： 
 ```
@@ -605,28 +614,33 @@ Accept-Encoding: gzip
 ---
 
 ## 安全
-### XSS(cross-site scripting) 
+### XSS(cross-site scripting) 跨站脚本攻击
 
-代码注入的一种
-分为三种：反射型，存储行，DOM-base
-```js
-var a = document.createElement('script')
-a.innerText = 'alert(1)'
-document.getElementById('ss').append(a)
-```
+代码注入的一种 分为三种
 
-### CSRF
+DOM-base： 浏览器端取出和执行恶意代码，也是利用url中加特殊代码
+
+存储行：攻击者将代码提交到目标网站的数据库中，像论坛这些，其他用户打开网站后，服务器将代码发送到页面，在浏览器端窃取用户信息发送到第三方
+
+反射型：攻击者 构造出特殊 url（用户搜索的输入参数） 用户打开这个 url ，服务器将 url中的代码拼接在html中返回，以此来获取用户信息
+
+### CSRF 跨站请求伪造
 钓鱼网站中加入如下代码，链接为一个get请求，
 ```
 <img src="http://localhost:2500/api/names/?name=hew" alt="no">
 ```
-防范
+### 预防
+
+前端：
+
+- 避免拼接 html
+- 输入的校验  数字 url 邮箱等
+- 验证码
 - Get 请求不对数据进行修改
 - 不让第三方网站访问到用户 Cookie
 - 阻止第三方网站请求接口
 - 请求时附带验证信息，比如验证码或者 token
-
-### 密码安全
+#### 密码安全
 密码加盐，只能保证用户真实密码不会泄露，对于暴力访问破解，可以使用验证码拖延时间，或是限制访问次数
 
 采用crypto包 处理
@@ -639,6 +653,7 @@ CryptoJS.SHA1('123').toString() // 注意方法名的大小写
 
 - MD5 信息摘要算法（Message-Digest Algorithm）：把一个任意长度的字节串变换成一定长的十六进制数字串
 - SHA 安全哈希算法（Secure Hash Algorithm）
+
 
 ## 框架知识
 angluar
