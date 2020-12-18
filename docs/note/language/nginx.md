@@ -72,7 +72,7 @@ worker_processes  1;
 #pid        logs/nginx.pid;
 
 
-# 以上位全局块 
+# 以上为全局块 
 # worker_processes 数值越大，Nginx 并发能力越强
 # error_log  错误日志存放的位置
 # pid  一般不用关注  Nginx 运行的标志
@@ -135,7 +135,7 @@ http {
             # 重定向到指定地址
             # proxy_pass http://localhost:2500/page/one;
             
-            # 将接收到的请求，根据 html  这个地址区查找静态资源
+            # 将接收到的请求，根据 html  这个地址去查找静态资源
             root   html;
             # 默认去上面的路径中查找 index.html 或者 index.htm
             index  index.html index.htm;
