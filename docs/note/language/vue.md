@@ -27,8 +27,18 @@ Object.assign(this.$data, this.$options.data.call(this));
     3. 有些高性能应用中，无法极致优化，比如vscode手动操作DOM进行的性能优化
 
 ### 自定义组件用 v-model
-父组件：
+
+原本是用于 input textarea 这些可输入的元素了
+
+```html
+<input :value="value" @input="input">  // 默认用 value 和 input
+<input v-model="value"> // 语法糖
 ```
+
+后面为了满足非输入元素（也就是自定义组件）父子通信有了如下方式
+
+父组件：
+```js
 <ChildComponent v-model="select"></ChildComponent>
 
 data() {
@@ -39,10 +49,10 @@ data() {
 ```
 
 子组件：
-```
+```js
 model: {
-    prop: 'sel', // 与下面 props 中的 sel 一致  默认是 'value'
-    event: 'eventName' // 用于 this.$emit('eventName', '参数') 触发 默认 eventName 是 input
+    prop: 'sel', // 与下面 props 中的 sel 一致 
+    event: 'eventName' // 用于 this.$emit('eventName', '参数') 触发
 },
 props: {
     sel: {
@@ -509,7 +519,7 @@ dispatch 触发 action store.dispatch('increment')
 - `@import '@/x/x/x.scss'`;  引用文件时，不加后缀可能导致编译错误
 
 - 深度作用域 
-```
+```css
 .a >>> .b (实际使用中效果没有deep好)
 .a /deep/ .b  (容易报错)
 .a ::v-deep .b  (最新版，vue/cli 4.4.1,只有这个有效)

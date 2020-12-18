@@ -596,26 +596,26 @@ document.domain  获取域名不带端口
 
 - Number.toFixed(n) 
 ```
-返回字符串
-n为0到20之间值; 
-这里采用的是四舍六入五取偶：保留位后面是5，保留位是奇数则直接舍去后面数，保留位是偶数则进一位; 保留位后面不是5，按照正常四舍五入计算
+返回字符串 n为0到20之间值;  这里采用的是四舍六入五取偶：
+1. 保留位后面是5，保留位是奇数则直接舍去后面数，保留位是偶数则进一位; 
+2. 保留位后面不是5，按照正常四舍五入计算
 (0.35).toFixed(1) // 0.3
 (0.45).toFixed(1) // 0.5
 ```
-#### Math对象
+#### Math 对象
 
-- .abs(X):返回X的绝对值；  
-- .ceil(X):上舍入；  
-- .floor(X):下舍入；  
-- .round(X):四舍五入；  
-- .pow(x, y):x的y次方
-- .sqrt() 平方根
-- .random(): 返回 [0，1) 之间的随机数  
+- .abs(X)    返回X的绝对值；  
+- .ceil(X)   上舍入；  
+- .floor(X)  下舍入；  
+- .round(X)  四舍五入；  
+- .pow(x, y) x的y次方
+- .sqrt()    平方根
+- .random()  返回 [0，1) 之间的随机数  
 - .sin(以弧度表示的角度)：（2*PI/360）度数，就是弧度
 
 调用方法返回值为： number
 
-#### Date对象
+#### Date 对象
 - UTC 世界同一时间 || GMT 格林尼治标准时间 ：返回值相同。GMT 是一个时区，而 UTC 是一个时间标准。  
 - Date()方法:不接受参数，  
   alert(Date())返回当前日期和时间字符串；  
@@ -642,6 +642,7 @@ var d=new Date() d.toISOString() // 2017-01-09T06:19:11.004Z
 
 - new Date(+new Date()+8*3600*1000).toISOString()  返回正确的时区时间，valueOf() 方法返回一个 Date 对象的原始值，等同于getTime() 。
 
+- 当给定的时间一样，以下方法返回值相同
 ```js
 var d = new Date('2018-04-03T16:40:00'); 
 console.log(d.getTime())
@@ -649,7 +650,6 @@ console.log(d.valueOf())
 console.log(Date.now())
 console.log(Date.parse('date string'))
 console.log(Date.UTC(2018, 3, 3, 8, 40, 0))
-// 当给定的时间一样，返回值相同
 ```
 
 ### 循环
@@ -850,21 +850,21 @@ Array.from([1, 2, 3], x => x + x) // [2,4,6]
 ```
 
 #### filter/map/forEach/some/every/find/findIndex/includes
-- filter 返回符合条件的新数组,没有赋值或删除了的项，会被跳过
+- .filter 返回符合条件的新数组,没有赋值或删除了的项，会被跳过
 
-- map 返回新数组，数组项不变，但值可做修改
+- .map 返回新数组，数组项不变，但值可做修改
 
 - console.log(arr.forEach(function(v){console.log('v',v)}));//返回undefind
 
-- some 有返回值， some 的回调函数有一个返回 true，则返回true, 有true返回则结束循环
+- .some 有返回值， some 的回调函数有一个返回 true，则返回true, 有true返回则结束循环
 
-- every 有返回值， some 的回调函数每一个返回 true，则返回true, 有false返回则结束循环
+- .every 有返回值， some 的回调函数每一个返回 true，则返回true, 有false返回则结束循环
 
-- find 返回第一个符合的值
+- .find 返回第一个符合的值
 
 ---
 
-- findIndex(() => {}) 返回第一个符合的值的数组下标(没有返回-1与indexOf一致) 与 indexOf 区别为传入的参数，前者为函数,函数有利于匹配数组项为对象
+- .findIndex(() => {}) 返回第一个符合的值的数组下标(没有返回-1与indexOf一致) 与 indexOf 区别为传入的参数，前者为函数,函数有利于匹配数组项为对象
 
 indexOf(str) 参数可以是字符或字符串
 
@@ -953,6 +953,8 @@ var fnName = function fn() {
   4. generator(ES6)
   5. async/await(ES7)
   6. 发布/订阅, 将订阅的回调函数，循环的去执行
+
+- async/await : 返回的是 Promise 函数 return 的值，作为 then 的接收参数 
 
 ---
 
@@ -1048,7 +1050,7 @@ obj.constructor.a3 // 实例中 只能这样访问
 
 - 数字 Number 的最大最小范围：Number.MAX_VALUE Number.MIN_VALUE
 
-Number类型统一按浮点数处理，64位存储，整数是按最大54位来算最大最小数的，否则会丧失精度；某些操作（如数组索引还有位操作）按32位处理
+Number类型统一按浮点数处理，64位存储，整数是按最大54位来算最大最小数的，否则会丧失精度 也就是超过 `2**53` 就会出错；某些操作（如数组索引还有位操作）按32位处理
 
 - `+` 一元运算符 将元素转换为number类型，转换不了就返回NaN。
 
