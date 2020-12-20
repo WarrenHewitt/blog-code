@@ -76,6 +76,29 @@ name = 'new name'
 
 ---
 
+- Web Worker 提供了在后台非主线程执行 JavaScript 代码的能力
+
+不会阻塞main.js 中代码的执行，否则会一直等待循环执行完毕才会执行下面的代码
+```js
+// main.js
+var worker = new Worker('./index.js')
+worker.postMessage = function(e) {
+    console.log(e);
+}
+
+// index.js
+while (1) {
+    var n = Math.random()
+    if(n>.99999999) {
+        console.log(n);
+        postMessage(n)
+        break
+    }
+}
+```
+
+---
+
 **节点操作**
 - 注意Element 与 Node 区别
 - 当把获取到的节点添加到DOM中的另外一个地方时，原位置的节点没有了，移动到文档片段也是同理；相当于移动节点位置

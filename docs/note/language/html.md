@@ -278,7 +278,7 @@ Document, Element, Attr, CharacterData (which Text, Comment, and CDATASection in
 
 - 元素的插入
 
-```
+```js
 parentElement.insertBefore(Element, 在父元素中的某个子元素); // 在元素插入到指定元素前面
 
 Element.appendChild(Element); // 在元素内部最后插入元素
@@ -293,6 +293,8 @@ if(parentNode.prepend) {
 ```
 
 ---
+
+- `node.nodeType` 1 元素节点  2属性节点(被废弃)  3文本节点 
 
 - `node.parentElement` 返回当前节点的父元素节点
 
