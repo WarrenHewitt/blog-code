@@ -7,44 +7,59 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>blog-code-test</title>
     <style>
-
+        html{
+            width: 100%;
+            height: 100%;
+        }
+        body{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+        .main{
+            width: calc(100% - 200px);
+            height: 100%;
+            float: left;
+            background-color: red;
+        }
+        .middle{
+            margin: 0 100px;
+            height: 100%;
+            background-color: red;
+        }
+        .left{
+            width: 100px;
+            height: 100%;
+            background-color: blue;
+            float: left;
+        }
+        .right{
+            width: 100px;
+            height: 100%;
+            background-color: yellow;
+            float: right;
+        }
     </style>
 </head>
 
 <body>
-
+    <div class="left"></div>
+    <div class="main">
+        <!-- <div class="middle"></div> -->
+    </div>
+    <div class="right"></div>
     <script>
-        function zhToNumber(str) {
-            var zhNumber = { '零': 0, '一': 1, '二': 2, '三': 3, '四': 4, '五': 5, '六': 6, '七': 7, '八': 8, '九': 9 }
-            var zhLevel = { '十': 10, '百': 100, '千': 1000, '万': 10000, '亿': 100000000 }
 
-            var count = 0
-            /* 亿或万前面的一段数字 */
-            var tempNum = 0
-            var len = str.length
-            for (let i = 0; i < len; i++) {
-                var current = str[i]
-                if(current === '零') continue
-                /* 只有亿和万前面可以包含许多级数字，所以以它们两个来分段划分数字 */
-                if(current === '万' || current === '亿') {
-                    /* 把前面一段数字乘以对应的单位 */
-                    count += tempNum * zhLevel[current]
-                    tempNum = 0
-                } else {
-                    var next = str[i+1]
-                    if (next && next !== '万' && next !== '亿') {
-                        tempNum +=  zhNumber[current] * zhLevel[next]
-                        i++
-                    } else {
-                        /* 下一位不存在或是万或亿的情况 */
-                        tempNum += zhNumber[current]
-                    }
-                }
-            }
-            return count + temp
-        }
 
-        console.log(zhToNumber('四十二亿九千四百九十六万七千二百零九'));
+       var worker = new Worker('./index.js')
+
+       worker.postMessage = function(e) {
+           console.log(e);
+       }
+
+       console.log(23333);
+
     </script>
 </body>
 

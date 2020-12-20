@@ -4,6 +4,9 @@
 
 # Vue
 
+- 在每个 new Vue 实例的子组件中，其根实例可以通过 $root 属性进行访问
+
+全局挂载事件  `this.$root.$on('eventName', () => {})  this.$root.$emit('eventName')`
 
 ## vue-2
 - `__ob__: Observer` vue设置的数据监听器，一般不可枚举
@@ -139,6 +142,7 @@ created() {
 
 
 ### 生命周期 
+- created 非相应式的data数据可以赋初始值 `data: { a: {} };   this.a.b=1`
 - destroyed ： 如果有定时器，在该钩子函数中务必清除
 https://www.jianshu.com/p/a20f2023c78a
 
