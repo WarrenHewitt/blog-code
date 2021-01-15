@@ -33,9 +33,11 @@ token需要查库验证token 是否有效，而JWT不用查库或者少查库
 
 ## yarn
 
-1. yarn add 安装包 
+- yarn add 安装包 
 
-2. yarn remove 卸载包
+- yarn remove 卸载包
+
+- yarn create xxx yyy  相当于全局安装 xxx  再执行  xxx yyy
 
 ## npm
 
