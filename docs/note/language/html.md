@@ -191,6 +191,7 @@ rel:shortcut icon
 ---
 `< input type='file' multiple(多选文件)/>` 元素的files属性则是一个FileList对象，
 该对象是一个类数组对象，files[0] (表示第一个文件),files[1].........等，一个file对象就是一个Blob。有name，type，size（files[0].name）是火狐的标准+谷歌也可以。
+size 是大小乘以 1024 比如不超过 `10M => 10*1024*1024`
 当没有加multiple时 只有一个文件也是用files[0]来获取
 
 Filereader对象，图片预览等
@@ -334,7 +335,10 @@ var height = htmlImageElement.naturalHeight
 
 - htmlElement.scrollHeight  所有内容包括未被滚动到的 没有滚动条时 scrollHeight 和 clientHeight 相同
 
-- element.scrollIntoView({ behavior: "smooth"});//js原生，让元素滚动到可见区域
+- js原生，让元素滚动到可见区域
+```js
+element.scrollIntoView({ behavior: "smooth"});
+```
 
 - element.scrollLeft/scrollTop 来设置或获取滑动条的位置; 只能作用于元素上，window上无效
 

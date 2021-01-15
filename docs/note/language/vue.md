@@ -331,12 +331,13 @@ lint-staged 的作用是每次提交只检查本次提交所修改的文件
 
 ## vue-loader
 
-- 在style中用别名引入scss文件时，如果报错，在别名前~
+- 在style中用别名引入scss文件时，如果报错，在别名前 ~ ： `~@/asset/xxx`  在scss中@是变量定义的前缀，所以需要加上~以示区分
+- 独立的 .scss 文件中引入图片，图片的相对地址是根据，引入该样式的 vue 文件的相对地址决定的
 
-- `@import '@/x/x/x.scss'`;  引用文件时，不加后缀可能导致编译错误
+- `@import '@/x/x/x.scss'`;  引用文件时，不加后缀名可能导致编译错误
 
 - 深度作用域 
-```
+```css
 .a >>> .b (实际使用中效果没有deep好)
 .a /deep/ .b  (容易报错)
 .a ::v-deep .b  (最新版，vue/cli 4.4.1,只有这个有效)
@@ -511,19 +512,6 @@ dispatch 触发 action store.dispatch('increment')
 - `namespaced: true` 命名空间
 
 两个用法 `store.dispatch('模块名/actionSetUserInfo')`  `...mapState('模块名', ['roles'])`
-
-## vue-loader
-
-- 在style中用别名引入scss文件时，如果报错，在别名前~
-
-- `@import '@/x/x/x.scss'`;  引用文件时，不加后缀可能导致编译错误
-
-- 深度作用域 
-```css
-.a >>> .b (实际使用中效果没有deep好)
-.a /deep/ .b  (容易报错)
-.a ::v-deep .b  (最新版，vue/cli 4.4.1,只有这个有效)
-```
 
 ## elementUI
 

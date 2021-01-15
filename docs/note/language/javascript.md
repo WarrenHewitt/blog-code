@@ -939,7 +939,7 @@ function compare(a,b) {
     return a-b; // 注意这里是 a-b 如果是 b-a ab的位置会相反
     // 重点关注返回值即刻
     // 返回0 位置不变
-    // 返回负数 a放到b左边（简单理解为降序）
+    // 返回负数 a放到b左边（简单理解为降序）nde
     // 返回正数 a放到b右边（简单理解为升序）
 }
 arr.sort(compare);
@@ -1070,7 +1070,7 @@ obj.constructor.a3 // 实例中 只能这样访问
 
 ### String
 
-- `String.fromCharCode(97)` a  `'a'.charCodeAt(0)` 97 
+- `String.fromCharCode(97)` // a  `'a'.charCodeAt(0)` // 97 
 
 - 字符串存储的大小：理论最大长度是2^53-1
 

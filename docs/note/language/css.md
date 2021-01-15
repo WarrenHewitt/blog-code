@@ -66,8 +66,11 @@ replace 元素
 
 - ::selection { background:blue; color:red;} 设置鼠标选中文本样式
     
-- placeholder 颜色
+- 去掉 input type = number 的加减按钮 和修改 placeholder 颜色
 ```css
+input::-webkit-outer-spin-button(这个可以不写，都不支持了), input::-webkit-inner-spin-button { -webkit-appearance: none; }
+input[type="number"] { -moz-appearance: textfield; }
+
 textarea::-webkit-input-placeholder{ color: #cacaca; }
 input::-webkit-input-placeholder{ color: #cacaca; }
 ```
@@ -539,7 +542,7 @@ body{ font-size:$fontSize; }
 
 ---
 
-- `#{}` 用于将变量设置为属性名，或包裹 变量计算
+- `#{}` 用于将变量设置为属性名，或包裹 变量计算 `height:calc(100% - #{$headerH})`
 
 ---
 #### 混合 mixin
