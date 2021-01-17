@@ -1,4 +1,12 @@
-# three.js demo
+# three.js 
+
+## 载入3D模型
+
+官方文档 https://threejs.org/docs/index.html#manual/zh/introduction/Loading-3D-models
+
+推荐使用glTF（gl传输格式）。.GLB和.GLTF是这种格式的这两种不同版本
+
+## demo
 
 [在线示例](https://codepen.io/Hewitt/pen/ZEWgNyg)
 
