@@ -1,4 +1,16 @@
-# three.js demo
+# three.js 
+
+## 载入3D模型
+
+官方文档 https://threejs.org/docs/index.html#manual/zh/introduction/Loading-3D-models
+
+官方推荐使用glTF（gl传输格式）。.GLB和.GLTF是这种格式的这两种不同版本
+
+- 轨道控制器（OrbitControls） 可以使得相机围绕目标进行轨道运动。
+
+- 透视相机（PerspectiveCamera） 这一投影模式被用来模拟人眼所看到的景象，它是3D场景的渲染中使用得最普遍的投影模式
+
+## demo
 
 [在线示例](https://codepen.io/Hewitt/pen/ZEWgNyg)
 
