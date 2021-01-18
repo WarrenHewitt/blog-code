@@ -1,25 +1,8 @@
-
-
-export const a = function () {
-    console.log(233);
-
+while (1) {
+    var n = Math.random()
+    if(n>.99999999) {
+        console.log(n);
+        postMessage(n)
+        break
+    }
 }
-process.nextTick(() => {
-    console.log(6);
-})
-
-setTimeout(() => {
-    console.log(9);
-    process.nextTick(() => {
-        console.log(10);
-    })
-
-    new Promise((resolve) => {
-        console.log(11);
-        resolve()
-    }).then(() => {
-        console.log(12);
-    })
-})
-
-const nameValllue = '22'

@@ -278,7 +278,7 @@ require用于从外部获取一个模块接口及获取模块的exports对象
 
 application/x-www-form-urlebcoded 常见的form提交  post提交时可以将 contenttype改为该值
 
-multipart/form-data 不对字符编码在对文件上传时必须使用该值
+multipart/form-data 不对字符编码 在对文件上传时必须使用该值
 
 application/json json格式数据提交
 
