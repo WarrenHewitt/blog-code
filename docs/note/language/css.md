@@ -688,6 +688,7 @@ reset模块是compass内置的
   - Ideal Viewport（理想视口）
 
 ### css3视口单位
+兼容性： 主流版本都支持，只有ie 的10，11 不持支 vmax 
 - vm：1vw 等于视口宽度的1%（永远指水平方向）
 - vh: 1vh 等于视口高度的1%
 - vmin : 选取 vw 和 vh 中最小的那个
