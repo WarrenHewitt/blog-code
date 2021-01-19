@@ -49,18 +49,25 @@
             HEIGHT,
             WIDTH;
 
+        /* 创建场景 */
         const createScene = () => {
             HEIGHT = window.innerHeight;
             WIDTH = window.innerWidth;
 
             scene = new THREE.Scene();
 
-            scene.fog = new THREE.Fog(0x5d0361, 10, 1500);
+            /* 设置雾 */
+            // scene.fog = new THREE.Fog(0xffffff, 10, 1500);
+
+            // 坐标轴辅助  红色代表 X 轴. 绿色代表 Y 轴. 蓝色代表 Z 轴.
+            var axes = new THREE.AxesHelper(500);
+            scene.add(axes);
 
             aspectRatio = WIDTH / HEIGHT;
             fieldOfView = 60;
             nearPlane = 1;
             farPlane = 10000;
+            /* 创建透视相机 */
             camera = new THREE.PerspectiveCamera(
                 fieldOfView,
                 aspectRatio,
@@ -68,9 +75,9 @@
                 farPlane
             );
 
-            camera.position.x = 0;
-            camera.position.z = 500;
-            camera.position.y = -10;
+            camera.position.x = 200;
+            camera.position.z = 2000;
+            camera.position.y = 300;
 
             renderer = new THREE.WebGLRenderer({
                 alpha: true,
@@ -80,23 +87,25 @@
 
             renderer.shadowMap.enabled = true;
 
+            /* 渲染到浏览器 */
             container = document.getElementById("canvas");
             container.appendChild(renderer.domElement);
 
-            window.addEventListener("resize", handleWindowResize, false);
+            // window.addEventListener("resize", handleWindowResize, false);
 
             let loader = new THREE.GLTFLoader();
-            loader.load("https://www.stivaliserna.com/assets/rocket/rocket.gltf",
+            // loader.load("https://www.stivaliserna.com/assets/rocket/rocket.gltf",
+            loader.load("mdd.gltf",
                 (gltf) => {
                     rocket = gltf.scene;
-                    rocket.position.y = 50;
+                    rocket.position.y = -200;
+                    rocket.position.z = 500;
                     scene.add(rocket);
-
-                    console.log(23333);
-
                     main();
                 }
             );
+
+            // controls = new THREE.OrbitControls(camera,renderer.document);
         };
 
         const handleWindowResize = () => {
@@ -108,15 +117,18 @@
         };
 
         const createLights = () => {
-            const ambientLight = new THREE.HemisphereLight(0x404040, 0x404040, 1);
+            const ambientLight = new THREE.HemisphereLight(0xffffff, 0xffffff, .3);
 
-            const directionalLight = new THREE.DirectionalLight(0xdfebff, 1);
-            directionalLight.position.set(-300, 0, 600);
+            const directionalLight = new THREE.DirectionalLight(0xffeedd, 0.5);
+            directionalLight.position.set(0, 500, 1000);
 
-            const pointLight = new THREE.PointLight(0xa11148, 2, 1000, 2);
+            const pointLight = new THREE.PointLight(0xffffff, 2, 1000, 2);
             pointLight.position.set(200, -100, 50);
 
-            scene.add(ambientLight, directionalLight, pointLight);
+            var ambient = new THREE.AmbientLight(0x444444);
+
+            scene.add(ambient, directionalLight);
+            // scene.add(ambientLight, directionalLight, pointLight);
         };
 
         const targetRocketPosition = 40;
@@ -128,22 +140,83 @@
             renderer.render(scene, camera);
 
             const delta = targetRocketPosition * Math.sin(Math.PI * 2 * t);
-            rocket.rotation.y += 20;
-            rocket.position.y = delta;
-            console.log(delta);
+
+            rocket.rotation.y += 0.01;
+            // rocket.position.x = 100;
+            // rocket.position.y = 100;
+
+            // console.log(rocket.rotation.y);
 
             // requestAnimationFrame(loop);
         };
 
+        createScene();
         const main = () => {
-            createScene();
             createLights();
 
             renderer.render(scene, camera);
             loop();
         };
 
+        const controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+        camera.position.set( 100, 200, 1000 );
+        controls.update();
+
+        function animate() {
+
+            requestAnimationFrame( animate );
+
+            // required if controls.enableDamping or controls.autoRotate are set to true
+            controls.update();
+
+            renderer.render( scene, camera );
+
+        }
+
+        animate()
         
+        // document.addEventListener( 'mousedown', onMouseDown, false );
+        // document.addEventListener( 'mouseup', onMouseup, false );
+
+        var mouseDown = false
+        function onMouseDown(event) {
+            event.preventDefault();
+            mouseDown = true;
+            mouseX = event.clientX;//出发事件时的鼠标指针的水平坐标
+
+            document.addEventListener('mousemove', onMouseMove2, false);
+        }
+
+        function onMouseup(event) {
+            mouseDown = false;
+
+            document.removeEventListener("mousemove", onMouseMove2);
+        }
+
+        function onMouseMove2(event) {
+            if (!mouseDown) {
+                return;
+            }
+            var deltaX = event.clientX - mouseX;
+            mouseX = event.clientX;
+            rotateScene(deltaX);
+        }
+
+        //设置模型旋转速度，可以根据自己的需要调整
+        function rotateScene(deltaX) {
+            //设置旋转方向和移动方向相反，所以加了个负号
+            var deg = -deltaX / 279;
+            //deg 设置模型旋转的弧度
+            camera.rotation.z += deg;
+            render();
+        }
+
+        function render() {
+            renderer.render(scene, camera);
+        }
+
+
 
     </script>
 

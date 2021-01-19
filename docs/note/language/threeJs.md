@@ -1,14 +1,53 @@
 # three.js 
 
+- 视锥体，指的看起来像一个被削掉顶部的金字塔。这个形状是可以被透视camera看见和渲染的区域
+
+- OrbitControls 轨道控制器， 可以使得相机围绕目标进行轨道运动。
+
+- PerspectiveCamera ( fov : Number, aspect : Number, near : Number, far : Number ) 
+fov — 摄像机视锥体垂直视野角度, 从视图的底部到顶部; aspect — 摄像机视锥体长宽比,通常是使用画布的宽/画布的高。默认值是1（正方形画布）; 
+near — 摄像机视锥体近端面; far — 摄像机视锥体远端面
+
+透视相机， 这一投影模式被用来模拟人眼所看到的景象，它是3D场景的渲染中使用得最普遍的投影模式
+
+- Fog(name: 可选, color : Integer, near : Float, far : Float) 雾，在一定的距离内设置雾
+
+- AxesHelper( size : Number )  模拟3个坐标轴 红色代表 X 轴. 绿色代表 Y 轴. 蓝色代表 Z 轴. size 代表轴的线段长度. 默认为 1
+
+## 渲染器
+
+- renderer = WebGLRenderer({ 配置项 }) 用 WebGL(一种3D渲染协议) 渲染出制作的场景
+```
+alpha - canvas是否包含alpha (透明度)。默认为 false
+antialias - 是否执行抗锯齿。默认为false.
+
+renderer.shadowMap.enabled : Boolean 如果设置开启，允许在场景中使用阴影贴图。默认是 false。
+```
+
+## 灯光
+
+- SpotLight 聚光灯，光线从一个点沿一个方向射出，随着光线照射的变远，光线圆锥体的尺寸也逐渐增大
+
+----
+
+- HemisphereLight(skyColor : Integer, groundColor : Integer, intensity : Float) 
+半球光，光源直接放置于场景之上，光照颜色从天空光线颜色渐变到地面光线颜色。半球光不能投射阴影。
+```
+skyColor - (可选参数) 天空中发出光线的颜色。 缺省值 0xffffff。 
+groundColor - (可选参数) 地面发出光线的颜色。 缺省值 0xffffff。 
+intensity - (可选参数) 光照强度。 缺省值 1。
+```
+
+- DirectionalLight( color : Integer, intensity : Float ) 平行光, 可以投射阴影
+color - (可选参数) 16进制颜色。 缺省值为 0xffffff (白色)。
+intensity - (可选参数) 光照的强度。缺省值为1。
+
 ## 载入3D模型
 
 官方文档 https://threejs.org/docs/index.html#manual/zh/introduction/Loading-3D-models
 
 官方推荐使用glTF（gl传输格式）。.GLB和.GLTF是这种格式的这两种不同版本
 
-- 轨道控制器（OrbitControls） 可以使得相机围绕目标进行轨道运动。
-
-- 透视相机（PerspectiveCamera） 这一投影模式被用来模拟人眼所看到的景象，它是3D场景的渲染中使用得最普遍的投影模式
 
 ## demo
 
@@ -37,6 +76,29 @@ var scene = new THREE.Scene()
 var renderer = new THREE.WebGLRenderer()
 renderer.setSize(windowW, windowH)
 renderer.shadowMap.enabled = true
+
+/* 创建透视相机 */ 
+function createCamera() {
+    camera = new THREE.PerspectiveCamera(60, windowW / windowH, .1, 1000)
+    /* 设置相机的位置 */
+    camera.position.x = -40
+    camera.position.y = 50
+    camera.position.z = 30
+
+    /* 设置镜头的位置 */
+    camera.lookAt(scene.position)
+}
+
+/* 加入光源 */
+function createSpotLight() {
+    spotLight = new THREE.SpotLight(0xffffff, 1)
+    spotLight.position.set(0, 100, 100)
+    spotLight.castShadow = true
+    spotLight.shadow.mapSize.with = 2048
+    spotLight.shadow.mapSize.height = 2048
+
+    scene.add(spotLight)
+}
 
 /* 创建平面 */
 function createPlane() {
@@ -106,29 +168,6 @@ function createSphere() {
 
     /* 将球面体加入到场景中 */
     scene.add(sphere)
-}
-
-/* 创建透视相机 */ 
-function createCamera() {
-    camera = new THREE.PerspectiveCamera(60, windowW / windowH, .1, 1000)
-    /* 设置相机的位置 */
-    camera.position.x = -40
-    camera.position.y = 50
-    camera.position.z = 30
-
-    /* 设置镜头的位置 */
-    camera.lookAt(scene.position)
-}
-
-/* 加入光源 */
-function createSpotLight() {
-    spotLight = new THREE.SpotLight(0xffffff, 1)
-    spotLight.position.set(0, 100, 100)
-    spotLight.castShadow = true
-    spotLight.shadow.mapSize.with = 2048
-    spotLight.shadow.mapSize.height = 2048
-
-    scene.add(spotLight)
 }
 
 document.querySelector('#cusThree').appendChild(renderer.domElement)
