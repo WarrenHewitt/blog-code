@@ -94,7 +94,7 @@
 
                     console.log(23333);
 
-                    main();
+                    
                 }
             );
         };
@@ -127,13 +127,21 @@
 
             renderer.render(scene, camera);
 
-            const delta = targetRocketPosition * Math.sin(Math.PI * 2 * t);
-            rocket.rotation.y += 20;
-            rocket.position.y = delta;
-            console.log(delta);
+
+            if(rocket) {
+
+                const delta = targetRocketPosition * Math.sin(Math.PI * 2 * t);
+                rocket.rotation.y += 20;
+                rocket.position.y = delta;
+                console.log(delta);
+            }
 
             // requestAnimationFrame(loop);
         };
+
+        setTimeout(() => {
+            loop()
+        }, 2000);
 
         const main = () => {
             createScene();
@@ -142,6 +150,8 @@
             renderer.render(scene, camera);
             loop();
         };
+
+        main();
 
         
 
