@@ -116,3 +116,11 @@ v5：namespace + 输入内容 SHA1
 ### node 相关
 
 - 文件的操作，封装简化 fs 的方法 [fs-extra](https://github.com/jprichardson/node-fs-extra)
+
+
+### 其它
+
+- api 处理 [地址](https://github.com/Tencent/APIJSON)
+
+- Strapi is the open-source Headless CMS(Content Management System) 提供内容的处理接口  不提供业务层
+ 属于低代码一种实现

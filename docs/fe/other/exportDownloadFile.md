@@ -128,9 +128,19 @@ html2canvas 原理是读取DOM，并根据规则在画布上绘制，但部分cs
 
 
 
-### 下载图片
+### 下载图片 或其它文件
 
-- 利用 a 标签
+#### 利用跳转
+```
+window.open('a.zip');
+
+location.href = 'a.zip';
+```
+会出现URL长度限制问题；浏览器可直接浏览的类型无法下载如txt、png、jpg、gif等；不能添加header，也就不能进行鉴权；不知道下载的进度
+
+---
+
+#### 利用 a 标签 download
 
 IE存在兼容问题，必须是同源图片(非同源会在新标签页打开)，download属性值要跟图片格式
 ```html
@@ -141,13 +151,18 @@ IE存在兼容问题，必须是同源图片(非同源会在新标签页打开)�
 const downloadFile = (url, download) => {
     const aEle = document.createElement('a')
     aEle.setAttribute('href', url)
-    aEle.setAttribute('download', download || 'name')
+    aEle.setAttribute('download', download || 'name') // 默认是文件原本名
     document.body.appendChild(aEle)
     aEle.click()
 }
+
+// 判断是否支持download
+'download' in document.createElement('a');
 ```
 
-- 如果是放 cdn 或是 图片服务器（服务器也要设置允许跨域）
+#### 利用 canvas 结合 Image 下载图片
+
+如果是放 cdn 或是 图片服务器（服务器也要设置允许跨域）
 
 ```js
 const canvasEle = document.createElement('canvas');
@@ -168,27 +183,58 @@ imgEle.onload = function() {
 imgEle.src = 'xxx.jpg';
 ```
 
-- 利用 ajax 请求，要求也是同上，只是不需要兼容 crossOrigin
+#### 利用 ajax 请求，结合返回 Blob ，下载图片或其它类型文件
+
+要求也是同上，只是不需要兼容 crossOrigin；可以设置 header
 ```js
 function dl() {
     var xhr = new XMLHttpRequest();
-    xhr.onload = function () {
-        var url = URL.createObjectURL(this.response);
-        var img = new Image();
-        img.onload = function () {
-            const aEle = document.createElement('a');
-            aEle.setAttribute('href', canvasEle.toDataURL('image/jpeg'));
-            aEle.setAttribute('download', 'cross.jpg');
-            aEle.click();
-            // 释放内存
-            URL.revokeObjectURL(url);
-        };
-        img.src = url;
-    };
-    xhr.open('GET', url, true);
+    xhr.open('GET', '/xx/xx', true);
     xhr.responseType = 'blob';
     xhr.send();
+    xhr.onload = function () {
+        /*
+         * @des 利用 Blob
+         */
+        var url = URL.createObjectURL(this.response);
+        const aEle = document.createElement('a');
+        aEle.setAttribute('href', canvasEle.toDataURL('image/jpeg'));
+        aEle.setAttribute('download', 'cross.jpg');
+        aEle.click();
+        // 释放内存
+        URL.revokeObjectURL(url);
+
+        /*
+         * @des 利用 base64
+         */
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(this.response);
+        fileReader.onload = function () {
+            const aEle = document.createElement('a');
+            aEle.href = this.result;
+            aEle.download = 'fileName.doc';
+            aEle.click();
+        }
+    };
 }
 ```
 
+- 文件流返回，获取文件名 
+
+header上有 Content-Disposition  其值有一段的内容是 `filename=xxxxxx.xlsx; filename*=xxxxxxy`
+
+filename* 后跟的就是现代浏览器都支持较好的 文件名
+
+```js
+const disposition = xhr.getResponseHeader('content-disposition'); 
+if (disposition) {
+    // 具体的获取方法根据实际字符串而定
+    let filename = content.match(/filename\*=(.*)/)[1];
+    filename = decodeURIComponent(filename);
+}
+```
+
+若以上方式无法解决名称获取，只能后端配合添加自定义 header
+
 > 欢迎交流 [Github](https://github.com/WarrenHewitt/blog/issues)
+
