@@ -532,6 +532,8 @@ dispatch 触发 action store.dispatch('increment')
 
 - 在表格中使用 dropdown 的基础形式 也就是没有用 split-button 需要把 v-slot="scope" 加上
 
+- 动态表格添加项时 一定要注意把字段加上，如果表格中需要的字段，在是初始化时没有指定，在修改其值后 页面不会及时更新显示，再次操作时才会显示
+
 
 ## iview
 

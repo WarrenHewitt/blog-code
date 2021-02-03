@@ -152,6 +152,11 @@ typeof a // object
 
 先调 toString() 后调 valueOf() 
 
+- valueOf() 方法
+
+Array返回数组对象本身； Boolean布尔值； Date存储的时间是从1970年1月1日午夜开始计的毫秒数UTC； Function函数本身； Number数字值； Object对象本身；
+String字符串值； Math和Error对象没有该方法；可以自定义覆盖
+
 ---
 
 - 对象转数字：

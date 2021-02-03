@@ -26,7 +26,7 @@ footer: MIT Licensed | Copyright © 2019-present Warren
 
 - 【2020-08-07】 [常见排序算法原理及JS代码实现](https://warrenhewitt.github.io/blog/note/algorithm/sort.html)
 
-- 【2020-03-16】 [导出Excel、PDF和下载图片](https://warrenhewitt.github.io/blog/fe/other/exportFile.html)
+- 【2020-03-16】 [导出Excel、PDF和下载图片](https://warrenhewitt.github.io/blog/fe/other/exportDownloadFile.html)
 
 - 【2020-03-09】 [canvas画板多端实现](https://warrenhewitt.github.io/blog/fe/other/drawBoard.html)
 
