@@ -47,8 +47,22 @@ user-select: none;
     1. 查询app的URL Scheme(如微信的为weixin) < a href="weixin://" >打开微信< /a> 
 ---
 
-- 打电话 `<a href='tel:1234565'>`
-
+- 打电话 发短信 发邮件 `<a href='tel:1234565'>`
+```js
+function send(type) {
+    var tagA = document.createElement('a')
+    const typeObj = {
+        phone: 'tel:10086',
+        sms: 'sms:10086,10010?body=message',
+        /* 给两个人发 mailto:p1@163.com,p2@126.com */
+        /* 主题 mailto:p1@163.com?subject=主题 */
+        /* 抄送 mailto:p1@163.com?subject=主题 mailto&cc=p3@126.com */
+        mail: 'mailto:t1@163.com?subject=Testing',
+    }
+    tagA.setAttribute('href', typeObj[type])
+    tagA.click()
+}
+```
 ---
 
 - 禁止识别手机号

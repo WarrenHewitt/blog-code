@@ -379,7 +379,7 @@ getURLParameter('?name=b&amp;password=d','password')
 - data instanceof FormData 判断是否是 FormData
 
 ---
-option标签在谷歌和ie低版本上是没有click事件的，一般对select都是用change事件；  
+option标签在谷歌和ie低版本上是没有 click 事件的，一般对select都是用change事件；  
 获取option的value和text用  
 selectObj=document.getElementById('select');  
 selectObj.value;  selectObj.options[selectObj.selectedIndex].text;
