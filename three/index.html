@@ -86,7 +86,7 @@
             container.appendChild(renderer.domElement);
 
             let loader = new THREE.GLTFLoader();
-            loader.load("./gltf/mdd.gltf", (gltf) => {
+            loader.load("./mdd.gltf", (gltf) => {
                     rocket = gltf.scene;
                     rocket.position.y = -200;
                     rocket.position.z = 500;
