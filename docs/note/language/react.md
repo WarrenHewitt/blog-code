@@ -155,6 +155,8 @@ props是不可以改变的
 // 必须放在函数内顶部
 const [ val, setVal ] = useState('initValue')  // 返回数组,第一个值是设置的值，第二个值是更新这个值的函数
 
+// 这里用数组 就是为了可以自己定义 state 和修改state函数的名字，如果用对象解构 名字就需要固定
+
 setVal(old => old+1)  // 采用回调方式更新，更好，修改后 react 会自动渲染对应UI，不会将新的 state和旧的state 合并
 ``` 
 
