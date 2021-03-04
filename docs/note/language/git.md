@@ -178,6 +178,8 @@ git config --local --list
 
 git clone 会默认将本地与远程分支进行追踪
 
+克隆时 密码输入错误，怎么修改；打开控制面板 ->  用户账户 -> Windows 凭据  -> 选中凭据展开编辑即可
+
 ---
 
 当在merge时产生了冲突（branchname|Marging）  
