@@ -515,13 +515,15 @@ dispatch 触发 action store.dispatch('increment')
 
 - `namespaced: true` 命名空间
 
-两个用法 `store.dispatch('模块名/actionSetUserInfo')`  `...mapState('模块名', ['roles'])`
+两个用法 `store.dispatch('模块名/actionSetUserInfo')`  `...mapState('模块名', ['state属性'])`
 
 ## elementUI
 
 - 表单重置  `this.$refs.ruleForm.resetFields()`  只会清除 新输入的数据 ；当在data上配置表单数据时设置了初始化值时，该默认值是不会被清除的，并且修改该默认值，重置后的值也是初始值
 
 - 当表单数据有多层嵌套对象时，在设置prop时要将 嵌套关系用字符串形式 赋值
+
+- 初始化时给表单赋值，触发了校验，赋值后还是给出了错误提示，检查是否是在 created 生命周期中进行的赋值，如果不是请保证在 created 中进行初始化赋值
 
 - 动态表格列，需要用 `template` 来包裹
 ```vue

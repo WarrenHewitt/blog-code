@@ -185,6 +185,24 @@ git clone 会默认将本地与远程分支进行追踪
 当在merge时产生了冲突（branchname|Marging）  
 执行git add filename|. ,git commit –m ‘message’,再次将工作区的更改提交到本地仓库-区，告诉Git 冲突已解决。
 
+---
+
+- git rebase 
+
+在当前分支操作 git rebase master，把当前分支(dev)的 commit 放到公共分支(matser)的最后面,所以叫变基。就好像你从公共分支又重新拉出来这个分支一样
+
+merge 会把公共分支和当前分支的commit 合并在一起，形成一个新的 commit 提交， rebase不会生成新的节点，是将两个分支融合成一个线性的提交
+
+在分支上进行 git rebase master 操作，相当于让当前分支相对于 分支 master 进行变基，遇到冲突 解决后需要执行， git rebase --continue 
+
+当需要保留详细的合并信息的时候建议使用git merge，特别是需要将分支合并进入master分支时；
+当频繁进行了git commit提交时，不必提交过多的信息时，可以尝试git rebase。
+
+建议不要在公共分支使用rebase，因为公共分支的commit 一般不应放到次分支后面
+
+变基操作的 实质是丢弃一些现有的提交，然后相应地新建一些内容一样但实际上不同的提交。 如果你已经将提交推送至某个仓库，而其他人也已经从该仓库拉取提交并进行了后续工作，此时，如果你用 git rebase 命令重新整理了提交并再次推送，你的同伴因此将不得不再次将他们手头的工作与你的提交进行整合，如果接下来你还要拉取并整合他们修改过的提交，事情就会变得一团糟
+
+---
 
 
 ### 分支操作
@@ -272,9 +290,9 @@ git stash pop // 和 apply 功能一致，但会将stash列表中的信息进行
 
 git stash apply // 应用最近的存储
 
-git stash apply stash@{值} // 查看列表获取的值
+git stash apply stash@{值} // 值:  git stash list 查看
 
-git stash drop stash@{值} // 移除某个暂存
+git stash drop stash@{值} // 移除某个暂存 值：同上
 
 git stash clear // 清空本地暂存栈信息
 

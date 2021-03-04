@@ -106,11 +106,13 @@ https://developers.weixin.qq.com/miniprogram/dev/reference/configuration/page.ht
 单个页面的 .json 文件
 ```json
 {
-  "navigationBarTitleText": "页面顶部标题"
+  "navigationBarTitleText": "页面顶部标题" 如果没有正常显示，检查app.json中是否有这个页面
 }
 ```
 
-- 标题也可以动态修改  `wx.setNavigationBarTitle({ title: '' })`
+- 每个页面顶部标题也可以动态修改  `wx.setNavigationBarTitle({ title: '' })`
+
+- 每个页面顶部的 Bar 样式修改 setNavigationBarColor
 
 ### 页面周期函数
 
