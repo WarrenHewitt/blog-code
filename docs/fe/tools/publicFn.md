@@ -7,13 +7,18 @@
 function ajaxFn() {
     // IE5,6用 new ActiveXObject('Microsoft.XMLHTTP');
     var xhr=new XMLHttpRequest();
+    /* 所有的浏览器都支持该事件 */
     xhr.onreadystatechange=function(){//这个事件函数放在哪里都可
         if(xhr.readyState===4){//针对open方法可以调用并且接受了全部响应数据
             if(xhr.status===200){//响应的http状态
-                alert(xhr.responseText);
+                console.log(xhr.responseText);
             }
         }
     };
+    /* 可以用onload替代上面的onreadystatechange */
+    xhr.onload=function(){
+        // 处理取回的数据(在 xhr.response 中找到)
+    }
     xhr.timeout = 2000; // 超时时间，单位是毫秒(设置的超时值，在请求头中不显示)
     
     /* @des get方式 */

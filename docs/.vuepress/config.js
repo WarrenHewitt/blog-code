@@ -46,7 +46,7 @@ module.exports = {
                     title: '实践示例', 
                     collapsable: false,
                     children: [
-                        ['/fe/other/exportFile', '导出Excel、PDF和下载图片'],
+                        ['/fe/other/exportDownloadFile', '导出Excel、PDF和下载图片、文件'],
                         ['/fe/other/drawBoard', 'canvas画板多端实现'],
                         ['/fe/other/print', 'html 打印相关操作与实现'],
                         ['/fe/other/dragDropPreview', '拖拽与拖拽文件上传以及预览'],
@@ -161,8 +161,17 @@ module.exports = {
                     title: '插件、包介绍', 
                     collapsable: false,
                     children: [
-                        ['/other/plugin', '一些包的使用介绍'],
+                        ['/other/plugin', 'GitHub上开源包、系统等介绍'],
                         ['/other/eslintConfig', 'eslint 相关的配置说明'],
+                    ]
+                },
+                { 
+                    title: '博客和书籍', 
+                    collapsable: false,
+                    children: [
+                        ['/other/wordsExplain', '技术名词解释'],
+                        ['/other/blogBook', '技术书籍和博客'],
+                        ['/other/githubHexo', 'Hexo搭建博客过程'],
                     ]
                 },
                 { 
@@ -180,14 +189,6 @@ module.exports = {
                         ['/other/softwareUsage', '常用软件操作'],
                         ['/other/charles-proxy-phone', 'charles抓包手机数据'],
                         ['/other/psISE', 'powershell ISE，集成git命令'],
-                    ]
-                },
-                { 
-                    title: '博客和书籍', 
-                    collapsable: false,
-                    children: [
-                        ['/other/blogBook', '技术书籍和博客'],
-                        ['/other/githubHexo', 'Hexo搭建博客过程'],
                     ]
                 },
             ]

@@ -30,6 +30,13 @@ PureComponent 通过 props 和 state 的 浅对比实现 shouldComponentUpdate�
 
 - React.cloneElement(createElement创建的元素)
 
+- react 严格模式 StrictMode, 用了antd 后，会报错，删除严格模式即可
+```html
+<React.StrictMode>
+  <App />
+</React.StrictMode>
+```
+
 ---
 
 - HOC: 参见 react-admin ；（与公共组件区别，主要是公共组件应该是多地方引用相同的组件，而不需要修改公共组件内容）
@@ -147,7 +154,7 @@ props是不可以改变的
 
 实践代码： react-admin/src/pages/practice/hooks
 
-- 使函数组件拥有状态
+- 使函数组件拥有状态 useState 
 - 只能放到函数组件中，如（useParams）
 - 复杂状态用 `useReducer()`
 
@@ -177,9 +184,7 @@ componentWillUnmount     -> useEffect 里返回的函数
 ### redux杂项
 Action 发出以后，Reducer 立即算出 State，这叫做同步；Action 发出以后，过一段时间再执行 Reducer，这就是异步。
 
----
- react-router 和react-router-dom 只要引用一个就行了，不同之处就是后者比前者多出了 < Link> < BrowserRouter> 这样的 DOM 类组件。  
-因此我们只需引用 react-router-dom 这个包就行了。当然，如果搭配 redux ，你还需要使用 react-router-redux。
+参考示例： https://www.redux.org.cn/docs/basics/ExampleTodoList.html
 
 ---
 ### 基本概念
@@ -201,14 +206,24 @@ store.dispatch()是view发出action的唯一方法，可接受一个action对象
 ---
 reducer  
 store接收到action后，必须给出一个新的state，view才会变化，这就是reducer过程。  
-reducer函数接收state和action参数，返回一个新的state。  
+reducer函数接收state和action参数，返回一个新的state。 简单的通过 switch 判断不同的 action  返回不同的state 通过 connect 连接多个reducer 
 store.dispatch()方法会触发reducer的自执行
 
 ---
 subscribe  
 可以用subscribe函数监听store，一旦state发生变化就自动执行这个函数，该方法返回一个函数，调用这个函数就可以接触监听。
 
+## redux-toolkit
+
+教程 https://penueling.com/%E6%8A%80%E8%A1%93%E7%AD%86%E8%A8%98/react-react-redux-redix-toolkit-%E6%96%B0%E6%89%8B%E6%95%99%E5%AD%B8/
+
+- createSlice()
+根据传递的参数自动生成相应的actionCreator和reducer函数  https://blog.csdn.net/ilovethesunshine/article/details/109627560
+
 ## react-router
+
+react-router 和react-router-dom 只要引用一个就行了，不同之处就是后者比前者多出了 < Link> < BrowserRouter> 这样的 DOM 类组件。  
+因此我们只需引用 react-router-dom 这个包就行了。当然，如果搭配 redux ，你还需要使用 react-router-redux。
 
 - `exact` 精准定位路由 匹配 '/' 跟路由时作用明显
 
@@ -220,6 +235,10 @@ subscribe
 ```
 PORT=3006
 ```
+
+使用eject 暴露出配置后
+
+可以在 config/webpack.config.js 中配置 alias `'@': path.resolve(__dirname, '../src'),`
 
 ## 学习使用ant design pro
 

@@ -116,3 +116,24 @@ v5：namespace + 输入内容 SHA1
 ### node 相关
 
 - 文件的操作，封装简化 fs 的方法 [fs-extra](https://github.com/jprichardson/node-fs-extra)
+
+- browserslist 是在不同的前端工具之间共用目标浏览器和 node 版本的配置工具。用于 Autoprefixer
+Babel 等
+
+两个地址 [一](https://juejin.cn/post/6844903669524086797)  [github地址](https://github.com/browserslist/browserslist)
+
+```
+last 2 versions
+not dead 
+// 注意 如果是这么用 可能在vue项目中 Autoprefixer 可能就不会加前缀了，因为 很多需要加前缀的浏览器会被判定为已经死了，所以不用加前缀了，可以 把 not dead 改为 not ie<=10
+```
+
+- PostCSS 转换CSS的工具，有许多插件，例如autoprefixer,cssnext以及CSS Modules
+
+
+### 其它
+
+- api 处理 [地址](https://github.com/Tencent/APIJSON)
+
+- Strapi is the open-source Headless CMS(Content Management System) 提供内容的处理接口  不提供业务层
+ 属于低代码一种实现
