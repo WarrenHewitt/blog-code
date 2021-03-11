@@ -43,13 +43,15 @@ Router.prototype.push = function push (location, onResolve, onReject) {
 
 - throw er; // Unhandled 'error' event ：请检测是否为端口被占用
 - EADDRINUSE : 给定的地址已经被使用
-
-
 ## git
 
 - fatal: unable to access 'https://github.com/WarrenHewitt/blog.git/': OpenSSL SSL_connect: SSL_ERROR_SYSCALL in connection to github.com:443
 
 检查是否是开了代理
+
+- cannot lock ref 'HEAD': unable to resolve reference 'refs/heads/master': reference broken 或是在push的时候电脑重启，导致git文件损毁
+
+解决办法：在新的文件夹下重新拉取该项目，将拿到的 .git 文件替换到项目中
 
 ## svn
 
