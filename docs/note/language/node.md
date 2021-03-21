@@ -39,7 +39,7 @@ token需要查库验证token 是否有效，而JWT不用查库或者少查库
 
 - yarn create xxx yyy  相当于全局安装 xxx  再执行  xxx yyy
 
-- 设置国内源  `yarn config set registry https://registry.npm.taobao.org/` 查看源 `yarn config get registry` 
+- 设置国内源  `yarn config set registry https://registry.npm.taobao.org/` ;查看源地址信息： `yarn config get registry` 
 
 ## npm
 
