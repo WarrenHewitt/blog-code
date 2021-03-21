@@ -984,6 +984,10 @@ var newArray = [].concat(valueN,valueN,valueN) valueN 可以是值或数组
 
 ### Function
 
+- Thunk 函数 ： 只接受回调函数作为参数，将多参函数替换为单参函数 
+
+---
+
 - 一种特殊的 命名函数表达式
 
 ```js
