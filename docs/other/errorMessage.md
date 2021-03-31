@@ -20,6 +20,12 @@ Router.prototype.push = function push (location, onResolve, onReject) {
 
 - `%E2%80%8B` 一个看不见的字符 ZERO-WIDTH SPACE 如果出现在了url中会导致接口 404
 
+- centOS 重启 nginx
+```
+nginx: [alert] kill(16179, 1) failed (3: No such process)
+先启动 nginx  再重启  如果无法重启 报 address already in use  证明端口冲突了 改了端口后再试
+```
+
 
 ## 服务端报错信息
 - 403 权限访问此站，服务器收到请求但拒绝提供服务

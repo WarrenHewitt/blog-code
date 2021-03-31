@@ -15,9 +15,26 @@
 
 - mv name1 name2 将文件或文件夹改名
 
-- `find / -name fileName ` 命令用来在指定目录下查找文件docker 
+- pwd 显示当前目录地址
+
+- `find / -name fileName ` 命令用来在指定目录下查找文件
+
+- whereis 命令用于查找文件 `whereis nginx`  查找 nginx 的地址 
 
 - `sed -i 's/xx/yy/g' fileName`  -i 表示插入  s 表示取代，这里是利用正则将文件中的xx替换为yy
+
+- netstat -tulpn  查看开启的端口号
+
+- 查看进程  `ps -ef | grep nginx`
+```
+-e 显示所有进程信息 -f 格式化的信息列表
+grep 命令用于查找文件里符合条件的字符串
+| 表示管道，上一条命令的输出，作为下一条命令参数
+```
+
+- 杀死进程 `kill pid` ; `kill -9 pid` 表示强制杀死该进程
+
+- `netstat -tunlp | grep 端口号`  显示 tcp，udp 的端口和进程等相关情况 
 
 --- 
 
@@ -42,9 +59,12 @@
 
 `rm -rf *` 递归删除当前目录下的文件和文件夹
 
+
 ---
 
 - cat options file 【显示文件内容】
+
+- cat /etc/redhat-release  查看系统      
 
 - `vi filename ` 打开或新建文件
 
