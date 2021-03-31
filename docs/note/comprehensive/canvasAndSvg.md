@@ -90,8 +90,10 @@ document.body.appendChild(imgEle)
 
 ### svg
 
+- xmlns 该属性意味着这个 `svg` 标签和它的子节点都属于'http://www.w3.org/2000/svg' 这个SVG命名空间; 请注意，命名空间仅仅只是一些字符串，所以SVG上那些看起来像URI的命名空间并不重要。因为URIs的唯一性从而被广泛使用，它的本意并不是要“链接”到某个地址
+
 ```html
-<svg width="900" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg" style="background-color: rgb(5, 216, 216);">
+<svg width="900" height="600" version="1.0" xmlns="http://www.hew/1/svg" style="background-color: rgb(5, 216, 216);">
     <!-- x:矩形左上角的x位置 y:矩形左上角的y位置 rx:圆角的x方位的半径 ry:圆角的y方位的半径 -->
     <rect x="10" y="10" width="30" height="30" stroke="black" fill="transparent" stroke-width="2"/>
     <rect x="60" y="10" rx="10" ry="10" width="30" height="30" stroke="black" fill="transparent" stroke-width="2"/>
@@ -104,14 +106,29 @@ document.body.appendChild(imgEle)
     <polyline points="60 110 65 120 70 115 75 130 80 125 85 140 90 135 95 150 100 145, 300 300" stroke="orange" fill="transparent" stroke-width="2"/>
     <polygon points="50 160 55 180 70 180 60 190 65 205 50 195 35 205 40 190 30 180 45 180" stroke="green" fill="transparent" stroke-width="2"/>
     
+    <text x="0" y="15" fill="red">文本</text>
+
+    <!-- 
+        M = moveto 在什么位置开始
+        L = lineto
+        H = horizontal lineto
+        V = vertical lineto
+        C = curveto
+        S = smooth curveto
+        Q = quadratic Bézier curve
+        T = smooth quadratic Bézier curveto
+        A = elliptical Arc
+        Z = closepath 
+    -->
+    <!-- 大写表示绝对位置，小写表示相对位置（相对的是上一个绘画结束点） -->
     <path d="M20,230 Q40,205 50,230 T90,230" fill="red" stroke="blue" stroke-width="2"/>
 
-    <!-- 大写表示绝对位置，小写表示相对位置（相对的是上一个绘画结束点） -->
     <!-- H V 表示在上一个绘制结束点，向水平或垂直方向延伸到指定x位置或y位置 -->
     <path d="M110 20, L 120 40, H 200, V 200" fill="none" stroke="white" stroke-width="2"/>
 
     <!-- Z 表示连接起点与终点 -->
     <path d="M 120 60, L 120 100, L 160 100, Z" fill="pink" stroke="pink" stroke-width="2"/>
+
     <!-- 
         A 参数：
         1. 水平方向半径(椭圆的其中一个半径)，会根据终点位置进行自动比例换算 
