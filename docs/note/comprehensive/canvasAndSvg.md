@@ -110,15 +110,15 @@ document.body.appendChild(imgEle)
 
     <!-- 
         M = moveto 在什么位置开始
-        L = lineto
-        H = horizontal lineto
-        V = vertical lineto
-        C = curveto
-        S = smooth curveto
-        Q = quadratic Bézier curve
-        T = smooth quadratic Bézier curveto
+        L = lineto 画线到
+        H = horizontal lineto 水平线到
+        V = vertical lineto 垂直线到
+        C = curveto 三次贝塞尔曲线到
+        S = smooth curveto  光滑三次贝塞尔曲线到
+        Q = quadratic Bézier curve 二次贝塞尔曲线
+        T = smooth quadratic Bézier curveto 光滑二次贝塞尔曲线到
         A = elliptical Arc
-        Z = closepath 
+        Z = closepath  关闭路径
     -->
     <!-- 大写表示绝对位置，小写表示相对位置（相对的是上一个绘画结束点） -->
     <path d="M20,230 Q40,205 50,230 T90,230" fill="red" stroke="blue" stroke-width="2"/>
