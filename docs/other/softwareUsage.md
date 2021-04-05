@@ -261,3 +261,9 @@ monocloud 添加pac：在安装目录中找到pac.txt 在rules数组中加入网
 
 编辑 session 选择 Advanced SSH settings  勾选 Follow SSH path
 
+
+# blender
+
+1. 点击鼠标滚轮  上下左右移动 物体； 加 shift 或 ctrl 移动，alt 按角度切换
+
+2. alt + g  移动清零   alt+r 旋转清零   alt+s 大小清零
