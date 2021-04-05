@@ -73,6 +73,28 @@ function objectToQueryString(obj) {
 }
 ```
 
+## 一维数组和二维数组相互转换
+
+```js
+/* 一维数组转二位数组 */
+function oneDimensionalToTwo(array, length) {
+    if(!array.length || !length || array.length < length) return array
+    const newArr = []
+    let j = -1
+    for (let i = 0; i < array.length; i++) {
+        if(i%length === 0) {
+            j++
+            newArr[j] = []
+        }
+        newArr[j].push(array[i])
+    }
+    return newArr
+}
+
+/* 一维数组转二位数组 */
+// 参考 js 笔记中的 flat 方法
+```
+
 
 ## 批量动态插入元素
 ```js
@@ -499,7 +521,7 @@ function randomColor(type){
     } else {
         /** 16777215 (2的24次方) 转换为16进制是 ffffff 所以用 16777216 保证能取到白色 */
         const color = `#${Math.floor(Math.random() * 16777216).toString(16)}`;
-        /** 这里填充的值随意设置 */
+        /** 这里填充的值随意设置  防止位数不够的情况 */
         return color.padEnd(7, 'f');
     }
 }

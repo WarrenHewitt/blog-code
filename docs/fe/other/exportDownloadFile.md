@@ -87,11 +87,6 @@ exportData = () => {
 
 ####  引入 jspdf 和 html2canvas
 
-`import * as jsPDF from 'jspdf'`
-
-`import html2canvas from 'html2canvas';`
-html2canvas 原理是读取DOM，并根据规则在画布上绘制，但部分css样式是无法实现的
-
 - 主要代码
 
 ```js
@@ -130,6 +125,27 @@ html2canvas 原理是读取DOM，并根据规则在画布上绘制，但部分cs
 
 ### 下载图片 或其它文件
 
+#### 利用canvas将 dom 生成图片并下载
+
+- html2canvas 原理是读取DOM，并根据规则在画布上绘制，但部分css样式是无法实现的
+
+- 如果有滑动条 需要将滑动条滚到要截取的DOM顶部
+
+```js
+// 配置项 https://html2canvas.hertzen.com/configuration
+// allowTaint: true  使背景图或img引入的图片生效
+html2canvas(document.querySelector('xxx'), { allowTaint: true }).then((canvas) => {
+    // 防止截图不完整
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+    // toDataURL 方法参见 javascript.md
+    var d = canvas.toDataURL('image/jpeg', 1)
+    // downloadFile 方法参见下文
+    downloadFile(d)
+})
+
+```
+
 #### 利用跳转
 ```
 window.open('a.zip');
@@ -163,6 +179,8 @@ const downloadFile = (url, download) => {
 #### 利用 canvas 结合 Image 下载图片
 
 如果是放 cdn 或是 图片服务器（服务器也要设置允许跨域）
+
+toDataURL 如果本地开发引入图片 会报跨域错误 可以将图片转为base64 直接使用
 
 ```js
 const canvasEle = document.createElement('canvas');
