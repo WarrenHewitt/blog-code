@@ -22,7 +22,7 @@
 
 ## `jsconfig.json` 文件配置
 
-https://code.visualstudio.com/docs/languages/jsconfig
+https://code.visualstudio.com/docs/languages/jsconfig  示例参考 /vue-admin
 
 文件所在目录下的所有js代码做出个性化支持
 

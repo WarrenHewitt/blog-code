@@ -309,11 +309,22 @@ syntax:JSON.stringify(value[, replacer[, space]]) **巴科斯范式(BNF)**
 
 ### window
 
+- 利用 a 标签来打开 防止被拦截
+
+```js
+const openNewWindow = () => {
+    const a = document.createElement('a')
+    a.setAttribute('href', 'xxxxx')
+    a.setAttribute('target', '_blank')
+    a.click()
+}
+```
+
 - 打开新的页面，并将其关闭
 ```js
 var newTag = window.open('', '_blank')
 newTag.print()
-newTag.close();
+newTag.close()
 ```
 
 - window.btoa(需要编码的字符串) 将字符串转base64  <=> window.atob(base64字符) 相反方法
@@ -349,10 +360,11 @@ sessionStorage.removeItem(key) // 删除指定key本地存储的值
 // sessionStorage.length是sessionStorage的项目数
 sessionStorage.clear(); //清除所有
 
-// localStorage与上面相同。
 // 或者直接设置值
 localStorage.a = 3;
 localStorage['a'] = 'sfsf';
+
+// https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
 ```
 ---
 
@@ -923,7 +935,9 @@ indexOf(str) 参数可以是字符或字符串
 
 ---
 
-在表达式中：`var a = i++` a等于i原来的值，`var a = ++i` a等于i加1后的值；但最后i的值都会加1
+在表达式中：`var a = i++` a等于i原来的值，`var a = ++i` a等于i加1后的值；但最后i的值都会加1 
+
+`fn(++i)` 函数传参时 如果要加一  用 ++i 用 i++ 传递的是i
 
 ---
 splice(x,y,z1,z2,z3,z4....):会直接对当前数组进行修改；  
@@ -1511,6 +1525,7 @@ var { foo, bar } = { foo: "lorem", bar: "ipsum" };
 // 详见 Object.assign() 
 
 const { a: a, b:b=9, c='no c' } = { a: 12, b: null } 
+// 设置默认值简写 { b=9, c='no c' }
 console.log(a, b,c); // 12, null on o
 // 当被赋予的值是null时，是不会用默认值将其覆盖的，默认值只会赋值为undefined的情况,当没有属性c时才会使用默认值
 // Babel是将其解析为判断值是否等于void 0 也就是undefined
@@ -1750,6 +1765,8 @@ console.log(a) // { age: 250, get age: f, get age: f, _proto_: { name: 'hew' } }
 ### es2019
 
 - 展平数组
+
+将一维数组转换为二维数组查看 docs\fe\tools\publicFn.md
 
 flat(展平层级:数字(默认1)或Infinity)  会过滤数组中的空值 返回新数组
 

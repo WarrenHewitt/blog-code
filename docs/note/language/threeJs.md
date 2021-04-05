@@ -2,21 +2,35 @@
 
 - 视锥体，指的看起来像一个被削掉顶部的金字塔。这个形状是可以被透视camera看见和渲染的区域
 
-- OrbitControls 轨道控制器， 可以使得相机围绕目标进行轨道运动。
-
 - Fog(name: 可选, color : Integer, near : Float, far : Float) 雾，在一定的距离内设置雾
-
-- AxesHelper( size : Number )  模拟3个坐标轴 红色代表 X 轴. 绿色代表 Y 轴. 蓝色代表 Z 轴. size 代表轴的线段长度. 默认为 1
 
 - renderer.domElement  返回的是 canvas 元素
 
+- WebGL可以看做是将OpenGL ES（OpenGL for Embedded Systems，OpenGL嵌入式版本，针对手机、游戏机等设备相对较轻量级的版本）移植到了网页平台,是一个底层的标准
+
+- Three.js 封装了底层的图形接口
+
+- 网格 = 几何体+材质
+
 ## 坐标轴的一些描述
+
+- AxesHelper( size : Number )  模拟3个坐标轴 红色代表 X 轴. 绿色代表 Y 轴. 蓝色代表 Z 轴. size 代表轴的线段长度. 默认为 1
 
 - 默认原点就在canvas的中心位置
 
 - 如果导入的3D模型，其因为占用一定的长宽高  它的原心不一定和canvas的中心位置重合
 
 - 坐标轴的各轴的走向会随摄像机的位置不同而不同
+
+- 世界坐标系: 世界坐标系位于屏幕的中心(0,0,0),往右侧是x轴,往上是y轴,垂直屏幕朝向的是z轴.所以屏幕的左下角是(-1,-1),右上角是(1,1);
+
+- https://segmentfault.com/a/1190000010490845  世界坐标的计算推演过程
+```js
+mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+```
+
+- 屏幕坐标系: webgl会将三维的坐标经过计算,在屏幕里正常显示
 
 ## 摄像机
 
@@ -52,10 +66,14 @@ intensity - (可选参数) 光照强度。 缺省值 1。
 color - (可选参数) 16进制颜色。 缺省值为 0xffffff (白色)。
 intensity - (可选参数) 光照的强度。缺省值为1。
 
+- AmbientLight( color : Integer, intensity : Float )环境光会均匀的照亮场景中的所有物体
+color - (参数可选）颜色的rgb数值。缺省值为 0xffffff。
+intensity - (参数可选)光照的强度。缺省值为 1
+
 
 ## 控制
 
-- OrbitControls( object : Camera, domElement : HTMLDOMElement )  轨道控制器
+- OrbitControls( object : Camera, domElement : HTMLDOMElement )  轨道控制器, 可以使得相机围绕目标进行轨道运动。
 Camera 将要被控制的相机。该相机不允许是其他任何对象的子级，除非该对象是场景自身
 domElement: 用于事件监听的HTML元素。
 

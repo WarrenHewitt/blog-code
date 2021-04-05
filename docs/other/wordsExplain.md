@@ -36,6 +36,8 @@ pro-code  常规的代码开发
 
 ---
 
+- SSR Server Side Render 服务器端渲染
+
 - BFF Backend For Frontend 的缩写，翻译成用户体验适配层， 把 Node 定位为 BFF 层实现
 
 - 持续集成Continuous Integration（CI）和持续交付Continuous Delivery（CD）

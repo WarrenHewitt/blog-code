@@ -40,6 +40,8 @@ nginx -s reload 重启: 改变了配置等
 
 ## 配置文件
 
+指定配置文件重启  /usr/local/nginx/sbin/nginx -s reload -c /usr/local/nginx/conf/nginx.conf
+
 > root 与 alias 的区别:
 
 主要在于怎么解释 location 后面的 url
@@ -127,6 +129,8 @@ http {
     server {
         # Nginx 监听的端口号
         listen       80;
+        # 监听 ipv6的地址
+        # listen [::]:80
         # Nginx接收请求的的域名
         server_name  localhost;
 
