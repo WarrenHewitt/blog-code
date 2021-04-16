@@ -7,14 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        rect{
+        rect {
             background: red
         }
     </style>
 </head>
 
 <body>
-    <svg id="svg" xmlns="http://www.hew/1/svg" version="1.0" style="width: 100%; height: 500px;background-color: rgb(5, 216, 216);">
+    <svg id="svg" xmlns="http://www.hew/1/svg" version="1.0"
+        style="width: 100%; height: 1000px;background-color: rgb(5, 216, 216);">
 
         <!-- <path d="M 310 100, L 310 5, A 700 700 0 0 0 580 100" fill="green" stroke="pink" stroke-width="2"/>
         -->
@@ -43,116 +44,336 @@
         </g> -->
     </svg>
     <script>
-        var data = [{
-            name: 'hew',
-            children: [
-                { 
-                    name: 'warren',
-                    children: [
-                        { 
-                            name: 'name1', 
-                            children: [
-                                {
-                                    name: 'n1'
-                                },
-                                {
-                                    name: 'n2'
-                                },
-                                {
-                                    name: 'n3'
-                                },
-                            ] 
-                        },
-                        { 
-                            name: 'name2',
-                            children: [
-                                {
-                                    name: 'name2-1'
-                                },
-                                {
-                                    name: 'name2-2',
-                                    children: [
-                                        {
-                                            name: 'name2-1'
-                                        },
-                                    ]
-                                }
-                            ]
-                        },
-                    ]
-                }
-            ]
-        }]
+        var data =
+            {
+                startNode: { name: "开始", id: "startEvent1" },
+                userNode: [
+                    {
+                        name: "李四任务",
+                        id: "cs_1",
+                        tasks: [{
+                            startTime: "2021-01-12 09:50:47",
+                            message: "第1步",
+                            userName: "王五",
+                            reviewTime: "2021-01-12 09:52:29",
+                            status: "已审批"
+                        }
+                        ]
+                    },
+                    {
+                        name: "候选用户王五",
+                        id: "cs_2",
+                        tasks: [
+                            {
+                                startTime: "2021-01-12 09:52:29",
+                                message: "第2步",
+                                reviewTime: "2021-01-12 10:14:06",
+                                status: "已审批"
+                            },
+                            {
+                                startTime: "2021-01-12 11:06:20",
+                                message: "第4步",
+                                userName: "测试管理员",
+                                reviewTime: "2021-01-12 11:06:56",
+                                status: "已审批"
+                            }
+                        ]
+                    },
+                    {
+                        name: "候选组测试组",
+                        id: "cs_3",
+                        tasks: [
+                            {
+                                startTime: "2021-01-12 10:14:06",
+                                message: "第3步",
+                                reviewTime: "2021-01-12 10:25:26",
+                                status: "已审批"
+                            },
+                            {
+                                startTime: "2021-01-12 10:59:51",
+                                message: "第3步",
+                                reviewTime: "2021-01-12 11:03:29",
+                                status: "已审批"
+                            },
+                            {
+                                startTime: "2021-01-12 11:04:41",
+                                message: "第4步",
+                                reviewTime: "2021-01-12 11:06:20",
+                                status: "已审批"
+                            },
+
+                            {
+                                startTime: "2021-01-12 11:06:56",
+                                message: "第4步",
+                                userName: "李四,赵六",
+                                reviewTime: "2021-01-12 11:07:14",
+                                status: "已审批"
+                            }
+                        ]
+                    },
+                    {
+                        name: "候选用户赵六，李四",
+                        id: "cs_42",
+                        tasks: [
+                            {
+                                startTime: "2021-01-12 10:25:26",
+                                message: "第4步",
+                                reviewTime: "2021-01-12 10:59:51",
+                                status: "已审批"
+                            },
+                            {
+                                startTime: "2021-01-12 11:03:29",
+                                message: "第4步",
+                                reviewTime: "2021-01-12 11:04:41",
+                                status: "已审批"
+                            },
+                            {
+                                startTime: "2021-01-12 11:07:14",
+                                message: "第4步",
+                                userName: "李四",
+                                reviewTime: "2021-01-12 11:18:29",
+                                status: "已审批"
+                            }
+                        ]
+                    },
+                    {
+                        name: "王五任务",
+                        id: "cs_41",
+                        tasks: []
+                    },
+                    {
+                        name: "李四任务",
+                        id: "cs_6",
+                        tasks: [
+                            {
+                                startTime: "2021-01-12 13:47:28",
+                                message: "第4步",
+                                userName: "赵六",
+                                reviewTime: "2021-01-12 13:47:59",
+                                status: "已审批"
+                            }
+                        ]
+                    },
+                    {
+                        name: "流程发起人",
+                        id: "cs_5",
+                        tasks: [
+                            {
+                                startTime: "2021-01-12 11:18:29",
+                                message: "第4步",
+                                reviewTime: "2021-01-12 13:47:28",
+                                status: "已审批"
+                            }
+                        ]
+                    }
+                ],
+                endNode: {
+                    name: "结束",
+                    id: "sid-BEDAEB42-74EB-4D9E-AE43-3D4EA89037FA"
+                },
+                gateway: [
+                    {
+                        name: "判断节点",
+                        id: "sid-B75E7605-1757-4E28-AA94-878C769B480B",
+                        type: "exclusive"
+                    },
+                ],
+                flow: [
+                    {
+                        targetRef: "cs_1",
+                        sourceRef: "startEvent1"
+                    },
+                    {
+                        targetRef: "cs_2",
+                        sourceRef: "cs_1"
+                    },
+                    {
+                        targetRef: "sid-B75E7605-1757-4E28-AA94-878C769B480B",
+                        sourceRef: "cs_3"
+                    },
+                    {
+                        targetRef: "cs_6",
+                        sourceRef: "cs_41"
+                    },
+                    {
+                        targetRef: "cs_5",
+                        sourceRef: "cs_42"
+                    },
+                    {
+                        targetRef: "cs_3",
+                        sourceRef: "cs_2"
+                    },
+                    {
+                        targetRef: "sid-BEDAEB42-74EB-4D9E-AE43-3D4EA89037FA",
+                        sourceRef: "cs_6"
+                    },
+                    {
+                        targetRef: "cs_6",
+                        sourceRef: "cs_5"
+                    },
+                    {
+                        targetRef: "cs_42",
+                        sourceRef: "sid-B75E7605-1757-4E28-AA94-878C769B480B"
+                    },
+                    {
+                        targetRef: "cs_41",
+                        sourceRef: "sid-B75E7605-1757-4E28-AA94-878C769B480B"
+                    }
+
+                ]
+            }
 
         const svg = document.querySelector('#svg');
         let str = ''
         let path = ''
         let hDelta = 100
-        
-        function rect(name, left, top) {
-            str += `<g transform="translate(${left},${top})" fill="red"> <rect x="0" y="0" rx="2" ry="2" width="120" height="30" fill="#E2E2E2"/> <text x="30" y="20" fill="red">${name}</text></g>`
-        }
+        let rectWidth = 120
+        let rectHeight = 30
+        let fontWidth=16
 
-        function setPath(type, left, top) {
-            console.log('---', type, left, top);
-            const h = top + hDelta
-            const mTop = top + 30
-            left = left + 50
-            if(type === 1) {
-                path += `<path d="M ${left} ${mTop} L ${left} ${h}" fill="none" stroke="pink" stroke-width="2"/>`
+        function rect(people, left, top) {
+            if(people) {
+                const len = people.name.length
+                const x = (rectWidth- len*fontWidth)/2
+                str += `<g transform="translate(${left},${top})" fill="red"> <rect x="0" y="0" rx="2" ry="2" width="${rectWidth}" height="${rectHeight}" fill="#E2E2E2"/> 
+                    <text x="${x}" y="20" fill="red">${people.name}</text></g>`
             }
         }
 
-        function setEle (d, left, top) {
-            if(d.length === 1) {
-                const children = d[0].children 
-                if(children && children.length > 2) {
+        function setPath(type, left, top, nextLeftRight) {
+            const halfRectWidth = rectWidth / 2
+            left = left + halfRectWidth
+            if (type === 1) {
+                if (top - 70 > 0) {
+                    path += `<path d="M ${left} ${top} L ${left} ${top - 70}" fill="none" stroke="pink" stroke-width="2"/>`
+                }
+            } else if (type === 'toLeft') {
+                path += `<path d="M ${left} ${top - 70} L ${left} ${top - 50} L ${nextLeftRight + halfRectWidth} ${top - 50} L ${nextLeftRight + halfRectWidth} ${top}" fill="none" stroke="pink" stroke-width="2"/>`
+            } else if (type === 'toRight') {
+                path += `<path d="M ${left} ${top - 70} L ${left} ${top - 50} L ${nextLeftRight + halfRectWidth} ${top - 50} L ${nextLeftRight + halfRectWidth} ${top}" fill="none" stroke="pink" stroke-width="2"/>`
+            } else if (type === 3) {
+
+            }
+        }
+
+        function setEle(d, left, top) {
+            if (d.length === 1) {
+                const children = d[0].children
+                if (children && children.length > 2) {
                     left = left - 200
                 }
-                rect(d[0].name, left, top)
-                setPath(1, left, top)
-                if(children) {
-                    top += hDelta
-                    setEle(children, left, top)
+                rect(d[0].people, left, top)
+                if (children) {
+                    setEle(children, left, top + hDelta)
                 }
+                setPath(1, left, top)
             } else if (d.length === 2) {
-                
-                let l0 = left-100
+
+                let l0 = left - 100
                 let nextTop = top + hDelta
                 const d0 = d[0].children
-                if(d0) {
-                    if(d0 && d0.length > 2) {
+                if (d0) {
+                    if (d0.length > 2) {
                         l0 = left - 200
                     }
                     setEle(d0, l0, nextTop)
                 }
-                rect(d[0].name, l0 , top)
+                setPath('toLeft', left, top, l0)
+                rect(d[0].people, l0, top)
 
-                let l1 = left+100
+                let l1 = left + 100
                 const d1 = d[1].children
-                if(d1) {
-                    if(d1.length > 1) {
+                if (d1) {
+                    if (d1.length > 1) {
                         l1 = left + 200
                     }
                     setEle(d1, l1, nextTop)
                 }
-                rect(d[1].name, l1 , top)
+                setPath('toRight', left, top, l1)
+                rect(d[1].people, l1, top)
             } else if (d.length === 3) {
-                rect(d[1].name, left - 150, top)
-                rect(d[0].name, left, top)
-                rect(d[2].name, left + 150, top)
+                rect(d[1].people, left - 150, top)
+                setPath('toLeft', left, top, left - 150)
+                rect(d[0].people, left, top)
+                setPath(1, left, top)
+                rect(d[2].people, left + 150, top)
+                setPath('toRight', left, top, left + 150)
             } else {
 
             }
         }
-        setEle(data, 500, 0)
-        
-        svg.innerHTML = str + path
-
        
 
-        // main(reData, data.startNode.id)
-        // console.log(reData);
+        function setRectWidth(name) {
+            if(name) {
+                const newWidth = name.length*fontWidth
+                if(newWidth > rectWidth) rectWidth = newWidth
+            }
+        }
+
+        /* 获取当前流程信息及其人员信息 */
+        const getFlowPeople = (currentId) => {
+            const flow = data.flow.filter(v => v.sourceRef === currentId)
+            if (flow.length) {
+                flow.forEach(item => {
+                    const p = data.userNode.find(v => v.id === item.targetRef)
+                    console.log(p);
+                    if(p) {
+                        item.people = p
+                        setRectWidth(p.name)
+                    }
+                })
+                return flow
+            } else {
+                return false
+            }
+        }
+
+        const main = (_d, id) => {
+            const getData = getFlowPeople(id)
+            if (getData.length) {
+                _d.children = getData
+                getData.forEach(item => {
+                    main(item, item.targetRef)
+                })
+            }
+        }
+        const reData = {}
+        main(reData, data.startNode.id)
+        console.log(reData.children);
+
+        setEle(reData.children, 500, 0)
+        svg.innerHTML = str + path
+
+
+        /* 获取当前流程信息及其人员信息 */
+        const flowPeople = (currentId) => {
+            const flow = data.flow.filter(v => v.sourceRef === currentId)
+            if (flow.length) {
+                flow.forEach(item => {
+                    const p = data.userNode.find(v => v.id === item.targetRef)
+                    if(p) {
+                        item.people = p
+                    }
+                })
+                return flow
+            } else {
+                return false
+            }
+        }
+
+        const start = (_d, id) => {
+            const getData = flowPeople(id)
+            if (getData.length) {
+                _d.children = getData
+                getData.forEach(item => {
+                    start(item, item.targetRef)
+                })
+            }
+        }
+
+        start()
+
     </script>
 </body>
 
