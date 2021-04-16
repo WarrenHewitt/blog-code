@@ -92,7 +92,19 @@ document.body.appendChild(imgEle)
 
 - xmlns 该属性意味着这个 `svg` 标签和它的子节点都属于'http://www.w3.org/2000/svg' 这个SVG命名空间; 请注意，命名空间仅仅只是一些字符串，所以SVG上那些看起来像URI的命名空间并不重要。因为URIs的唯一性从而被广泛使用，它的本意并不是要“链接”到某个地址
 
+- fill stroke stroke-width stroke-dasharray 这些属性可以写到 style 中 
+
 ```html
+<!-- 半圆弧进度 -->
+<svg width="900" height="600" version="1.0" xmlns="http://www.hew/percent/svg" style="background-color: rgb(5, 216, 216);">
+    <!-- stroke-dasharray 就是控制画笔的虚实，通过实线和虚线的来控制画； 如果参数是一个 那虚线和实线一样长， -->
+    <!-- 可以在shape(形状)和text content elements(字体元素)上起作用 -->
+
+    <!-- stroke-linecap="round" 设置两边为圆弧  -->
+    <circle cx="200" cy="160" r="130" stroke="red" fill="transparent" stroke-width="20" stroke-dasharray="310" stroke-dashoffset="0" stroke-linecap="round"/>
+    <circle cx="200" cy="160" r="130" stroke="green" fill="transparent" stroke-width="20" stroke-dasharray="10 410" stroke-dashoffset="-410"/>
+</svg>
+
 <svg width="900" height="600" version="1.0" xmlns="http://www.hew/1/svg" style="background-color: rgb(5, 216, 216);">
     <!-- x:矩形左上角的x位置 y:矩形左上角的y位置 rx:圆角的x方位的半径 ry:圆角的y方位的半径 -->
     <rect x="10" y="10" width="30" height="30" stroke="black" fill="transparent" stroke-width="2"/>
@@ -107,6 +119,8 @@ document.body.appendChild(imgEle)
     <polygon points="50 160 55 180 70 180 60 190 65 205 50 195 35 205 40 190 30 180 45 180" stroke="green" fill="transparent" stroke-width="2"/>
     
     <text x="0" y="15" fill="red">文本</text>
+
+    <!-- stroke 表示画线的颜色 fill 是连线区域间填充的颜色 -->
 
     <!-- 
         M = moveto 在什么位置开始

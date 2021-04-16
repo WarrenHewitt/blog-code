@@ -7,27 +7,21 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>blog-code-test</title>
     <style>
+        line{
+            stroke: black;
+            stroke-width: 2;
+        }
+    </style>
     </style>
 </head>
 
 <body>
+    <svg width="900" height="600" version="1.0" xmlns="http://www.hew/percent/svg" style="background-color: rgb(5, 216, 216);">
+        <line x1="0" y1="50" x2="900" y2="50" fill="red" stroke="orange" stroke-dasharray="50%" style="stroke-width:20"/>
+        <path d="M0,200 L900,200" style="fill:red; stroke:blue; stroke-width:20; stroke-dasharray:50%" />
+        <path d="M0,300 L900,300" style="fill:red; stroke:blue; stroke-width:20; stroke-dasharray:0;"/>
+    </svg>
     <script>
-        function TwoDimensionalToTwo(array, length) {
-            if(!array.length || !length || array.length < length) return array
-            const newArr = []
-            let j = -1
-            for (let i = 0; i < array.length; i++) {
-                if(i%length === 0) {
-                    j++
-                    newArr[j] = []
-                }
-                newArr[j].push(array[i])
-            }
-
-            return newArr
-        }
-
-        console.log(oneDimensionalToTwo([1,2], 1));
     </script>
 
 </body>

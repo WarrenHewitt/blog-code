@@ -66,6 +66,7 @@ settings.json（可用setting sync共享）
     ],
     // 地址中为双斜线
     "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+    "terminal.external.windowsExec": "C:\\Windows\\System32\\cmd.exe",
 
     // 装了插件后可以不配置
     "markdown.styles": [

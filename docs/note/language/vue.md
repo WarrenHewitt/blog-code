@@ -95,7 +95,7 @@ this.testComputed = 'new name' // 触发setter
 methods: { fn(str, event) {}}
 ```
 
-组件中，可以用 $on,$once 监听所有的生命周期钩子函数，如监听组件的 updated 钩子函数可以写成 `this.$on('hook:updated', () => {})` 其他周期函数同理
+组件中，可以用 $on,$once 监听所有的生命周期钩子函数，如监听组件的 updated 钩子函数可以写成 `this.$on('hook:destroyed', () => {})` 其他周期函数同理
 
 父组件监听子组件生命周期函数
 ```js

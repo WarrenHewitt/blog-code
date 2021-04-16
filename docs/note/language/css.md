@@ -618,7 +618,7 @@ body{ font-size:$fontSize; }
 - 继承
 
 ```css
-//@extend 不能继承选择器序列   比如@extend .content .inner
+// @extend 不能继承选择器序列   比如@extend .content .inner
 h1{
   border: 4px solid #ff9aa9;
 }
