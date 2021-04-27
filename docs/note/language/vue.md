@@ -154,7 +154,7 @@ created() {
 ### 生命周期 
 - created 非相应式的data数据可以赋初始值 `data: { a: {} };   this.a.b=1`
 - destroyed ： 如果有定时器，在该钩子函数中务必清除
-https://www.jianshu.com/p/a20f2023c78a
+https://www.jianshu.com/p/a20f2023c78a 
 
 ### mixin
 
@@ -376,6 +376,8 @@ lint-staged 的作用是每次提交只检查本次提交所修改的文件
 vueRouter 的两个方法 match addRouter 都是 matcher 暴露的方法
 
 https://juejin.cn/post/6844904030687199239
+
+- beforeRouteUpdate 处理使用同一个组件页面  但是路由参数变化的情况 /:id 或 /?id=1
 
 ```js
 new Router({

@@ -1,5 +1,7 @@
 # three.js 
 
+示例项目 `threejs-typescript/three`
+
 - 视锥体，指的看起来像一个被削掉顶部的金字塔。这个形状是可以被透视camera看见和渲染的区域
 
 - Fog(name: 可选, color : Integer, near : Float, far : Float) 雾，在一定的距离内设置雾

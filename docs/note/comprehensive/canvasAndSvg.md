@@ -95,6 +95,43 @@ document.body.appendChild(imgEle)
 - fill stroke stroke-width stroke-dasharray 这些属性可以写到 style 中 
 
 ```html
+<!-- 圆环进度 -->
+<style>
+.c-whole{
+    fill:transparent; 
+    stroke:lightgrey;
+    stroke-width: 10
+}
+.c-percent{
+    /* 设置旋转中心，85是根据圆的半径实际调试得到的，暂时没有找到计算公式 */
+    transform-origin: 100px 100px;
+    transform: rotate(-85deg);
+    fill:transparent;
+    stroke:aqua;
+    stroke-width:10;
+    stroke-linecap:round;
+    /* 314 = 2 * PI * r */
+    stroke-dasharray: 0 314;
+    transition: stroke-dasharray 2s;
+}
+.percent_text{
+    fill: rgb(4, 209, 209);
+}
+</style>
+<svg width="200" height="200" version="1.0" xmlns="http://www.hew/circle/svg" style="background-color: rgb(235, 235, 235);">
+    <circle class="c-whole" r="50" cx="100" cy="100"></circle>
+    <circle class="c-percent" r="50" cx="100" cy="100" id="cPercent"></circle>
+    <g class="percent_text"> 
+        <text x="83" y="105" id="pText">0%</text>
+    </g>
+</svg>
+<script>
+    setTimeout(() => {
+        document.querySelector('#cPercent').setAttribute('style', 'stroke-dasharray: 62 314;');
+        document.querySelector('#pText').innerHTML= `${20}%`
+    }, 500);
+</script>
+
 <!-- 半圆弧进度 -->
 <svg width="900" height="600" version="1.0" xmlns="http://www.hew/percent/svg" style="background-color: rgb(5, 216, 216);">
     <!-- stroke-dasharray 就是控制画笔的虚实，通过实线和虚线的来控制画； 如果参数是一个 那虚线和实线一样长， -->

@@ -126,7 +126,7 @@ module.exports = {
                         ['/note/language/vue', 'vue'], 
                         ['/note/language/web-app', 'web-app'], 
                         ['/note/language/typescript', 'typescript'], 
-                        ['/note/language/mini-programe', 'mini-programe'], 
+                        ['/note/language/mini-program', 'mini-program'], 
                         ['/note/language/node', 'node'], 
                         ['/note/language/java', 'java'], 
                         ['/note/language/python', 'python'], 
@@ -136,6 +136,7 @@ module.exports = {
                         ['/note/language/git', 'git'], 
                         ['/note/language/D3', 'D3'],
                         ['/note/language/threeJs', 'threeJs'],
+                        ['/note/language/flutter', 'flutter'],
                     ]
                 },
                 {

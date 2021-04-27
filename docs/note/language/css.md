@@ -378,7 +378,7 @@ animation-iteration-count: 次数 | infinite;
 
 animation-direction: normal | reversse(从最后一帧到第一帧执行动画) | alternate(执行到最后一帧后按照原有动画轨迹反向执行到第一帧) | alternate-reverse(结合两种);
 
-animation-fill-mode: forwards | backwards | both
+animation-fill-mode: forwards | backwards | both  默认none
 ```
 forwards 等待期为初始样式，完成期为最后一帧样式
 backwards 等待期为第一帧样式，完成期为初始样式
