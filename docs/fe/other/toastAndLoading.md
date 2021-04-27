@@ -162,7 +162,7 @@ const toast = (() => {
         if(!time || time<1000 ) time = 1500
         const update = () => {
             once.innerHTML = text || ''
-            once.setAttribute('style', 'position: fixed;left: 50%;z-index: 9000;max-width: 300px;padding: 5px 12px;-webkit-transform: translateX(-50%);text-align: center;border-radius: 4px;font-size: 14px;color: #fff;background-color: rgba(0,0,0,0.6);')
+            once.setAttribute('style', 'position: fixed;left: 50%;z-index: 9000;top:100px;max-width: 300px;padding: 5px 12px;-webkit-transform: translateX(-50%);text-align: center;border-radius: 4px;font-size: 14px;color: #fff;background-color: rgba(0,0,0,0.6);')
             clearTime = setTimeout(() => {
                 once.setAttribute('style', 'display:none')
                 clearTimeout(clearTime)
