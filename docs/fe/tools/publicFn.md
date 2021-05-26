@@ -134,36 +134,20 @@ function formatTime(data = {}) {
         h = timeObj.getHours(),
         m = timeObj.getMinutes(),
         s = timeObj.getSeconds();
-    let re = ''
 
     const dateString = `${y}${dateSeparator}${addZeroCharacter(mon)}${dateSeparator}${addZeroCharacter(day)}`
     const timeString = `${addZeroCharacter(h)}${timeSeparator}${addZeroCharacter(m)}${timeSeparator}${addZeroCharacter(s)}`
 
     const commandObj = {
+        dateTimeZh: () => {
+            return `${y}年${addZeroCharacter(mon)}月${addZeroCharacter(day)}日 ${addZeroCharacter(h)}时${addZeroCharacter(m)}分${addZeroCharacter(s)}秒`
+        },
         date: () => dateString,
         time: () => timeString,
         dateTime: () => `${dateString} ${timeString}`
     }
 
     return commandObj[type]()
-}
-
-function formatTime() {
-    var timeObj = new Date();
-    var y = timeObj.getFullYear(),
-        mon = timeObj.getMonth() + 1,
-        day = timeObj.getDate(),
-        h = timeObj.getHours(),
-        m = timeObj.getMinutes(),
-        s = timeObj.getSeconds();
-
-    if(mon < 10) mon = '0' + mon
-    if(day < 10) day = '0' + day
-    if(h < 10) h = '0' + h
-    if(m < 10) m = '0' + m
-    if(s < 10) s = '0' + s
-
-    return y + '-' + mon + '-' + day + ' ' + h + ':' + m + ':' + s;
 }
 
 /**
@@ -187,6 +171,45 @@ function weekZh() {
     const week = new Date().getDay()
     const map = new Map([[0, '日'], [1, '一'],[2, '二'],[3, '三'],[4, '四'],[5, '五'],[6, '六']])
     return `星期${map.get(week)}`;
+}
+
+/**
+ * 返回上午下午
+*/
+function timeNowPeriodZh() {
+    const now = new Date()
+    const hour = now.getHours() 
+    let str = ''
+    if (hour < 12){
+        str='上午'
+    } else if (hour < 14){
+        str = '中午'
+    } else if (hour < 18){
+        str = '下午'
+    } else if (hour < 23){
+        str = '晚上'
+    } 
+    return str
+}
+
+/* 返回当前月份的前n个月组成的数组 */
+const getMonth = (n = 0, separator = '-') => {
+    const time = new Date()
+    let y = time.getFullYear()
+    let m = time.getMonth()
+
+    const ym = () => (`${y}${separator}${m}`)
+    const allM = [ym()]
+
+    for (let i = 0; i < n; i++) {
+        m--
+        if (m === 0) {
+            y--
+            m = 12
+        }
+        allM.push(ym())
+    }
+    return allM
 }
 ```
 

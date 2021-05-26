@@ -1,8 +1,8 @@
-## 导出Excel、PDF和下载图片
+## 导出Excel、PDF和下载文件
 
-> 创建时间： 2020-03-16；测试：chrome v80.0.3987.122 正常 
+> 创建时间： 2020-03-16；测试：chrome v80.0.3987.122 正常  更新：2021-05-26
 
-### 导出 Excel （利用xlsx）
+### 导出 Excel （利用xlsx插件）
 
 - 安装 xlsx 引入包 `import XLSX from 'xlsx/dist/xlsx.mini.min.js';`
 
@@ -123,7 +123,7 @@ exportData = () => {
 
 
 
-### 下载图片 或其它文件
+### 下载图片 或 其它文件
 
 #### 利用canvas将 dom 生成图片并下载
 
@@ -201,10 +201,11 @@ imgEle.onload = function() {
 imgEle.src = 'xxx.jpg';
 ```
 
-#### 利用 ajax 请求，结合返回 Blob ，下载图片或其它类型文件
+#### 利用 ajax 请求，后端返回二进制流，结合 Blob ，下载图片 excel 等类型文件
 
 要求也是同上，只是不需要兼容 crossOrigin；可以设置 header
 ```js
+// ajax 直接请求
 function dl() {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '/xx/xx', true);
@@ -234,6 +235,39 @@ function dl() {
             aEle.click();
         }
     };
+}
+
+// axios 请求
+function axios() {
+     const httpService = axios.create({
+        baseURL: '',
+        headers: {},
+    })
+    httpService({
+        method: 'get',
+        url: 'xxx',
+        data: { },
+        responseType: 'arraybuffer' // 或者 blob
+    }).then((result) => {
+        /*
+            type 类型
+            .doc  application/msword
+            .docx application/vnd.openxmlformats-officedocument.wordprocessingml.document
+            .xls  application/vnd.ms-excel
+            .xlsx application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+            .ppt  application/vnd.ms-powerpoint
+            .pptx application/vnd.openxmlformats-officedocument.presentationml.presentation
+            .ppt  text/csv
+        */
+        const blob = new Blob([result], { type: 'application/vnd.ms-excel;charset=UTF-8' })
+        const eleA = document.createElement('a')
+        eleA.href = window.URL.createObjectURL(blob)
+        eleA.download = new Date().getTime() + '-file'
+        document.querySelector('body').append(eleA)
+        eleA.click()
+    }).catch((err) => {
+        console.log(err)
+    })
 }
 ```
 

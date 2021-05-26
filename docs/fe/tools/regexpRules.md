@@ -153,6 +153,7 @@ const RegExpObject = /:([a-z]+)/ig
 console.log(str.match(/:([a-z]+)/ig)) // [":a", ":b"]
 let result = ''
 let resultArr = []
+// 先复制 后判断
 while ((result = RegExpObject.exec(str)) !== null) {
     console.log('循环体输出：', result,  RegExpObject.lastIndex)
     // 循环体输出： [":a", "a", index: 1, input: "/:a/:b", groups: undefined] 3
