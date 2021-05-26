@@ -138,6 +138,10 @@ video 和 audio
 </video>
 ```
 
+- `timeupdate` 事件在音频/视频（audio/video）的播放位置发生改变时触发
+- `play` 事件在音频/视频（audio/video）点击播放时时触发
+- 设置播放时间点 document.getElementById("xxx").currentTime = 5;
+
 ---
 
 ## 属性

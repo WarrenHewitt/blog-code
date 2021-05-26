@@ -167,21 +167,6 @@ white-space:nowrap; 强制不换行，都起作用(对inner-block的标签也起
 
 ---
 
-## background
-
-filter:blur(90px) // 高斯模糊,ie不支持,其它都可，注意前缀。 
-
-`filter:grayscale()`  html 标签添加该属性，可让页面变黑白
-
-其它的一些滤镜效果参考 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/filter)
-
----
-background:hsl(色调hue，饱和度saturation，亮度luminance)  
-- 色调：0-360  红 黄 绿 青 蓝 洋   //循环 
-- 饱和度：0-100%    //灰度到全包和
-- 亮度：0-100%      //暗到亮
-- 还有hsla()     //多了一个透明度
-
 ## 布局
 1. margin,padding用百分比时:都是相对于父元素的宽;  
 毗邻(同级或者嵌套的盒元素，并且之间没有非空内容、Padding或Border分隔)的两个或更多盒元素的margin将会合并为一个margin共享
@@ -344,6 +329,20 @@ text-overflow:ellipsis;（不换行超出部分隐藏且以省略号形式出现
 ---
 
 ## background
+
+filter:blur(90px) // 高斯模糊,ie不支持,其它都可，注意前缀。 
+
+`filter:grayscale()`  html 标签添加该属性，可让页面变黑白
+
+其它的一些滤镜效果参考 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/filter)
+
+---
+background:hsl(色调hue，饱和度saturation，亮度luminance)  
+- 色调：0-360  红 黄 绿 青 蓝 洋   //循环 
+- 饱和度：0-100%    //灰度到全包和
+- 亮度：0-100%      //暗到亮
+- 还有hsla()     //多了一个透明度
+
 ```
 background：color image repeat fixed position/size  
 background-size: cover(图片不会按比例缩放来覆盖当前元素背景)  
@@ -353,6 +352,7 @@ background-origin: border/
 background-clip: border/padding/content-box;背景从border/padding/content开始，背景图片最多从padding开始。  
 background-attachment: scroll默认 | fixed滚动轴背景图片不会移动
 
+background: url() no-repeat left/50% 50%, url() no-repeat right/50% 50%;
 对于多重背景，写在前的在上面；
 
 渐变 background: linear-gradient(blue, pink); 默认上到下

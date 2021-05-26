@@ -257,9 +257,9 @@ function handler() {
 ```
 File 继承自 Blob
 
-// array: ArrayBuffer, ArrayBufferView, Blob, DOMString
+// array: ArrayBuffer, ArrayBufferView, Blob, DOMString (一个数组)
 // options: { type: 'MIME', endings: 'native'(结束符会被更改为适合宿主操作系统文件系统的换行符) || 'transparent'(默认，保持blob中保存的结束符不变) }
-const _Blob = new Blob( array, options ); 
+const _Blob = new Blob(array, options ); 
 ```
 
 2. 将图片转 base64
@@ -1210,7 +1210,6 @@ console.log(str.match(/name=([^;]+)(;|$)/g))
 2. str.search();  //返回匹配字符开始的位置，没有返回-1  
 3. str.replace(字符|正则，替换值|函数);  函数返回值为替换值，当用字符时不是全局替换，函数第一个参数为匹配结果字符，然后依次是子表达式值…,出现位置，被匹配字符串。返回被替换过后的新字符串  
 4. str.split();   //以传入的字符或正则匹配的字符分割成数组，并删除该字符，必填，没有默认  
-5. substr 
 
 ## es6
 

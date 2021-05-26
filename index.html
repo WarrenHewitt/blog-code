@@ -6,58 +6,71 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>blog-code-test</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.js"></script>
     <style>
-        line{
+        line {
             stroke: black;
             stroke-width: 2;
             color: #00A5E0;
         }
-        .c-whole{
-            fill:transparent; 
-            stroke:lightgrey;
+
+        .c-whole {
+            fill: transparent;
+            stroke: lightgrey;
             stroke-width: 10
         }
-        .c-percent{
+
+        .c-percent {
             transform-origin: 100px 100px;
             transform: rotate(-85deg);
             /* animation: donut1 2s forwards; */
-            fill:transparent;
-            stroke:aqua;
-            stroke-width:10;
-            stroke-linecap:round;
+            fill: transparent;
+            stroke: aqua;
+            stroke-width: 10;
+            stroke-linecap: round;
             stroke-dasharray: 0 314;
             transition: stroke-dasharray 2s;
         }
-        .percent_text{
+
+        .percent_text {
             fill: rgb(4, 209, 209);
         }
     </style>
 </head>
 
 <body>
-    <svg width="900" height="600" version="1.0" xmlns="http://www.hew/percent/svg" style="background-color: rgb(235, 235, 235);">
-        <circle class="c-whole" r="50" cx="100" cy="100"></circle>
-        <circle class="c-percent" r="50" cx="100" cy="100" id="cPercent"></circle>
-        <g class="percent_text"> 
-            <text x="83" y="105" id="pText">0%</text>
-        </g>
-
-        <!-- <circle cx="220" cy="220" r="170" stroke-width="50" stroke="#D1D3D7" fill="none"></circle> -->
-        <!-- 需要显示的圆环  通过修改 stroke-dasharray="0 1069"的0值那块，(角度/360) = 圆弧长度/周长  这里的圆弧长度就是第一个值-->
-        <!-- <circle cx="220" cy="220" r="170" stroke-width="50" stroke="#00A5E0" fill="none" transform="matrix(0,-1,1,0,0,440)" stroke-dasharray="200 1069"></circle> -->
-        <!-- <path d="M 200 100, A 100 100 0 0 1 400 200" fill="green" stroke="pink" stroke-width="10"/> -->
-        <line x1="0" y1="100" x2="900" y2="100" fill="red" stroke="orange" stroke-dasharray="" style="stroke-width:1"/>
-        <!-- <line x1="100" y1="0" x2="100" y2="600" fill="red" stroke="orange" stroke-dasharray="" style="stroke-width:1"/> -->
-        <line x1="300" y1="0" x2="300" y2="600" fill="red" stroke="orange" stroke-dasharray="" style="stroke-width:1"/>
-        <!-- <line x1="0" y1="50" x2="900" y2="50" fill="red" stroke="orange" stroke-dasharray="50%" style="stroke-width:2"/> -->
-        <!-- <path d="M0,200 L900,200" style="fill:red; stroke:blue; stroke-width:20; stroke-dasharray:50%" />
-        <path d="M0,300 L900,300" style="fill:red; stroke:blue; stroke-width:20; stroke-dasharray:0;"/> -->
-    </svg>
+    <button onclick=handleClick()>click 11</button>
     <script>
-        setTimeout(() => {
-            document.querySelector('#cPercent').setAttribute('style', 'stroke-dasharray: 62 314;');
-            document.querySelector('#pText').innerHTML= `${20}%`
-        }, 500);
+        function handleClick() {
+            const httpService = axios.create({
+                baseURL: '',
+                headers: {
+                    Authorization: 'bearer 1167bde5-3fa8-4fcc-9918-14020f036d83',
+                },
+            })
+            httpService({
+                method: 'get',
+                url: 'http://192.168.0.3:9999/manage/basetree/getByCate/2',
+                // url: 'http://192.168.0.3:9999/manage/paper/exam/export/data',
+                responseType: 'text',
+                // data: { examId: 93 },
+                // responseType: 'arraybuffer'
+                // auth: 123456
+            }).then((result) => {
+                console.log(result)
+                // const blob = new Blob([result.data], { type: 'application/vnd.ms-excel;charset=UTF-8' })
+                // // const blob = new Blob(['\ufeff' + result.data], { type: 'text/csv;charset=utf-8' })
+                // // const blob = new Blob(['\ufeff' + result.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' })
+                // const temp = document.createElement('a')
+                // temp.href = window.URL.createObjectURL(blob)
+                // temp.download = new Date().getTime() + 'excel'
+                // document.querySelector('body').append(temp)
+                // temp.click()
+            }).catch((err) => {
+                console.log(err)
+            })
+        }
+
     </script>
 
 </body>
