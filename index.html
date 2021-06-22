@@ -41,36 +41,22 @@
 <body>
     <button onclick=handleClick()>click 11</button>
     <script>
-        function handleClick() {
-            const httpService = axios.create({
-                baseURL: '',
-                headers: {
-                    Authorization: 'bearer 1167bde5-3fa8-4fcc-9918-14020f036d83',
-                },
-            })
-            httpService({
-                method: 'get',
-                url: 'http://192.168.0.3:9999/manage/basetree/getByCate/2',
-                // url: 'http://192.168.0.3:9999/manage/paper/exam/export/data',
-                responseType: 'text',
-                // data: { examId: 93 },
-                // responseType: 'arraybuffer'
-                // auth: 123456
-            }).then((result) => {
-                console.log(result)
-                // const blob = new Blob([result.data], { type: 'application/vnd.ms-excel;charset=UTF-8' })
-                // // const blob = new Blob(['\ufeff' + result.data], { type: 'text/csv;charset=utf-8' })
-                // // const blob = new Blob(['\ufeff' + result.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' })
-                // const temp = document.createElement('a')
-                // temp.href = window.URL.createObjectURL(blob)
-                // temp.download = new Date().getTime() + 'excel'
-                // document.querySelector('body').append(temp)
-                // temp.click()
-            }).catch((err) => {
-                console.log(err)
-            })
+        const byteArrayToHexString = function(inarray) {
+            // let i, j, inn;
+            // let hex = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
+            let out = "";
+
+            for (j = 0; j < inarray.length; ++j) {
+                var a = inarray[j].toString(16).toUpperCase()
+                if(a.length<2) a='0'+a
+                out += a
+            }
+            return out;
         }
 
+        // console.log(byteArrayToHexString([4,53,120,34,33,75,129]));
+        console.log(byteArrayToHexString([4,53,120,34,33,75,129]));
+        // console.log(parseInt(35, 16));
     </script>
 
 </body>

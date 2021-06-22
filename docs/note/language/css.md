@@ -29,8 +29,6 @@
 
 - user-select：none 禁止用户选择 
 
-- ::before css3 语法  :before 用来支持IE8
-
 - `visibility: hidden` 只是隐藏，还是会占据其对应的宽高所在的区域
 
 - box-sizing
@@ -88,7 +86,20 @@ input::-webkit-input-placeholder{ color: #cacaca; }
 .level1::before{ content: counter(count1， upper-roman)"、"; counter-increment: count1;}
 ```
 
----
+----
+
+- filter
+
+`filter:blur(90px)` // 高斯模糊,ie不支持,其它都可，注意前缀。 
+`filter:grayscale()`  html 标签添加该属性，可让页面变黑白（可以加一个固定结束时间判断，避免为了这个问题重复上线两次）
+`filter: drop-shadow` 为透明元素添加阴影效果不止于在图片四周加阴影  也会在图片中物体四周加阴影
+`filter: brightness(110%) saturate(140%);` 让元素高亮
+`backdrop-filter: blur(10px);` 毛玻璃效果用 效果看起来更好
+先用ps将图片对比度等降低，以减小图片尺寸，在利用 filter 增大图片对比度，以此来实现图片资源优化
+
+其它的一些滤镜效果参考 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/filter)
+
+----
 
 ## 阿里 icon-font 使用方法
 可参考 vue-admin 项目的 welcome 页面
@@ -110,8 +121,11 @@ input::-webkit-input-placeholder{ color: #cacaca; }
 </svg>
 ```
 
-
 ## 选择器
+- ::before css3 语法  :before 用来支持IE8
+
+- 既不是 `<div>` 也不是 `<span>` 的元素  `body :not(div):not(span)` 
+
 -  :nth-child(n|odd|even),选择属于父元素的第几个子元素，后两个为奇数和偶数；
 -  :nth-of-type(n),选择属于父元素的，同一类中的第几个子元素，后两个为奇数和偶数；
 
@@ -330,13 +344,6 @@ text-overflow:ellipsis;（不换行超出部分隐藏且以省略号形式出现
 
 ## background
 
-filter:blur(90px) // 高斯模糊,ie不支持,其它都可，注意前缀。 
-
-`filter:grayscale()`  html 标签添加该属性，可让页面变黑白
-
-其它的一些滤镜效果参考 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/filter)
-
----
 background:hsl(色调hue，饱和度saturation，亮度luminance)  
 - 色调：0-360  红 黄 绿 青 蓝 洋   //循环 
 - 饱和度：0-100%    //灰度到全包和
@@ -345,9 +352,8 @@ background:hsl(色调hue，饱和度saturation，亮度luminance)
 
 ```
 background：color image repeat fixed position/size  
-background-size: cover(图片不会按比例缩放来覆盖当前元素背景)  
-background-size: contain(图片会按比例缩放直到宽或高达到当前元素的宽或高)  
-background-size: content-box(背景图片放在哪里)  
+background-size: cover(图片不会按比例缩放来覆盖当前元素背景) contain(图片会按比例缩放直到宽或高达到当前元素的宽或高) content-box(背景图片放在哪里)  
+
 background-origin: border/ 
 background-clip: border/padding/content-box;背景从border/padding/content开始，背景图片最多从padding开始。  
 background-attachment: scroll默认 | fixed滚动轴背景图片不会移动

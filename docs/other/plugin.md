@@ -6,11 +6,15 @@
 
 - 打印：打印将服务端的 pdf 文件进行打印；打印html内容；打印图片；打印JSON字符串；[Pring.js](https://github.com/crabbly/Print.js)
 
+- vue项目打印 https://github.com/Power-kxLee/vue-print-nb
+
 - 视频播放 [video](https://github.com/videojs/video.js)
 
 - 将内容放入剪切板 [clipboard](https://github.com/zenorocha/clipboard.js)
 
 - 利用js实现页面滚动，放弃浏览器的原生滚动，并且实现如picker等效果组件 [better-scroll](https://github.com/ustbhuangyi/better-scroll)
+
+- 可视化算法学习工具 [algorithm-visualizer](https://github.com/algorithm-visualizer/algorithm-visualizer) 
 
 ----
 
@@ -117,7 +121,7 @@ v5：namespace + 输入内容 SHA1
 
 - 文件的操作，封装简化 fs 的方法 [fs-extra](https://github.com/jprichardson/node-fs-extra)
 
-- browserslist 是在不同的前端工具之间共用目标浏览器和 node 版本的配置工具。用于 Autoprefixer
+- `browserslist`包 是在不同的前端工具之间共用目标浏览器和 node 版本的配置工具。用于 Autoprefixer
 Babel 等
 
 两个地址 [一](https://juejin.cn/post/6844903669524086797)  [github地址](https://github.com/browserslist/browserslist)

@@ -237,7 +237,9 @@ function dl() {
     };
 }
 
-// axios 请求
+注意如果项目中有使用 mock 可能会导致下载出错
+
+// axios 请求  
 function axios() {
      const httpService = axios.create({
         baseURL: '',

@@ -273,7 +273,7 @@ fr.onloadend = function (e) {
 };
 ```
 
-方法二：使用canvas
+方法二：使用 canvas
 ```js
 ctx.drawImage(imgElement,176,0,300,150, 0, 150, 300, 150);
 const base64 = canvas.toDataURL('image/png');
@@ -1119,7 +1119,7 @@ obj.constructor.a3 // 实例中 只能这样访问
 
 - 数字 Number 的最大最小范围：Number.MAX_VALUE Number.MIN_VALUE
 
-Number类型统一按浮点数处理，64位存储，整数是按最大54位来算最大最小数的，否则会丧失精度 也就是超过 `2**53` 就会出错；某些操作（如数组索引还有位操作）按32位处理
+Number类型统一按浮点数处理，64位存储，整数是按最大54位来算最大最小数的，否则会丧失精度 也就是超过 `2**53` (9,007,199,254,740,992) 就会出错；某些操作（如数组索引还有位操作）按32位处理
 
 - `+` 一元运算符 将元素转换为number类型，转换不了就返回NaN。
 
@@ -1131,7 +1131,7 @@ toString() 最慢；1 + '' 字符串拼接 和 `` 模板字符串 都更快，�
 
 - 字符串转数字
   1. Number(new Date()|new Boolean()|'123');  
-  2. parseInt(该参数会被强制转化为字符串 | 注意科学计数法, radix(一定要指定一个,不指定就会有不同的默认(一般是10)))  解析一个字符串并**返回指定基数的十进制整数** 返回的是十进制
+  2. parseInt(该参数会被强制转化为字符串 | 注意科学计数法, radix(一定要指定一个,不指定就会有不同的默认(一般是10)))  radix 表示第一个参数是什么进制的数
       - https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/parseInt
       - `parseInt('2+9', 10)` 返回2 因为遇到非指定基数的字符就不解析了
         
@@ -1168,9 +1168,21 @@ toString() 最慢；1 + '' 字符串拼接 和 `` 模板字符串 都更快，�
 示例：0与1互换 
 `const fn = (n) => (n^1)`
 
+0x16 -> `0001 0110` -> 22(十进制)   f 表示 `1111`
+```
+2|_57           1
+  2|_28         0
+    2|_14       0
+      2|_7      1
+        2|_3    1
+          1    
+
+=> 111 001
+```
+
 2. 移位运算符 <<(左移)  >>(右移) >>>(无符号右移)
 
-求 2^n 值： `2^3 = 1<<3 = 32`
+求 2^n 值： `2^3 = 1<<3 = 8`
 
 求一个数的1/2：`8/2 = 8>>1 = 4` 前提是2的倍数
 
@@ -1544,21 +1556,25 @@ console.log(b)  //[2,3,4]
 
 - `import.meta` 打印执行这个语句的文件地址   // 类似 http://127.0.0.1:5500/index.html
 
-ES6 的模块自动采用严格模式，不管你有没有在模块头部加上"use strict";。  
-- es6 模块不是对象  而是通过export输出的代码
-- es6 模块是在编译时加载
-- export var m=1 ;export function f(){};(正确);  
-  var m=1;export m;(错误)  
-  注意与内部变量建立一一对应关系.  
-  推荐用法 export {m,f};  
-  var n = 1;  
-  export {n as m};  
 - export 命名可以出现在任何位置，必须是模块顶层。
 
 - 引入的同一个模块，如果不做拷贝，当修改其原始值时，会影响所有引用该模块的地方
 
----
-export 与 export default 的区别在于import的时候是不是需要用{}，后者不用。
+ES6 的模块自动采用严格模式，不管你有没有在模块头部加上"use strict";。  
+- es6 模块不是对象  而是通过export输出的代码
+- es6 模块是在编译时加载
+
+```js
+export var m=1;
+export function f(){}; // (正确);
+var m=1;
+export m; // (错误)  
+// 注意与内部变量建立一一对应关系
+// 推荐用法 
+export { m, f };  
+var n = 1;  
+export {n as m};  
+```
 
 ---
 - import '模块名' // 表示引入并执行该模块，多次重复调用只执行一次 `import a.js`
@@ -1584,6 +1600,24 @@ import { default as xxx } from 'modules'; 等同于import xxx from 'modules';
 可同时引入default内容和单个内容 import a, { each } from 'export';
 ```
 ---
+
+- 复合使用
+```js
+export { some } from './some';
+// 等同于 
+import { some } from './some'; // 这里 some 输出的 不是 default
+export { some };
+
+export { deault as some } from './some';
+// 等同于 
+import some from './some'; // 这里 some 输出的 是 default
+export { some };
+
+export * as some from "some"; 
+// 等同于
+import * as some from "some"; // 这里 some 输出的 不是 default
+export { some };
+```
 
 扩展运算符内部调用的是数据结构的 Iterator 接口，因此只要具有 Iterator 接口的对象，都可以使用扩展运算符
 

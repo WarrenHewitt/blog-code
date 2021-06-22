@@ -19,10 +19,10 @@ PureComponent 通过 props 和 state 的 浅对比实现 shouldComponentUpdate�
 
 - react推荐使用内联样式
 
-- **引入图片** 
+- img **引入图片** 
   1. css 设置背景图
-  2. src="require('xx/xx/x.jpg')"
-  3. import logo from './public/logo.png';
+  2. src="require('xx/xx/x.jpg')"  // 该方式在最新的 create-react-app 脚手架搭建的项目中已经不能使用 ，使用方式以脚手架或自己搭建的项目方式为准
+  3. import logo from './public/logo.png'; // create-react-app 可用
 
 ---
 
@@ -63,7 +63,7 @@ PureComponent 通过 props 和 state 的 浅对比实现 shouldComponentUpdate�
 ### 组件
 
 组件中 this 两种方式调用当前组件
-```
+```js
 // 方式一：
 constructor(props) {
   this.handleClick = this.handleClick.bind(this);
@@ -77,13 +77,13 @@ onChange = () => {
 
 
 1. function component  
-```
+```js
 function Welcome(props) {  
   return < h1>Hello, { props.name}< /h1>;  
 }
 ```
 2.  es6语法  
-```
+```js
 class Welcome extends React.Component {  
   render() {  
     return < h1>Hello, {this.props.name}< /h1>;  
@@ -94,7 +94,7 @@ class Welcome extends React.Component {
 
 - 通过this.props.属性名，来获取参数  
 
-- 属性名class要用className，for要用htmlFor  
+- 属性名class要用 className，for要用htmlFor  
 
 - 复合组件要用div标签包含起来  
 

@@ -2,6 +2,12 @@
 
 示例项目 `threejs-typescript/three`
 
+- Three中的物体包括 Mesh,Line,Points等，它们都继承自Object3D类
+
+- Mesh 网格： 3D世界由点组成，两个点能组成一条直线，三个不在一条直线上的点，就能组成一个三角面，无数的三角面就能组成各种各样的物体，通常把这种网络模型叫做Mesh模型
+Mesh(要用三角面创建的形状【一般的形状threejs已经提供】, 材质)
+
+
 - 视锥体，指的看起来像一个被削掉顶部的金字塔。这个形状是可以被透视camera看见和渲染的区域
 
 - Fog(name: 可选, color : Integer, near : Float, far : Float) 雾，在一定的距离内设置雾
@@ -11,8 +17,6 @@
 - WebGL可以看做是将OpenGL ES（OpenGL for Embedded Systems，OpenGL嵌入式版本，针对手机、游戏机等设备相对较轻量级的版本）移植到了网页平台,是一个底层的标准
 
 - Three.js 封装了底层的图形接口
-
-- 网格 = 几何体+材质
 
 ## 坐标轴的一些描述
 
@@ -35,6 +39,10 @@ mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
 - 屏幕坐标系: webgl会将三维的坐标经过计算,在屏幕里正常显示
 
 ## 摄像机
+
+- 先设置好相机位置.position(眼睛位置)，然后通过.lookAt()方法设置相机目标观察点
+
+- 相机默认是由正z轴看像-z轴（相机镜头对着-z轴方向拍）
 
 - PerspectiveCamera ( fov : Number, aspect : Number, near : Number, far : Number ) 
 fov(fieldOfView) — 摄像机视锥体垂直视野角度, 从视图的底部到顶部,默认值是50，越大视图越小; 参考https://www.ituring.com.cn/book/miniarticle/49446

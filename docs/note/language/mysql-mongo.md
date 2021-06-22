@@ -30,7 +30,7 @@ SELECT UUID()
 ## 求和
 SELECT SUM(total) company
 
-## 添加income 有的字段加反引号的原因是与保留字段冲突
+## 添加 income 有的字段加反引号的原因是与保留字段冲突
 INSERT INTO income (id, product, `change`, total) VALUES ('12e12e1', 8, 8, 8);
 
 ## 删除数据
@@ -120,7 +120,15 @@ db.表名.remove({键值对})//当不加参数时就直接删除表中所有数�
 有两种驱动 MongoDB Driver 和 Mongoose
 
 - mongodb driver 参考 node-koa/graphql
-- mongoose 参考 node-egg/
+- mongoose 参考 node-egg/ 它是针对mongoDB操作的一个对象模型库，封装了mongoDB对文档的一些增删改查等常用方法，让nodejs操作mongoDB数据库变得更加容易
+
+### studio3t
+
+```
+|-mymongo localhost:27017 数据库地址
+	|-mydatabase 数据库名称
+		|- Collections 集合(表)
+```
 
 ## MySQL
 
