@@ -82,6 +82,7 @@ function Welcome(props) {
   return < h1>Hello, { props.name}< /h1>;  
 }
 ```
+
 2.  es6语法  
 ```js
 class Welcome extends React.Component {  

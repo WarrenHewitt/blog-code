@@ -273,7 +273,7 @@ fr.onloadend = function (e) {
 };
 ```
 
-方法二：使用 canvas
+方法二：使用canvas
 ```js
 ctx.drawImage(imgElement,176,0,300,150, 0, 150, 300, 150);
 const base64 = canvas.toDataURL('image/png');
@@ -1131,7 +1131,7 @@ toString() 最慢；1 + '' 字符串拼接 和 `` 模板字符串 都更快，�
 
 - 字符串转数字
   1. Number(new Date()|new Boolean()|'123');  
-  2. parseInt(该参数会被强制转化为字符串 | 注意科学计数法, radix(一定要指定一个,不指定就会有不同的默认(一般是10)))  radix 表示第一个参数是什么进制的数
+  2. parseInt(该参数会被强制转化为字符串 | 注意科学计数法, radix(一定要指定一个,不指定就会有不同的默认(一般是10)))  解析一个字符串并**返回指定基数的十进制整数** 返回的是十进制
       - https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/parseInt
       - `parseInt('2+9', 10)` 返回2 因为遇到非指定基数的字符就不解析了
         
@@ -1575,6 +1575,21 @@ export { m, f };
 var n = 1;  
 export {n as m};  
 ```
+ES6 的模块自动采用严格模式，不管你有没有在模块头部加上"use strict";。  
+- es6 模块不是对象  而是通过export输出的代码
+- es6 模块是在编译时加载
+- export var m=1 ;export function f(){};(正确);  
+  var m=1;export m;(错误)  
+  注意与内部变量建立一一对应关系.  
+  推荐用法 export {m,f};  
+  var n = 1;  
+  export {n as m};  
+- export 命名可以出现在任何位置，必须是模块顶层。
+
+- 引入的同一个模块，如果不做拷贝，当修改其原始值时，会影响所有引用该模块的地方
+
+---
+export 与 export default 的区别在于import的时候是不是需要用{}，后者不用。
 
 ---
 - import '模块名' // 表示引入并执行该模块，多次重复调用只执行一次 `import a.js`
@@ -1619,11 +1634,12 @@ import * as some from "some"; // 这里 some 输出的 不是 default
 export { some };
 ```
 
-扩展运算符内部调用的是数据结构的 Iterator 接口，因此只要具有 Iterator 接口的对象，都可以使用扩展运算符
-
 ---
 
 ### 函数扩展
+
+扩展运算符内部调用的是数据结构的 Iterator 接口，因此只要具有 Iterator 接口的对象，都可以使用扩展运算符
+
 1. 尾递归（只存在一个帧调用，所以效率高，不会出现栈溢出的情况）
 
 

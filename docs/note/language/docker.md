@@ -174,6 +174,7 @@ apt-get install vim
 docker-compose  安装示例 https://docs.docker.com/compose/install/
 
 ` .yml 文件，和 json 一样是配置文件 有可能是 json 的写法不好，才发明了它  语法与json有较大区别`
+
 - docker-compose.yml 配置
 
 ```shell

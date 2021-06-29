@@ -129,6 +129,7 @@ db.表名.remove({键值对})//当不加参数时就直接删除表中所有数�
 	|-mydatabase 数据库名称
 		|- Collections 集合(表)
 ```
+- mongoose 参考 node-egg/
 
 ## MySQL
 

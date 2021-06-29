@@ -121,8 +121,7 @@ v5：namespace + 输入内容 SHA1
 
 - 文件的操作，封装简化 fs 的方法 [fs-extra](https://github.com/jprichardson/node-fs-extra)
 
-- `browserslist`包 是在不同的前端工具之间共用目标浏览器和 node 版本的配置工具。用于 Autoprefixer
-Babel 等
+- `browserslist`包 是在不同的前端工具之间共用目标浏览器和 node 版本的配置工具。用于 Autoprefixer Babel 等
 
 两个地址 [一](https://juejin.cn/post/6844903669524086797)  [github地址](https://github.com/browserslist/browserslist)
 
