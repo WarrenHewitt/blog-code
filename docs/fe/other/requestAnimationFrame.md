@@ -1,3 +1,4 @@
+[[toc]]
 [toc]
 # requestAnimationFrame 兼容方案
 > 编写涉及：css, html, js

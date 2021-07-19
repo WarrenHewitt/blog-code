@@ -1,3 +1,4 @@
+[[toc]]
 [toc]
 
 # Generator(生成器) 学习理解与实践

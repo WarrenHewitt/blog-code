@@ -1,3 +1,4 @@
+[[toc]]
 [toc]
 
 # markdown 语法

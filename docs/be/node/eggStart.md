@@ -1,3 +1,4 @@
+[[toc]]
 [toc]
 
 # egg 自学入门demo分享

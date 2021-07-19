@@ -1,3 +1,4 @@
+[[toc]]
 [toc]
 
 # node获取本机动态IP,并对应修改相关JavaScript文件的IP地址
