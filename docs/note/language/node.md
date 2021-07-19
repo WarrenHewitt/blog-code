@@ -62,8 +62,7 @@ scripts 命令："npmRun": "node"
 
 - 安装指定版本 `npm install packageName@3.1.2`
 
-
- #### npm-shrinkwrap.json和package-lock.json区别
+### npm-shrinkwrap.json和package-lock.json区别
 - shrinkwrap 向后兼容npm版本2,3和4
 - package-lock 只能被npm 5+识别
 - 可以通过运行npm shrinkwrap package-lock.json将现有的package-lock.json转换为npm-shrinkwrap.json
@@ -72,8 +71,7 @@ scripts 命令："npmRun": "node"
 - npm install 操作会自动生成package-lock文件 并且更新该文件
 - 如果是用的cnpm安装的包 注意要 npm install 操作一次 更新package-lock文件
 
-
-#### package.json中：
+### package.json中：
 
 devdependencies表示开发过程中依赖的包
 
@@ -95,7 +93,7 @@ npm start 和 npm test 可以直接用；其它用npm run
 
 npm install 默认两个下的都安装，--production 只安装dependences的 
 
-#### npx
+### npx
 1. 调用项目内部安装的模块
 ```
 node-modules/.bin/项目
@@ -124,6 +122,16 @@ npx -p m1 -p m2
 npx http://some path
 ```
 必须包含package.json和入口文件
+
+### 私有npm
+
+对比一系列方式后决定采用 `Verdaccio`
+
+1. 安装  yarn global add verdaccio
+2. 启动  verdaccio
+```
+warn --- config file // 后面跟的配置文件地址
+```
 
 
 ## node
@@ -227,7 +235,7 @@ path.join()  也可以用 `../`
 `console.log(path.join(__dirname, 'a', 'b')) // C:\folder1\folder2\a\b`
 
 path.resolve() 任意一个参数是以`/`开头都直接转到根目录 `../` 是会在上一个参数的基础上返回上一级目录进行拼接
-```
+```js
 console.log(path.resolve()); // G:\GitHub\webpack-pure
 console.log(path.resolve('a/b', 'c')); // G:\GitHub\webpack-pure\a\b\c
 console.log(path.resolve('a/b', 'c', '/k')); // G:\k
@@ -237,9 +245,7 @@ console.log(path.resolve('a/b/c', '../m')); // G:\GitHub\webpack-pure\a\b\m
 - __dirname：返回运行文件所在的目录
 - path.resolve('./')：当前运行命令所在的目录
 - process.cwd()：当前运行命令所在的目录
-
 - path.basename(__dirname)  获取当前文件夹名称
-
 - path.sep  // 平台特定的路径片段分隔符  (例如windows是: \ )
 
 ---

@@ -279,13 +279,20 @@ header上有 Content-Disposition  其值有一段的内容是 `filename=xxxxxx.x
 
 filename* 后跟的就是现代浏览器都支持较好的 文件名
 
+如果获取不到 Content-Disposition 的值， 就需要后端配合设置 Access-Control-Expose-Headers = Content-Disposition
+
 ```js
 const disposition = xhr.getResponseHeader('content-disposition'); 
 if (disposition) {
     // 具体的获取方法根据实际字符串而定
     let filename = content.match(/filename\*=(.*)/)[1];
+    // 不要后最名 ([^.]*)
     filename = decodeURIComponent(filename);
 }
+// 中文如果出现乱码 需要后端进行编码, 编码后还是有问题 可以参考如下编码方式
+// import java.net.URLEncoder;
+// httpHeaders.add("Content-disposition", "attachment; filename=\"" + fileName + "\""); //httpHeaders.add("Content-Type", mimeType + "; name=\"" + fileName + "\"");
+// String encodedFileName = URLEncoder.encode(fileName, "UTF-8"); httpHeaders.add("Content-disposition", "attachment; filename*=UTF-8''" + encodedFileName ); httpHeaders.add("Content-Type", mimeType + ";charset=UTF-8");
 ```
 
 若以上方式无法解决名称获取，只能后端配合添加自定义 header

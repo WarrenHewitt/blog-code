@@ -1,5 +1,4 @@
 [toc]
-[[toc]]
 
 ## Javascript
 
@@ -826,19 +825,26 @@ IE6/7/8不支持，opera不支持，IE9/10和Chrome、Safari均支持
 Event.x/y相对于css中的绝对定位的位置，不会随滚动条的改变而改变。火狐不支持但有等效的pageX。
 
 #### querySelector
-querySelectorAll 返回的是一个 Static Node List(是一次对文档的快照，若是该快照下对文档有什么更改不会影响本次操作);  
+querySelectorAll 返回的是 Static Node List(是一次对文档的快照，若是该快照下对文档有什么更改不会影响本次操作);  
 document.querySelectorAll('选择符')：返回匹配元素集合。  
 document.querySelector ('选择符')：返回匹配第一个元素。  
-而 getElementsBy 系列的返回的是一个 Live Node List：  
+而 getElementsBy 系列的返回的是 Live Node List：  
+```js
 var ul = document.getElementsByTagName('ul')[0],  
-     lis = ul.getElementsByTagName("li");  
+    lis = ul.getElementsByTagName("li");  
 for(var i = 0; i < lis.length ; i++){   //这里就是lis.length在一直变化  
     ul.appendChild(document.createElement("li"));  
 }  
+```
 每一次调用lis都会去遍历一下文档，最终会无限循环。  
 
-HTMLCollection 和 NodeList 十分相似，都是一个动态的元素集合，每次访问都需要重新对文档进行查询。两者的本质上差别在于，HTMLCollection 是属于 Document Object Model HTML 规范，而 NodeList 属于 Document Object Model Core 规范。
-所以在现代浏览器中，querySelectorAll 的返回值是一个静态的 NodeList 对象，而 getElementsBy 系列的返回值实际上是一个 HTMLCollection 对象 。
+- 相同：
+HTMLCollection 和 NodeList 十分相似，都是一个动态的元素集合，每次访问都需要重新对文档进行查询。
+
+- 不同：
+HTMLCollection 是属于 Document Object Model HTML 规范，而 NodeList 属于 Document Object Model Core 规范。
+所以在现代浏览器中，querySelectorAll 的返回值是一个静态的 NodeList(包含：entries forEach item keys length) 对象
+而 getElementsBy 系列的返回值实际上是一个  HTMLCollection (包含 item length nameItem) 对象
 
 ---
 
@@ -892,13 +898,13 @@ const args = [...arguments];
 ```js
 var a = [2,5,8]
 // accumulator 上一次返回的值 currentValue 当前值 index 当前正在处理的元素索引
-console.log(a.reduce((accumulator, currentValue, index) => { 
-    console.log(index); // index 从1开始，这里是没有设置初始值
+console.log('result', a.reduce((accumulator, currentValue, index) => { 
+    // accumulator 这里没有设置初始值，其值为数组第一个，也就是 2
+    console.log('value', accumulator, currentValue, index); // index 从1开始，这里是没有设置初始值
     var r = accumulator
-    if(index === 1) r = accumulator*10
-    return 1
+    return accumulator + currentValue * 10
 }));
-// 返回 150
+// 返回 132
 ```
 
 ---
@@ -1565,28 +1571,11 @@ ES6 的模块自动采用严格模式，不管你有没有在模块头部加上"
 - es6 模块是在编译时加载
 
 ```js
-export var m=1;
-export function f(){}; // (正确);
-var m=1;
-export m; // (错误)  
-// 注意与内部变量建立一一对应关系
-// 推荐用法 
-export { m, f };  
-var n = 1;  
-export {n as m};  
+export var m=1; export function f(){}; // (正确);
+var m=1; export m; // (错误)  
+export { m, f }; // 推荐用法 注意与内部变量建立一一对应关系
+var n = 1; export {n as m};  
 ```
-ES6 的模块自动采用严格模式，不管你有没有在模块头部加上"use strict";。  
-- es6 模块不是对象  而是通过export输出的代码
-- es6 模块是在编译时加载
-- export var m=1 ;export function f(){};(正确);  
-  var m=1;export m;(错误)  
-  注意与内部变量建立一一对应关系.  
-  推荐用法 export {m,f};  
-  var n = 1;  
-  export {n as m};  
-- export 命名可以出现在任何位置，必须是模块顶层。
-
-- 引入的同一个模块，如果不做拷贝，当修改其原始值时，会影响所有引用该模块的地方
 
 ---
 export 与 export default 的区别在于import的时候是不是需要用{}，后者不用。

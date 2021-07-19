@@ -39,24 +39,17 @@
 </head>
 
 <body>
-    <button onclick=handleClick()>click 11</button>
+    <span>1</span>
+    <span>2</span>
+    <span>3</span>
     <script>
-        const byteArrayToHexString = function(inarray) {
-            // let i, j, inn;
-            // let hex = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
-            let out = "";
-
-            for (j = 0; j < inarray.length; ++j) {
-                var a = inarray[j].toString(16).toUpperCase()
-                if(a.length<2) a='0'+a
-                out += a
-            }
-            return out;
-        }
-
-        // console.log(byteArrayToHexString([4,53,120,34,33,75,129]));
-        console.log(byteArrayToHexString([4,53,120,34,33,75,129]));
-        // console.log(parseInt(35, 16));
+       var a = '{a:1,"b":1,"c":2}'
+       try {
+           var aa = JSON.parse(a)
+           console.log(aa);
+       } catch (error) {
+           console.log(error);
+       }
     </script>
 
 </body>

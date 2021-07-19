@@ -1,4 +1,3 @@
-[[toc]]
 [toc]
 
 ## 使用windows powershell ISE管理命令窗口，并集成git命令

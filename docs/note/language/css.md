@@ -102,7 +102,6 @@ input::-webkit-input-placeholder{ color: #cacaca; }
 其它的一些滤镜效果参考 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/filter)
 
 ----
----
 
 ## 阿里 icon-font 使用方法
 可参考 vue-admin 项目的 welcome 页面
@@ -201,7 +200,7 @@ html中，右边固定元素要在前，设置样式 float:right
 ```
 
 ### flex布局
-- 子元素的float，clear，vertical-aline属性将失效。
+- 子元素的 float clear vertical-aline 属性将失效。
 
 - 容器设置display:flex;(任何元素都可以设置，行内用display:inline-flex设置之后该容器将不会再占用一行);
 
@@ -229,7 +228,7 @@ flex-start(上对齐默认)|
 flex-end(下对齐)  
 center(居中)  
 space-between(两端对齐，边距为0)  
-space-around(每个元素件的间隔相同，是与边距的两倍) 
+space-around(每个元素的间隔相同，是与边距的两倍) 
 
 #### 一些用法
 

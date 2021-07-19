@@ -136,6 +136,8 @@ not dead
 
 ### 其它
 
+- uniSignature https://github.com/sintrb/uniSignature 用于uni-app的签名组件，支持H5、小程序、APP，可导出svg矢量图片
+
 - api 处理 [地址](https://github.com/Tencent/APIJSON)
 
 - Strapi is the open-source Headless CMS(Content Management System) 提供内容的处理接口  不提供业务层

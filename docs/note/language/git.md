@@ -1,5 +1,4 @@
 
-[[toc]]
 [toc]
 
 ---
@@ -31,7 +30,9 @@ clone 时出现， fatal: unable to access 'http://xxxx/front-end/smart-safety-p
 
 其中的 xxxx 是一串表示仓库的字符 要将字符改为，当前域名
 
+### contribution 没有记录  
 
+出现提交了代码 但 contribution 没有记录，同时查看 commit 记录  提交的用户也无法被 GitHub识别；证明配置的 uaer.name 和 user.email 不正确，email必须配置为GitHub上认证过的邮箱
 
 ## git
 
@@ -154,6 +155,10 @@ X：未知状态
 ```
 git config --global user.name 'username'
 git config --global user.email 'email'
+
+// 配置当前仓库
+git config user.name 'username'
+git config user.email 'email'
 ```
 
 查看系统、当前用户、当前仓库配置： 
@@ -170,6 +175,8 @@ git config --local --list
 
 ---
 
+- 解决 windows 和 Linux 文件格式不一致 NTFS  `git config --global core.filemode false`  这是全局设置
+
 - 解决 git 默认不区分文件名大小写问题
 
 `git config core.ignorecase false`
@@ -183,7 +190,7 @@ git clone 会默认将本地与远程分支进行追踪
 ---
 
 当在merge时产生了冲突（branchname|Marging）  
-执行git add filename|. ,git commit –m ‘message’,再次将工作区的更改提交到本地仓库-区，告诉Git 冲突已解决。
+执行 `git add filename|. + git commit –m 'message'` 再次将工作区的更改提交到本地仓库-区，告诉Git 冲突已解决。
 
 ---
 

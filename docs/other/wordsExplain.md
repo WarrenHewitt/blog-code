@@ -36,11 +36,21 @@ pro-code  常规的代码开发
 
 ---
 
-- SSR Server Side Render 服务器端渲染
+- AB测试就是指把少部分用户分成平均的两组，其中一组用户体验网站改版的A版本，另外一组用户体验网站改版的B版本，分别记录清楚相关的所有用户操作数据以后再进行精确的比对，最后分析得出哪一个版本是用户最喜爱的
+
+- 灰度发布则是指在新的功能上线以及没有上线之间能够保证新的版本可以稳定过渡的一种发布方法
+
+- QPS (Query Per Second) 每秒请求数，就是说服务器在一秒的时间内处理了多少个请求
+
+---
+
+- CSR (Client Side Rendering) 客户端渲染
+
+- SSR Server Side Render 服务器端渲染 SSR强在首屏渲染，而CSR强在用户和页面多交互的场景
 
 - BFF Backend For Frontend 的缩写，翻译成用户体验适配层， 把 Node 定位为 BFF 层实现
 
-- 持续集成Continuous Integration（CI）和持续交付Continuous Delivery（CD）
+- CI 持续集成 Continuous Integration CD 持续交付Continuous Delivery
 
 - DevOps（Development和Operations的组合词）是一组过程、方法与系统的统称，用于促进开发（应用程序/软件工程）、技术运营和质量保障（QA）部门之间的沟通、协作与整合。
 
